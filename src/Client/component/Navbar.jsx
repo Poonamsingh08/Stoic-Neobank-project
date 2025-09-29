@@ -27,7 +27,7 @@ const Navbar = () => {
     { name: "Loan", icon: <DollarSign size={18} />, path: "/client/loan" },
     { name: "Money Transfer", icon: <Repeat size={18} />, path: "/client/money-transfer" },
     { name: "Investment", icon: <TrendingUp size={18} />, path: "/client/investment" },
-    { name: "cards", icon: <CreditCard size={18} />, path: "/client/cards" },
+    { name: "Cards", icon: <CreditCard size={18} />, path: "/client/cards" },
     { name: "Services", icon: <Settings size={18} />, path: "/client/services" },
     { name: "Setting", icon: <Settings size={18} />, path: "/client/setting" },
     { name: "Complaint", icon: <AlertCircle size={18} />, path: "/client/complaintfeedback" },
