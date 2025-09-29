@@ -1,4 +1,3 @@
-// src/Components/Card.jsx
 import React, { useState } from "react";
 import "./Card.css";
 
@@ -76,6 +75,7 @@ export default function Card() {
 
   return (
     <div className="card-container">
+      {/* ✅ Updated Card Title */}
       <h2 className="card-title">💳 Card Services</h2>
 
       {/* Tabs */}
@@ -183,7 +183,7 @@ export default function Card() {
             <tbody>
               {fraudData.map((row, index) => (
                 <tr key={index} className={editingIndex === index ? "editing" : ""}>
-                  <td>
+                  <td data-label="Transaction ID">
                     {editingIndex === index ? (
                       <input
                         type="text"
@@ -196,7 +196,7 @@ export default function Card() {
                       row.transactionId
                     )}
                   </td>
-                  <td>
+                  <td data-label="Card Number">
                     {editingIndex === index ? (
                       <input
                         type="text"
@@ -209,7 +209,7 @@ export default function Card() {
                       row.cardNumber
                     )}
                   </td>
-                  <td>
+                  <td data-label="Amount">
                     {editingIndex === index ? (
                       <input
                         type="number"
@@ -222,7 +222,7 @@ export default function Card() {
                       `₹${row.amount}`
                     )}
                   </td>
-                  <td>
+                  <td data-label="User">
                     {editingIndex === index ? (
                       <input
                         type="text"
@@ -235,7 +235,7 @@ export default function Card() {
                       row.user
                     )}
                   </td>
-                  <td>
+                  <td data-label="Reason">
                     {editingIndex === index ? (
                       <input
                         type="text"
@@ -248,7 +248,7 @@ export default function Card() {
                       row.reason
                     )}
                   </td>
-                  <td>
+                  <td data-label="Action">
                     <button
                       className="fraud-btn safe"
                       onClick={() => handleFraudAction(index, "Safe")}
@@ -262,10 +262,13 @@ export default function Card() {
                       Escalate
                     </button>
                   </td>
-                  <td className={row.action === "Safe" ? "safe-status" : "escalate-status"}>
+                  <td
+                    data-label="Action Performed"
+                    className={row.action === "Safe" ? "safe-status" : "escalate-status"}
+                  >
                     {row.action || "—"}
                   </td>
-                  <td>
+                  <td data-label="Edit">
                     {editingIndex === index ? (
                       <>
                         <button className="fraud-btn save" onClick={() => handleSaveEdit(index)}>
