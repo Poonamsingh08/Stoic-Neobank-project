@@ -8,18 +8,15 @@ export default function Dashboard() {
 
   return (
     <>
-{/* Header */}
+      {/* Header */}
       <div
         className="py-4 text-center shadow-sm"
         style={{ backgroundColor: "#960603" }}
       >
         <h1 className="fw-bold fs-2 text-white"> Welcome, Khushavant Wagh! Let’s make today amazing.</h1>
-        
       </div>
 
-
       <div className="dashboard">
-      
         <p className="dashboard-sub">
           Welcome back! Here's an overview of your{" "}
           <span className="highlight">Neo-Bank</span> operations.
@@ -29,7 +26,7 @@ export default function Dashboard() {
         <div className="stats-grid">
           <div
             className="stat-card clickable"
-            onClick={() => navigate("/users")}
+            onClick={() => navigate("/Admin/users")}
           >
             <h3>Active Users</h3>
             <p className="stat-value">24,531</p>
@@ -38,7 +35,7 @@ export default function Dashboard() {
 
           <div
             className="stat-card clickable"
-            onClick={() => navigate("/kyc")}
+            onClick={() => navigate("/Admin/kyc")}
           >
             <h3>Pending KYCs</h3>
             <p className="stat-value">147</p>
@@ -47,7 +44,7 @@ export default function Dashboard() {
 
           <div
             className="stat-card clickable"
-            onClick={() => navigate("/transactions")}
+            onClick={() => navigate("/Admin/transactions")}
           >
             <h3>Daily Transactions</h3>
             <p className="stat-value">$2.4M</p>
@@ -66,7 +63,7 @@ export default function Dashboard() {
             <p>Review and approve pending user verifications</p>
             <button
               className="action-btn"
-              onClick={() => navigate("/kyc")}
+              onClick={() => navigate("/Admin/kyc")}
             >
               Review KYCs
             </button>
@@ -80,7 +77,7 @@ export default function Dashboard() {
             <p>Check flagged high-value transactions</p>
             <button
               className="action-btn"
-              onClick={() => navigate("/transactions")}
+              onClick={() => navigate("/Admin/transactions")}
             >
               Review Transactions
             </button>
@@ -94,7 +91,7 @@ export default function Dashboard() {
             <p>Process new loan requests and approvals</p>
             <button
               className="action-btn"
-              onClick={() => navigate("/loans")}
+              onClick={() => navigate("/Admin/loans")}
             >
               Review Loans
             </button>
@@ -133,7 +130,7 @@ export default function Dashboard() {
             </ul>
             <button
               className="view-all"
-              onClick={() => navigate("/transactions")}
+              onClick={() => navigate("/Admin/transactions")}
             >
               View All Transactions
             </button>
@@ -149,7 +146,7 @@ export default function Dashboard() {
                 <span className="time">10 min ago</span>
                 <button
                   className="alert-btn"
-                  onClick={() => navigate("/users")}
+                  onClick={() => navigate("/Admin/users")}
                 >
                   Review Now
                 </button>
@@ -160,7 +157,7 @@ export default function Dashboard() {
                 <span className="time">25 min ago</span>
                 <button
                   className="alert-btn"
-                  onClick={() => navigate("/transactions")}
+                  onClick={() => navigate("/Admin/transactions")}
                 >
                   Monitor
                 </button>
@@ -171,7 +168,7 @@ export default function Dashboard() {
                 <span className="time">1 hour ago</span>
                 <button
                   className="alert-btn"
-                  onClick={() => navigate("/reports")}
+                  onClick={() => navigate("/Admin/reports")}
                 >
                   View Report
                 </button>

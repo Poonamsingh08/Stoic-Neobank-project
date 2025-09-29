@@ -56,6 +56,7 @@ export default function AdminApp() {
           <Route path="/users" element={<UserManagement />} />
           <Route path="/kyc/*" element={<KYCComplianceRoutes />} />
           <Route path="/transactions" element={<Transactions />} />
+          <Route path="/Admin/transactions" element={<Transactions />} />
           <Route path="/loans" element={<Loans />} />
           <Route path="/DepositManagement" element={<DepositManagement />} />
           <Route path="/complaints" element={<ComplaintsLayout />} />
