@@ -30,18 +30,21 @@ body {
   margin-left: calc(-50vw + 50%);
   background-color: #950606;
   color: #fff;
-  
+
   /* Increased text size */
-  font-size: 1.67rem; /* was 1.2rem, you can adjust as needed */
+  font-size: 1.67rem;
+  /* was 1.2rem, you can adjust as needed */
   font-weight: 700;
-  line-height: 3;
+  line-height: 2.5;
   letter-spacing: 1px;
   padding: 18px 2%;
-  
+
   /* Increased border */
-  border: 5px solid #fff; /* added border */
-  border-radius: 1px; /* optional rounded corners */
-  
+  border: 5px solid #fff;
+  /* added border */
+  border-radius: 1px;
+  /* optional rounded corners */
+
   margin-top: -40px;
   margin-bottom: 20px;
   box-sizing: border-box;
@@ -49,7 +52,7 @@ body {
   overflow: hidden;
   display: inline-block;
   white-space: nowrap;
-  
+
   animation: scrollText 12s linear infinite;
 }
 
