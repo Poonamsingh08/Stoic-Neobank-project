@@ -28,7 +28,7 @@ const Loan = () => {
       {/* Right side: Button */}
       <div className="text-center text-md-end">
         <button
-          onClick={() => navigate("/apply-loan")}
+          onClick={() => navigate("/Client/apply-loan")}
           className="btn d-flex align-items-center gap-2 px-4 py-2 fw-semibold text-white shadow"
           style={{  backgroundColor: "#900606",
               border: "2px solid white"}}
