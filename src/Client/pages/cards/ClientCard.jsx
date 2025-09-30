@@ -84,7 +84,7 @@ export default function ClientCard() {
     <>
     <div
   className="d-flex justify-content-between align-items-center px-4 mt-10 mt-md-0"
-  style={{ backgroundColor: "#900603", padding: "35px 0" }}
+  style={{ backgroundColor: "#900603", padding: "40px 0" }}
 >
   <h1 className="fw-bold fs-2 text-white mb-0">My Cards</h1>
   <button
