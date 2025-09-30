@@ -1,0 +1,160 @@
+/* Container */
+.client-card-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Card */
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Titles */
+.title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.subtitle {
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+/* Quick Actions */
+.quick-actions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.action-card {
+  flex: 1 1 22%;
+  min-width: 120px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.action-label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+.icon-danger { color: #dc3545; }
+.icon-warning { color: #ffc107; }
+.icon-primary { color: #0d6efd; }
+.icon-success { color: #198754; }
+
+/* Recent Transactions */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.btn-view {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 5px 12px;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+.transaction-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.transaction-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.txn-icon { color: #950606; }
+.txn-merchant { font-weight: bold; }
+.txn-card { color: #6c757d; font-size: 0.85rem; }
+.transaction-right { text-align: right; }
+.amount-negative { color: #dc3545; font-weight: bold; }
+.amount-positive { color: #198754; font-weight: bold; }
+.txn-date { color: #6c757d; font-size: 0.8rem; }
+
+/* Summary Cards */
+.summary-grid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.summary-card {
+  flex: 1 1 30%;
+  min-width: 180px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.summary-title { font-weight: bold; margin-bottom: 5px; }
+.summary-value { font-weight: bold; margin-bottom: 5px; font-size: 1.5rem; }
+.summary-value.success { color: #198754; }
+.summary-value.warning { color: #ffc107; }
+.summary-value.danger { color: #dc3545; }
+.summary-subtitle { color: #6c757d; font-size: 0.85rem; }
+
+/* ------------------ Responsive Media Queries ------------------ */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .quick-actions-grid {
+    gap: 10px;
+  }
+  .action-card {
+    flex: 1 1 45%;
+    min-width: auto;
+  }
+
+  .transaction-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .transaction-right {
+    width: 100%;
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .summary-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .summary-card {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .action-card {
+    flex: 1 1 100%;
+  }
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .btn-view {
+    width: 100%;
+    text-align: center;
+  }
+}
