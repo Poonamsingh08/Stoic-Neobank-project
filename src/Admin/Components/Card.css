@@ -1,7 +1,8 @@
 /* ================== */
 /* Full Page Background */
 /* ================== */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -14,36 +15,74 @@ html, body {
 /* ================== */
 .card-container {
   max-width: 900px;
-  margin: 30px auto;
-  padding: 25px;
-}
-
-.card-title {
-  text-align: center;
-  color: #222;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  font-weight: 600;
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* ================== */
-/* Tabs               */
+/* Card Title Flush   */
+/* ================== */
+.card-title {
+  position: relative;
+  width: 100vw;
+  left: 0;
+  margin-left: calc(-50vw + 50%);
+  background-color: #950606;
+  color: #fff;
+
+  /* Increased text size */
+  font-size: 1.67rem;
+  /* was 1.2rem, you can adjust as needed */
+  font-weight: 700;
+  line-height: 2.5;
+  letter-spacing: 1px;
+  padding: 18px 2%;
+
+  /* Increased border */
+  border: 5px solid #fff;
+  /* added border */
+  border-radius: 1px;
+  /* optional rounded corners */
+
+  margin-top: -40px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  z-index: 950;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+
+  animation: scrollText 12s linear infinite;
+}
+
+.card-title span {
+  display: inline-block;
+  padding-left: 120%;
+  white-space: nowrap;
+  animation: scrollText 12s linear infinite;
+}
+
+/* ================== */
+/* Tabs Styling       */
 /* ================== */
 .card-tabs {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 .card-tabs button {
-  padding: 10px 20px;
-  margin: 0 8px;
+  padding: 10px 18px;
   border: none;
-  background: #f1f1f1;
+  /* background: #f1f1f1; */
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .card-tabs button.active {
@@ -65,7 +104,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .form-group {
@@ -80,18 +119,17 @@ label {
   font-size: 14px;
 }
 
-/* Inputs / Select / Textarea */
 input,
 select,
 textarea {
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-radius: 6px;
   border: 1.5px solid #ccc;
-  font-size: 15px;
+  font-size: 14px;
   outline: none;
   background: #fff;
   transition: border-color 0.3s ease;
-  width: 100%;  /* ✅ makes all input/select same size */
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -100,17 +138,16 @@ select:focus,
 textarea:focus {
   border-color: #950606;
   background: #fff;
-  box-shadow: none;
 }
 
 textarea {
-  min-height: 90px;
+  min-height: 80px;
   resize: vertical;
 }
 
 /* Submit Button */
 .btn-submit {
-  padding: 12px;
+  padding: 10px;
   border: none;
   background: #950606;
   color: white;
@@ -118,8 +155,8 @@ textarea {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 15px;
-  width: 100%; /* ✅ align with input/select width */
+  font-size: 14px;
+  width: 100%;
 }
 
 .btn-submit:hover {
@@ -130,7 +167,7 @@ textarea {
 /* Notification       */
 /* ================== */
 .notification {
-  padding: 12px;
+  padding: 10px;
   border-radius: 6px;
   margin-bottom: 15px;
   text-align: center;
@@ -156,22 +193,20 @@ textarea {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  font-size: 12px;
 }
 
 .fraud-table th,
 .fraud-table td {
-  padding: 12px;
+  padding: 8px;
   text-align: center;
   border: 1px solid #ddd;
-  font-size: 14px;
-  border-radius: 6px;
 }
 
 .fraud-table th {
   background: #950606;
   color: #fff;
-  font-size: 15px;
-  border-radius: 6px;
+  font-size: 13px;
 }
 
 /* Row editing highlight */
@@ -181,17 +216,17 @@ textarea {
   border: 1px solid #ffc107;
   border-radius: 4px;
   background-color: #fff8e1;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* Action Buttons */
 .fraud-btn {
-  padding: 6px 12px;
+  padding: 5px 10px;
   margin: 2px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   transition: 0.3s;
 }
 
@@ -240,4 +275,104 @@ textarea {
 .escalate-status {
   color: #dc3545;
   font-weight: bold;
+}
+
+/* ================== */
+/* MOBILE RESPONSIVE  */
+/* ================== */
+@media (max-width: 768px) {
+  .card-container {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+    line-height: 2.2;
+    padding: 12px 5%;
+    margin-top: -20px;
+  }
+
+  .card-tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-tabs button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .fraud-table {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .fraud-table thead {
+    display: none;
+    /* Hide headers on mobile */
+  }
+
+  .fraud-table tbody,
+  .fraud-table tr {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+  }
+
+  .fraud-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 6px 8px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    font-size: 11px;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .fraud-table td:last-child {
+    border-bottom: none;
+  }
+
+  .fraud-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #950606;
+    flex: 0 0 45%;
+    margin-right: 10px;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .fraud-table td>* {
+    max-width: 55%;
+    word-break: break-word;
+  }
+
+  .fraud-table td button {
+    margin: 2px 0;
+    font-size: 11px;
+    padding: 4px 6px;
+    flex: 1 0 100%;
+  }
+
+  .btn-submit {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
 }
