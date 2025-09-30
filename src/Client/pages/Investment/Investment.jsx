@@ -446,7 +446,7 @@ const InvestmentPage = () => {
                         {investmentOptions.map((option, index) => (
                             <div key={option._id} className="col-md-6 col-lg-4">
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
+                                    
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 * index }}
                                     whileHover={{ y: -5 }}
@@ -571,7 +571,7 @@ const InvestmentPage = () => {
                     <button
                         className="btn text-white d-flex align-items-center"
                         style={{ backgroundColor: "#780606" }}
-                        onClick={() => navigate("/add-goal")}
+                        onClick={() => navigate("/Client/add-goal")}
                     >
                         <Plus size={25} className="me-2" /> Add Goal
                     </button>
@@ -583,7 +583,6 @@ const InvestmentPage = () => {
                             return (
                                 <motion.div
                                     key={goal.name + index}
-                                    initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.1 * index }}
                                     className="col-md-6"

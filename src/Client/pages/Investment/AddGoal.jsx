@@ -26,7 +26,7 @@ const AddGoal = () => {
         const updatedGoals = [...storedGoals, newGoal];
         sessionStorage.setItem("goals", JSON.stringify(updatedGoals));
 
-        navigate("/investment");
+        navigate("/Client/investment");
     };
 
     return (
@@ -57,7 +57,7 @@ const AddGoal = () => {
                         color: "#FFD580", // 🌟 light gold for contrast
                         fontSize: "1rem"
                     }}
-                    onClick={() => navigate("/investment")}
+                    onClick={() => navigate("/Client/investment")}
                 >
                     <i className="bi bi-arrow-left-circle me-2"></i>Back to Investments
                 </span>
@@ -164,7 +164,7 @@ const AddGoal = () => {
                                     <button
                                         type="button"
                                         className="btn btn-light"
-                                        onClick={() => navigate("/investment")}
+                                        onClick={() => navigate("/Client/investment")}
                                     >
                                         Cancel
                                     </button>

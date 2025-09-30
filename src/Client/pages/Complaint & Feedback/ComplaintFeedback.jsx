@@ -575,7 +575,7 @@ export default function ComplaintFeedback() {
 
               {/* Email Support */}
               <button
-               onClick={() => navigate("/email-support")}
+               onClick={() => navigate("/Client/email-support")}
                 className="w-full flex items-center p-4 bg-white rounded-xl border border-blue-200 shadow-sm hover:shadow-lg transition-shadow duration-200"
               >
                 <Mail className="text-blue-500 mr-4" size={24} />

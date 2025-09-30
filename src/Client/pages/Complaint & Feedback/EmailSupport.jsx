@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Card, Badge } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 function EmailSupport() {
   const [formState, setFormState] = useState({
     fullName: "",
@@ -10,8 +10,9 @@ function EmailSupport() {
     priority: "",
     message: "",
     attachment: null,
-  });
 
+  });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormState({
@@ -24,6 +25,7 @@ function EmailSupport() {
     e.preventDefault();
     console.log("Form Data:", formState);
     alert("Your email request has been submitted successfully!");
+    
   };
 
   return (
@@ -165,7 +167,7 @@ function EmailSupport() {
                         <Button
                           variant="light"
                           className="border"
-                          onClick={() => (window.location.href = "/complaint")}
+                          onClick={() => navigate("/Client/complaintfeedback")}
                         >
                           Cancel
                         </Button>
@@ -173,6 +175,7 @@ function EmailSupport() {
                           type="submit"
                           className="text-white px-4"
                           style={{ backgroundColor: "#A50034", border: "none" }}
+                           onClick={() => navigate("/Client/complaintfeedback")}
                         >
                           🚀 Send Email
                         </Button>
