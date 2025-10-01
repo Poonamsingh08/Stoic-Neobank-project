@@ -17,6 +17,7 @@ import DepositManagement from "./pages/DepositManagement/AdminDeposits";
 import Loans from "./pages/Loan/Loans.jsx";
 import MoneyTransferRequest from "./pages/MoneyTransferRequests/MoneyTransferRequests";
 import Reports from "./pages/Reports/Reports.jsx";
+import AdminTransactions from "./pages/Transaction/AdminApp.jsx";
 
 // ✅ From khush_Dashboard branch
 import Dashboard from "./Components/Dashboard";
@@ -27,9 +28,6 @@ import Card from "./Components/Card";
 // ✅ Temporary placeholder components
 function KYC() {
   return <h1>KYC Page</h1>;
-}
-function Transactions() {
-  return <h1>Transactions Page</h1>;
 }
 function Support() {
   return <h1>Support Page</h1>;
@@ -55,7 +53,7 @@ export default function AdminApp() {
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/users" element={<UserManagement />} />
           <Route path="/kyc/*" element={<KYCComplianceRoutes />} />
-          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/transactions" element={<AdminTransactions />} />
           <Route path="/loans" element={<Loans />} />
           <Route path="/DepositManagement" element={<DepositManagement />} />
           <Route path="/complaints" element={<ComplaintsLayout />} />
@@ -66,6 +64,7 @@ export default function AdminApp() {
           <Route path="/investment_products" element={<InvestmentPanel />} />
           <Route path="/moneyrequest" element={<MoneyTransferRequest />} />
           <Route path="/reports" element={<Reports />} />
+          
         </Routes>
       </div>
     </>
