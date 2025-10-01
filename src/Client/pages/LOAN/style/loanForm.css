@@ -1,0 +1,98 @@
+/* Container */
+.form-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Card & Alert */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.card-body {
+  padding: 2rem;
+  text-align: center;
+}
+.alert.success {
+  background: #e6ffed;
+  color: #065f46;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Form */
+.loan-form {
+  background: #fff0f0;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid grey;
+}
+
+.form-title {
+  text-align: center;
+  color: #900603;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  color: #900603;
+  margin: 1.5rem 0 1rem;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap: 1rem;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+/* Inputs */
+.loan-form input,
+.loan-form select,
+.loan-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 0.95rem;
+  transition: border 0.2s;
+}
+.loan-form input:focus,
+.loan-form select:focus,
+.loan-form textarea:focus {
+  outline: none;
+  border-color: #900603;
+  box-shadow: 0 0 4px rgba(144,6,3,0.2);
+}
+
+/* Checkbox */
+.checkbox {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Button */
+.btn-submit {
+  background-color: #900603;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-submit:hover {
+  background-color: #780606;
+}
