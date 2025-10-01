@@ -1,0 +1,160 @@
+/* Dashboard Header */
+.dashboard-header {
+  border: 2px solid #f8e4e4ff;
+  background-color: #900603;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.last-updated {
+  background-color: #900603;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Summary Cards */
+.card-hover {
+  border: 1px solid #900603 !important;
+  background-color: #fff !important;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-color: #900603 !important;
+}
+
+.card-hover .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Buttons */
+.btn-custom {
+  background-color: #900603 !important;
+  color: white !important;
+  border: none !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-custom:hover {
+  background-color: white !important;
+  color: #900603 !important;
+  border: 1px solid #900603 !important;
+}
+
+.btn-outline-custom {
+  border: 1px solid #900603 !important;
+  color: #900603 !important;
+  background-color: transparent !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-custom:hover {
+  background-color: #900603 !important;
+  color: white !important;
+}
+
+/* Transactions */
+.txn-item {
+  background-color: #fff7f5ff;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+}
+
+/* Alerts */
+.alert-item {
+  background-color: #fff7f5ff;
+  color: #380092ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+}
+
+/* Modal */
+.modal-header-custom {
+  background-color: #8B0000;
+  color: #fff;
+}
+
+/* Compliance Overview */
+.compliance-card {
+  text-align: center;
+  background-color: #fff7f5ff;
+  border: 1px solid #8B0000;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+/* Grid Adjustments */
+.row.g-3 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-hover,
+  .compliance-card {
+    margin-bottom: 1rem;
+  }
+
+  .txn-item,
+  .alert-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-header h5 {
+    font-size: 1rem;
+  }
+
+  .last-updated {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .compliance-card {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+}

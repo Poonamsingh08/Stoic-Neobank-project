@@ -1,0 +1,85 @@
+/* Navbar */
+.custom-navbar {
+  background-color: #900603;
+}
+.custom-navbar .navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Heading */
+.page-title {
+  color: #900603;
+}
+
+/* Table header */
+.custom-table thead {
+  background-color: #900603;
+  color: #fff;
+}
+
+/* Status colors */
+.status-pending {
+  color: #ffc107; /* Bootstrap warning */
+  font-weight: bold;
+}
+.status-approved {
+  color: #28a745; /* Bootstrap success */
+  font-weight: bold;
+}
+.status-rejected {
+  color: #dc3545; /* Bootstrap danger */
+  font-weight: bold;
+}
+.status-escalated {
+  color: #0d6efd; /* Bootstrap primary */
+  font-weight: bold;
+}
+
+/* Custom buttons */
+.btn-custom {
+  background-color: #900603;
+  color: #fff;
+}
+.btn-custom:hover {
+  background-color: #750402;
+  color: #fff;
+}
+
+/* Modal header */
+.modal-header.custom-header {
+  background-color: #900603;
+  color: #fff;
+}
+
+/* Tabs */
+.nav-tabs .nav-link.active {
+  background-color: #900603 !important;
+  color: #fff !important;
+}
+.nav-tabs .nav-link {
+  color: #900603;
+  font-weight: 500;
+}
+
+/* Document cards */
+.doc-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+.doc-card img {
+  width: 120px;
+  margin-bottom: 8px;
+}
+
+/* Pagination */
+.pagination .page-link {
+  color: #900603;
+}
+.pagination .page-link:hover {
+  background-color: #900603;
+  color: #fff;
+}

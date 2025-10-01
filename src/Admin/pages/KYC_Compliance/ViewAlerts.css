@@ -1,0 +1,56 @@
+/* Navbar */
+.custom-navbar {
+  background-color: #8B0000;
+}
+.custom-navbar .navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+/* Heading Card */
+.card-heading {
+  background-color: #fff5f5;
+}
+.heading-icon {
+  color: #8B0000;
+}
+.heading-title {
+  color: #8B0000;
+  font-weight: 600;
+}
+
+/* Table */
+.custom-table-header {
+  background-color: #8B0000;
+  color: #fff;
+}
+
+/* Status Colors */
+.status-pending {
+  color: #ffc107;
+  font-weight: bold;
+}
+.status-resolved {
+  color: #28a745;
+  font-weight: bold;
+}
+.status-escalated {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Buttons */
+.btn-custom {
+  background-color: #8B0000;
+  color: #fff;
+}
+.btn-custom:hover {
+  background-color: #6a0000;
+  color: #fff;
+}
+
+/* Modal */
+.custom-modal-header {
+  background-color: #8B0000;
+  color: #fff;
+}

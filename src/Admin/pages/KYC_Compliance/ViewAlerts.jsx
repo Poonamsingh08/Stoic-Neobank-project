@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaBell } from "react-icons/fa";
+import "./ViewAlerts.css"; // <-- import CSS
 
 export default function ViewAlerts() {
   const dummyAlerts = [
@@ -159,19 +160,17 @@ export default function ViewAlerts() {
 
   const statusColor = (status) =>
     status === "Pending"
-      ? "text-warning fw-bold"
+      ? "status-pending"
       : status === "Resolved"
-      ? "text-success fw-bold"
-      : "text-danger fw-bold";
+      ? "status-resolved"
+      : "status-escalated";
 
   return (
-    <div className="vh-100 d-flex flex-column" style={{ overflowX: "hidden" }}>
+    <div className="vh-100 d-flex flex-column overflow-hidden">
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#8B0000" }}>
+      <nav className="navbar navbar-expand-lg custom-navbar">
         <div className="container-fluid">
-          <span className="navbar-brand text-white fw-bold">
-            Neo Bank AML & Complaints
-          </span>
+          <span className="navbar-brand">Neo Bank AML & Complaints</span>
         </div>
       </nav>
 
@@ -180,11 +179,9 @@ export default function ViewAlerts() {
         <div className="container-fluid">
           {/* Heading */}
           <div className="card mb-4 shadow-sm rounded">
-            <div className="card-body d-flex align-items-center" style={{ backgroundColor: "#fff5f5" }}>
-              <FaBell size={28} color="#8B0000" className="me-2" />
-              <h3 className="mb-0" style={{ color: "#8B0000" }}>
-                AML / Complaints Alerts
-              </h3>
+            <div className="card-body d-flex align-items-center card-heading">
+              <FaBell size={28} className="me-2 heading-icon" />
+              <h3 className="mb-0 heading-title">AML / Complaints Alerts</h3>
             </div>
           </div>
 
@@ -249,7 +246,7 @@ export default function ViewAlerts() {
           {/* Table */}
           <div className="table-responsive">
             <table className="table table-bordered table-hover text-center align-middle">
-              <thead style={{ backgroundColor: "#8B0000", color: "#fff" }}>
+              <thead className="custom-table-header">
                 <tr>
                   <th>
                     <input
@@ -285,8 +282,7 @@ export default function ViewAlerts() {
                     <td>{a.note}</td>
                     <td>
                       <button
-                        className="btn btn-sm text-white"
-                        style={{ backgroundColor: "#8B0000" }}
+                        className="btn btn-sm btn-custom"
                         onClick={() => setViewingAlert(a)}
                       >
                         View
@@ -326,7 +322,7 @@ export default function ViewAlerts() {
             <div className="modal show d-block" tabIndex="-1">
               <div className="modal-dialog modal-xl modal-dialog-centered">
                 <div className="modal-content">
-                  <div className="modal-header" style={{ backgroundColor: "#8B0000", color: "#fff" }}>
+                  <div className="modal-header custom-modal-header">
                     <h5 className="modal-title">{viewingAlert.name}</h5>
                     <button className="btn-close btn-close-white" onClick={() => setViewingAlert(null)}></button>
                   </div>
@@ -366,8 +362,7 @@ export default function ViewAlerts() {
                             onChange={(e) => setNewNote(e.target.value)}
                           />
                           <button
-                            className="btn text-white"
-                            style={{ backgroundColor: "#8B0000" }}
+                            className="btn btn-custom"
                             onClick={() => addNote(viewingAlert.alertId)}
                           >
                             Add Note
@@ -383,8 +378,7 @@ export default function ViewAlerts() {
                             onChange={(e) => setEscalateReason(e.target.value)}
                           />
                           <button
-                            className="btn btn-danger text-white"
-                            style={{ backgroundColor: "#8B0000" }}
+                            className="btn btn-danger btn-custom"
                             onClick={() => escalateAlert(viewingAlert.alertId)}
                           >
                             Escalate
@@ -396,7 +390,7 @@ export default function ViewAlerts() {
                       <div className="tab-pane fade" id="auditTab">
                         <div className="table-responsive">
                           <table className="table table-bordered text-center">
-                            <thead style={{ backgroundColor: "#8B0000", color: "#fff" }}>
+                            <thead className="custom-table-header">
                               <tr>
                                 <th>Date</th>
                                 <th>Action</th>
