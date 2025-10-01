@@ -1,121 +1,84 @@
 
-
 import React from "react";
 import { Home, CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import "./style/ActiveLoanCard.css"; // custom CSS file
 
 function ActiveLoanCard() {
-  const navigate=useNavigate();
-  const handleStatement=()=>{
-    navigate('/Client/view-loan-statement');
-  }
+  const navigate = useNavigate();
+  const handleStatement = () => {
+    navigate("/Client/view-loan-statement");
+  };
+
   return (
-    <div className="m-4">
-      <div className="card shadow rounded-4 border-0 w-100">
-        <div className="card-body p-4">
+    <div className="loan-card-container">
+      <div className="loan-card">
+        <div className="loan-card-body">
           {/* Header */}
-          <div className="d-flex justify-content-between align-items-start mb-4">
+          <div className="loan-header">
             <div>
-              <h5 className="fw-semibold mb-1">My Active Loan</h5>
-              <p className="text-muted small mb-0">
-                Track your current loan details
-              </p>
+              <h5>My Active Loan</h5>
+              <p>Track your current loan details</p>
             </div>
-            {/* <div className="d-flex align-items-center gap-2 text-success bg-light px-3 py-1 rounded-pill">
-              <CheckCircle size={16} />
-              <span className="small fw-medium">Active</span>
-            </div> */}
-            <div className="d-flex align-items-center gap-2 bg-light px-3 py-1 rounded-pill">
+
+            <div className="loan-status">
               <CheckCircle size={16} color="#900603" />
-              <span className="small fw-medium" style={{ color: "#900603" }}>
-                Active
-              </span>
+              <span>Active</span>
             </div>
           </div>
 
-          <div className="row g-4">
+          <div className="loan-content">
             {/* Left section - loan details */}
-            <div className="col-md-6">
-              <div className="d-flex align-items-center gap-3 mb-4">
-                <div
-                  className="p-2 rounded"
-                  style={{ backgroundColor: "#900503" }} // light tint of your custom red
-                >
+            <div className="loan-details">
+              <div className="loan-type">
+                <div className="loan-icon">
                   <Home size={24} color="#ffc107" />
                 </div>
-
                 <div>
-                  <h6 className="fw-semibold mb-0">Home Loan</h6>
-                  <small className="text-muted">8.5% p.a. • 240 months</small>
+                  <h6>Home Loan</h6>
+                  <small>8.5% p.a. • 240 months</small>
                 </div>
               </div>
 
-              <ul className="list-unstyled mb-0">
-                <li className="d-flex justify-content-between mb-2">
-                  <span className="text-muted">Loan Amount</span>
-                  <span className="fw-medium">₹25,00,000.00</span>
+              <ul>
+                <li>
+                  <span>Loan Amount</span>
+                  <span>₹25,00,000.00</span>
                 </li>
-                <li className="d-flex justify-content-between mb-2">
-                  <span className="text-muted">Outstanding</span>
-                  <span className="fw-medium">₹18,50,000.00</span>
+                <li>
+                  <span>Outstanding</span>
+                  <span>₹18,50,000.00</span>
                 </li>
-                <li className="d-flex justify-content-between mb-2">
-                  <span className="text-muted">Monthly EMI</span>
-                  <span className="fw-medium">₹23,500.00</span>
+                <li>
+                  <span>Monthly EMI</span>
+                  <span>₹23,500.00</span>
                 </li>
-                <li className="d-flex justify-content-between">
-                  <span className="text-muted">Next EMI Date</span>
-                  <span className="fw-medium">2/1/2025</span>
+                <li>
+                  <span>Next EMI Date</span>
+                  <span>2/1/2025</span>
                 </li>
               </ul>
             </div>
 
             {/* Right section - progress + actions */}
-            <div className="col-md-6">
-              <div className="mb-4">
-                <div className="d-flex justify-content-between align-items-center mb-2">
-                  <span className="fw-medium">Loan Progress</span>
-                  <span className="fw-semibold">25%</span>
+            <div className="loan-progress-section">
+              <div className="loan-progress">
+                <div className="loan-progress-header">
+                  <span>Loan Progress</span>
+                  <span>25%</span>
                 </div>
-                <div className="progress" style={{ height: "8px" }}>
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    style={{ width: "25%", backgroundColor: "#900603" }}
-                  ></div>
+                <div className="loan-progress-bar">
+                  <div className="loan-progress-fill"></div>
                 </div>
-                <div className="d-flex justify-content-between small text-muted mt-2">
+                <div className="loan-progress-info">
                   <span>60 months paid</span>
                   <span>180 months remaining</span>
                 </div>
               </div>
 
-              <div className="d-flex gap-3">
-                <button
-                  className="btn text-white fw-medium flex-fill background"
-                  style={{ backgroundColor: "#900603" }}
-                >
-                  Make Payment
-                </button>
-                {/* <button className="btn btn-outline-warning fw-medium flex-fill">
-                  View Statement
-                </button> */}
-                <button
-                  className="btn fw-medium flex-fill"
-                  style={{
-                    borderColor: "#900603",
-                    color: "#900603",
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.backgroundColor = "#900603";
-                    e.currentTarget.style.color = "#fff";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "#900603";
-                  }}
-                  onClick={() => handleStatement()}
-                >
+              <div className="loan-actions">
+                <button className="btn-primary">Make Payment</button>
+                <button className="btn-outline" onClick={handleStatement}>
                   View Statement
                 </button>
               </div>

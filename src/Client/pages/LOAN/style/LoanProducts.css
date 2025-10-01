@@ -1,0 +1,117 @@
+.loan-products-container {
+  margin: 1.5rem;
+}
+
+.loan-products-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loan-products-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.loan-products-subtitle {
+  color: #6c757d;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* Grid */
+.loan-products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .loan-products-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.loan-product-item {
+  display: flex;
+}
+
+.loan-product-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.loan-product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.loan-product-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loan-icon {
+  background-color: #900603;
+  padding: 0.6rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffc107;
+  font-size: 1.2rem;
+}
+
+.loan-product-header h6 {
+  font-weight: 600;
+  margin: 0;
+}
+
+.loan-purpose {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.loan-info {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.loan-info li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.loan-info li span {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Apply Button */
+.loan-apply-btn {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #900603;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.loan-apply-btn:hover {
+  background-color: #a10a0a;
+}
