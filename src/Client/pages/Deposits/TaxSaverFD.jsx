@@ -1,114 +1,109 @@
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import fdBanner from "./fd-banner.png";
+import "./TaxSaverFD.css";
 
 const TaxSaverFD = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [amount, setAmount] = useState(10000);
   const rate = 7.75;
   const term = 5; // 5 Years Fixed
-
-  const maturity = (amount * Math.pow(1 + rate / 100, term)).toFixed(2);
+  const maturity = Math.round(amount * Math.pow(1 + rate / 100, term));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="fd-container">
 
       {/* Hero Section */}
-      <section
-        className="text-center text-white py-16"
-        style={{ backgroundColor: "#900603" }}
-      >
-        <h1 className="text-4xl font-bold mb-4">Tax Saver Fixed Deposit</h1>
-        <p className="mb-6">
-          Save tax under Section 80C & earn guaranteed <strong>7.75% returns</strong>
-        </p>
-         <div className="flex justify-center gap-4">
-          <button 
-            className="bg-white text-[#900603] px-6 py-3 rounded-lg font-semibold"
-            onClick={() => navigate("/Client/fixed-deposit", { 
-              state: { 
-                type: "Tax Saver FD", 
-                amount,
-                duration: 0,        // default 0
-                interestRate: 0,    // default 0
-                maturity: 0         // default 0
-              } 
-            })}
-          >
-            Open FD Account
-          </button>
-          <button className="border border-white px-6 py-3 rounded-lg font-semibold">
-            Know More
-          </button>
-        </div>
-      </section>
-        
-      {/* Calculator */}
-      <section className="py-16 text-center">
-        <h2 className="text-3xl font-bold text-[#900603] mb-6">Calculate Your Returns</h2>
-        <input
-          type="number"
-          value={amount}
-          min={100}
-          onChange={(e) => setAmount(e.target.value)}
-          className="border rounded-lg p-3 mb-6 w-1/2"
-        />
-        <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          <div className="bg-white p-4 rounded shadow">
-            <h3 className="font-bold">Interest Rate</h3>
-            <p className="text-[#900603] font-semibold text-xl">{rate}%</p>
+      <section className="fd-hero">
+        <div className="fd-hero-inner">
+          <div className="fd-hero-left">
+            <h1>Tax Saver Fixed Deposit</h1>
+            <p>Save tax under Section 80C & earn guaranteed <strong>7.75% returns</strong></p>
+            <div className="fd-buttons">
+              <button
+                className="btn-primary"
+                onClick={() => navigate("/Client/fixed-deposit", { state: { type: "Tax Saver FD", amount, duration: 0, interestRate: 0, maturity: 0 } })}
+              >
+                Open FD Account
+              </button>
+              <button className="btn-outline">Know More</button>
+            </div>
           </div>
-          <div className="bg-white p-4 rounded shadow">
-            <h3 className="font-bold">Tenure</h3>
-            <p className="text-[#900603] font-semibold text-xl">{term} Years</p>
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <h3 className="font-bold">Maturity Value</h3>
-            <p className="text-[#900603] font-semibold text-xl">₹{maturity}</p>
+          <div className="fd-hero-right">
+           <img src={fdBanner} alt="FD Banner" />
           </div>
         </div>
-        <p className="mt-4 text-gray-500 text-sm">
-          *Premature withdrawal not allowed
-        </p>
       </section>
 
-      {/* Benefits */}
-      <section className="py-16 max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-[#900603] mb-10">Why Choose Tax Saver FD?</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+      {/* Calculator Section */}
+      <section className="fd-calculator">
+        <div className="fd-calculator-inner">
+          <div className="fd-calculator-left">
+            <h2>Calculate Your Returns</h2>
+            <input
+              type="number"
+              value={amount}
+              min={100}
+              onChange={(e) => setAmount(Number(e.target.value))}
+              className="fd-input"
+            />
+            <div className="fd-cards">
+              <div className="fd-card">
+                <h3>Interest Rate</h3>
+                <p>{rate}%</p>
+              </div>
+              <div className="fd-card">
+                <h3>Tenure</h3>
+                <p>{term} Years</p>
+              </div>
+              <div className="fd-card">
+                <h3>Maturity Value</h3>
+                <p>₹{maturity.toLocaleString()}</p>
+              </div>
+            </div>
+            <p className="fd-note">*Premature withdrawal not allowed</p>
+          </div>
+          <div className="fd-calculator-right">
+            <div className="fd-summary-card">
+              <h3>Summary</h3>
+              <p>Amount: ₹{amount.toLocaleString()}</p>
+              <p>Rate: {rate}% p.a.</p>
+              <p>Tenure: {term} Years</p>
+              <p>Maturity: ₹{maturity.toLocaleString()}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="fd-benefits">
+        <h2>Why Choose Tax Saver FD?</h2>
+        <div className="fd-benefit-cards">
           {[
             "Save tax upto ₹1.5 Lakh under 80C",
             "100% Guaranteed & Safe Returns",
-            "Start with just ₹100"
+            "Start with just ₹100",
+            "Hassle-free Setup",
           ].map((benefit, i) => (
-            <div key={i} className="bg-white p-6 rounded shadow">
-              <h3 className="font-semibold mb-2">{benefit}</h3>
+            <div key={i} className="fd-benefit-card">
+              <h3>{benefit}</h3>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section
-        className="text-center text-white py-16"
-        style={{ backgroundColor: "#900603" }}
-      >
-        <h2 className="text-3xl font-bold mb-4">Start your Tax Saver FD Today</h2>
-        <button 
-          className="bg-white text-[#900603] px-8 py-3 rounded-xl font-semibold flex items-center gap-2 mx-auto"
-          onClick={() => navigate("/Client/fixed-deposit", { 
-            state: { 
-              type: "Tax Saver FD", 
-              amount,
-              duration: 0,        // default 0
-              interestRate: 0,    // default 0
-              maturity: 0         // default 0
-            } 
-          })}
+      {/* CTA Section */}
+      <section className="fd-cta">
+        <h2>Start your Tax Saver FD Today</h2>
+        <button
+          className="btn-primary flex-btn"
+          onClick={() => navigate("/Client/fixed-deposit", { state: { type: "Tax Saver FD", amount, duration: 0, interestRate: 0, maturity: 0 } })}
         >
           Open FD Account <ArrowRight size={18} />
         </button>
       </section>
+
     </div>
   );
 };

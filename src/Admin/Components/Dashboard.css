@@ -1,15 +1,11 @@
 /* ✅ Full-width Welcome Banner */
 /* Reset default body/html spacing */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-
-
-
-
 
 .dashboard {
   padding: 20px;
@@ -21,13 +17,17 @@ html, body {
 }
 
 .dashboard-sub {
-  font-size: 16px; /* normal size for rest of the text */
-  color: #333;     /* normal dark text */
+  font-size: 16px;
+  /* normal size for rest of the text */
+  color: #333;
+  /* normal dark text */
 }
 
 .dashboard-sub .highlight {
-  color: #950606;   /* red color */
-  font-size: 24px;  /* bigger */
+  color: #950606;
+  /* red color */
+  font-size: 24px;
+  /* bigger */
   font-weight: bold;
 }
 
@@ -43,22 +43,26 @@ html, body {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
-  color: #333; /* default text color */
+  color: #333;
+  /* default text color */
 }
 
 .stat-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
-  background: #950606;   /* 🔴 full background */
-  color: #fff;           /* make text white for contrast */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+  background: #950606;
+  /* 🔴 full background */
+  color: #fff;
+  /* make text white for contrast */
 }
 
 .stat-card:hover h3,
 .stat-card:hover .stat-value,
 .stat-card:hover .stat-change {
-  color: #fff; /* ensure all text is visible */
+  color: #fff;
+  /* ensure all text is visible */
 }
 
 .stat-value {
@@ -89,13 +93,13 @@ html, body {
   background: white;
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .action-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 .action-header {
@@ -142,7 +146,7 @@ html, body {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .transaction-list {
@@ -233,7 +237,7 @@ html, body {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .alert-list {
@@ -250,7 +254,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .alert-list li:last-child {
@@ -309,9 +313,10 @@ html, body {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .stat-card.clickable:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 
 /* ✅ Credit Card Section */
@@ -332,7 +337,7 @@ html, body {
   background: #ffffff;
   border-radius: 18px;
   padding: 24px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   text-align: center;
@@ -347,14 +352,14 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at top left, rgba(149,6,6,0.05), transparent 70%);
+  background: radial-gradient(circle at top left, rgba(149, 6, 6, 0.05), transparent 70%);
   pointer-events: none;
   border-radius: 18px;
 }
 
 .credit-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* Ribbon Banner */
@@ -369,7 +374,7 @@ html, body {
   font-weight: bold;
   transform: rotate(-8deg);
   border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .card-banner.hot {
@@ -385,16 +390,17 @@ html, body {
   width: 100%;
   max-width: 300px;
   margin: 20px auto;
-  background: #fff;   /* ✅ Full white background */
+  background: #fff;
+  /* ✅ Full white background */
   border-radius: 14px;
   /* padding: 12px; */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-img:hover {
   transform: scale(1.05) rotate(-1deg);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
 }
 
 /* Card Title */
@@ -443,12 +449,12 @@ html, body {
 .apply-btn {
   background: #950606;
   color: #fff;
-  box-shadow: 0 3px 10px rgba(149,6,6,0.25);
+  box-shadow: 0 3px 10px rgba(149, 6, 6, 0.25);
 }
 
 .apply-btn:hover {
   background: #750505;
-  box-shadow: 0 5px 15px rgba(117,5,5,0.3);
+  box-shadow: 0 5px 15px rgba(117, 5, 5, 0.3);
 }
 
 .details-btn {
@@ -469,13 +475,15 @@ html, body {
   }
 }
 
- /* Mobile Responsive CSS */
- /* ✅ Tablets (up to 1024px) */
+/* Mobile Responsive CSS */
+/* ✅ Tablets (up to 1024px) */
 @media (max-width: 1024px) {
+
   .stats-grid,
   .quick-actions,
   .bottom-grid {
-    flex-direction: column; /* stack vertically */
+    flex-direction: column;
+    /* stack vertically */
   }
 
   .stat-card,
@@ -486,7 +494,8 @@ html, body {
   }
 
   .transaction-list li {
-    grid-template-columns: 70px 1fr 1fr; /* simplify layout */
+    grid-template-columns: 70px 1fr 1fr;
+    /* simplify layout */
     font-size: 0.85rem;
   }
 }
@@ -517,7 +526,8 @@ html, body {
   }
 
   .transaction-list li {
-    grid-template-columns: 1fr 1fr; /* only show essential info */
+    grid-template-columns: 1fr 1fr;
+    /* only show essential info */
     padding: 10px 6px;
   }
 
@@ -535,7 +545,8 @@ html, body {
   }
 
   .card-img {
-    max-width: 100%; /* shrink image properly */
+    max-width: 100%;
+    /* shrink image properly */
   }
 
   .card-actions {
@@ -545,7 +556,8 @@ html, body {
 
   .apply-btn,
   .details-btn {
-    width: 100%; /* full width buttons on mobile */
+    width: 100%;
+    /* full width buttons on mobile */
   }
 }
 
@@ -560,7 +572,8 @@ html, body {
   }
 
   .transaction-list li {
-    grid-template-columns: 1fr; /* stack everything */
+    grid-template-columns: 1fr;
+    /* stack everything */
     text-align: left;
   }
 

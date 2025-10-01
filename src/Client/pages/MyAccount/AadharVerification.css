@@ -1,0 +1,130 @@
+/* ============================ */
+/* AadharVerification Component */
+/* ============================ */
+
+.av-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.av-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.av-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.av-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.av-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.av-input:focus {
+  outline: none;
+  border-color: #900603;
+  box-shadow: 0 0 5px rgba(144, 6, 3, 0.3);
+}
+
+.av-otp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.av-otp-input {
+  margin-bottom: 10px;
+}
+
+/* Inline Messages */
+.av-message {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.av-success {
+  color: #16a34a;
+}
+
+.av-error {
+  color: #dc2626;
+}
+
+.av-info {
+  color: #2563eb;
+}
+
+/* Button row */
+.av-btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.av-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  transition: all 0.2s ease;
+}
+
+.av-btn-active {
+  background-color: #900603;
+  color: #fff;
+}
+
+.av-btn-active:hover {
+  background-color: #6f0402;
+}
+
+.av-btn-disabled {
+  background-color: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.av-btn-back {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.av-btn-back:hover {
+  background-color: #d1d5db;
+}
+
+.av-btn-resend {
+  background-color: #900603;
+  color: #fff;
+}
+
+.av-btn-resend:hover {
+  background-color: #6f0402;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .av-btn-row {
+    flex-direction: column;
+  }
+}

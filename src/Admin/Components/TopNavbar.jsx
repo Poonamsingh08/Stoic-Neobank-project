@@ -29,7 +29,7 @@ const TopNavbar = () => {
 
   // ✅ Menu items
   const firstRow = [
-    { name: "Dashboard", icon: <LayoutDashboard size={18} />, path: "/" },
+    { name: "Dashboard", icon: <LayoutDashboard size={18} />, path: "/Admin" },
     { name: "Users", icon: <Users size={18} />, path: "/Admin/users" },
     { name: "KYC", icon: <FileText size={18} />, path: "/Admin/kyc" },
     { name: "Accounts & Wallets", icon: <Wallet size={18} />, path: "/Admin/accountsdashboard" },

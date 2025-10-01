@@ -1,0 +1,125 @@
+/* ================= Global Reset ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.security-options-page {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #f8f8f8;
+}
+
+.security-options-container {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 0; /* square container */
+}
+
+.security-header {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.security-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* ================= Security Card ================= */
+.security-card {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 0; /* square card */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-left: 5px solid transparent;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.security-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+/* Card Left (Icon + Text) */
+.security-card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.security-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.security-card-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.security-card-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Buttons */
+.security-btn {
+  padding: 6px 12px;
+  border: 1px solid;
+  border-radius: 0; /* square button */
+  font-weight: bold;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.security-btn span {
+  margin-left: 6px;
+}
+
+.security-btn:hover {
+  color: #fff;
+}
+
+/* ================= Color Variants ================= */
+.warning-card { border-left-color: #ffc107; background-color: #fffaf0; }
+.primary-card { border-left-color: #0d6efd; background-color: #f0f5ff; }
+.success-card { border-left-color: #198754; background-color: #f0fff4; }
+
+.warning-icon { color: #ffc107; }
+.primary-icon { color: #0d6efd; }
+.success-icon { color: #198754; }
+
+.warning-btn { border-color: #ffc107; color: #ffc107; }
+.primary-btn { border-color: #0d6efd; color: #0d6efd; }
+.success-btn { border-color: #198754; color: #198754; }
+
+.warning-btn:hover { background-color: #ffc107; }
+.primary-btn:hover { background-color: #0d6efd; }
+.success-btn:hover { background-color: #198754; }
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  .security-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .security-btn { width: 100%; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .security-card { padding: 12px 15px; }
+  .security-card-title { font-size: 14px; }
+  .security-card-desc { font-size: 12px; }
+  .security-btn { padding: 5px 10px; font-size: 13px; }
+}
