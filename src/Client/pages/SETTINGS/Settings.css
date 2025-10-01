@@ -1,0 +1,134 @@
+/* ================= Global Reset ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f8f8f8;
+}
+
+/* ================= Page Container ================= */
+.settings-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ================= Header ================= */
+.settings-header {
+  background-color: #960603;
+  color: #fff;
+  padding: 25px 15px;
+  border-radius: 0; /* round removed */
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.settings-header h1 {
+  font-weight: bold; /* title bold */
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.settings-header p {
+  font-size: 14px;
+  color: #fefefe;
+  font-weight: normal;
+}
+
+/* ================= Cards Grid ================= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ================= Card ================= */
+.card {
+  background-color: #fff;
+  border-radius: 0; /* square cards */
+  padding: 20px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Card Icon */
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #960603;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+/* Card Title */
+.card-title {
+  font-size: 18px;
+  font-weight: bold; /* bold title */
+}
+
+/* Card Description */
+.card-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+/* Card Button */
+.card-btn {
+  padding: 8px 12px;
+  border: 1px solid #960603;
+  border-radius: 0; /* square button */
+  background-color: transparent;
+  color: #960603;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.card-btn span {
+  margin-left: 9px;
+}
+
+.card-btn:hover {
+  background-color: #960603;
+  color: #fff;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  .settings-header h1 { font-size: 24px; }
+  .settings-header p { font-size: 14px; }
+  .card-title { font-size: 16px; }
+  .card-desc { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .settings-header { padding: 20px 10px; }
+  .card { padding: 15px; min-height: 220px; }
+  .card-icon { width: 35px; height: 35px; font-size: 16px; }
+  .card-title { font-size: 15px; }
+  .card-desc { font-size: 12px; }
+  .card-btn { padding: 6px 10px; font-size: 13px; }
+}
