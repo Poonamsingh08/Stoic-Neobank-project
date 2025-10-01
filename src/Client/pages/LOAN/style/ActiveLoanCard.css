@@ -1,12 +1,24 @@
+.loan-card-container {
+  margin: 1.5rem;
+}
 
+.loan-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.loan-card-body {
+  padding: 1.5rem;
+}
 
 /* Header */
 .loan-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  background-color: #fff;
+  margin-bottom: 1.5rem;
 }
 
 .loan-header h5 {

@@ -72,7 +72,7 @@ const Loan = () => {
         {/* Left side: Title & Subtitle */}
         <div className="loan-title">
           <h1>Loans</h1>
-          <p>Achieve your dreams with flexible loan options</p>
+          <p style={{color:'white'}}>Achieve your dreams with flexible loan options</p>
         </div>
 
         {/* Right side: Button */}
