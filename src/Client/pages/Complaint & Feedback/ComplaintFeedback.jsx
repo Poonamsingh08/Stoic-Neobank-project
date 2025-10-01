@@ -526,10 +526,10 @@ export default function ComplaintFeedback() {
               </button>
 
               <button
-=======
+
                 className="cf-contact-btn cf-contact-email"
                 onClick={() => navigate("/Client/email-support")}
->>>  >
+ >
                 <Mail size={24} className="cf-contact-icon" />
                 <div className="cf-contact-text">
                   <p>Email Support</p>

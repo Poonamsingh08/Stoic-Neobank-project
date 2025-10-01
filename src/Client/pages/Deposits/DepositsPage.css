@@ -23,7 +23,9 @@ body, div, p, h1, h3, input, select, button, ul, li {
   z-index: 100;
 }
 .header h1 { font-weight: bold; font-size: 30px; } /* Bigger & bold */
-.header p { font-weight: ; font-size: 15px; } /* Bold & bigger */
+
+.header p { font-weight: bold; font-size: 15px; }
+
 
 /* Dropdown */
 .dropdown { position: relative; }
