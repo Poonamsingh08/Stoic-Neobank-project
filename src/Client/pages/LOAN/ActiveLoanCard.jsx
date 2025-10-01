@@ -2,7 +2,7 @@
 import React from "react";
 import { Home, CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import "./style/ActiveLoanCard.css"; // custom CSS file
+
 
 function ActiveLoanCard() {
   const navigate = useNavigate();
