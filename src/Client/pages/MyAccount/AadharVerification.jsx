@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './AadharVerification.css'; // 👈 unique CSS
 
 const AadharVerification = ({ userData, updateUserData, nextStep, prevStep }) => {
   const [otpSent, setOtpSent] = useState(false);
@@ -34,17 +35,18 @@ const AadharVerification = ({ userData, updateUserData, nextStep, prevStep }) =>
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">Aadhar Verification</h2>
-      <div className="mb-4">
-        <label className="block text-gray-600 mb-2">Aadhar Number</label>
+    <div className="av-container">
+      <h2 className="av-title">Aadhar Verification</h2>
+
+      <div className="av-form-group">
+        <label className="av-label">Aadhar Number</label>
         <input
           type="text"
           name="aadharNumber"
           value={userData.aadharNumber}
           onChange={handleChange}
           placeholder="Enter your 12-digit Aadhar Number"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
+          className="av-input"
         />
       </div>
 
@@ -52,60 +54,37 @@ const AadharVerification = ({ userData, updateUserData, nextStep, prevStep }) =>
         <button
           onClick={sendOtp}
           disabled={userData.aadharNumber.length !== 12}
-          className={`w-full px-6 py-2 rounded-lg transition ${
-            userData.aadharNumber.length === 12
-              ? 'bg-[#900603] hover:bg-red-700 text-white'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
+          className={`av-btn ${userData.aadharNumber.length === 12 ? 'av-btn-active' : 'av-btn-disabled'}`}
         >
           Send OTP
         </button>
       ) : (
-        <div className="mt-4">
+        <div className="av-otp-section">
           <input
             type="text"
             placeholder="Enter OTP"
             value={enteredOtp}
             onChange={(e) => setEnteredOtp(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none mb-2"
+            className="av-input av-otp-input"
           />
 
-          {/* Inline message */}
           {message && (
-            <p
-              className={`text-sm mb-4 ${
-                messageType === 'success'
-                  ? 'text-green-600'
-                  : messageType === 'error'
-                  ? 'text-red-600'
-                  : 'text-blue-600'
-              }`}
-            >
+            <p className={`av-message ${messageType === 'success' ? 'av-success' : messageType === 'error' ? 'av-error' : 'av-info'}`}>
               {message}
             </p>
           )}
 
-          <div className="flex justify-between gap-2">
-            <button
-              onClick={prevStep}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 flex-1 px-4 py-2 rounded-lg transition"
-            >
+          <div className="av-btn-row">
+            <button onClick={prevStep} className="av-btn av-btn-back">
               Back
             </button>
-            <button
-              onClick={sendOtp}
-              className="bg-[#900603] hover:bg-red-700 text-white flex-1 px-4 py-2 rounded-lg transition"
-            >
+            <button onClick={sendOtp} className="av-btn av-btn-resend">
               Resend OTP
             </button>
             <button
               onClick={verifyOtp}
               disabled={enteredOtp.length !== 6}
-              className={`flex-1 px-4 py-2 rounded-lg transition ${
-                enteredOtp.length === 6
-                  ? 'bg-[#900603] hover:bg-red-700 text-white'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
+              className={`av-btn ${enteredOtp.length === 6 ? 'av-btn-active' : 'av-btn-disabled'}`}
             >
               Verify OTP
             </button>

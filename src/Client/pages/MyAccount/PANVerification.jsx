@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './PANVerification.css'; // 👈 unique CSS
 
 const PANVerification = ({ userData, updateUserData, nextStep, prevStep }) => {
   const [otpSent, setOtpSent] = useState(false);
@@ -24,27 +25,28 @@ const PANVerification = ({ userData, updateUserData, nextStep, prevStep }) => {
 
   const verifyOtp = () => {
     if (enteredOtp === otp && enteredOtp !== "") {
-      setMessage("PAN Verified Successfully!");
+      setMessage("✅ PAN Verified Successfully!");
       setMessageType("success");
       setTimeout(() => nextStep(), 1000); // proceed to next step after 1s
     } else {
-      setMessage("Incorrect OTP. Please try again.");
+      setMessage("❌ Incorrect OTP. Please try again.");
       setMessageType("error");
     }
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">PAN Verification</h2>
-      <div className="mb-4">
-        <label className="block text-gray-600 mb-2">PAN Number</label>
+    <div className="pv-container">
+      <h2 className="pv-title">PAN Verification</h2>
+
+      <div className="pv-form-group">
+        <label className="pv-label">PAN Number</label>
         <input
           type="text"
           name="panNumber"
           value={userData.panNumber}
           onChange={handleChange}
           placeholder="Enter your PAN Number"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
+          className="pv-input"
         />
       </div>
 
@@ -52,56 +54,37 @@ const PANVerification = ({ userData, updateUserData, nextStep, prevStep }) => {
         <button
           onClick={sendOtp}
           disabled={userData.panNumber.length !== 10}
-          className={`w-full px-6 py-2 rounded-lg transition ${
-            userData.panNumber.length === 10
-              ? 'bg-[#900603] hover:bg-red-700 text-white'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
+          className={`pv-btn ${userData.panNumber.length === 10 ? 'pv-btn-active' : 'pv-btn-disabled'}`}
         >
           Send OTP
         </button>
       ) : (
-        <div className="mt-4">
+        <div className="pv-otp-section">
           <input
             type="text"
             placeholder="Enter OTP"
             value={enteredOtp}
             onChange={(e) => setEnteredOtp(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none mb-2"
+            className="pv-input pv-otp-input"
           />
 
-          {/* Display OTP / Verification message */}
           {message && (
-            <p
-              className={`text-sm mb-4 ${
-                messageType === "success" ? "text-green-600" : "text-red-600"
-              }`}
-            >
+            <p className={`pv-message ${messageType === "success" ? "pv-success" : "pv-error"}`}>
               {message}
             </p>
           )}
 
-          <div className="flex justify-between gap-2">
-            <button
-              onClick={prevStep}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 flex-1 px-4 py-2 rounded-lg transition"
-            >
+          <div className="pv-btn-row">
+            <button onClick={prevStep} className="pv-btn pv-btn-back">
               Back
             </button>
-            <button
-              onClick={sendOtp}
-              className="bg-[#900603] hover:bg-red-700 text-white flex-1 px-4 py-2 rounded-lg transition"
-            >
+            <button onClick={sendOtp} className="pv-btn pv-btn-resend">
               Resend OTP
             </button>
             <button
               onClick={verifyOtp}
               disabled={enteredOtp.length !== 6}
-              className={`flex-1 px-4 py-2 rounded-lg transition ${
-                enteredOtp.length === 6
-                  ? 'bg-[#900603] hover:bg-red-700 text-white'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
+              className={`pv-btn ${enteredOtp.length === 6 ? 'pv-btn-active' : 'pv-btn-disabled'}`}
             >
               Verify OTP
             </button>

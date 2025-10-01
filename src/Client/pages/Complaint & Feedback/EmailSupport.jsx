@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button, Card, Badge } from "react-bootstrap";
+import "./EmailSupport.css";
 
-function EmailSupport() {
+const EmailSupport = () => {
   const [formState, setFormState] = useState({
     fullName: "",
     email: "",
@@ -27,211 +27,182 @@ function EmailSupport() {
   };
 
   return (
-    <div className="w-100">
-      {/* 🔴 Header Full Width */}
-      <div className="w-full bg-[#900603] py-4">
-        <Container className="text-center text-white">
-          <h1 className="text-white">Neo Bank Email Support</h1>
-          <p className="text-white">
-            We value your feedback and are committed to resolving your concerns promptly. <br />
+    <div className="es-root">
+      {/* Header */}
+      <div className="es-header">
+        <div className="es-header-content">
+          <h1 className="es-header-title">Neo Bank Email Support</h1>
+          <p className="es-header-subtitle">
+            We value your feedback and are committed to resolving your concerns promptly.
+            <br />
             Choose your preferred way to reach us.
           </p>
-        </Container>
+        </div>
       </div>
 
       {/* Page Content */}
-      <Container className="py-5">
-        <Row className="justify-content-center">
-          <Col md={10}>
-            <Row>
-              {/* Left Side (Email Form) */}
-              <Col md={7}>
-                <Card className="shadow-sm border-0 mb-4">
-                  <Card.Body>
-                    <h3 className="mb-2" style={{ color: "#A50034" }}>📧 Email Support</h3>
-                    <p className="text-muted">
-                      Contact our support team via email. We’ll respond within{" "}
-                      <strong>24-48 hours</strong>.
-                    </p>
+      <div className="es-container">
+        <div className="es-row">
+          {/* Left Side - Form */}
+          <div className="es-col es-col-left">
+            <div className="es-card">
+              <h3 className="es-card-title">📧 Email Support</h3>
+              <p className="es-card-subtitle">
+                Contact our support team via email. We’ll respond within <strong>24-48 hours</strong>.
+              </p>
 
-                    <Form onSubmit={handleSubmit}>
-                      <Row>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Full Name *</Form.Label>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter your full name"
-                              name="fullName"
-                              value={formState.fullName}
-                              onChange={handleChange}
-                              required
-                            />
-                          </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Email Address *</Form.Label>
-                            <Form.Control
-                              type="email"
-                              placeholder="your.email@example.com"
-                              name="email"
-                              value={formState.email}
-                              onChange={handleChange}
-                              required
-                            />
-                          </Form.Group>
-                        </Col>
-                      </Row>
+              <form className="es-form" onSubmit={handleSubmit}>
+                <div className="es-form-row">
+                  <div className="es-form-col">
+                    <label>Full Name *</label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formState.fullName}
+                      onChange={handleChange}
+                      placeholder="Enter your full name"
+                      required
+                    />
+                  </div>
+                  <div className="es-form-col">
+                    <label>Email Address *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formState.email}
+                      onChange={handleChange}
+                      placeholder="your.email@example.com"
+                      required
+                    />
+                  </div>
+                </div>
 
-                      <Form.Group className="mb-3">
-                        <Form.Label>Subject *</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="Brief description of your inquiry"
-                          name="subject"
-                          value={formState.subject}
-                          onChange={handleChange}
-                          required
-                        />
-                      </Form.Group>
+                <div className="es-form-group">
+                  <label>Subject *</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formState.subject}
+                    onChange={handleChange}
+                    placeholder="Brief description of your inquiry"
+                    required
+                  />
+                </div>
 
-                      <Row>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Category *</Form.Label>
-                            <Form.Select
-                              name="category"
-                              value={formState.category}
-                              onChange={handleChange}
-                              required
-                            >
-                              <option value="">Select category</option>
-                              <option>Account Issues</option>
-                              <option>Transaction Problems</option>
-                              <option>Card Related</option>
-                              <option>Loan Services</option>
-                              <option>Investment Issues</option>
-                              <option>Mobile/Internet Banking</option>
-                              <option>Other</option>
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Priority Level *</Form.Label>
-                            <Form.Select
-                              name="priority"
-                              value={formState.priority}
-                              onChange={handleChange}
-                              required
-                            >
-                              <option value="">Select priority</option>
-                              <option>Low Priority - General inquiries</option>
-                              <option>Medium Priority - Account issues</option>
-                              <option>High Priority - Urgent issues</option>
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-                      </Row>
+                <div className="es-form-row">
+                  <div className="es-form-col">
+                    <label>Category *</label>
+                    <select
+                      name="category"
+                      value={formState.category}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select category</option>
+                      <option>Account Issues</option>
+                      <option>Transaction Problems</option>
+                      <option>Card Related</option>
+                      <option>Loan Services</option>
+                      <option>Investment Issues</option>
+                      <option>Mobile/Internet Banking</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div className="es-form-col">
+                    <label>Priority Level *</label>
+                    <select
+                      name="priority"
+                      value={formState.priority}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select priority</option>
+                      <option>Low Priority - General inquiries</option>
+                      <option>Medium Priority - Account issues</option>
+                      <option>High Priority - Urgent issues</option>
+                    </select>
+                  </div>
+                </div>
 
-                      <Form.Group className="mb-3">
-                        <Form.Label>Message *</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          rows={4}
-                          placeholder="Please provide detailed information about your inquiry or issue..."
-                          name="message"
-                          value={formState.message}
-                          onChange={handleChange}
-                          required
-                        />
-                      </Form.Group>
+                <div className="es-form-group">
+                  <label>Message *</label>
+                  <textarea
+                    name="message"
+                    value={formState.message}
+                    onChange={handleChange}
+                    placeholder="Please provide detailed information about your inquiry or issue..."
+                    rows="4"
+                    required
+                  />
+                </div>
 
-                      <Form.Group className="mb-4">
-                        <Form.Label>Attachments (Optional)</Form.Label>
-                        <Form.Control
-                          type="file"
-                          name="attachment"
-                          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                          onChange={handleChange}
-                        />
-                        <Form.Text className="text-muted">
-                          Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB per file)
-                        </Form.Text>
-                      </Form.Group>
+                <div className="es-form-group">
+                  <label>Attachments (Optional)</label>
+                  <input
+                    type="file"
+                    name="attachment"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                    onChange={handleChange}
+                  />
+                  <small className="es-form-text">
+                    Supported formats: PDF, DOC, DOCX, JPG, PNG (Max 10MB per file)
+                  </small>
+                </div>
 
-                      <div className="d-flex justify-content-between">
-                        <Button
-                          variant="light"
-                          className="border"
-                          onClick={() => (window.location.href = "/complaint")}
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          type="submit"
-                          className="text-white px-4"
-                          style={{ backgroundColor: "#A50034", border: "none" }}
-                        >
-                          🚀 Send Email
-                        </Button>
-                      </div>
-                    </Form>
-                  </Card.Body>
-                </Card>
-              </Col>
+                <div className="es-form-actions">
+                  <button
+                    type="button"
+                    className="es-btn es-btn-light"
+                    onClick={() => (window.location.href = "/complaint")}
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" className="es-btn es-btn-submit">
+                    🚀 Send Email
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
 
-              {/* Right Side (Extra Info) */}
-              <Col md={5}>
-                <Card className="shadow-sm border-0 mb-4">
-                  <Card.Body>
-                    <h5 className="mb-3">⏱ Response Times</h5>
-                    <div className="d-flex justify-content-between mb-2">
-                      <Badge bg="success">Low Priority</Badge>
-                      <span>24-48 hours</span>
-                    </div>
-                    <div className="d-flex justify-content-between mb-2">
-                      <Badge bg="warning">Medium Priority</Badge>
-                      <span>12-24 hours</span>
-                    </div>
-                    <div className="d-flex justify-content-between">
-                      <Badge bg="danger">High Priority</Badge>
-                      <span>4-12 hours</span>
-                    </div>
-                  </Card.Body>
-                </Card>
+          {/* Right Side - Info */}
+          <div className="es-col es-col-right">
+            <div className="es-card">
+              <h5 className="es-card-title">⏱ Response Times</h5>
+              <div className="es-info-row">
+                <span className="es-badge es-badge-success">Low Priority</span>
+                <span>24-48 hours</span>
+              </div>
+              <div className="es-info-row">
+                <span className="es-badge es-badge-warning">Medium Priority</span>
+                <span>12-24 hours</span>
+              </div>
+              <div className="es-info-row">
+                <span className="es-badge es-badge-danger">High Priority</span>
+                <span>4-12 hours</span>
+              </div>
+            </div>
 
-                <Card className="shadow-sm border-0 mb-4">
-                  <Card.Body>
-                    <h5 className="mb-3">📞 Other Contact Options</h5>
-                    <p>
-                      <strong>Phone Support:</strong> 1800-123-4567 (24/7)
-                    </p>
-                    <p>
-                      <strong>Live Chat:</strong> Available 9 AM - 9 PM
-                    </p>
-                  </Card.Body>
-                </Card>
+            <div className="es-card">
+              <h5 className="es-card-title">📞 Other Contact Options</h5>
+              <p><strong>Phone Support:</strong> 1800-123-4567 (24/7)</p>
+              <p><strong>Live Chat:</strong> Available 9 AM - 9 PM</p>
+            </div>
 
-                <Card className="shadow-sm border-0">
-                  <Card.Body>
-                    <h5 className="mb-3">💡 Email Tips</h5>
-                    <ul className="mb-0 text-muted">
-                      <li>Include account details for faster resolution</li>
-                      <li>Attach screenshots for technical issues</li>
-                      <li>Be specific about the problem or question</li>
-                      <li>Check your spam folder for our replies</li>
-                    </ul>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+            <div className="es-card">
+              <h5 className="es-card-title">💡 Email Tips</h5>
+              <ul className="es-tips-list">
+                <li>Include account details for faster resolution</li>
+                <li>Attach screenshots for technical issues</li>
+                <li>Be specific about the problem or question</li>
+                <li>Check your spam folder for our replies</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default EmailSupport;

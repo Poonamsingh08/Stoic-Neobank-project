@@ -1,4 +1,5 @@
 import React from 'react';
+import './PersonalDetails.css'; // 👈 unique CSS import
 
 const PersonalDetails = ({ userData, updateUserData, nextStep }) => {
   const handleChange = (e) => {
@@ -8,48 +9,50 @@ const PersonalDetails = ({ userData, updateUserData, nextStep }) => {
   const isFormValid = userData.fullName && userData.mobileNumber && userData.email;
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">Personal Details</h2>
-      <div className="mb-4">
-        <label className="block text-gray-600 mb-2">Full Name</label>
+    <div className="pd-container">
+      <h2 className="pd-title">Personal Details</h2>
+
+      <div className="pd-form-group">
+        <label className="pd-label">Full Name</label>
         <input
           type="text"
           name="fullName"
           value={userData.fullName}
           onChange={handleChange}
           placeholder="Enter your full name"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
+          className="pd-input"
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-600 mb-2">Mobile Number</label>
+
+      <div className="pd-form-group">
+        <label className="pd-label">Mobile Number</label>
         <input
           type="text"
           name="mobileNumber"
           value={userData.mobileNumber}
           onChange={handleChange}
           placeholder="Enter your mobile number"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
+          className="pd-input"
         />
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-600 mb-2">Email</label>
+
+      <div className="pd-form-group">
+        <label className="pd-label">Email</label>
         <input
           type="email"
           name="email"
           value={userData.email}
           onChange={handleChange}
           placeholder="Enter your email"
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:outline-none"
+          className="pd-input"
         />
       </div>
-      <div className="flex justify-end mt-6">
+
+      <div className="pd-btn-row">
         <button
           onClick={nextStep}
           disabled={!isFormValid}
-          className={`px-6 py-2 rounded-lg transition ${
-            isFormValid ? 'bg-red-600 hover:bg-red-700 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
+          className={`pd-btn ${isFormValid ? 'pd-btn-active' : 'pd-btn-disabled'}`}
         >
           Next
         </button>
@@ -57,4 +60,5 @@ const PersonalDetails = ({ userData, updateUserData, nextStep }) => {
     </div>
   );
 };
+
 export default PersonalDetails;

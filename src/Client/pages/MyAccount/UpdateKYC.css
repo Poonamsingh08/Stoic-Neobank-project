@@ -1,0 +1,232 @@
+/* === Container === */
+.kyc-unique-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+}
+
+/* === Main Box === */
+.kyc-unique-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  background: #fff;
+  min-height: 550px; /* 👈 Fix height for consistency */
+}
+
+/* === Left Branding (Center Text) === */
+.kyc-unique-left {
+  flex: 1 1 40%;
+  background: #900603;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Vertical center */
+  align-items: center;       /* Horizontal center */
+  text-align: center;
+  padding: 40px 20px;
+}
+.kyc-unique-logo {
+  max-height: 100px;
+  margin-bottom: 0px;
+}
+.kyc-unique-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 0;   /* 👈 title ko logo ke kareeb le aaya */
+}
+.kyc-unique-subtitle {
+  font-size: 15px;
+  color: #f5f5f5;
+}
+
+/* === Right Form (Centered Content) === */
+.kyc-unique-right {
+  flex: 1 1 60%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 👈 Vertical centering */
+}
+.kyc-unique-heading {
+  font-size: 22px;
+  color: #900603;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.kyc-unique-subheading {
+  font-size: 18px;
+  color: #e60000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* === Inputs === */
+.kyc-unique-input {
+  width: 100%;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.kyc-unique-input:focus {
+  outline: none;
+  border-color: #900603;
+}
+
+/* === Captcha === */
+.kyc-unique-captcha {
+  display: block;
+  font-weight: bold;
+  margin: 12px 0 6px;
+  color: #333;
+  font-size: 15px;
+}
+
+/* === Radio === */
+.kyc-unique-radio-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.kyc-unique-radio-label input {
+  margin-right: 8px;
+}
+.kyc-unique-radio-text {
+  font-weight: bold;
+  color: #333;
+}
+
+/* === Buttons === */
+.kyc-unique-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+}
+.kyc-unique-btn-primary {
+  background: #900603;
+  color: #fff;
+  width: 100%;
+}
+.kyc-unique-btn-danger {
+  background: #900603; /* Verify OTP color */
+  color: #fff;
+  width: 100%;
+}
+.kyc-unique-btn-submit {
+  background: #ff9f00;
+  color: #111;
+  width: 100%;
+}
+
+/* === Outlined Buttons === */
+.kyc-unique-btn-outline-warning,
+.kyc-unique-btn-outline-danger,
+.kyc-unique-btn-outline-success,
+.kyc-unique-btn-outline-secondary,
+.kyc-unique-btn-outline-primary {
+  background: #fff;
+  border: 2px solid;
+  margin-right: 10px;
+}
+.kyc-unique-btn-outline-warning {
+  border-color: #f0ad4e;
+  color: #f0ad4e;
+}
+.kyc-unique-btn-outline-danger {
+  border-color: #d9534f;
+  color: #d9534f;
+}
+.kyc-unique-btn-outline-success {
+  border-color: #5cb85c;
+  color: #5cb85c;
+}
+.kyc-unique-btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.kyc-unique-btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+/* === Hover for all outlined buttons -> #900603 === */
+.kyc-unique-btn-outline-warning:hover,
+.kyc-unique-btn-outline-danger:hover,
+.kyc-unique-btn-outline-success:hover,
+.kyc-unique-btn-outline-secondary:hover,
+.kyc-unique-btn-outline-primary:hover {
+  border-color: #900603;
+  color: #900603;
+  background: #fff;
+}
+
+/* === Error === */
+.kyc-unique-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* === Webcam / Photo / Signature === */
+.kyc-unique-webcam {
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.kyc-unique-photo {
+  width: 100%;
+  border: 2px solid #333;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.kyc-unique-signature {
+  border: 1px solid #333;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+/* === Success === */
+.kyc-unique-success {
+  text-align: center;
+  padding: 20px;
+}
+.kyc-unique-success h4 {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .kyc-unique-left,
+  .kyc-unique-right {
+    flex: 1 1 100%;
+    border-radius: 0;
+  }
+  .kyc-unique-left {
+    border-radius: 15px 15px 0 0;
+  }
+  .kyc-unique-right {
+    border-radius: 0 0 15px 15px;
+    padding: 25px 15px;
+  }
+}
