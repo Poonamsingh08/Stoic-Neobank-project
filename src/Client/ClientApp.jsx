@@ -69,6 +69,9 @@ import ApplyNewCard from "./pages/cards/ApplyNewCard";
 import ComplaintFeedback from "./pages/Complaint & Feedback/ComplaintFeedback";
 import EmailSupport from "./pages/Complaint & Feedback/EmailSupport";
 
+// import Profile from "./pages/Profile/Profile";
+
+
 const ClientApp = () => {
   const [showSplash, setShowSplash] = useState(true);
 
@@ -83,6 +86,9 @@ const ClientApp = () => {
     <div className="App">
       <Navbar />
       <Routes>
+         {/* Profile Page */}
+        {/* <Route path="/profile" element={<Profile />} /> */}
+
         {/* Dashboard */}
         <Route path="/" element={<DashBoard />} />
         <Route path="homepage" element={<HomePage />} />

@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
+import './VideoKYC.css'; // 👈 unique CSS
 
 const VideoKYC = ({ prevStep }) => {
   const [isVerifying, setIsVerifying] = useState(false);
-  const [kycStatus, setKycStatus] = useState("pending"); // pending, in_progress, completed, failed
+  const [kycStatus, setKycStatus] = useState("pending"); // pending, in_progress, completed
   const [message, setMessage] = useState(""); // Status message
   const videoRef = useRef(null);
 
@@ -32,19 +33,19 @@ const VideoKYC = ({ prevStep }) => {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">Video KYC</h2>
-      <p className="mb-4 text-gray-600">
+    <div className="vk-container">
+      <h2 className="vk-title">Video KYC</h2>
+      <p className="vk-subtitle">
         Complete your video KYC to finish your account setup. This is a crucial step for identity verification.
       </p>
 
-      <div className="relative bg-gray-200 aspect-video rounded-lg overflow-hidden flex items-center justify-center mb-4">
+      <div className="vk-video-wrapper">
         <video 
           ref={videoRef} 
           autoPlay 
           playsInline 
           muted 
-          className="w-full h-full object-cover"
+          className="vk-video"
         >
           <source 
             src="https://assets.mixkit.co/videos/preview/mixkit-online-learning-with-laptop-and-coffee-4161-large.mp4" 
@@ -52,36 +53,29 @@ const VideoKYC = ({ prevStep }) => {
           />
         </video>
         {kycStatus === "pending" && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-70 text-white text-lg">
-            <span className="animate-pulse">Click "Start KYC" to begin...</span>
+          <div className="vk-overlay">
+            <span className="vk-overlay-text">Click "Start KYC" to begin...</span>
           </div>
         )}
       </div>
 
-      {/* Inline message */}
       {message && (
-        <p className={`text-sm mb-4 ${kycStatus === "completed" ? "text-green-600" : "text-blue-600"}`}>
+        <p className={`vk-message ${kycStatus === "completed" ? "vk-success" : "vk-info"}`}>
           {message}
         </p>
       )}
 
-      <div className="flex justify-between gap-2">
+      <div className="vk-btn-row">
         <button
           onClick={prevStep}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 flex-1 px-4 py-2 rounded-lg transition"
+          className="vk-btn vk-btn-back"
         >
           Back
         </button>
         <button
           onClick={startKyc}
           disabled={isVerifying || kycStatus === "completed"}
-          className={`flex-1 px-4 py-2 rounded-lg transition text-white ${
-            kycStatus === "completed"
-              ? "bg-green-500 cursor-not-allowed"
-              : isVerifying
-              ? "bg-red-400 cursor-not-allowed"
-              : "bg-[#900603] hover:bg-red-700"
-          }`}
+          className={`vk-btn ${kycStatus === "completed" ? "vk-btn-completed" : isVerifying ? "vk-btn-verifying" : "vk-btn-active"}`}
         >
           {getButtonText()}
         </button>

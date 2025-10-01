@@ -1,0 +1,126 @@
+/* ============================ */
+/* PANVerification Component    */
+/* ============================ */
+
+.pv-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pv-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.pv-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.pv-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.pv-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.pv-input:focus {
+  outline: none;
+  border-color: #900603;
+  box-shadow: 0 0 5px rgba(144, 6, 3, 0.3);
+}
+
+.pv-otp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pv-otp-input {
+  margin-bottom: 10px;
+}
+
+/* Inline Messages */
+.pv-message {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.pv-success {
+  color: #16a34a;
+}
+
+.pv-error {
+  color: #dc2626;
+}
+
+/* Button row */
+.pv-btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.pv-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  transition: all 0.2s ease;
+}
+
+.pv-btn-active {
+  background-color: #900603;
+  color: #fff;
+}
+
+.pv-btn-active:hover {
+  background-color: #6f0402;
+}
+
+.pv-btn-disabled {
+  background-color: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.pv-btn-back {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.pv-btn-back:hover {
+  background-color: #d1d5db;
+}
+
+.pv-btn-resend {
+  background-color: #900603;
+  color: #fff;
+}
+
+.pv-btn-resend:hover {
+  background-color: #6f0402;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pv-btn-row {
+    flex-direction: column;
+  }
+}
