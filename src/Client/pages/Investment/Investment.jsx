@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
 import { TrendingUp, TrendingDown, DollarSign, PieChart, BarChart3, Target, Plus, Eye } from 'lucide-react';
-import "bootstrap-icons/font/bootstrap-icons.css";
+import "./Investment.css";
 
 // ✅ NEW IMPORT for charts
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
@@ -306,125 +306,82 @@ const InvestmentPage = () => {
     }
 
     return (
-        <div
-            className="container-fluid px-0"  // px-0 → horizontal padding remove
-            style={{ backgroundColor: "#f8f9fa", overflowX: "hidden" }} // overflowX hidden → horizontal scroll remove
-        >
+
+        <div className="investment-container">
 
             {/* Header */}
-            <div
-                className="d-flex justify-content-between align-items-center px-4"
-                style={{
-                    backgroundColor: "#900603",
-                    padding: "25px 0",
-                    position: "sticky",
-                    top: 0,
-                    zIndex: 1000,
-                }}
-            >
-            
+            <div className="investment-header">
                 <div>
-                    <h2 className="fw-bold fs-2 text-white mb-0">Investment Portfolios</h2>
-                    <p className="text-white small">
-                        Grow your wealth with smart investments
-                    </p>
+                    <h2 className="title">Investment Portfolios</h2>
+                    <p className="subtitle">Grow your wealth with smart investments</p>
                 </div>
-
-                <button
-                    className="btn text-white d-flex align-items-right"
-                    style={{ backgroundColor: "#780606", border: "2px solid white" }}
-                    onClick={handleScrollToInvestments}
-                >
-                    <Plus size={25} className="me-2" /> Start Investing
+                <button className="start-investing-btn" onClick={handleScrollToInvestments}>
+                    <Plus size={25} /> Start Investing
                 </button>
             </div>
 
-
-            {/* Space between header and portfolio overview */}
-            <div className="my-4"></div>  {/* 1.5-2rem vertical space */}
+            {/* Spacer */}
+            <div className="spacer"></div>
 
             {/* Portfolio Overview */}
-            <div className="row g-4 mb-4">
-                <div className="col-md-3">
-                    <div className="card p-3 shadow-sm" style={{ borderTop: "4px solid #900603" }}>
-                        <h5 className="d-flex align-items-center mb-0"><DollarSign className="me-2" style={{ color: "#f86605ff" }} /> Total Value</h5>
-                        <h4 style={{ color: "#f86605ff" }}>{portfolioData.length > 0 ? formatCurrency(totalPortfolioValue) : "--"}</h4>
-                        <small className="text-success">{portfolioData.length > 0 ? "↑ 8.5% this month" : ""}</small>
-                    </div>
+            <div className="portfolio-overview">
+                <div className="card total-value">
+                    <h5><DollarSign /> Total Value</h5>
+                    <h4>{portfolioData.length > 0 ? formatCurrency(totalPortfolioValue) : "--"}</h4>
+                    <small>{portfolioData.length > 0 ? "↑ 8.5% this month" : ""}</small>
                 </div>
-                <div className="col-md-3">
-                    <div className="card p-3 shadow-sm" style={{ borderTop: "4px solid #780606" }}>
-                        <h5 className="d-flex align-items-center mb-0"><TrendingUp className="me-2" style={{ color: "#128d07ff" }} /> Total Returns</h5>
-                        <h4 style={{ color: "#128d07ff" }}>{portfolioData.length > 0 ? "₹45,680" : "--"}</h4>
-                        <small className="text-muted">{portfolioData.length > 0 ? "15.2% overall" : ""}</small>
-                    </div>
+                <div className="card total-returns">
+                    <h5><TrendingUp /> Total Returns</h5>
+                    <h4>{portfolioData.length > 0 ? "₹45,680" : "--"}</h4>
+                    <small>{portfolioData.length > 0 ? "15.2% overall" : ""}</small>
                 </div>
-                <div className="col-md-3">
-                    <div className="card p-3 shadow-sm" style={{ borderTop: "4px solid #950606" }}>
-                        <h5 className="d-flex align-items-center mb-0"><Target className="me-2" style={{ color: "#0e2fc0ff" }} /> Goal Progress</h5>
-                        <h4 style={{ color: "#0e2fc0ff" }}>{goals.length > 0 ? `${totalGoalProgress}%` : "--"}</h4>
-                        <small className="text-muted">{portfolioData.length > 0 ? "Retirement fund" : ""}</small>
-                    </div>
+                <div className="card goal-progress">
+                    <h5><Target /> Goal Progress</h5>
+                    <h4>{goals.length > 0 ? `${totalGoalProgress}%` : "--"}</h4>
+                    <small>{portfolioData.length > 0 ? "Retirement fund" : ""}</small>
                 </div>
-                <div className="col-md-3">
-                    <div className="card p-3 shadow-sm" style={{ borderTop: "4px solid #900603" }}>
-                        <h5 className="d-flex align-items-center mb-0"><BarChart3 className="me-2" style={{ color: "#6a0683ff" }} /> Risk Score</h5>
-                        <h4 style={{ color: "#6a0683ff" }}>{portfolioData.length > 0 ? "Moderate" : "--"}</h4>
-                        <small className="text-muted">{portfolioData.length > 0 ? "Balanced portfolio" : ""}</small>
-                    </div>
+                <div className="card risk-score">
+                    <h5><BarChart3 /> Risk Score</h5>
+                    <h4>{portfolioData.length > 0 ? "Moderate" : "--"}</h4>
+                    <small>{portfolioData.length > 0 ? "Balanced portfolio" : ""}</small>
                 </div>
             </div>
 
             {/* Current Portfolio */}
-            <div className="card mb-4 shadow-sm">
-                <div className="card-header d-flex justify-content-between align-items-center text-white" style={{ backgroundColor: "#900603" }}>
+            <div className="current-portfolio">
+                <div className="portfolio-header">
                     <div>
-                        <h5 className="mb-0">Current Portfolio</h5>
+                        <h5>Current Portfolio</h5>
                         <small>Your investment allocation and performance</small>
                     </div>
-                    <button
-                        className="btn text-white d-flex align-items-center"
-                        style={{ backgroundColor: "#780606" }}
-                        onClick={() => setShowPortfolioDetails(!showPortfolioDetails)}  // ✅ Toggle
-                    >
-                        <Eye size={25} className="me-2" /> {showPortfolioDetails ? "Hide Details" : "View Details"}
+                    <button className="toggle-btn" onClick={() => setShowPortfolioDetails(!showPortfolioDetails)}>
+                        <Eye size={25} /> {showPortfolioDetails ? "Hide Details" : "View Details"}
                     </button>
                 </div>
 
-                {/* ✅ Details only when toggled true */}
                 {showPortfolioDetails && (
-                    <div className="card-body">
+                    <div className="portfolio-details">
                         {portfolioData.length === 0 ? (
-                            <p className="text-muted">No investments yet. Start investing below.</p>
+                            <p>No investments yet. Start investing below.</p>
                         ) : (
                             portfolioData.map((item, index) => (
-                                <div
-                                    key={item.name}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.1 * index }}
-                                    className="d-flex justify-content-between align-items-center border rounded p-3 mb-2"
-                                >
-                                    <div className="d-flex align-items-center">
-                                        <div className="p-2 rounded me-3" style={{ backgroundColor: "#90060320" }}>
-                                            <PieChart style={{ color: "#900603" }} />
-                                        </div>
+                                <div key={item.name} className="portfolio-item">
+                                    <div className="portfolio-info">
+                                        <div className="icon-bg"><PieChart /></div>
                                         <div>
-                                            <p className="mb-0 fw-bold">{item.name}</p>
-                                            <small className="text-muted">{item.allocation}% allocation</small>
+                                            <p className="item-name">{item.name}</p>
+                                            <small>{item.allocation}% allocation</small>
                                         </div>
                                     </div>
-                                    <div className="text-end">
-                                        <p className="mb-0 fw-bold">{formatCurrency(item.value)}</p>
-                                        <div className="d-flex align-items-center justify-content-end">
+                                    <div className="portfolio-value">
+                                        <p>{formatCurrency(item.value)}</p>
+                                        <div className="change">
                                             {item.change >= 0 ? (
-                                                <TrendingUp size={14} className="me-1" style={{ color: "#780606" }} />
+                                                <TrendingUp size={14} />
                                             ) : (
-                                                <TrendingDown size={14} className="me-1" style={{ color: "#950606" }} />
+                                                <TrendingDown size={14} />
                                             )}
-                                            <small style={{ color: item.change >= 0 ? "#780606" : "#950606" }}>
-                                                {item.change >= 0 ? "+" : ""}{item.change}%
-                                            </small>
+                                            <small>{item.change >= 0 ? "+" : ""}{item.change}%</small>
                                         </div>
                                     </div>
                                 </div>
@@ -436,56 +393,50 @@ const InvestmentPage = () => {
 
 
             {/* Investment Options */}
-            <div ref={investmentSectionRef} className="card mb-4 shadow-sm">
-                <div className="card-header text-white" style={{ backgroundColor: "#900603" }}>
-                    <h5 className="mb-0">Investment Options</h5>
+            <div ref={investmentSectionRef} className="investment-card">
+                <div className="investment-card-header">
+                    <h5>Investment Options</h5>
                     <small>Explore new investment opportunities</small>
                 </div>
-                <div className="card-body">
-                    <div className="row g-4">
+                <div className="investment-card-body">
+                    <div className="investment-row">
                         {investmentOptions.map((option, index) => (
-                            <div key={option._id} className="col-md-6 col-lg-4">
+                            <div key={option._id} className="investment-col">
                                 <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 * index }}
                                     whileHover={{ y: -5 }}
                                 >
-                                    <div className="card h-100 shadow-sm">
+                                    <div className="investment-option-card">
                                         {option.investmentImage && (
                                             <img
                                                 src={option.investmentImage}
                                                 alt={option.investmentName}
-                                                className="card-img-top"
-                                                style={{ height: "180px", objectFit: "cover" }}
+                                                className="investment-img"
                                             />
                                         )}
-                                        <div className="card-body">
-                                            <div className="d-flex justify-content-between align-items-start mb-2">
+                                        <div className="investment-option-body">
+                                            <div className="investment-info-header">
                                                 <div>
-                                                    <h6 className="mb-0">{option.investmentName}</h6>
-                                                    <small className="text-muted">{option.investmentType}</small>
+                                                    <h6>{option.investmentName}</h6>
+                                                    <small>{option.investmentType}</small>
                                                 </div>
-                                                <span className={getRiskColor(option.riskLevel || '')}>
+                                                <span className={`risk-badge ${getRiskColor(option.riskLevel || '')}`}>
                                                     {option.riskLevel} Risk
                                                 </span>
                                             </div>
-                                            <p className="text-muted small">{option.description}</p>
-                                            <div className="mb-2">
-                                                <div className="d-flex justify-content-between small">
+                                            <p className="investment-desc">{option.description}</p>
+                                            <div className="investment-stats">
+                                                <div className="stat-row">
                                                     <span>Expected Returns</span>
                                                     <span>{option.potentialReturns}</span>
                                                 </div>
-                                                <div className="d-flex justify-content-between small">
+                                                <div className="stat-row">
                                                     <span>Minimum Investment</span>
                                                     <span>{option.minimumInvestment ? formatCurrency(option.minimumInvestment) : 'N/A'}</span>
                                                 </div>
                                             </div>
-                                            <button
-                                                className="btn text-white w-100"
-                                                style={{ backgroundColor: "#950606" }}
-                                                onClick={() => handleInvestNow(option)}
-                                            >
+                                            <button className="invest-now-btn" onClick={() => handleInvestNow(option)}>
                                                 Invest Now
                                             </button>
                                         </div>
@@ -497,134 +448,82 @@ const InvestmentPage = () => {
                 </div>
             </div>
 
-            {/* Bootstrap Modal (themed) */}
+            {/* Bootstrap Modal */}
             {showModal && (
-                <div
-                    className="modal fade show"
-                    tabIndex="-1"
-                    style={{ display: "block", backgroundColor: "rgba(0,0,0,0.5)" }}
-                    onClick={() => setShowModal(false)}
-                >
-                    <div
-                        className="modal-dialog modal-dialog-centered"
-                        style={{ maxWidth: "900px", width: "90%", margin: "1.5rem auto" }} // 🔥 bigger size + centered
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="modal-content rounded-4 shadow border-0">
-                            {/* Header */}
-                            <div
-                                className="modal-header text-white"
-                                style={{ backgroundColor: "#900603", borderBottom: "1px solid rgba(255,255,255,0.2)" }}
-                            >
-                                <h5 className="modal-title">Invest in {selectedInvestment?.investmentName}</h5>
-                                <button
-                                    type="button"
-                                    className="btn-close btn-close-white"
-                                    aria-label="Close"
-                                    onClick={() => setShowModal(false)}
-                                ></button>
-                            </div>
-
-                            {/* Body */}
-                            <div className="modal-body">
-                                <label className="form-label fw-semibold">Enter Amount</label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    value={investmentAmount}
-                                    onChange={(e) => setInvestmentAmount(e.target.value)}
-                                    placeholder="Enter amount in INR"
-                                    style={{ borderRadius: "0.5rem", marginTop: "0.5rem", height: "50px", fontSize: "1.1rem" }} // 🔥 bigger input
-                                />
-                            </div>
-
-                            {/* Footer */}
-                            <div className="modal-footer d-flex justify-content-between">
-                                <button
-                                    className="btn text-white flex-fill me-2"
-                                    style={{ backgroundColor: "#780606", borderRadius: "0.5rem", height: "50px", fontSize: "1rem" }}
-                                    onClick={() => setShowModal(false)}
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    className="btn text-white flex-fill ms-2"
-                                    style={{ backgroundColor: "#900603", borderRadius: "0.5rem", height: "50px", fontSize: "1rem" }}
-                                    onClick={handleConfirmInvestment}
-                                >
-                                    Confirm
-                                </button>
-                            </div>
+                <div className="custom-modal-overlay" onClick={() => setShowModal(false)}>
+                    <div className="custom-modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="custom-modal-header">
+                            <h5>Invest in {selectedInvestment?.investmentName}</h5>
+                            <button className="modal-close-btn" onClick={() => setShowModal(false)}>×</button>
+                        </div>
+                        <div className="custom-modal-body">
+                            <label className="modal-label">Enter Amount</label>
+                            <input
+                                type="number"
+                                value={investmentAmount}
+                                onChange={(e) => setInvestmentAmount(e.target.value)}
+                                placeholder="Enter amount in INR"
+                                className="modal-input"
+                            />
+                        </div>
+                        <div className="custom-modal-footer">
+                            <button className="modal-btn cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
+                            <button className="modal-btn confirm-btn" onClick={handleConfirmInvestment}>Confirm</button>
                         </div>
                     </div>
                 </div>
             )}
 
-
             {/* Investment Goals */}
-            <div className="card shadow-sm" >
-                <div className="card-header d-flex justify-content-between align-items-center text-white" style={{ backgroundColor: "#900603" }}>
+            <div className="goals-card">
+                <div className="goals-card-header">
                     <div>
-                        <h5 className="mb-0">Investment Goals</h5>
+                        <h5>Investment Goals</h5>
                         <small>Track your financial objectives</small>
                     </div>
-                    <button
-                        className="btn text-white d-flex align-items-center"
-                        style={{ backgroundColor: "#780606" }}
-                        onClick={() => navigate("/add-goal")}
-                    >
-                        <Plus size={25} className="me-2" /> Add Goal
+                    <button className="add-goal-btn" onClick={() => navigate("/Client/add-goal")}>
+                        <Plus size={25} /> Add Goal
                     </button>
                 </div>
-                <div className="card-body">
-                    <div className="row g-4">
+                <div className="goals-card-body">
+                    <div className="goals-row">
                         {goals.map((goal, index) => {
                             const progress = Math.round((goal.current / goal.target) * 100);
                             return (
                                 <motion.div
                                     key={goal.name + index}
-                                    initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: 0.1 * index }}
-                                    className="col-md-6"
+                                    className="goals-col"
                                 >
-                                    <div className="border rounded p-3 h-100" style={{ backgroundColor: "#f8f9fa" }}>
-                                        <div className="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 className="mb-0">{goal.name}</h6>
-                                            <span className="badge text-white" style={{ backgroundColor: "#950606" }}>{progress}%</span>
+                                    <div className="goal-item">
+                                        <div className="goal-header">
+                                            <h6>{goal.name}</h6>
+                                            <span className="progress-badge">{progress}%</span>
                                         </div>
-                                        <div className="mb-3 small">
-                                            <div className="d-flex justify-content-between">
-                                                <span className="text-muted">Current</span>
+                                        <div className="goal-stats">
+                                            <div className="stat-row">
+                                                <span className="stat-label">Current</span>
                                                 <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(goal.current)}</span>
                                             </div>
-                                            <div className="d-flex justify-content-between">
-                                                <span className="text-muted">Target</span>
+                                            <div className="stat-row">
+                                                <span className="stat-label">Target</span>
                                                 <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(goal.target)}</span>
                                             </div>
-                                            <div className="d-flex justify-content-between">
-                                                <span className="text-muted">Deadline</span>
+                                            <div className="stat-row">
+                                                <span className="stat-label">Deadline</span>
                                                 <span>{new Date(goal.deadline).toLocaleDateString()}</span>
                                             </div>
-                                            <div className="d-flex justify-content-between">
-                                                <span className="text-muted">Monthly SIP</span>
+                                            <div className="stat-row">
+                                                <span className="stat-label">Monthly SIP</span>
                                                 <span>{goal.sip ? new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(goal.sip) : "--"}</span>
                                             </div>
                                         </div>
-                                        <div className="progress mb-3">
-                                            <div
-                                                className="progress-bar"
-                                                role="progressbar"
-                                                style={{ width: `${progress}%`, backgroundColor: "#128D07" }}
-                                                aria-valuenow={progress}
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                            ></div>
+                                        <div className="goal-progress-bar">
+                                            <div className="goal-progress-fill" style={{ width: `${progress}%` }}></div>
                                         </div>
-
-                                        {/* ✅ Line Chart for each goal */}
-                                        <div style={{ width: "100%", height: 150 }} className="mb-3">
-                                            <ResponsiveContainer>
+                                        <div className="goal-chart">
+                                            <ResponsiveContainer width="100%" height={150}>
                                                 <LineChart data={goal.history || []}>
                                                     <CartesianGrid strokeDasharray="3 3" />
                                                     <XAxis dataKey="month" />
@@ -634,14 +533,7 @@ const InvestmentPage = () => {
                                                 </LineChart>
                                             </ResponsiveContainer>
                                         </div>
-
-                                        <button
-                                            className="btn text-white btn-sm w-100"
-                                            style={{ backgroundColor: "#900603" }}
-                                            onClick={() => handleContribute(index)}
-                                        >
-                                            Contribute
-                                        </button>
+                                        <button className="contribute-btn" onClick={() => handleContribute(index)}>Contribute</button>
                                     </div>
                                 </motion.div>
                             );
@@ -651,47 +543,47 @@ const InvestmentPage = () => {
             </div>
 
             {/* Investment Tips Section */}
-            <div className="container-fluid px-3 my-4">
-                <div className="card shadow-sm border rounded-4 p-4">
-                    <div className="text-center mb-5">
-                        <h3 className="fw-bold">Investment Tips for Success</h3>
+            <div className="investment-tips-section">
+                <div className="tips-card">
+                    <div className="tips-header text-center">
+                        <h3>Investment Tips for Success</h3>
                     </div>
-                    <div className="row text-center">
+                    <div className="tips-row text-center">
 
                         {/* Tip 1 */}
-                        <div className="col-md-4 mb-4">
-                            <div className="d-flex flex-column align-items-center">
-                                <div className="mb-3" style={{ fontSize: "3rem", color: "#900603" }}>
-                                    <i className="bi bi-bullseye"></i>
+                        <div className="tip-col">
+                            <div className="tip-item">
+                                <div className="tip-icon">
+                                    🎯
                                 </div>
-                                <h5 className="fw-bold">Diversify Your Portfolio</h5>
-                                <p className="text-muted fs-5">
+                                <h5>Diversify Your Portfolio</h5>
+                                <p>
                                     Spread your investments across different asset classes to reduce risk
                                 </p>
                             </div>
                         </div>
 
                         {/* Tip 2 */}
-                        <div className="col-md-4 mb-4">
-                            <div className="d-flex flex-column align-items-center">
-                                <div className="mb-3" style={{ fontSize: "3rem", color: "#900603" }}>
-                                    <i className="bi bi-graph-up-arrow"></i>
+                        <div className="tip-col">
+                            <div className="tip-item">
+                                <div className="tip-icon">
+                                    📈
                                 </div>
-                                <h5 className="fw-bold">Think Long-term</h5>
-                                <p className="text-muted fs-5">
+                                <h5>Think Long-term</h5>
+                                <p>
                                     Patient investors often see better returns over extended periods
                                 </p>
                             </div>
                         </div>
 
                         {/* Tip 3 */}
-                        <div className="col-md-4 mb-4">
-                            <div className="d-flex flex-column align-items-center">
-                                <div className="mb-3" style={{ fontSize: "3rem", color: "#900603" }}>
-                                    <i className="bi bi-shield-check"></i>
+                        <div className="tip-col">
+                            <div className="tip-item">
+                                <div className="tip-icon">
+                                    🛡️
                                 </div>
-                                <h5 className="fw-bold">Understand Risk</h5>
-                                <p className="text-muted fs-5">
+                                <h5>Understand Risk</h5>
+                                <p>
                                     Higher returns often come with higher risk – invest accordingly
                                 </p>
                             </div>
