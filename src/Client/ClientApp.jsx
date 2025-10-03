@@ -69,7 +69,7 @@ import ApplyNewCard from "./pages/cards/ApplyNewCard";
 import ComplaintFeedback from "./pages/Complaint & Feedback/ComplaintFeedback";
 import EmailSupport from "./pages/Complaint & Feedback/EmailSupport";
 
-// import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
 
 
 const ClientApp = () => {
@@ -87,7 +87,7 @@ const ClientApp = () => {
       <Navbar />
       <Routes>
          {/* Profile Page */}
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} /> 
 
         {/* Dashboard */}
         <Route path="/" element={<DashBoard />} />

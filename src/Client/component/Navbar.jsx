@@ -80,14 +80,14 @@ const Navbar = () => {
 
 
             <div className="d-flex align-items-center">
-              <span className="fw-bold me-2">JD</span>
-              <button
-                className="navbar-toggler "
-                type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <Menu size={24} />
-              </button>
+                          <Link
+              to="/Client/profile"
+              className="d-flex align-items-center px-2 py-1 rounded-pill shadow-sm bg-light text-dark text-decoration-none me-3"
+              style={{ transition: "all 0.3s ease" }}
+            >
+              <User size={20} className="me-2 text-danger" />
+              <span className="fw-semibold">Amit Rajput</span>
+            </Link>
 
               <button
                 className="btn p-0 border-0"
