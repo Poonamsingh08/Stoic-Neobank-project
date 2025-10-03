@@ -1,8 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Webcam from "react-webcam";
 import SignatureCanvas from "react-signature-canvas";
+import "./UpdateKYC.css";
+import logoWhite from '../../assets/neobank-white.png';
 
-export default function KYCForm() {
+
+export function UpdateKYC() {
   const [step, setStep] = useState(1);
   const [choice, setChoice] = useState("customerId");
   const [customerId, setCustomerId] = useState("");
@@ -15,11 +18,20 @@ export default function KYCForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const [captchaNum1, setCaptchaNum1] = useState(Math.floor(Math.random() * 10) + 1);
-  const [captchaNum2, setCaptchaNum2] = useState(Math.floor(Math.random() * 10) + 1);
+  const [captchaNum1, setCaptchaNum1] = useState(0);
+  const [captchaNum2, setCaptchaNum2] = useState(0);
 
   const webcamRef = useRef(null);
   const sigCanvas = useRef(null);
+
+  const generateCaptcha = () => {
+    setCaptchaNum1(Math.floor(Math.random() * 10) + 1);
+    setCaptchaNum2(Math.floor(Math.random() * 10) + 1);
+  };
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
 
   const getSelectedValue = () => {
     if (choice === "customerId") return customerId;
@@ -35,8 +47,7 @@ export default function KYCForm() {
     }
     if (parseInt(verificationAnswer) !== captchaNum1 * captchaNum2) {
       setError("Captcha answer is incorrect.");
-      setCaptchaNum1(Math.floor(Math.random() * 10) + 1);
-      setCaptchaNum2(Math.floor(Math.random() * 10) + 1);
+      generateCaptcha();
       setVerificationAnswer("");
       return;
     }
@@ -89,113 +100,80 @@ export default function KYCForm() {
     if (sigCanvas.current) sigCanvas.current.clear();
     setError("");
     setSuccess(false);
-    setCaptchaNum1(Math.floor(Math.random() * 10) + 1);
-    setCaptchaNum2(Math.floor(Math.random() * 10) + 1);
+    generateCaptcha();
   };
 
   return (
-    <div
-      className="w-100 py-5 d-flex justify-content-center"
-      style={{ backgroundColor: "#ffffff", minHeight: "100vh" }} // Outer background white
-    >
-      <div
-        className="row w-100 shadow-lg rounded-3"
-        style={{ maxWidth: "900px", backgroundColor: "#fff" }} // Form box background
-      >
-        {/* Left Side - Branding */}
-        <div
-          className="col-md-5 d-flex flex-column justify-content-center align-items-center p-4"
-          style={{
-            backgroundColor: "#900603",
-            color: "#fff",
-            borderTopLeftRadius: "15px",
-            borderBottomLeftRadius: "15px",
-          }}
-        >
-          <img
-            src="src/assets/neobank-white.png"
-            alt="Neo Bank Logo"
-            className="img-fluid mb-3"
-            style={{ maxHeight: 180 }}
-          />
-          <h2 className="fw-bold">Neo Bank KYC</h2>
-          <p className="text-light mt-2 text-center">
+    <div className="kyc-unique-container">
+      <div className="kyc-unique-box">
+        {/* Left Branding */}
+        <div className="kyc-unique-left">
+          <img src={logoWhite} alt="Neo Bank Logo" className="kyc-unique-logo" />
+          <h2 className="kyc-unique-title">Neo Bank KYC</h2>
+          <p className="kyc-unique-subtitle">
             Securely complete your account verification in simple steps
           </p>
         </div>
 
-        {/* Right Side - Form */}
-        <div className="col-md-7 p-5">
+        {/* Right Form */}
+        <div className="kyc-unique-right">
           {!success ? (
             <>
               {step === 1 && (
                 <form onSubmit={handleStep1Submit}>
-                  <h4 className="mb-4" style={{ color: "#900603" }}>
-                    KYC Verification
-                  </h4>
+                  <h4 className="kyc-unique-heading">KYC Verification</h4>
 
                   {["customerId", "panNumber", "accountNumber"].map((type) => (
-                    <div className="form-check mb-2" key={type}>
+                    <label key={type} className="kyc-unique-radio-label">
                       <input
-                        className="form-check-input"
                         type="radio"
-                        name="choice"
-                        id={type}
                         value={type}
                         checked={choice === type}
                         onChange={() => setChoice(type)}
                       />
-                      <label className="form-check-label fw-bold" htmlFor={type}>
+                      <span className="kyc-unique-radio-text">
                         {type === "customerId"
                           ? "Customer ID"
                           : type === "panNumber"
                           ? "PAN Number"
                           : "Account Number"}
-                      </label>
-                    </div>
+                      </span>
+                    </label>
                   ))}
 
-                  <div className="mb-3 mt-3">
-                    <input
-                      type="text"
-                      className="form-control border border-dark rounded-3"
-                      placeholder={`Enter your ${
-                        choice === "customerId"
-                          ? "Customer ID"
-                          : choice === "panNumber"
-                          ? "PAN Number"
-                          : "Account Number"
-                      }`}
-                      value={getSelectedValue()}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        if (choice === "customerId") setCustomerId(val);
-                        else if (choice === "panNumber") setPanNumber(val);
-                        else setAccountNumber(val);
-                      }}
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    className="kyc-unique-input"
+                    placeholder={`Enter your ${
+                      choice === "customerId"
+                        ? "Customer ID"
+                        : choice === "panNumber"
+                        ? "PAN Number"
+                        : "Account Number"
+                    }`}
+                    value={getSelectedValue()}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (choice === "customerId") setCustomerId(val);
+                      else if (choice === "panNumber") setPanNumber(val);
+                      else setAccountNumber(val);
+                    }}
+                  />
 
-                  <div className="mb-3">
-                    <label className="form-label text-dark fw-bold bg-light p-2 rounded">
-                      What is the value of {captchaNum1} × {captchaNum2}?
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control border border-dark rounded-3"
-                      placeholder="Enter Answer"
-                      value={verificationAnswer}
-                      onChange={(e) => setVerificationAnswer(e.target.value)}
-                    />
-                  </div>
+                  <label className="kyc-unique-captcha">
+                    What is the value of {captchaNum1} × {captchaNum2}?
+                  </label>
+                  <input
+                    type="text"
+                    className="kyc-unique-input"
+                    placeholder="Enter Answer"
+                    value={verificationAnswer}
+                    onChange={(e) => setVerificationAnswer(e.target.value)}
+                  />
 
-                  {error && <div className="alert alert-danger">{error}</div>}
+                  {error && <div className="kyc-unique-error">{error}</div>}
 
-                  <button
-                    type="submit"
-                    className="btn w-100 text-white fw-bold"
-                    style={{ backgroundColor: "#900603" }}
-                  >
+                  <button type="submit" className="kyc-unique-btn kyc-unique-btn-primary">
                     Verify & Send OTP
                   </button>
                 </form>
@@ -203,115 +181,76 @@ export default function KYCForm() {
 
               {step === 2 && (
                 <form onSubmit={handleStep2Submit}>
-                  <h5 className="mb-3" style={{ color: "#e60000" }}>
-                    Enter OTP
-                  </h5>
-
+                  <h5 className="kyc-unique-subheading">Enter OTP</h5>
                   <input
                     type="text"
-                    className="form-control mb-3 border border-dark rounded-3"
+                    className="kyc-unique-input"
                     placeholder="Enter OTP (Use 123456)"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                   />
 
-                  <div className="d-flex justify-content-between mb-3">
+                  <div className="kyc-unique-btn-group">
                     <button
                       type="button"
-                      className="btn btn-outline-warning"
+                      className="kyc-unique-btn kyc-unique-btn-outline-warning"
                       onClick={() => alert("OTP resent: 123456")}
                     >
                       Resend OTP
                     </button>
-                    <button
-                      type="button"
-                      className="btn btn-outline-danger"
-                      onClick={resetForm}
-                    >
+                    <button type="button" className="kyc-unique-btn kyc-unique-btn-outline-danger" onClick={resetForm}>
                       Cancel
                     </button>
                   </div>
 
-                  {error && <div className="alert alert-danger">{error}</div>}
-
-                  <button
-                    type="submit"
-                    className="btn w-100 text-white fw-bold"
-                    style={{ backgroundColor: "#e60000" }}
-                  >
-                    Verify OTP
-                  </button>
+                  {error && <div className="kyc-unique-error">{error}</div>}
+                  <button type="submit" className="kyc-unique-btn kyc-unique-btn-danger">Verify OTP</button>
                 </form>
               )}
 
               {step === 3 && (
                 <form onSubmit={handleFinalSubmit}>
-                  <h5 className="mb-3" style={{ color: "#e60000" }}>
-                    Capture Photo & Signature
-                  </h5>
+                  <h5 className="kyc-unique-subheading">Capture Photo & Signature</h5>
 
-                  <div className="mb-3">
-                    <label className="form-label fw-bold">Take Photo</label>
-                    {showWebcam ? (
-                      <>
-                        <Webcam
-                          audio={false}
-                          ref={webcamRef}
-                          screenshotFormat="image/jpeg"
-                          width="100%"
-                          videoConstraints={{ width: 300, height: 200, facingMode: "user" }}
-                          className="rounded-3 border border-dark"
-                        />
-                        <button
-                          type="button"
-                          className="btn btn-outline-success mt-2 w-100"
-                          onClick={capturePhoto}
-                        >
-                          Capture Photo
-                        </button>
-                      </>
-                    ) : (
-                      <img
-                        src={photo}
-                        alt="Captured"
-                        className="img-thumbnail mt-2 w-100"
-                        style={{ maxWidth: "100%" }}
+                  <label className="kyc-unique-label">Take Photo</label>
+                  {showWebcam ? (
+                    <>
+                      <Webcam
+                        audio={false}
+                        ref={webcamRef}
+                        screenshotFormat="image/jpeg"
+                        width="100%"
+                        videoConstraints={{ width: 300, height: 200, facingMode: "user" }}
+                        className="kyc-unique-webcam"
                       />
-                    )}
-                  </div>
+                      <button type="button" className="kyc-unique-btn kyc-unique-btn-outline-success" onClick={capturePhoto}>
+                        Capture Photo
+                      </button>
+                    </>
+                  ) : (
+                    <img src={photo} alt="Captured" className="kyc-unique-photo" />
+                  )}
 
-                  <div className="mb-3">
-                    <label className="form-label fw-bold">Draw Signature</label>
-                    <SignatureCanvas
-                      penColor="black"
-                      canvasProps={{ width: 300, height: 100, className: "border border-dark rounded" }}
-                      ref={sigCanvas}
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary mt-2"
-                      onClick={() => sigCanvas.current.clear()}
-                    >
-                      Clear Signature
-                    </button>
-                  </div>
-
-                  {error && <div className="alert alert-danger">{error}</div>}
-
-                  <button
-                    type="submit"
-                    className="btn w-100 text-dark fw-bold"
-                    style={{ backgroundColor: "#ff9f00" }}
-                  >
-                    Submit KYC
+                  <label className="kyc-unique-label">Draw Signature</label>
+                  <SignatureCanvas
+                    penColor="black"
+                    canvasProps={{ width: 300, height: 100, className: "kyc-unique-signature" }}
+                    ref={sigCanvas}
+                  />
+                  <button type="button" className="kyc-unique-btn kyc-unique-btn-outline-secondary" onClick={() => sigCanvas.current.clear()}>
+                    Clear Signature
                   </button>
+
+                  {error && <div className="kyc-unique-error">{error}</div>}
+
+                  <button type="submit" className="kyc-unique-btn kyc-unique-btn-submit">Submit KYC</button>
                 </form>
               )}
             </>
           ) : (
-            <div className="text-center p-4">
-              <h4 className="text-success">✅ KYC completed successfully!</h4>
-              <button className="btn btn-outline-primary mt-3" onClick={resetForm}>
+            <div className="kyc-unique-success">
+              <h4>✅ KYC completed successfully!</h4>
+              <button className="kyc-unique-btn kyc-unique-btn-outline-primary" onClick={resetForm}>
                 Start New KYC
               </button>
             </div>
@@ -321,3 +260,5 @@ export default function KYCForm() {
     </div>
   );
 }
+
+export default UpdateKYC;

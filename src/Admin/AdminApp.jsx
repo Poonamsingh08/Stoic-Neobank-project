@@ -50,7 +50,7 @@ export default function AdminApp() {
       {/* Push content below navbar */}
       <div>
         <Routes>
-          <Route path="/admin" element={<Dashboard />} />
+          <Route path="" element={<Dashboard />} />
           <Route path="/users" element={<UserManagement />} />
           <Route path="/kyc/*" element={<KYCComplianceRoutes />} />
           <Route path="/transactions" element={<AdminTransactions />} />

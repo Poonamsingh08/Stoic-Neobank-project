@@ -3,6 +3,8 @@ import PersonalDetails from "./PersonalDetails";
 import AadharVerification from "./AadharVerification";
 import PANVerification from "./PANVerification";
 import VideoKYC from "./VideoKYC";
+import "./Welcome.css"; // 👈 unique CSS
+import logoWhite from '../../assets/neobank-logo.png';
 
 const Welcome = () => {
   const [step, setStep] = useState(1);
@@ -25,49 +27,52 @@ const Welcome = () => {
   const steps = ["Personal", "Aadhar", "PAN", "Video KYC"];
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+    <div className="wn-container">
+      <div className="wn-box">
         {/* Header */}
-        <div className="text-center mb-6">
-          <img
-            src="src/assets/neobank-logo.png"
-            alt="NeoBank"
-            className="mx-auto mb-3 w-24"
-          />
-          <h1 className="text-2xl font-bold text-red-700">
-            NeoBank Account Open
-          </h1>
-          <p className="text-gray-500 mt-1 text-sm">
+        <div className="wn-header">
+          <img src={logoWhite} alt="NeoBank" className="wn-logo"/>
+          <h1 className="wn-title">NeoBank Account Open</h1>
+          <p className="wn-subtitle">
             Complete your account setup in easy steps
           </p>
         </div>
 
         {/* Stepper */}
-        <div className="flex justify-between items-center mb-6 relative">
+        <div className="wn-stepper">
           {steps.map((label, index) => (
-            <div
-              key={index}
-              className="flex-1 relative flex flex-col items-center"
-            >
+            <div key={index} className="wn-step">
               {index !== steps.length - 1 && (
-                <div className="absolute top-1/2 left-1/2 w-full h-1 bg-gray-200 z-0"></div>
+                <div
+                  className={`wn-step-line ${
+                    step > index + 1 ? "wn-filled" : ""
+                  }`}
+                ></div>
               )}
               <div
-                className={`z-10 w-9 h-9 flex items-center justify-center rounded-full font-bold text-white text-sm ${
-                  step === index + 1
-                    ? "bg-red-600 shadow-md scale-110 transition-transform duration-300"
-                    : "bg-gray-300"
+                className={`wn-step-circle ${
+                  step > index + 1
+                    ? "wn-complete"
+                    : step === index + 1
+                    ? "wn-active"
+                    : ""
                 }`}
               >
                 {index + 1}
               </div>
-              <span className="mt-2 text-xs text-gray-600">{label}</span>
+              <span
+                className={`wn-step-label ${
+                  step >= index + 1 ? "wn-label-active" : ""
+                }`}
+              >
+                {label}
+              </span>
             </div>
           ))}
         </div>
 
         {/* Step Content */}
-        <div className="p-3">
+        <div className="wn-step-content">
           {step === 1 && (
             <PersonalDetails
               userData={userData}
@@ -80,7 +85,7 @@ const Welcome = () => {
             <AadharVerification
               userData={userData}
               updateUserData={updateUserData}
-              nextStep={nextStep} // Moves to PAN after verification
+              nextStep={nextStep}
               prevStep={prevStep}
               setModal={setModal}
               inputSize="sm"
@@ -90,7 +95,7 @@ const Welcome = () => {
             <PANVerification
               userData={userData}
               updateUserData={updateUserData}
-              nextStep={nextStep} // Moves to Video KYC after verification
+              nextStep={nextStep}
               prevStep={prevStep}
               setModal={setModal}
               inputSize="sm"
@@ -108,15 +113,13 @@ const Welcome = () => {
 
         {/* Modal for OTP / verification messages */}
         {modal && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-96">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                {modal.title}
-              </h3>
-              <p className="text-gray-700 mb-6">{modal.message}</p>
+          <div className="wn-modal-backdrop">
+            <div className="wn-modal">
+              <h3 className="wn-modal-title">{modal.title}</h3>
+              <p className="wn-modal-message">{modal.message}</p>
               <button
                 onClick={() => setModal(null)}
-                className="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                className="wn-modal-btn"
               >
                 OK
               </button>
