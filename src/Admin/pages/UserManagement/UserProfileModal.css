@@ -1,0 +1,420 @@
+/* ========== Overlay ========== */
+.upm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  padding: 10px;
+}
+
+/* ========== Modal Container ========== */
+.upm-modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 1200px;
+  max-height: 95vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== Header ========== */
+.upm-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 2px solid #f1f1f1;
+  background: #950606;
+  color: #fff;
+  border-radius: 12px 12px 0 0;
+}
+
+.upm-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.upm-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ========== Body Layout ========== */
+.upm-modal-body {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Left Column */
+.upm-profile-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Profile Card */
+.upm-profile-card {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upm-photo img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid #950606;
+  margin-bottom: 10px;
+  object-fit: cover;
+  transition: 0.2s;
+}
+
+.upm-photo img:hover {
+  transform: scale(1.05);
+}
+
+.upm-profile-card h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #333;
+}
+
+.upm-profile-card p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.upm-status {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #444;
+}
+
+/* ========== Documents Section ========== */
+.upm-documents h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  border-left: 4px solid #950606;
+  padding-left: 6px;
+  font-weight: 600;
+}
+
+.upm-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.upm-doc-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  height: 160px; /* ✅ Fixed size for better uniformity */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.upm-doc-card:hover {
+  border-color: #950606;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.upm-doc-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.upm-doc-title {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #333;
+  font-weight: 500;
+}
+
+.upm-doc-placeholder {
+  font-size: 12px;
+  color: #888;
+  padding: 18px 5px;
+}
+
+/* ========== Right Column (Details) ========== */
+.upm-details-card {
+  flex: 2;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.upm-details-card h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #222;
+  border-left: 4px solid #950606;
+  padding-left: 6px;
+}
+
+.upm-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.upm-form-group label {
+  font-size: 12px;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.upm-form-group input {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* ========== Buttons ========== */
+.upm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.upm-btn-warning {
+  background: #950606;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.upm-btn-secondary {
+  background: #eee;
+  color: #333;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.upm-btn-secondary:hover {
+  background: #ddd;
+}
+
+/* ========== Preview Modal ========== */
+.upm-preview-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+}
+
+.upm-preview-modal {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.upm-preview-modal h4 {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.upm-preview-images img,
+.upm-preview-modal img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.upm-preview-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ========== Download Button Icon ========== */
+.upm-btn-download::before {
+  content: "⬇️";
+  font-size: 14px;
+}
+
+/* ========== Animation ========== */
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 992px) {
+  .upm-modal-body {
+    flex-direction: column;
+  }
+
+  .upm-profile-column,
+  .upm-details-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .upm-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .upm-modal-header h2 {
+    font-size: 16px;
+  }
+
+  .upm-btn-warning,
+  .upm-btn-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .upm-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* ===== KYC Card Hover Effect ===== */
+.upm-doc-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.upm-doc-card:hover {
+  border-color: #950606;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+/* ===== Multiple KYC Images Scroll ===== */
+.upm-docs-multiple {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.upm-docs-multiple::-webkit-scrollbar {
+  height: 6px;
+}
+
+.upm-docs-multiple::-webkit-scrollbar-thumb {
+  background-color: #950606;
+  border-radius: 4px;
+}
+
+.upm-docs-multiple img {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  transition: 0.2s;
+}
+
+.upm-docs-multiple img:hover {
+  transform: scale(1.1);
+  border: 2px solid #950606;
+}
+
+/* ===== Preview Modal for Multiple Images (Scroll if many) ===== */
+.upm-preview-images {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+}
+
+.upm-preview-images::-webkit-scrollbar {
+  height: 6px;
+}
+
+.upm-preview-images::-webkit-scrollbar-thumb {
+  background-color: #950606;
+  border-radius: 3px;
+}
+
+.upm-preview-images img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex: 0 0 auto;
+  transition: 0.2s;
+}
+
+.upm-preview-images img:hover {
+  transform: scale(1.05);
+  border: 2px solid #950606;
+}
