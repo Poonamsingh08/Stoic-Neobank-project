@@ -1,0 +1,156 @@
+/* Container */
+.loan-statement-container {
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  max-width: 1400px;
+  margin: 50px auto;
+}
+
+/* Button */
+.button-wrapper {
+  text-align: center;
+}
+
+.toggle-button {
+  background-color: #950606;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 500;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-button:hover {
+  background-color: #b30707;
+}
+
+.toggle-button:active {
+  background-color: #7a0505;
+}
+
+.toggle-button:focus {
+  outline: 2px solid #950606;
+  outline-offset: 2px;
+}
+
+/* Content */
+.statement-content {
+  margin-top: 16px;
+}
+
+/* Filter */
+.filter-wrapper {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.filter-label {
+  margin-right: 8px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.filter-select {
+  border: 1px solid #950606;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #b30707;
+  box-shadow: 0 0 0 2px rgba(149, 6, 6, 0.2);
+}
+
+.filter-select:hover {
+  border-color: #b30707;
+}
+
+/* Table */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d1d5db;
+  margin-top: 8px;
+}
+
+.transactions-table thead {
+  background-color: #f3f4f6;
+}
+
+.transactions-table th {
+  border: 1px solid #d1d5db;
+  padding: 10px 8px;
+  font-weight: 600;
+  text-align: left;
+  font-size: 14px;
+}
+
+.transactions-table td {
+  border: 1px solid #d1d5db;
+  padding: 10px 8px;
+  font-size: 14px;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Amount colors */
+.amount-negative {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.amount-positive {
+  color: #16a34a;
+  font-weight: 500;
+}
+
+/* Empty state */
+.empty-row {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .loan-statement-container {
+    padding: 16px;
+  }
+
+  .toggle-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .transactions-table {
+    font-size: 12px;
+  }
+
+  .transactions-table th,
+  .transactions-table td {
+    padding: 6px 4px;
+  }
+
+  .filter-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .filter-label {
+    margin-right: 0;
+  }
+}
