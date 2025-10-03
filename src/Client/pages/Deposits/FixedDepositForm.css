@@ -1,6 +1,6 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
 
-.fd-container { max-width: 800px; margin:auto; padding:40px 20px; }
+.fd-container15 { max-width: 800px; margin:auto; padding:40px 20px; }
 .fd-title { font-size:28px; font-weight:bold; color:#900603; display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 
 .fd-summary-alert {
@@ -12,7 +12,7 @@
   font-size:1rem;
 }
 
-.fd-card { background:#FFF0F0; padding:25px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+.fd-card15 { background:#FFF0F0; padding:25px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
 
 .fd-form-group { margin-bottom:15px; display:flex; flex-direction:column; }
 .fd-form-group label { font-weight:bold; margin-bottom:5px; }

@@ -80,7 +80,7 @@ export default function DepositsPage() {
       {/* Page Content */}
       <div className="content">
         {/* Deposit Calculator */}
-        <div className="card">
+        <div className="card12">
           <h3>Deposit Calculator</h3>
           <div className="form-grid">
             <input

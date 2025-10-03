@@ -114,7 +114,7 @@ function FdCalculator() {
                   onChange={(e) => setAmount(Number(e.target.value))}
                 />
                 <div className="fd-range-values">
-                  <span>₹1000</span>
+                  <span>₹1,000</span>
                   <span className="fd-range-current">₹{amount.toLocaleString()}</span>
                   <span>₹10,00,000</span>
                 </div>
