@@ -307,46 +307,42 @@ const InvestmentPage = () => {
 
     return (
 
-        <div className="investment-container">
-
+        <div className="invp-container">
             {/* Header */}
-            <div className="investment-header">
+            <div className="invp-header">
                 <div>
-                    <h2 className="title">Investment Portfolios</h2>
-                    <p className="subtitle">Grow your wealth with smart investments</p>
+                    <h2 className="invp-title">Investment Portfolios</h2>
+                    <p className="invp-subtitle">Grow your wealth with smart investments</p>
                 </div>
-                <button className="start-investing-btn" onClick={handleScrollToInvestments}>
+                <button className="invp-start-btn" onClick={handleScrollToInvestments}>
                     <Plus size={25} /> Start Investing
                 </button>
             </div>
-
             {/* Spacer */}
-            <div className="spacer"></div>
-
+            <div className="po-spacer"></div>
             {/* Portfolio Overview */}
-            <div className="portfolio-overview">
-                <div className="card total-value">
+            <div className="po-overview">
+                <div className="po-card po-total-value">
                     <h5><DollarSign /> Total Value</h5>
                     <h4>{portfolioData.length > 0 ? formatCurrency(totalPortfolioValue) : "--"}</h4>
                     <small>{portfolioData.length > 0 ? "↑ 8.5% this month" : ""}</small>
                 </div>
-                <div className="card total-returns">
+                <div className="po-card po-total-returns">
                     <h5><TrendingUp /> Total Returns</h5>
                     <h4>{portfolioData.length > 0 ? "₹45,680" : "--"}</h4>
                     <small>{portfolioData.length > 0 ? "15.2% overall" : ""}</small>
                 </div>
-                <div className="card goal-progress">
+                <div className="po-card po-goal-progress">
                     <h5><Target /> Goal Progress</h5>
                     <h4>{goals.length > 0 ? `${totalGoalProgress}%` : "--"}</h4>
                     <small>{portfolioData.length > 0 ? "Retirement fund" : ""}</small>
                 </div>
-                <div className="card risk-score">
+                <div className="po-card po-risk-score">
                     <h5><BarChart3 /> Risk Score</h5>
                     <h4>{portfolioData.length > 0 ? "Moderate" : "--"}</h4>
                     <small>{portfolioData.length > 0 ? "Balanced portfolio" : ""}</small>
                 </div>
             </div>
-
             {/* Current Portfolio */}
             <div className="current-portfolio">
                 <div className="portfolio-header">

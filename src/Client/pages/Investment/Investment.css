@@ -1,13 +1,12 @@
 
-.investment-container {
-    background-color: #f8f9fa;
+.invp-container {
+    background-color: #F8F9FA;
     overflow-x: hidden;
     padding: 0;
     font-family: sans-serif;
 }
-
 /* Header */
-.investment-header {
+.invp-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,20 +16,17 @@
     top: 0;
     z-index: 1000;
 }
-
-.investment-header .title {
+.invp-header .invp-title {
     color: white;
     margin: 10;
     font-weight: 700;
 }
-
-.investment-header .subtitle {
+.invp-header .invp-subtitle {
     color: white;
     font-size: 1rem;
     font-weight: 500;
 }
-
-.start-investing-btn {
+.invp-start-btn {
     display: flex;
     align-items: center;
     background-color: #780606;
@@ -41,52 +37,47 @@
     cursor: pointer;
     font-size: 0.95rem;
 }
-
-.start-investing-btn svg {
+.invp-start-btn svg {
     margin-right: 5px;
 }
-
-/* Spacer */
-.spacer {
+/* ===== Spacer ===== */
+.po-spacer {
     margin: 2rem 0;
 }
-
-/* Portfolio Overview */
-.portfolio-overview {
+/* ===== Portfolio Overview Container ===== */
+.po-overview {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     padding: 0 20px;
 }
-
-.portfolio-overview .card {
+/* ===== Common Card Style ===== */
+.po-card {
     flex: 1;
     min-width: 200px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-top: 4px solid #900603;
+    border-radius: 8px;
+    background: #fff;
 }
-
-.total-value {
+/* ===== Individual Card Colors ===== */
+.po-total-value {
     border-top-color: #900603;
     color: #f86605ff;
 }
-
-.total-returns {
+.po-total-returns {
     border-top-color: #780606;
     color: #128d07ff;
 }
-
-.goal-progress {
+.po-goal-progress {
     border-top-color: #950606;
     color: #0e2fc0ff;
 }
-
-.risk-score {
+.po-risk-score {
     border-top-color: #900603;
     color: #6a0683ff;
 }
-
 /* Current Portfolio */
 .current-portfolio {
     border-radius: 8px;
