@@ -1,0 +1,201 @@
+/* ===============================
+   Investment Panel Styles (900603 theme only + professional bank style)
+   =============================== */
+.investment-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.investment-header {
+  background-color: #900603;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.investment-header h2 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1.4rem;
+}
+
+.investment-header small {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Cards Section */
+.investment-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  padding: 1.5rem 2rem;
+  justify-items: center;
+  align-items: stretch;
+}
+
+/* Card */
+.investment-card {
+  width: 200px;
+  height: 240px;           /* ✅ Reduced height for better vertical alignment */
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-top: 4px solid #900603;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.investment-card.active {
+  border-top: 4px solid #900603;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.investment-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+
+/* Card Icon */
+.card-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 0.8rem auto;
+  border-radius: 50%;
+  background: #900603;
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+/* Card Title */
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Add Product Button inside Card */
+.investment-card .button-primary {
+  width: 100%;
+  padding: 0.6rem 0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  transition: all 0.3s ease;
+}
+
+.investment-card .button-primary:hover {
+  background-color: #750502;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
+  transform: translateY(-1px);
+}
+
+/* Investment Options List - single line */
+.investment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.investment-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-left: 3px solid #900603;
+}
+
+.investment-option:hover {
+  background: #f5f5f5;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+/* Main Content */
+.investment-content {
+  flex: 1;
+  background: #fff;
+  margin: 0 2rem 2rem 2rem;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Buttons - real banking style */
+.button-primary {
+  background-color: #900603;
+  color: #fff;
+  padding: 0.65rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  transition: all 0.3s ease;
+}
+
+.button-primary:hover {
+  background-color: #750502;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.18);
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .investment-cards {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .investment-card {
+    width: 180px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .investment-card {
+    width: 45%;
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .investment-card {
+    width: 100%;
+    height: auto;  /* auto height on mobile */
+  }
+  .investment-option {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    padding: 0.5rem 0.8rem;
+  }
+}

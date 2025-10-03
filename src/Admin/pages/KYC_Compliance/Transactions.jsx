@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaExchangeAlt } from "react-icons/fa";
+import "./Transactions.css";   // <-- import CSS
 
 export default function Transactions() {
   const dummyTransactions = [
@@ -123,9 +124,9 @@ export default function Transactions() {
 
   return (
     <div className="vh-100 d-flex flex-column" style={{ overflowX: "hidden" }}>
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#8B0000" }}>
+      <nav className="navbar navbar-expand-lg transactions-navbar">
         <div className="container-fluid">
-          <a className="navbar-brand text-white fw-bold" href="#">
+          <a className="navbar-brand" href="#">
             Neo Bank – All Transactions
           </a>
         </div>
@@ -134,11 +135,9 @@ export default function Transactions() {
       <div className="flex-grow-1 overflow-auto p-4 bg-light">
         <div className="container-fluid">
           <div className="card mb-4 shadow-sm rounded">
-            <div className="card-body d-flex align-items-center flex-wrap" style={{ backgroundColor: "#fff5f5" }}>
+            <div className="card-body transactions-card-header">
               <FaExchangeAlt size={28} color="#8B0000" className="me-2 mb-1" />
-              <h3 className="mb-0" style={{ color: "#8B0000" }}>
-                All Transactions
-              </h3>
+              <h3 className="mb-0">All Transactions</h3>
             </div>
           </div>
 
@@ -180,11 +179,7 @@ export default function Transactions() {
               <button className="btn btn-success w-100 w-md-auto" onClick={() => bulkAction("Completed")}>
                 Bulk Completed
               </button>
-              <button
-                className="btn text-white w-100 w-md-auto"
-                style={{ backgroundColor: "#fd7e14" }}
-                onClick={() => bulkAction("Flagged")}
-              >
+              <button className="btn btn-flagged w-100 w-md-auto" onClick={() => bulkAction("Flagged")}>
                 Bulk Flagged
               </button>
             </div>
@@ -223,11 +218,7 @@ export default function Transactions() {
                     <td>{t.status}</td>
                     <td>{t.date}</td>
                     <td>
-                      <button
-                        className="btn btn-sm text-white"
-                        style={{ backgroundColor: "#8B0000" }}
-                        onClick={() => setViewingTxn(t)}
-                      >
+                      <button className="btn btn-sm btn-view" onClick={() => setViewingTxn(t)}>
                         View
                       </button>
                     </td>
@@ -259,7 +250,7 @@ export default function Transactions() {
             <div className="modal show d-block" tabIndex="-1">
               <div className="modal-dialog modal-xl modal-dialog-centered">
                 <div className="modal-content">
-                  <div className="modal-header" style={{ backgroundColor: "#8B0000", color: "#fff" }}>
+                  <div className="modal-header transactions-modal-header">
                     <h5 className="modal-title">Transaction {viewingTxn.id}</h5>
                     <button className="btn-close btn-close-white" onClick={() => setViewingTxn(null)}></button>
                   </div>
@@ -291,8 +282,7 @@ export default function Transactions() {
                         <div className="input-group mt-2">
                           <input type="text" className="form-control" placeholder="Add note..." id="txnNote"/>
                           <button
-                            className="btn text-white"
-                            style={{ backgroundColor: "#8B0000" }}
+                            className="btn btn-note"
                             onClick={() => {
                               const text = document.getElementById("txnNote").value;
                               addNote(viewingTxn.id, text);

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/NeoBank_Logo_01.png";
+import "./Dashboard.css";   // <-- Import CSS file
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [lastUpdated, setLastUpdated] = useState(new Date());
-  const [viewingAlert, setViewingAlert] = useState(null); // AML modal state
+  const [viewingAlert, setViewingAlert] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => setLastUpdated(new Date()), 1000);
@@ -26,67 +27,19 @@ export default function Dashboard() {
 
   return (
     <div className="container-fluid p-0">
-
-
       {/* Header */}
-      <div
-       className="py-4 rounded text-white shadow-lg d-flex justify-content-between align-items-center flex-wrap "
-        style={{ border: "2px solid #f8e4e4ff", backgroundColor: "#900603" }}
-      >
+      <div className="dashboard-header">
         <div>
-          <h5 className="mb-0">
-                  
-            KYC & Compliance Dashboard</h5>
+          <h5 className="mb-0">KYC & Compliance Dashboard</h5>
           <small>Monitor and manage compliance operations</small>
-          
         </div>
-        <small className="px-2 py-1 rounded"
-          style={{ backgroundColor: "#900603", color: "#fff" }}
-        >
+        <small className="last-updated">
           ⏱ Last updated: {lastUpdated.toLocaleTimeString()}
         </small>
       </div>
 
       {/* Summary Cards */}
       <div className="row m-3 g-3">
-        <style>
-          {`
-            .card-hover {
-              border: 1px solid #900603 !important;
-              transition: all 0.3s ease-in-out;
-              background-color: #fff !important;
-            }
-            .card-hover:hover {
-              transform: translateY(-6px) scale(1.02);
-              box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-              border-color: #900603 !important;
-              background-color: #fff !important;
-            }
-            .card-hover h6,
-            .card-hover h5,
-            .card-hover p {
-              color: #333 !important;
-              transition: color 0.3s ease-in-out;
-            }
-            .card-hover:hover h6,
-            .card-hover:hover h5,
-            .card-hover:hover p {
-              color: #111 !important;
-            }
-            .card-hover .btn {
-              background-color: #900603 !important;
-              color: white !important;
-              border: none !important;
-              transition: all 0.3s ease-in-out;
-            }
-            .card-hover .btn:hover {
-              background-color: white !important;
-              color: #900603 !important;
-              border: 1px solid #900603 !important;
-            }
-          `}
-        </style>
-
         {[
           { title: "KYC Approvals", text: "Pending Review", btn: "Review KYC", route: "review-kyc" },
           { title: "KYC History", text: "History list", btn: "Review History", route: "review-transactions" },
@@ -98,7 +51,7 @@ export default function Dashboard() {
                 <h6 className="text-muted">{item.title}</h6>
                 <h5 className="fw-bold">0</h5>
                 <p className="small text-muted">{item.text}</p>
-                <button className="btn btn-sm" onClick={() => navigate(item.route)}>
+                <button className="btn btn-sm btn-custom" onClick={() => navigate(item.route)}>
                   {item.btn}
                 </button>
               </div>
@@ -107,28 +60,20 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Recent Transactions + System Alerts */}
+      {/* Transactions + Alerts */}
       <div className="row m-3 g-3">
         {/* Transactions */}
         <div className="col-md-6">
           <div className="card shadow-sm">
             <div className="card-header d-flex justify-content-between align-items-center">
               <strong>Recent Transactions</strong>
-              <button
-                className="btn btn-sm"
-                style={{ border: "1px solid #900603", color: "#900603" }}
-                onClick={() => navigate("transactions")}
-              >
+              <button className="btn btn-sm btn-outline-custom" onClick={() => navigate("transactions")}>
                 View All Transactions
               </button>
             </div>
             <div className="card-body">
               {transactions.map((txn) => (
-                <div
-                  key={txn.id}
-                  className="d-flex justify-content-between align-items-center mb-2 p-2 rounded text-dark"
-                  style={{ backgroundColor: "#fff7f5ff" }}
-                >
+                <div key={txn.id} className="txn-item">
                   <div>
                     <strong>{txn.id}</strong> <br />
                     <small>{txn.type}</small>
@@ -152,30 +97,18 @@ export default function Dashboard() {
           <div className="card shadow-sm">
             <div className="card-header d-flex justify-content-between align-items-center">
               <strong>System Alerts</strong>
-              <button
-                className="btn btn-sm"
-                style={{ border: "1px solid #900603", color: "#900603" }}
-                onClick={() => navigate("view-alerts")}
-              >
+              <button className="btn btn-sm btn-outline-custom" onClick={() => navigate("view-alerts")}>
                 Review Now
               </button>
             </div>
             <div className="card-body">
               {alerts.map((a) => (
-                <div
-                  key={a.id}
-                  className="d-flex justify-content-between align-items-center mb-2 p-2 rounded"
-                  style={{ backgroundColor: "#fff7f5ff", color: "#380092ff" }}
-                >
+                <div key={a.id} className="alert-item">
                   <div>
                     ⚠️ {a.text} <br />
                     <small>{a.time}</small>
                   </div>
-                  <button
-                    className="btn text-white btn-sm"
-                    style={{ backgroundColor: "#900603" }}
-                    onClick={() => setViewingAlert(a)}
-                  >
+                  <button className="btn btn-sm btn-custom" onClick={() => setViewingAlert(a)}>
                     View Report
                   </button>
                 </div>
@@ -190,19 +123,15 @@ export default function Dashboard() {
         <div className="modal show d-block" tabIndex="-1">
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
-              <div className="modal-header" style={{ backgroundColor: "#8B0000", color: "#fff" }}>
+              <div className="modal-header modal-header-custom">
                 <h5 className="modal-title">AML Alert Details</h5>
-                <button
-                  className="btn-close btn-close-white"
-                  onClick={() => setViewingAlert(null)}
-                ></button>
+                <button className="btn-close btn-close-white" onClick={() => setViewingAlert(null)}></button>
               </div>
               <div className="modal-body">
                 <h6>{viewingAlert.text}</h6>
                 <p><strong>Time:</strong> {viewingAlert.time}</p>
                 <hr />
                 <p>Here you can show full AML details, transaction list, flagged users, or compliance info.</p>
-                {/* You can expand this with your AML component/panel */}
               </div>
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => setViewingAlert(null)}>
@@ -216,34 +145,13 @@ export default function Dashboard() {
 
       {/* Compliance Overview */}
       <div className="row m-3 g-3">
-        <div className="col-md-3">
-          <div className="card text-dark text-center shadow-sm"
-            style={{ backgroundColor: "#fff7f5ff", border: "1px solid #8B0000" }}
-          >
-            <div className="card-body fw-bold">8<br />Total Submissions</div>
+        {["Total Submissions", "Approval Rate", "Pending Review", "Active Alerts"].map((text, i) => (
+          <div className="col-md-3" key={i}>
+            <div className="card compliance-card shadow-sm">
+              <div className="card-body fw-bold">0<br />{text}</div>
+            </div>
           </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-dark text-center shadow-sm"
-            style={{ backgroundColor: "#fff7f5ff" , border: "1px solid #8B0000"}}
-          >
-            <div className="card-body fw-bold">0%<br />Approval Rate</div>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-center text-dark shadow-sm"
-            style={{ backgroundColor: "#fff7f5ff", border: "1px solid #8B0000", color: "#fff" }}
-          >
-            <div className="card-body fw-bold">0<br />Pending Review</div>
-          </div>
-        </div>
-        <div className="col-md-3">
-          <div className="card text-dark text-center shadow-sm"
-            style={{ border: "1px solid #8B0000",backgroundColor: "#fff7f5ff" }}
-          >
-            <div className="card-body fw-bold">0<br />Active Alerts</div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

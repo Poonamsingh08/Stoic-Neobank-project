@@ -1,0 +1,64 @@
+/* Navbar */
+.transactions-navbar {
+  background-color: #8b0000;
+}
+
+.transactions-navbar .navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+/* Card Header */
+.transactions-card-header {
+  background-color: #fff5f5;
+  display: flex;
+  align-items: center;
+}
+
+.transactions-card-header h3 {
+  color: #8b0000;
+  margin: 0;
+}
+
+/* Buttons */
+.btn-flagged {
+  background-color: #fd7e14;
+  color: #fff;
+}
+
+.btn-view {
+  background-color: #8b0000;
+  color: #fff;
+}
+
+.btn-view:hover {
+  background-color: #a00000;
+  color: #fff;
+}
+
+.btn-note {
+  background-color: #8b0000;
+  color: #fff;
+}
+
+.btn-note:hover {
+  background-color: #a00000;
+  color: #fff;
+}
+
+/* Modal Header */
+.transactions-modal-header {
+  background-color: #8b0000;
+  color: #fff;
+}
+
+/* Tabs */
+.nav-tabs .nav-link.active {
+  background-color: #8b0000 !important;
+  color: #fff !important;
+}
+
+.nav-tabs .nav-link {
+  color: #8b0000;
+  font-weight: 500;
+}

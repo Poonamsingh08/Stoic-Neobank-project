@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./ReviewTransactions.css";
 
 export default function ReviewTransactions() {
   // Dummy KYC data
@@ -195,24 +196,19 @@ export default function ReviewTransactions() {
 
   return (
     <div className="vh-100 d-flex flex-column w-100">
-      {/* Navbar - Full Width */}
-      <nav
-        className="navbar navbar-expand-lg w-100"
-        style={{ backgroundColor: "#900603" }}
-      >
+      {/* Navbar */}
+      <nav className="navbar navbar-expand-lg w-100 custom-navbar">
         <div className="container-fluid">
-          <a className="navbar-brand text-white fw-bold m-0" href="#">
+          <a className="navbar-brand" href="#">
             KYC History
           </a>
         </div>
       </nav>
 
-      {/* Main Content - Full Width */}
+      {/* Main */}
       <div className="flex-grow-1 overflow-auto bg-light w-100 px-3 py-4">
         <div className="container-fluid px-0">
-          <h2 className="mb-3" style={{ color: "#900603" }}>
-            KYC History
-          </h2>
+          <h2 className="mb-3 page-title">KYC History</h2>
 
           {/* Controls */}
           <div className="row mb-3 g-2 align-items-center">
@@ -272,8 +268,8 @@ export default function ReviewTransactions() {
 
           {/* Table */}
           <div className="table-responsive">
-            <table className="table table-bordered table-hover align-middle text-center">
-              <thead style={{ backgroundColor: "#900603", color: "#fff" }}>
+            <table className="table table-bordered table-hover align-middle text-center custom-table">
+              <thead>
                 <tr>
                   <th>
                     <input
@@ -308,12 +304,12 @@ export default function ReviewTransactions() {
                     <td
                       className={
                         c.status === "Pending"
-                          ? "text-warning fw-bold"
+                          ? "status-pending"
                           : c.status === "Approved"
-                          ? "text-success fw-bold"
+                          ? "status-approved"
                           : c.status === "Escalated"
-                          ? "text-primary fw-bold"
-                          : "text-danger fw-bold"
+                          ? "status-escalated"
+                          : "status-rejected"
                       }
                     >
                       {c.status}
@@ -322,8 +318,7 @@ export default function ReviewTransactions() {
                     <td>{c.note}</td>
                     <td>
                       <button
-                        className="btn btn-sm text-white"
-                        style={{ backgroundColor: "#900603" }}
+                        className="btn btn-sm btn-custom"
                         onClick={() => setViewingCase(c)}
                       >
                         View
@@ -352,7 +347,9 @@ export default function ReviewTransactions() {
                 </span>
               </li>
               <li
-                className={`page-item ${page === totalPages ? "disabled" : ""}`}
+                className={`page-item ${
+                  page === totalPages ? "disabled" : ""
+                }`}
               >
                 <button
                   className="page-link"
@@ -369,10 +366,7 @@ export default function ReviewTransactions() {
             <div className="modal show d-block" tabIndex="-1">
               <div className="modal-dialog modal-xl modal-dialog-centered">
                 <div className="modal-content">
-                  <div
-                    className="modal-header"
-                    style={{ backgroundColor: "#900603", color: "#fff" }}
-                  >
+                  <div className="modal-header custom-header">
                     <h5 className="modal-title">
                       Case {viewingCase.caseId} - {viewingCase.name}
                     </h5>
@@ -428,12 +422,11 @@ export default function ReviewTransactions() {
                         {viewingCase.docs.length > 0 ? (
                           <div className="d-flex flex-wrap gap-3">
                             {viewingCase.docs.map((doc, idx) => (
-                              <div key={idx} className="border p-2 text-center">
+                              <div key={idx} className="doc-card">
                                 <img
                                   src={doc.url}
                                   alt={doc.type}
-                                  className="img-thumbnail mb-2"
-                                  width="120"
+                                  className="img-thumbnail"
                                 />
                                 <div>{doc.type}</div>
                                 <button
@@ -465,8 +458,7 @@ export default function ReviewTransactions() {
                             id="newNoteInput"
                           />
                           <button
-                            className="btn text-white"
-                            style={{ backgroundColor: "#900603" }}
+                            className="btn btn-custom"
                             onClick={() => {
                               const val =
                                 document.getElementById("newNoteInput").value;
@@ -507,8 +499,7 @@ export default function ReviewTransactions() {
                           placeholder="Enter escalation reason"
                         ></textarea>
                         <button
-                          className="btn text-white"
-                          style={{ backgroundColor: "#900603" }}
+                          className="btn btn-custom"
                           onClick={() => {
                             const val =
                               document.getElementById("escalateInput").value;
