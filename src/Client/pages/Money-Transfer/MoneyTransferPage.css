@@ -1,0 +1,445 @@
+/* Money Transfer Page Styles */
+.money-transfer-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 0 0 3rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Header Section */
+.money-transfer-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.header-content {
+  text-align: center;
+  padding: 25px 2rem;
+  background-color: #900603;
+  width: 100%;
+}
+
+.header-title {
+  font-size: 2rem;
+  /* font-weight: 700; */
+  color: white;
+  margin: 0;
+}
+
+.header-subtitle {
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* Feature Cards Section */
+.feature-cards-container {
+  padding: 0 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .feature-cards-container {
+    padding: 0 3rem;
+  }
+}
+
+.feature-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 576px) {
+  .feature-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .feature-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .feature-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.feature-card-col {
+  width: 100%;
+}
+
+/* Feature Card Component */
+.feature-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card-icon-container {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #900603; /* 🔴 red background */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-card-icon {
+  width: 28px;
+  height: 28px;
+  color: #fff; /* icon white */
+}
+
+.feature-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.feature-card-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.feature-card-description {
+  color: #718096;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.feature-card-link {
+  margin-top: auto;
+}
+
+.feature-card-button {
+  background-color: #900603;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feature-card-button:hover {
+  background-color: #780606;
+}
+
+/* Domestic Transfer Card */
+.domestic-transfer-card {
+  min-height: 280px;
+  max-height: 280px;
+}
+
+.transfer-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.transfer-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.neft-badge { background-color: #007bff; }
+.imps-badge { background-color: #28a745; }
+.rtgs-badge { background-color: #6c757d; }
+.upi-badge { background-color: #ffc107; color: #212529; }
+
+/* Quick Transfer Section */
+.quick-transfer-section {
+  margin-top: 2rem;
+  padding: 0 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .quick-transfer-section {
+    padding: 0 3rem;
+  }
+}
+
+.quick-transfer-header {
+  margin-bottom: 0.75rem;
+}
+
+.quick-transfer-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+  font-size: 1.125rem;
+  text-align: left;
+}
+
+.quick-transfer-subtitle {
+  color: #6c757d;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.quick-methods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .quick-methods-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.quick-method-col {
+  margin-bottom: 1rem;
+}
+
+/* Quick Method Card */
+.quick-method-link {
+  text-decoration: none;
+}
+
+.quick-method-card {
+  height: 100%;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: white;
+}
+
+.quick-method-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.quick-method-icon-container {
+  background-color: #900603; /* 🔴 red background */
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.quick-method-icon {
+  color: #fff; /* icon white */
+  width: 20px;
+  height: 20px;
+}
+
+.quick-method-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.quick-method-description {
+  color: #6c757d;
+  font-size: 0.7rem;
+  margin-bottom: 0;
+}
+
+/* Recent Transfers Section */
+.recent-transfers-section {
+  margin-top: 0.75rem;
+  padding: 0 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .recent-transfers-section {
+    padding: 0 3rem;
+  }
+}
+
+.recent-transfers-card {
+  background: white;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-size: 0.85rem;
+  padding: 0.75rem;
+}
+
+.recent-transfers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.recent-transfers-title {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0;
+  font-size: 1.125rem;
+}
+
+.recent-transfers-subtitle {
+  color: #6c757d;
+  font-size: 0.7rem;
+  margin-bottom: 0;
+}
+
+.recent-transfers-button {
+  background: #900603;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+  font-size: 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.recent-transfers-button:hover {
+  background-color: #780606;
+}
+
+.recent-transfer-item {
+  background-color: #f8f9fa;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recent-transfer-details h6 {
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.recent-transfer-info {
+  color: #6c757d;
+  font-size: 0.7rem;
+  margin-bottom: 0;
+}
+
+.recent-transfer-amount {
+  text-align: right;
+}
+
+.amount-text {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #28a745;
+  margin-bottom: 0;
+}
+
+.transfer-status {
+  color: #6c757d;
+  margin-bottom: 0;
+  font-size: 0.7rem;
+}
+
+/* Limits & KYC Section */
+.limits-kyc-section {
+  padding: 0 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .limits-kyc-section {
+    padding: 0 3rem;
+  }
+}
+
+.limits-kyc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .limits-kyc-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.limit-card-col {
+  width: 100%;
+}
+
+/* Limit Card Component */
+.limit-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  text-align: center;
+}
+
+.limit-card-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.limit-card-amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #900603;
+  margin-bottom: 0.25rem;
+}
+
+.limit-card-amount.verified {
+  color: #28a745;
+}
+
+.limit-card-used {
+  color: #6c757d;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+}
+
+.used-amount {
+  font-weight: 600;
+  color: #900603;
+}

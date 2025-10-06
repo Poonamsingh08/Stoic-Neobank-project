@@ -1,0 +1,134 @@
+/* Container */
+.kyc-container {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card */
+.kyc-card {
+  width: 100%;
+  max-width: 750px;
+  border-radius: 1rem;
+  min-height: 500px;
+}
+
+/* Card body */
+.kyc-card-body {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Step Indicator */
+.kyc-step-row {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.kyc-step-col span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: gray;
+}
+
+.kyc-step-col span.active-step {
+  font-weight: 700;
+  color: orange;
+}
+
+/* Buttons */
+.kyc-button {
+  background-color: #950606 !important;
+  border-color: #950606 !important;
+  color: #fff !important;
+  font-size: 1rem;
+  padding: 0.65rem 1.75rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.kyc-button:hover {
+  background-color: #780606 !important;
+  border-color: #780606 !important;
+}
+
+/* Input fields */
+.kyc-input {
+  font-size: 1rem;
+  padding: 0.65rem;
+}
+
+/* Step content spacing */
+.kyc-step-content {
+  margin-top: 1rem;
+  flex-grow: 1;
+}
+
+/* Intro Step */
+.kyc-intro-text {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.kyc-intro-list {
+  margin-top: 1rem;
+  font-size: 1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #6c757d;
+}
+
+/* Review Step */
+.kyc-review {
+  font-weight: 700;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .kyc-card-body {
+    padding: 2rem;
+  }
+
+  .kyc-button {
+    font-size: 0.95rem;
+    padding: 0.55rem 1.5rem;
+  }
+
+  .kyc-input {
+    font-size: 0.95rem;
+    padding: 0.55rem;
+  }
+
+  .kyc-intro-text, .kyc-intro-list {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .kyc-card-body {
+    padding: 1.5rem;
+  }
+
+  .kyc-button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .kyc-input {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .kyc-intro-text, .kyc-intro-list {
+    max-width: 100%;
+  }
+}

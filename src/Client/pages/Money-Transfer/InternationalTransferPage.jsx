@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import "./InternationalTransferPage.css";
 
 const InternationalTransferPage = () => {
   const [step, setStep] = useState(0);
@@ -31,286 +31,136 @@ const InternationalTransferPage = () => {
     });
   };
 
-  // Common card styles
-  const cardStyle = {
-    border: "0",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-    borderRadius: "1rem",
-    padding: "2rem",
-    marginTop: "3rem",
-  };
-
-  // Step button style (Next, Back, Confirm)
-  const stepButtonStyle = {
-   backgroundColor: "#950606",
-    borderColor: "#950606",
-    fontSize: "1rem",
-    padding: "0.65rem 1.75rem",
-  };
-
   return (
-    <Container fluid className="bg-light min-vh-90 px-4">
-      {/* <div style={{ paddingTop: "6rem" }}></div> */}
-
+    <div className="intl-page-container">
       {/* Step 0: Landing */}
       {step === 0 && (
-        <Row className="justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-          <Col xs={12} md={8} lg={6}>
-            <Card style={{ ...cardStyle, minHeight: "200px", padding: "3rem" }}>
-              <div className="text-center mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="60"
-                  height="60"
-                  className="text-primary mb"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-
-              <h1 className="fw-bold fs-3 mb-3">International Transfer</h1>
-              <p className="text-muted fs-6 mb-4">Send money securely to bank accounts worldwide</p>
-              <div className="d-flex justify-content-center">
-                <Button
-  variant="danger"
-  style={{ backgroundColor: "#900603", borderColor: "#900603", color: "#fff" }}
-  onMouseEnter={e => {
-    e.target.style.backgroundColor = "#780606";
-    e.target.style.borderColor = "#780606";
-  }}
-  onMouseLeave={e => {
-    e.target.style.backgroundColor = "#900603";
-    e.target.style.borderColor = "#900603";
-  }}
-  onClick={() => setStep(1)}
->
-  Start Transfer
-</Button>
-
-              </div>
-            </Card>
-          </Col>
-        </Row>
+        <div className="intl-row">
+          <div className="intl-card">
+            <div className="intl-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h1 className="intl-title">International Transfer</h1>
+            <p className="intl-subtitle">Send money securely to bank accounts worldwide</p>
+            <button className="intl-btn" onClick={() => setStep(1)}>Start Transfer</button>
+          </div>
+        </div>
       )}
 
       {/* Step 1: Choose Country */}
       {step === 1 && (
-        <Row className="justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-          <Col xs={12} md={8} lg={6}>
-            <Card style={{ ...cardStyle, minHeight: "200px", padding: "3rem" }}>
-              <h4 className="mb-5">Choose recipient country</h4>
-              <Form.Select
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="mb-4"
-              >
-                <option value="">Select Country</option>
-                {countries.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </Form.Select>
-
-              <h6 className="mt-4">Supported currencies:</h6>
+        <div className="intl-row">
+          <div className="intl-card">
+            <h2 className="intl-section-title">Choose recipient country</h2>
+            <select
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              className="intl-input"
+            >
+              <option value="">Select Country</option>
+              {countries.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+            <div className="intl-currencies">
+              <h4>Supported currencies:</h4>
               <p>{currencies.join(", ")}</p>
-
-              <div className="d-flex justify-content-end">
-         <Button
-  style={{
-    ...stepButtonStyle,
-    backgroundColor: "#900603",
-    borderColor: "#900603",
-    opacity: 1,        
-    cursor: "pointer",
-    color: "#fff"      
-  }}
-  onClick={handleNext}
-  disabled={!formData.country} 
-  onMouseEnter={e => {
-    e.target.style.backgroundColor = "#780606";
-    e.target.style.borderColor = "#780606";
-  }}
-  onMouseLeave={e => {
-    e.target.style.backgroundColor = "#900603";
-    e.target.style.borderColor = "#900603";
-  }}
->
-  Next
-</Button>
-
-
-
-
-              </div>
-            </Card>
-          </Col>
-        </Row>
+            </div>
+            <div className="intl-buttons-right">
+              <button
+                className="intl-btn"
+                onClick={handleNext}
+                disabled={!formData.country}
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Step 2: Recipient Details */}
       {step === 2 && (
-        <Row className="justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-          <Col xs={12} md={8} lg={6}>
-            <Card style={{ ...cardStyle, minHeight: "200px", padding: "3rem" }}>
-              <h4 className="mb-5">Recipient Details</h4>
-              <Form>
-                <Form.Group className="mb-4">
-                  <Form.Label>Recipient Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="recipientName"
-                    value={formData.recipientName}
-                    onChange={handleChange}
-                    placeholder="Enter recipient's full name"
-                  />
-                </Form.Group>
+        <div className="intl-row">
+          <div className="intl-card">
+            <h2 className="intl-section-title">Recipient Details</h2>
+            <form className="intl-form">
+              <label className="intl-label">Recipient Name</label>
+              <input
+                type="text"
+                name="recipientName"
+                value={formData.recipientName}
+                onChange={handleChange}
+                placeholder="Enter recipient's full name"
+                className="intl-input"
+              />
 
-                <Form.Group className="mb-4">
-                  <Form.Label>Account Number</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="accountNumber"
-                    value={formData.accountNumber}
-                    onChange={handleChange}
-                    placeholder="Enter recipient's account number"
-                  />
-                </Form.Group>
+              <label className="intl-label">Account Number</label>
+              <input
+                type="text"
+                name="accountNumber"
+                value={formData.accountNumber}
+                onChange={handleChange}
+                placeholder="Enter recipient's account number"
+                className="intl-input"
+              />
 
-                <Form.Group className="mb-4">
-                  <Form.Label>SWIFT / IBAN</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="swiftIban"
-                    value={formData.swiftIban}
-                    onChange={handleChange}
-                    placeholder="Enter SWIFT or IBAN code"
-                  />
-                </Form.Group>
-              </Form>
-
-              <div className="d-flex justify-content-between">
-               <Button
-  style={stepButtonStyle}
-  onClick={handlePrev}
-  onMouseEnter={e => {
-    e.target.style.backgroundColor = "#780606";
-    e.target.style.borderColor = "#780606";
-  }}
-  onMouseLeave={e => {
-    e.target.style.backgroundColor = "#900603";
-    e.target.style.borderColor = "#900603";
-  }}
->
-  Back
-</Button>
-
-  <Button
-  style={{
-    ...stepButtonStyle,
-    backgroundColor: "#900603",
-    borderColor: "#900603",
-    opacity: 1,        
-    cursor: "pointer",
-    color: "#fff"      
-  }}
-  onClick={handleNext}
-  disabled={!formData.country} 
-  onMouseEnter={e => {
-    e.target.style.backgroundColor = "#780606";
-    e.target.style.borderColor = "#780606";
-  }}
-  onMouseLeave={e => {
-    e.target.style.backgroundColor = "#900603";
-    e.target.style.borderColor = "#900603";
-  }}
->
-  Next
-</Button>
-
-              </div>
-            </Card>
-          </Col>
-        </Row>
+              <label className="intl-label">SWIFT / IBAN</label>
+              <input
+                type="text"
+                name="swiftIban"
+                value={formData.swiftIban}
+                onChange={handleChange}
+                placeholder="Enter SWIFT or IBAN code"
+                className="intl-input"
+              />
+            </form>
+            <div className="intl-buttons-between">
+              <button className="intl-btn" onClick={handlePrev}>Back</button>
+              <button className="intl-btn" onClick={handleNext}>Next</button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Step 3: Review */}
       {step === 3 && (
-        <Row className="justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
-          <Col xs={12} md={8} lg={6}>
-            <Card style={{ ...cardStyle, minHeight: "200px", padding: "3rem" }}>
-              <h4 className="mb-5">Review Transfer Details</h4>
-              <div className="border rounded p-3 mb-3">
-                <p>
-                  <strong>Country:</strong> {formData.country}
-                </p>
-                <p>
-                  <strong>Recipient:</strong> {formData.recipientName}
-                </p>
-                <p>
-                  <strong>Account Number:</strong> {formData.accountNumber}
-                </p>
-                <p>
-                  <strong>SWIFT / IBAN:</strong> {formData.swiftIban}
-                </p>
-                <hr />
-                <p>
-                  <strong>Conversion Rate:</strong> 1 USD = 82.50 INR
-                </p>
-                <p>
-                  <strong>Transfer Fees:</strong> $2.50
-                </p>
-                <p>
-                  <strong>Estimated Delivery:</strong> 1-2 business days
-                </p>
-              </div>
-
-              <div className="d-flex justify-content-between">
-                <Button
-  style={stepButtonStyle}
-  onClick={handlePrev}
-  onMouseEnter={e => {
-    e.target.style.backgroundColor = "#780606";
-    e.target.style.borderColor = "#780606";
-  }}
-  onMouseLeave={e => {
-    e.target.style.backgroundColor = "#900603";
-    e.target.style.borderColor = "#900603";
-  }}
->
-  Back
-</Button>
-
-<Button
-  style={stepButtonStyle}
-  onClick={handleStartTransfer}
-  onMouseEnter={e => {
-    e.target.style.backgroundColor = "#780606";
-    e.target.style.borderColor = "#780606";
-  }}
-  onMouseLeave={e => {
-    e.target.style.backgroundColor = "#900603";
-    e.target.style.borderColor = "#900603";
-  }}
->
-  Confirm & Send Transfer
-</Button>
-
-              </div>
-            </Card>
-          </Col>
-        </Row>
+        <div className="intl-row">
+          <div className="intl-card">
+            <h2 className="intl-section-title">Review Transfer Details</h2>
+            <div className="intl-review">
+              <p><strong>Country:</strong> {formData.country}</p>
+              <p><strong>Recipient:</strong> {formData.recipientName}</p>
+              <p><strong>Account Number:</strong> {formData.accountNumber}</p>
+              <p><strong>SWIFT / IBAN:</strong> {formData.swiftIban}</p>
+              <hr />
+              <p><strong>Conversion Rate:</strong> 1 USD = 82.50 INR</p>
+              <p><strong>Transfer Fees:</strong> $2.50</p>
+              <p><strong>Estimated Delivery:</strong> 1-2 business days</p>
+            </div>
+            <div className="intl-buttons-between">
+              <button className="intl-btn" onClick={handlePrev}>Back</button>
+              <button className="intl-btn" onClick={handleStartTransfer}>Confirm & Send Transfer</button>
+            </div>
+          </div>
+        </div>
       )}
-    </Container>
+    </div>
   );
 };
 

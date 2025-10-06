@@ -1,0 +1,140 @@
+/* ===== NEFT Page Container ===== */
+.neft-page-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* ===== NEFT Card ===== */
+.neft-card-container {
+  background: #fff;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 100%;
+  padding: 30px 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Title */
+.neft-card-title {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #900603;
+}
+
+/* ===== Form Styles ===== */
+.neft-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.neft-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.neft-label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a202c;
+}
+
+.neft-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.neft-input:focus {
+  border-color: #900603;
+  box-shadow: 0 0 0 2px rgba(144, 6, 3, 0.2);
+}
+
+.neft-error {
+  color: #dc3545;
+  font-size: 0.75rem;
+  margin-top: 3px;
+}
+
+/* ===== Row / Columns ===== */
+.neft-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.neft-col {
+  flex: 1;
+  min-width: 48%;
+}
+
+/* ===== Buttons ===== */
+.neft-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.neft-btn-submit,
+.neft-btn-back {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.neft-btn-submit {
+  background-color: #900603;
+}
+
+.neft-btn-submit:hover {
+  background-color: #780606;
+}
+
+.neft-btn-back {
+  background-color: #900603;
+}
+
+.neft-btn-back:hover {
+  background-color: #780606;
+}
+
+/* ===== Success Alert ===== */
+.neft-alert {
+  margin-top: 20px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 576px) {
+  .neft-col {
+    min-width: 100%;
+  }
+
+  .neft-form-buttons {
+    flex-direction: column;
+  }
+}
