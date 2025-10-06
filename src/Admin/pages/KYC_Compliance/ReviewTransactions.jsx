@@ -105,6 +105,11 @@ export default function ReviewTransactions() {
 
   return (
     <div className="rt-container">
+
+       <nav className="rt-navbar">
+        Neo Bank – KYC History
+      </nav>
+
       <header className="rt-header">KYC History</header>
 
       <div className="rt-controls">

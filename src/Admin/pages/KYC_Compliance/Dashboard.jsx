@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCheck, FaHistory, FaBell, FaExchangeAlt, FaShieldAlt } from "react-icons/fa";
-import "./Dashboard.css";
+import "./Dashboard11.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
