@@ -7,7 +7,7 @@
 
 /* ================= Header ================= */
 .cf-header {
-  background-color: #960603;
+  background-color: #900603;
   color: white;
   text-align: center;
   padding: 2rem 0;
@@ -75,7 +75,7 @@
 }
 .cf-alert-error {
   background-color: #fee2e2;
-  color: #991b1b;
+  color: #900603;
 }
 
 /* ================= Forms ================= */

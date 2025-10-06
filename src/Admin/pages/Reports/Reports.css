@@ -1,9 +1,9 @@
-:root {
+/* :root {
   --primary-color: #900603;
 }
 html{
     width: 100%;
-}
+} */
 
 .reports-container {
   max-width: 100%;
@@ -12,14 +12,14 @@ html{
 }
 
 .reports-container h1 {
-  font-size: 30px;
-  width: 98%;
+   /* font-size: 30px; */
+  width: 100%;
   /* font-weight: 700; */
-  margin: 0 -0 25px 0;
-  padding: 18px;
+  /* margin: 0 -0 25px 0; */
+  margin-top: 60px;
+  padding: 30px;
   background-color: #900603;
   color: #fff;
-  /* border-radius: 8px; */
 }
 
 /* Summary Cards */

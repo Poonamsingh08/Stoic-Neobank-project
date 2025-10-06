@@ -105,7 +105,7 @@ const AdminTransactions = () => {
       </div>
 
       {/* Table */}
-      <div className="table-card">
+      <div className="admin-table-card">
         <h2>
           {activeTab === "all"
             ? "All Transactions"
@@ -157,7 +157,13 @@ const AdminTransactions = () => {
                   </td>
                   {activeTab === "failed" && <td>{txn.reason || "—"}</td>}
                   <td>
-                    <button className="view-btn" onClick={() => setSelectedTxn(txn)}>
+                    <button
+                      className="admin-view-btn"
+                      onClick={() => {
+                        console.log("Clicked:", txn.id);
+                        setSelectedTxn(txn);
+                      }}
+                    >
                       <Eye size={16} /> View
                     </button>
                   </td>
@@ -179,34 +185,18 @@ const AdminTransactions = () => {
 
       {/* Modal */}
       {selectedTxn && (
-        <div className="modal-overlay" onClick={() => setSelectedTxn(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="admin-modal-overlay" onClick={() => setSelectedTxn(null)}>
+          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
             <h2>Transaction Details</h2>
-            <p>
-              <strong>ID:</strong> {selectedTxn.id}
-            </p>
-            <p>
-              <strong>Date:</strong> {selectedTxn.date}
-            </p>
-            <p>
-              <strong>Account:</strong> {selectedTxn.account}
-            </p>
-            <p>
-              <strong>Customer:</strong> {selectedTxn.customer}
-            </p>
-            <p>
-              <strong>Type:</strong> {selectedTxn.type}
-            </p>
-            <p>
-              <strong>Amount:</strong> ₹{selectedTxn.amount}
-            </p>
-            <p>
-              <strong>Status:</strong> {selectedTxn.status}
-            </p>
+            <p><strong>ID:</strong> {selectedTxn.id}</p>
+            <p><strong>Date:</strong> {selectedTxn.date}</p>
+            <p><strong>Account:</strong> {selectedTxn.account}</p>
+            <p><strong>Customer:</strong> {selectedTxn.customer}</p>
+            <p><strong>Type:</strong> {selectedTxn.type}</p>
+            <p><strong>Amount:</strong> ₹{selectedTxn.amount}</p>
+            <p><strong>Status:</strong> {selectedTxn.status}</p>
             {selectedTxn.reason && (
-              <p>
-                <strong>Reason:</strong> {selectedTxn.reason}
-              </p>
+              <p><strong>Reason:</strong> {selectedTxn.reason}</p>
             )}
 
             <div className="modal-actions">
