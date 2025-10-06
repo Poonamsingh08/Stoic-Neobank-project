@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Card, Button, Row, Col, Form } from "react-bootstrap";
+import "./ComplaintsLayout.css";
 import TicketQueue from "./TicketQueue";
 import Escalations from "./Escalations";
 import TicketDetails from "./TicketDetails";
@@ -7,12 +7,14 @@ import { getTickets } from "../services/ticketService";
 
 const PNB_PRIMARY_COLOR = "#900603";
 const PNB_ACCENT_COLOR = "#ff9800";
+const PAGE_SIZE = 10;
 
 export default function ComplaintsLayout() {
   const [activeTab, setActiveTab] = useState("queue");
   const [search, setSearch] = useState("");
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [tickets, setTickets] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     getTickets().then(setTickets);
@@ -25,89 +27,162 @@ export default function ComplaintsLayout() {
     closed: tickets.filter(t => t.status === "Closed").length
   }), [tickets]);
 
+  const filteredTickets = useMemo(() => {
+    return tickets.filter(t =>
+      t.id.toString().includes(search) ||
+      t.username?.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [tickets, search]);
+
+  const pagedTickets = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return filteredTickets.slice(start, start + PAGE_SIZE);
+  }, [filteredTickets, currentPage]);
+
+  const totalPages = Math.ceil(filteredTickets.length / PAGE_SIZE);
+
   const renderTab = () => {
-    if (selectedTicket) {
-      return <TicketDetails ticketId={selectedTicket} goBack={() => setSelectedTicket(null)} />;
-    }
-    if (activeTab === "queue") return <TicketQueue tickets={tickets} search={search} onView={setSelectedTicket} />;
-    if (activeTab === "escalations") return <Escalations tickets={tickets} search={search} onView={setSelectedTicket} />;
+    if (selectedTicket) return (
+      <TicketDetails
+        ticketId={selectedTicket}
+        goBack={() => setSelectedTicket(null)}
+        onUpdate={updated => setTickets(prev => prev.map(t => t.id === updated.id ? { ...t, ...updated } : t))}
+      />
+    );
+
+    if (activeTab === "queue") return (
+      <TicketQueue tickets={pagedTickets} search={search} onView={setSelectedTicket} />
+    );
+
+    if (activeTab === "escalations") return (
+      <Escalations tickets={pagedTickets} search={search} onView={setSelectedTicket} />
+    );
   };
 
   const summaryCards = [
-    { title:"Total Tickets", value:summaryData.total, color:PNB_PRIMARY_COLOR, icon:"bi-people-fill" },
-    { title:"Open Tickets", value:summaryData.open, color:"#28a745", icon:"bi-folder2-open" },
-    { title:"High Priority", value:summaryData.highPriority, color:PNB_ACCENT_COLOR, icon:"bi-exclamation-circle-fill" },
-    { title:"Closed Tickets", value:summaryData.closed, color:"gray", icon:"bi-check-circle-fill" }
+    { title: "Total Tickets", value: summaryData.total, color: PNB_PRIMARY_COLOR, icon: "bi-people-fill" },
+    { title: "Open Tickets", value: summaryData.open, color: "#28a745", icon: "bi-folder2-open" },
+    { title: "High Priority", value: summaryData.highPriority, color: PNB_ACCENT_COLOR, icon: "bi-exclamation-circle-fill" },
+    { title: "Closed Tickets", value: summaryData.closed, color: "gray", icon: "bi-check-circle-fill" }
   ];
 
   return (
-    <div className="bg-light">
-
-      {/* Full-width Header */}
-      <div className="w-100" style={{ backgroundColor: PNB_PRIMARY_COLOR }}>
-        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 py-4 px-4 text-white container-fluid">
-          <h4 className="mb-2 mb-md-0">📩 Complaints & Supports</h4>
-          <div className="d-flex flex-wrap gap-2">
-            <Button
-              variant={activeTab==="queue"?"light":"outline-light"}
-              onClick={()=>{setSelectedTicket(null);setActiveTab("queue");}}
-              className={activeTab==="queue" ? "text-dark" : "text-white"}
-            >
-              Ticket Queue
-            </Button>
-            <Button
-              variant={activeTab==="escalations"?"light":"outline-light"}
-              onClick={()=>{setSelectedTicket(null);setActiveTab("escalations");}}
-              className={activeTab==="escalations" ? "text-dark" : "text-white"}
-            >
-              Escalations
-            </Button>
-          </div>
+    <>
+      <header className="cl-header" style={{ backgroundColor: PNB_PRIMARY_COLOR }}>
+        <h4>📩 Complaints & Supports</h4>
+        <div className="cl-tabs">
+          <button
+            className={`cl-tab-btn ${activeTab === "queue" ? "active" : ""}`}
+            onClick={() => { setSelectedTicket(null); setActiveTab("queue"); setCurrentPage(1); }}
+          >
+            Ticket Queue
+          </button>
+          <button
+            className={`cl-tab-btn ${activeTab === "escalations" ? "active" : ""}`}
+            onClick={() => { setSelectedTicket(null); setActiveTab("escalations"); setCurrentPage(1); }}
+          >
+            Escalations
+          </button>
         </div>
-      </div>
+      </header>
 
-      {/* Content Container */}
-      <div className="container-fluid p-3 p-md-4">
-
-        {/* Summary Cards */}
-        {!selectedTicket && (
-          <Row className="mb-4 g-3">
-            {summaryCards.map((card, idx) => (
-              <Col xs={12} sm={6} lg={3} key={idx}>
-                <Card className={`shadow-sm border-0 border-start border-5`} style={{ borderColor: card.color }}>
-                  <Card.Body className="d-flex justify-content-between align-items-center flex-wrap">
+      <div className="cl-layout">
+        <main className="cl-container">
+          {!selectedTicket && (
+            <div className="cl-summary-cards">
+              {summaryCards.map((card, idx) => (
+                <div key={idx} className="cl-card" style={{ borderLeftColor: card.color }}>
+                  <div className="cl-card-body">
                     <div>
-                      <h6 className="text-muted">{card.title}</h6>
-                      <h2 className="fw-bold mb-0">{card.value}</h2>
+                      <h6>{card.title}</h6>
+                      <h2>{card.value}</h2>
                     </div>
-                    <div className="d-flex align-items-center justify-content-center rounded-circle text-white" 
-                         style={{ backgroundColor: card.color, width: "50px", height: "50px", fontSize: "1.5rem" }}>
+                    <div className="cl-card-icon" style={{ backgroundColor: card.color }}>
                       <i className={`bi ${card.icon}`}></i>
                     </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
-
-        {/* Table / Details */}
-        <Card className="shadow-sm">
-          {!selectedTicket && (
-            <Card.Header className="bg-white p-3">
-              <Form.Control
-                type="text"
-                placeholder="Search by Ticket ID / Username..."
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </Card.Header>
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
-          <Card.Body className="p-0 table-responsive">
-            {renderTab()}
-          </Card.Body>
-        </Card>
+
+          <div className="cl-card cl-table-card">
+            {!selectedTicket && (
+              <div className="cl-card-header">
+                <div className="cl-search-wrapper">
+                  <i className="bi bi-search cl-search-icon"></i>
+                  <input
+                    type="text"
+                    placeholder="Search by Ticket ID / Username..."
+                    value={search}
+                    onChange={e => { setSearch(e.target.value); setCurrentPage(1); }}
+                    className="cl-search-input"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="cl-card-body">{renderTab()}</div>
+
+          {/* Pagination */}
+{totalPages > 1 && (
+  <div className="cl-pagination">
+    <button
+      className="cl-prev-btn"
+      disabled={currentPage === 1}
+      onClick={() => setCurrentPage(prev => prev - 1)}
+    >
+      Prev
+    </button>
+
+    {(() => {
+      const pages = [];
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, currentPage + 2);
+
+      if (startPage > 1) {
+        pages.push(
+          <button key={1} className={`cl-page-btn ${currentPage === 1 ? "active" : ""}`} onClick={() => setCurrentPage(1)}>
+            1
+          </button>
+        );
+        if (startPage > 2) pages.push(<span key="start-ellipsis" className="cl-ellipsis">...</span>);
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(
+          <button key={i} className={`cl-page-btn ${i === currentPage ? "active" : ""}`} onClick={() => setCurrentPage(i)}>
+            {i}
+          </button>
+        );
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) pages.push(<span key="end-ellipsis" className="cl-ellipsis">...</span>);
+        pages.push(
+          <button key={totalPages} className={`cl-page-btn ${currentPage === totalPages ? "active" : ""}`} onClick={() => setCurrentPage(totalPages)}>
+            {totalPages}
+          </button>
+        );
+      }
+
+      return pages;
+    })()}
+
+    <button
+      className="cl-next-btn"
+      disabled={currentPage === totalPages}
+      onClick={() => setCurrentPage(prev => prev + 1)}
+    >
+      Next
+    </button>
+  </div>
+)}
+
+          </div>
+        </main>
+
       </div>
-    </div>
+    </>
   );
 }

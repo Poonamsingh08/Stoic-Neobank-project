@@ -1,0 +1,363 @@
+/* Global Font & Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ==================== Hero Section ==================== */
+.fd-hero {
+  background-color: #900603;
+  color: white;
+  padding:0px 20px;
+}
+
+.fd-hero-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 20px;
+}
+
+.fd-hero-left {
+  flex: 1;
+  min-width: 280px;
+}
+
+.fd-hero-left h1 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.fd-hero-left h4 {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.fd-hero-left p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.fd-hero-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: #fff;
+  color: #900603;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #f2f2f2;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: #900603;
+}
+
+.fd-hero-note {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Hero Image */
+.fd-hero-right {
+  flex: 1;
+  text-align: center;
+  min-width: 280px;
+}
+
+.fd-hero-right img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================== Calculator Card ==================== */
+.fd-calculator-section {
+  padding: 50px 20px;
+  background: #f8f9fa;
+}
+
+.fd-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.fd-card-header {
+  background: #900603;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.fd-card-body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 20px;
+}
+
+.fd-card-left {
+  flex: 1;
+  min-width: 280px;
+}
+
+.fd-card-right {
+  flex: 0 0 350px;
+}
+
+/* Tabs */
+.fd-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.fd-tab {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  background: #eee;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.fd-tab.active {
+  background: #900603;
+  color: white;
+}
+
+/* Input Groups */
+.fd-input-group {
+  margin-bottom: 20px;
+}
+
+.fd-input-group label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.fd-input-group input[type=range] {
+  width: 100%;
+  cursor: pointer;
+}
+
+.fd-range-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.fd-range-current {
+  font-weight: bold;
+  color: #900603;
+}
+
+/* Interest Slabs */
+.fd-slabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fd-slab {
+  flex: 1 1 150px;
+  padding: 15px;
+  border-radius: 8px;
+  background: #eee;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.fd-slab.active {
+  background: #900603;
+  color: white;
+}
+
+.fd-slab h5 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.fd-slab .badge {
+  background: #28a745;
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* Notes */
+.fd-note {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #555;
+}
+
+/* Summary Card */
+.fd-summary {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.fd-summary h6 {
+  color: #777;
+}
+
+.fd-summary h2 {
+  color: #900603;
+  font-weight: bold;
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+.fd-summary p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.fd-summary-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.fd-summary-buttons .btn-primary {
+  background-color: #900603;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.fd-summary-buttons .btn-primary:hover {
+  background-color: #700402;
+}
+
+.fd-summary-buttons .btn-outline-dark {
+  background: transparent;
+  border: 2px solid #900603;
+  color: #900603;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.fd-summary-buttons .btn-outline-dark:hover {
+  background-color: #900603;
+  color: white;
+}
+
+/* Benefits Section */
+.fd-benefits {
+  padding: 50px 20px;
+}
+
+.fd-benefits-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.fd-benefits-container h3 {
+  font-weight: bold;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.fd-benefit-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.fd-benefit-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1 1 250px;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.fd-benefit-card h6 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.fd-benefit-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Responsive */
+@media(max-width: 991px) {
+  .fd-card-body { flex-direction: column; }
+  .fd-card-right { flex: 1; max-width: 100%; }
+}
+
+@media(max-width: 767px) {
+  .fd-hero-container { flex-direction: column; text-align: center; }
+  .fd-hero-left h1 { font-size: 28px; }
+  .fd-hero-left h4 { font-size: 18px; }
+  .fd-summary h2 { font-size: 22px; }
+  .fd-benefits-container h3 { font-size: 22px; }
+}

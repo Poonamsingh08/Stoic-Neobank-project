@@ -1,48 +1,66 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import "./TicketChat.css";
 import { updateTicket } from "../services/ticketService";
 
-export default function TicketActions({ ticketId, close, onUpdate }) {
-  const [assigned, setAssigned] = useState("");
+export default function TicketActions({ ticket, close, onUpdate }) {
+  const [assigned, setAssigned] = useState(ticket.assigned || "");
   const [note, setNote] = useState("");
 
   const handleAssign = async () => {
     if (!assigned.trim()) return;
-    await updateTicket(ticketId, "assign", { agent: assigned });
-    onUpdate(prev => prev.map(t => t.id === ticketId ? { ...t, assigned: assigned } : t));
+    await updateTicket(ticket.id, "assign", { agent: assigned });
+    const updated = { ...ticket, assigned };
+    onUpdate(updated);
     close();
   };
 
   const handleCloseTicket = async () => {
-    await updateTicket(ticketId, "close");
-    onUpdate(prev => prev.map(t => t.id === ticketId ? { ...t, status: "Closed" } : t));
+    await updateTicket(ticket.id, "close");
+    const updated = { ...ticket, status: "Closed" };
+    onUpdate(updated);
     close();
   };
 
   const handleEscalate = async () => {
-    await updateTicket(ticketId, "escalate");
-    onUpdate(prev => prev.map(t => t.id === ticketId ? { ...t, priority: "High" } : t));
+    await updateTicket(ticket.id, "escalate");
+    const updated = { ...ticket, priority: "High" };
+    onUpdate(updated);
     close();
   };
 
   return (
-    <Modal show onHide={close} centered>
-      <Modal.Header closeButton><Modal.Title>Manage Ticket</Modal.Title></Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Label>Assign to Agent</Form.Label>
-            <Form.Control value={assigned} onChange={e => setAssigned(e.target.value)} placeholder="Agent Name"/>
-            <Button className="mt-2" size="sm" variant="info" onClick={handleAssign}>Assign</Button>
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Add Internal Note</Form.Label>
-            <Form.Control as="textarea" rows={3} value={note} onChange={e => setNote(e.target.value)} />
-          </Form.Group>
-          <Button variant="success" className="me-2" onClick={handleCloseTicket}>Close Ticket</Button>
-          <Button variant="warning" onClick={handleEscalate}>Escalate</Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
+    <div className="ta-modal-backdrop" onClick={close}>
+      <div className="ta-modal" onClick={e => e.stopPropagation()}>
+        <div className="ta-header">
+          <h4>Manage Ticket</h4>
+          <button className="ta-close-btn" onClick={close}>×</button>
+        </div>
+        <div className="ta-body">
+          <div className="ta-group">
+            <label>Assign to Agent</label>
+            <input
+              type="text"
+              value={assigned}
+              onChange={e => setAssigned(e.target.value)}
+              placeholder="Agent Name"
+            />
+            <button className="ta-btn info" onClick={handleAssign}>Assign</button>
+          </div>
+          <div className="ta-group">
+            <label>Add Internal Note</label>
+            <textarea
+              rows={3}
+              value={note}
+              onChange={e => setNote(e.target.value)}
+              placeholder="Write note..."
+            />
+          </div>
+          <div className="ta-group" style={{ display: 'flex', gap: '10px' }}>
+            <button className="ta-btn success" onClick={handleCloseTicket}>Close Ticket</button>
+            <button className="ta-btn warning" onClick={handleEscalate}>Escalate</button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Form, Button, Row, Col, Alert } from "react-bootstrap";
+
+ import React, { useState } from "react";
+import "./style/loanForm.css"; // Import CSS file
 
 function PersonalLoanForm() {
   const [formData, setFormData] = useState({
@@ -30,210 +31,172 @@ function PersonalLoanForm() {
   };
 
   return (
-    <div className="container my-4">
-      <h2 className="mb-4 text-center" style={{ color: "#900603" }}>
-        Personal Loan Application Form
-      </h2>
+    <div className="loan-form-container">
+      <h2 className="loan-form-title">Personal Loan Application Form</h2>
 
-      {/* Success Alert */}
       {submitted && (
-        <Alert variant="success" className="text-center">
+        <div className="loan-success">
           ✅ Personal Loan Application Submitted! <br />
           Name: {formData.applicantName}
-        </Alert>
+        </div>
       )}
 
-      <Form
-        onSubmit={handleSubmit}
-        className="p-4 border rounded shadow-sm"
-        style={{ backgroundColor: "#fff0f0" }}
-      >
+      <form onSubmit={handleSubmit} className="loan-form-card">
         {/* Applicant Details */}
-        <h5 className="mb-3" style={{ color: "#900603" }}>
-          Applicant Details
-        </h5>
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label>Full Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="applicantName"
-                value={formData.applicantName}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group>
-              <Form.Label>Date of Birth</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                value={formData.dob}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={3}>
-            <Form.Group>
-              <Form.Label>Gender</Form.Label>
-              <Form.Select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-        </Row>
+        <h5 className="loan-form-section">Applicant Details</h5>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              name="applicantName"
+              value={formData.applicantName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Date of Birth</label>
+            <input
+              type="date"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Gender</label>
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
 
-        <Row className="mb-3">
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label>Contact Number</Form.Label>
-              <Form.Control
-                type="tel"
-                name="contact"
-                value={formData.contact}
-                onChange={handleChange}
-                pattern="[0-9]{10}"
-                placeholder="10-digit number"
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group>
-              <Form.Label>Email ID</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Contact Number</label>
+            <input
+              type="tel"
+              name="contact"
+              value={formData.contact}
+              onChange={handleChange}
+              pattern="[0-9]{10}"
+              placeholder="10-digit number"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Email ID</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            as="textarea"
+        <div className="form-group">
+          <label>Address</label>
+          <textarea
             rows={2}
             name="address"
             value={formData.address}
             onChange={handleChange}
             required
           />
-        </Form.Group>
+        </div>
 
         {/* Employment & Income */}
-        <h5 className="mb-3" style={{ color: "#900603" }}>
-          Employment & Income
-        </h5>
-        <Row className="mb-3">
-          <Col md={4}>
-            <Form.Group>
-              <Form.Label>Occupation</Form.Label>
-              <Form.Select
-                name="occupation"
-                value={formData.occupation}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select</option>
-                <option>Salaried</option>
-                <option>Self-Employed</option>
-                <option>Business</option>
-                <option>Other</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group>
-              <Form.Label>Company / Business Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group>
-              <Form.Label>Monthly Income (₹)</Form.Label>
-              <Form.Control
-                type="number"
-                name="income"
-                value={formData.income}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <h5 className="loan-form-section">Employment & Income</h5>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Occupation</label>
+            <select
+              name="occupation"
+              value={formData.occupation}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select</option>
+              <option>Salaried</option>
+              <option>Self-Employed</option>
+              <option>Business</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Company / Business Name</label>
+            <input
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Monthly Income (₹)</label>
+            <input
+              type="number"
+              name="income"
+              value={formData.income}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
 
         {/* Loan Details */}
-        <h5 className="mb-3" style={{ color: "#900603" }}>
-          Loan Details
-        </h5>
-        <Row className="mb-3">
-          <Col md={4}>
-            <Form.Group>
-              <Form.Label>Loan Amount (₹)</Form.Label>
-              <Form.Control
-                type="number"
-                name="loanAmount"
-                value={formData.loanAmount}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group>
-              <Form.Label>Tenure (Months)</Form.Label>
-              <Form.Control
-                type="number"
-                name="tenure"
-                value={formData.tenure}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group>
-              <Form.Label>Purpose of Loan</Form.Label>
-              <Form.Control
-                type="text"
-                name="purpose"
-                value={formData.purpose}
-                onChange={handleChange}
-                placeholder="e.g. Wedding, Travel, Medical"
-                required
-              />
-            </Form.Group>
-          </Col>
-        </Row>
+        <h5 className="loan-form-section">Loan Details</h5>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Loan Amount (₹)</label>
+            <input
+              type="number"
+              name="loanAmount"
+              value={formData.loanAmount}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Tenure (Months)</label>
+            <input
+              type="number"
+              name="tenure"
+              value={formData.tenure}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Purpose of Loan</label>
+            <input
+              type="text"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              placeholder="e.g. Wedding, Travel, Medical"
+              required
+            />
+          </div>
+        </div>
 
         {/* Documents */}
-        <h5 className="mb-3" style={{ color: "#900603" }}>
-          Documents
-        </h5>
-        <Form.Group className="mb-3">
-          <Form.Label>Identity Proof</Form.Label>
-          <Form.Select
+        <h5 className="loan-form-section">Documents</h5>
+        <div className="form-group">
+          <label>Identity Proof</label>
+          <select
             name="idProof"
             value={formData.idProof}
             onChange={handleChange}
@@ -245,26 +208,16 @@ function PersonalLoanForm() {
             <option>Passport</option>
             <option>Voter ID</option>
             <option>Driving License</option>
-          </Form.Select>
-        </Form.Group>
+          </select>
+        </div>
 
         {/* Submit */}
-        <div className="text-center">
-          <Button
-            type="submit"
-            style={{
-              backgroundColor: "#900603",
-              border: "none",
-              padding: "10px 20px",
-              fontWeight: "500",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#780606")}
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#900603")}
-          >
+        <div className="form-submit">
+          <button type="submit" className="loan-submit-btn">
             Submit Application
-          </Button>
+          </button>
         </div>
-      </Form>
+      </form>
     </div>
   );
 }

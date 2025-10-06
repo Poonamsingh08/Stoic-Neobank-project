@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Form } from "react-bootstrap";
 import { FaMobileAlt, FaBell, FaEye, FaLock } from "react-icons/fa";
+import './QuickSettings.css';
 
 const quickSettings = [
   { title: "Biometric Login", icon: <FaMobileAlt />, default: true },
@@ -16,48 +16,34 @@ const QuickSettings = () => {
 
   const toggleSetting = (index) => {
     setSettings((prev) =>
-      prev.map((s, i) =>
-        i === index ? { ...s, enabled: !s.enabled } : s
-      )
+      prev.map((s, i) => (i === index ? { ...s, enabled: !s.enabled } : s))
     );
   };
 
   return (
-    <div className="p-4 bg-light rounded shadow-sm">
-      <h5 className="fw-bold">Quick Settings</h5>
-      <p className="text-muted">Frequently used settings for quick access</p>
+    <div className="quick-settings-page">
+      <h5 className="quick-header">Quick Settings</h5>
+      <p className="quick-subtitle">Frequently used settings for quick access</p>
 
-      <Row className="g-3">
+      <div className="quick-cards-grid">
         {settings.map((item, index) => (
-          <Col md={3} key={index}>
-            <Card className="d-flex flex-row align-items-center justify-content-between p-3 border-0 shadow-sm">
-              {/* Icon box */}
-              <div
-                className="d-flex align-items-center justify-content-center rounded p-2"
-                style={{ backgroundColor: "rgba(255, 140, 0, 0.15)", width: "40px", height: "40px" }}
-              >
-                <span className="text-warning fs-5">{item.icon}</span>
-              </div>
-
-              {/* Text */}
-              <div className="ms-3 flex-grow-1">
-                <p className="mb-0 fw-medium">{item.title}</p>
-              </div>
-
-              {/* Toggle */}
-              <Form.Check
-                type="switch"
-                id={`switch-${index}`}
+          <div className="quick-card" key={index}>
+            <div className="quick-card-icon">{item.icon}</div>
+            <div className="quick-card-title">{item.title}</div>
+            <label className="switch">
+              <input
+                type="checkbox"
                 checked={item.enabled}
                 onChange={() => toggleSetting(index)}
-                className="ms-auto"
               />
-            </Card>
-          </Col>
+              <span className="slider"></span>
+            </label>
+          </div>
         ))}
-      </Row>
+      </div>
     </div>
   );
 };
 
 export default QuickSettings;
+

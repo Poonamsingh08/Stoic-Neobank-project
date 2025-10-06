@@ -1,67 +1,68 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button } from 'react-bootstrap';
 import { FaExclamationTriangle, FaMobileAlt, FaKey } from 'react-icons/fa';
+import './SecurityOptions.css';
 
 const SecurityOptions = () => {
   return (
-    <div className=" bg-light">
-      <div className="p-3 mx-4 rounded border shadow-sm bg-white" >
-        <h5 className="fw-bold">Security Recommendations</h5>
-        <p className="text-muted mb-4">
+    <div className="security-options-page">
+      <div className="security-options-container">
+        <h5 className="security-header">Security Recommendations</h5>
+        <p className="security-subtitle">
           Improve your account security with these suggestions
         </p>
 
         {/* Enable Two-Factor Authentication */}
-        <Card className="mb-3 border-warning bg-warning-subtle">
-          <Card.Body className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
-              <FaExclamationTriangle className="text-warning me-3 fs-4" />
+        <div className="security-card warning-card">
+          <div className="security-card-body">
+            <div className="security-card-left">
+              <FaExclamationTriangle className="security-icon warning-icon" />
               <div>
-                <h6 className="mb-1">Enable Two-Factor Authentication</h6>
-                <small className="text-muted">
+                <h6 className="security-card-title">Enable Two-Factor Authentication</h6>
+                <small className="security-card-desc">
                   Add an extra layer of security to your account
                 </small>
               </div>
             </div>
-            <Button variant="outline-warning" size="sm">Enable</Button>
-          </Card.Body>
-        </Card>
+            <button className="security-btn warning-btn">Enable</button>
+          </div>
+        </div>
 
         {/* Update Password */}
-        <Card className="mb-3 border-primary bg-primary-subtle">
-          <Card.Body className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
-              <FaKey className="text-primary me-3 fs-4" />
+        <div className="security-card primary-card">
+          <div className="security-card-body">
+            <div className="security-card-left">
+              <FaKey className="security-icon primary-icon" />
               <div>
-                <h6 className="mb-1">Update Password</h6>
-                <small className="text-muted">
+                <h6 className="security-card-title">Update Password</h6>
+                <small className="security-card-desc">
                   Your password was last changed 6 months ago
                 </small>
               </div>
             </div>
-            <Button variant="outline-primary" size="sm">Update</Button>
-          </Card.Body>
-        </Card>
+            <button className="security-btn primary-btn">Update</button>
+          </div>
+        </div>
 
         {/* Enable Biometric Login */}
-        <Card className="border-success bg-success-subtle">
-          <Card.Body className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
-              <FaMobileAlt className="text-success me-3 fs-4" />
+        <div className="security-card success-card">
+          <div className="security-card-body">
+            <div className="security-card-left">
+              <FaMobileAlt className="security-icon success-icon" />
               <div>
-                <h6 className="mb-1">Enable Biometric Login</h6>
-                <small className="text-muted">
+                <h6 className="security-card-title">Enable Biometric Login</h6>
+                <small className="security-card-desc">
                   Use fingerprint or face recognition for quick access
                 </small>
               </div>
             </div>
-            <Button variant="outline-success" size="sm">Setup</Button>
-          </Card.Body>
-        </Card>
+            <button className="security-btn success-btn">Setup</button>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default SecurityOptions;
+
+
