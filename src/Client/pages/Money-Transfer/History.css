@@ -7,21 +7,21 @@
   box-sizing: border-box;
 }
 
-/* History Header - Styled like Money Transfer Header */
+/* History Header  */
 .history-header {
   
   width: 100%;  
   text-align: center;
-  padding: 25px 2rem; /* same as money-transfer-header */
+  padding: 25px 2rem; 
   background-color: #900603;
   color: #fff;
   margin-bottom: 2rem;
-  /* removed border-radius and box-shadow */
+  
 }
 
 .history-title {
   font-size: 2rem;
-  /* font-weight optional if you want */
+
   color: white;
   margin-bottom: 0;
 }
@@ -122,7 +122,7 @@
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 768px) {
+@media (max-width: 750px) {
   .history-table th,
   .history-table td {
     padding: 0.5rem;
@@ -130,7 +130,7 @@
   }
 
   .history-search-input {
-    max-width: 100%;
+    max-width: 60%;
   }
 }
 

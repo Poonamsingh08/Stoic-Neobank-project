@@ -44,7 +44,7 @@ const InternationalTransferPage = () => {
                 height="60"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                stroke="blue"
               >
                 <path
                   strokeLinecap="round"

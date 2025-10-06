@@ -32,6 +32,15 @@
   display: flex;
   flex-direction: column;
 }
+/* ===== Make some fields wider ===== */
+.neft-input[name="accountNumber"],
+.neft-input[name="confirmAccountNumber"],
+.neft-input[name="ifsc"],
+.neft-input[name="amount"] {
+  width: 100%;      
+  max-width: 500px;   
+}
+
 
 .neft-form-group {
   display: flex;

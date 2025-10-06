@@ -18,19 +18,19 @@
 .intl-card {
   background-color: #fff;
   border-radius: 1rem;
-  padding: 3rem;           /* वाढवले padding */
-  max-width: 700px;        /* वाढवले card width */
+  padding: 3rem;           
+  max-width: 700px;        
   width: 95%;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;            /* gap थोडा वाढवला */
+  gap: 1.25rem;            
 }
 
 /* ===== Titles ===== */
 .intl-title {
   font-weight: 700;
-  font-size: 1.5rem;       /* कमी केले font size */
+  font-size: 1.5rem;       
   text-align: center;
   margin-bottom: 0.5rem;
   color: #950606;
@@ -38,17 +38,24 @@
 
 .intl-subtitle {
   text-align: center;
-  font-size: 0.875rem;     /* कमी केले font size */
+  font-size: 0.875rem;     
   color: #6c757d;
   margin-bottom: 1.5rem;
 }
 
 .intl-section-title {
-  font-size: 1.1rem;       /* कमी केले font size */
+  font-size: 1.1rem;       
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: left;
   color: #950606;
+}
+
+.intl-icon {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+  margin-bottom: 1rem;      
 }
 
 /* ===== Form Elements ===== */
@@ -61,12 +68,12 @@
 .intl-label {
   font-weight: 600;
   margin-bottom: 0.25rem;
-  font-size: 0.85rem;      /* कमी केले font size */
+  font-size: 0.85rem;     
 }
 
 .intl-input, .intl-form-control {
   padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;     /* कमी केले font size */
+  font-size: 0.875rem;     
   border-radius: 8px;
   border: 1px solid #ced4da;
   outline: none;
@@ -83,8 +90,8 @@
   background-color: #900603;
   color: #fff;
   border: none;
-  padding: 0.75rem 2rem;   /* button size थोडा वाढवला */
-  font-size: 0.95rem;      /* थोडा कमी font size */
+  padding: 0.75rem 2rem;   
+  font-size: 0.95rem;      
   font-weight: 600;
   cursor: pointer;
   border-radius: 25px;
@@ -116,26 +123,26 @@
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
-  font-size: 0.875rem;    /* कमी केले font size */
+  font-size: 0.875rem;    
   line-height: 1.5;
 }
 
 /* ===== Currencies Display ===== */
 .intl-currencies h4 {
   margin-bottom: 0.25rem;
-  font-size: 1rem;         /* कमी केले font size */
+  font-size: 1rem;         
 }
 
 .intl-currencies p {
   margin: 0;
-  font-size: 0.85rem;      /* कमी केले font size */
+  font-size: 0.85rem;     
   color: #495057;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .intl-card {
-    padding: 2.5rem;       /* small screen card padding कमी */
+    padding: 2.5rem;      
   }
 
   .intl-title {
