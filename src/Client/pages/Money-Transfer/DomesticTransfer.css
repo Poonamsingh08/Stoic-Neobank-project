@@ -1,0 +1,165 @@
+/* ===== Container Background ===== */
+.dom-transfer-container {
+  background: #f8f9fa;
+  min-height: 100vh;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* ===== Header - Full Width ===== */
+.dom-transfer-header {
+  width: 100%;
+  text-align: center;
+  padding: 25px 2rem;
+  background-color: #900603;
+  color: #fff;
+  margin: 0 0 2rem 0;
+  box-sizing: border-box;
+}
+
+.dom-transfer-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.dom-transfer-subtitle {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ===== Main Card ===== */
+.dom-transfer-card {
+  min-height: 550px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+/* ===== Icon Wrapper ===== */
+.dom-transfer-icon {
+  width: 70px;             
+  height: 70px;            
+  display: flex;           
+  justify-content: center; 
+  align-items: center;     
+  margin: 0 auto 1rem auto;
+  background-color: #900603; /* wrapper background color */
+  border-radius: 50%;       /* circle background */
+}
+
+.dom-transfer-icon {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1rem auto;
+  background-color: #900603; /* dark red background */
+  border-radius: 50%;         /* पूर्ण circle */
+}
+
+
+/* ===== Description Text ===== */
+.dom-transfer-description {
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ===== Centered Buttons Row ===== */
+.dom-transfer-button-row {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 5px; /* spacing between buttons */
+}
+
+/* ===== Common Button Styles ===== */
+.dom-transfer-btn {
+   height: 50px;
+   width: 160px;
+  background-color: #900603 !important;
+  border: none !important;
+  color: white !important;
+  padding: 20px 50px; /* increased height and width */
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+ 
+}
+
+.dom-transfer-btn:hover {
+  background-color: #780606 !important;
+  transform: scale(1.05); /* subtle hover effect */
+}
+
+/* ===== Back Button ===== */
+.dom-transfer-back-btn {
+   width: 400px;
+  background-color: #900603 !important;
+  border-color: #950606 !important;
+  padding: 20px 140px; /* bigger button */
+  font-size: 1.2rem;
+  border-radius: 30px;
+  color: #fff !important;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dom-transfer-back-btn:hover {
+  background-color: #780606 !important;
+  transform: scale(1.05);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .dom-transfer-card {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .dom-transfer-btn {
+    padding: 18px 40px;
+    font-size: 1rem;
+  }
+
+  .dom-transfer-back-btn {
+    padding: 18px 100px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dom-transfer-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .dom-transfer-title {
+    font-size: 1.5rem;
+  }
+
+  .dom-transfer-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .dom-transfer-btn,
+  .dom-transfer-back-btn {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1rem;
+  }
+
+  .dom-transfer-button-row {
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+}

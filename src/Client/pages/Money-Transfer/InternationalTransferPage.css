@@ -1,0 +1,176 @@
+/* ===== Page Container ===== */
+.intl-page-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* ===== Row Wrapper ===== */
+.intl-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+/* ===== Card ===== */
+.intl-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 3rem;           
+  max-width: 700px;        
+  width: 95%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;            
+}
+
+/* ===== Titles ===== */
+.intl-title {
+  font-weight: 700;
+  font-size: 1.5rem;       
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #950606;
+}
+
+.intl-subtitle {
+  text-align: center;
+  font-size: 0.875rem;     
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+}
+
+.intl-section-title {
+  font-size: 1.1rem;       
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: left;
+  color: #950606;
+}
+
+.intl-icon {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+  margin-bottom: 1rem;      
+}
+
+/* ===== Form Elements ===== */
+.intl-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.intl-label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;     
+}
+
+.intl-input, .intl-form-control {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;     
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intl-input:focus {
+  border-color: #950606;
+  box-shadow: 0 0 0 2px rgba(149,6,6,0.2);
+}
+
+/* ===== Buttons ===== */
+.intl-btn {
+  background-color: #900603;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;   
+  font-size: 0.95rem;      
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.intl-btn:hover {
+  background-color: #780606;
+}
+
+/* Button groups */
+.intl-buttons-right {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.intl-buttons-between {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+/* ===== Review Box ===== */
+.intl-review {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;    
+  line-height: 1.5;
+}
+
+/* ===== Currencies Display ===== */
+.intl-currencies h4 {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;         
+}
+
+.intl-currencies p {
+  margin: 0;
+  font-size: 0.85rem;     
+  color: #495057;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .intl-card {
+    padding: 2.5rem;      
+  }
+
+  .intl-title {
+    font-size: 1.3rem;
+  }
+
+  .intl-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .intl-section-title {
+    font-size: 1rem;
+  }
+
+  .intl-label,
+  .intl-input,
+  .intl-form-control,
+  .intl-review,
+  .intl-currencies h4,
+  .intl-currencies p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .intl-buttons-between, 
+  .intl-buttons-right {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
