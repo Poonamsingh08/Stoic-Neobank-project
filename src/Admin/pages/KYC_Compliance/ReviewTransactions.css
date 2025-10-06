@@ -1,4 +1,4 @@
-/* ===== Container ===== */
+/* Container */
 .rt-container {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-/* ===== Header ===== */
+/* Header  */
 .rt-header {
   font-size: 1.5rem;
   font-weight: 600;
@@ -14,7 +14,7 @@
   margin-bottom: 1rem;
 }
 
-/* ===== Controls ===== */
+/* Controls*/
 .rt-controls {
   display: flex;
   flex-wrap: wrap;
@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 
-/* ===== Table ===== */
+/* Table */
 .rt-table-wrapper {
   overflow-x: auto;
   background-color: #fff;
@@ -96,7 +96,7 @@
   cursor: pointer;
 }
 
-/* ===== Pagination ===== */
+
 .rt-pagination {
   display: flex;
   justify-content: space-between;
@@ -212,7 +212,7 @@
   cursor: pointer;
 }
 
-/* ===== Notes / Audit / Escalate Inputs ===== */
+
 .rt-notes input,
 .rt-escalate input {
   padding: 0.5rem;
@@ -231,7 +231,7 @@
   cursor: pointer;
 }
 
-/* ===== Responsive ===== */
+
 @media (max-width: 768px) {
   .rt-controls { flex-direction: column; }
   .rt-bulk-buttons { justify-content: space-between; }

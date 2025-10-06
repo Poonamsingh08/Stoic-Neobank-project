@@ -33,7 +33,7 @@
 .subs-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px; /* large table for full-screen effect */
+  min-width: 800px; 
 }
 
 .subs-table th,
@@ -117,7 +117,7 @@
   color: #fff;
 }
 
-/* Responsive */
+
 @media (max-width: 1024px) {
   .subs-table {
     min-width: 700px;

@@ -45,7 +45,7 @@
 /* Main Content */
 .db-main {
   flex: 1;
-  margin-left: 220px; /* sidebar width */
+  margin-left: 220px; 
   padding: 1rem 2rem;
   background: #f4f4f4;
 }
