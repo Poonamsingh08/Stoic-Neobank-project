@@ -3,13 +3,12 @@ import "./ProductCatalog.css";
 
 // Pre-defined images
 const productImages = {
-  "Mutual Fund": "https://images.unsplash.com/photo-1611078484810-0be2b12f2304?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "Bank FD": "https://images.unsplash.com/photo-1590502593746-2b7d9456ed13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "Exchange Traded Fund": "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "Stock": "https://images.unsplash.com/photo-1581091870625-3b36db248ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
+  "Mutual Fund": "https://images.pexels.com/photos/8437000/pexels-photo-8437000.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "Bank FD": "https://images.pexels.com/photos/843700/pexels-photo-843700.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "Exchange Traded Fund": "https://images.pexels.com/photos/5980742/pexels-photo-5980742.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "Stock": "https://images.pexels.com/photos/5716004/pexels-photo-5716004.jpeg?auto=compress&cs=tinysrgb&w=800"
 };
 
-// Initial products & requests
 const initialProducts = [
   { id: 1, name: "Equity Mutual Fund", type: "Mutual Fund", price: "₹5,000", returns: "12-15% annually", risk: "High Risk", enabled: true, status: "approved" },
   { id: 2, name: "Fixed Deposit", type: "Bank FD", price: "₹1,000", returns: "6-7% annually", risk: "Low Risk", enabled: true, status: "approved" },
@@ -69,68 +68,52 @@ export default function ProductCatalog() {
   };
   const rejectRequest = (reqId) => { setRequests(requests.filter(r => r.id !== reqId)); };
 
+  // Merge approved and pending for same grid display
+  const allProducts = [...requests, ...products];
+
   return (
     <div className="product-container">
-      {/* Header */}
       <div className="product-header">
         <h3 className="product-title">Investment Options</h3>
         <button className="product-btn-primary" onClick={() => handleShow()}>Add Product</button>
       </div>
 
-      {/* Pending Requests */}
-      {requests.length > 0 && (
-        <div className="product-pending-section">
-          <h5 className="product-subtitle">Pending Product Requests</h5>
-          <div className="product-grid">
-            {requests.map(req => (
-              <div key={req.id} className="product-card">
-                <img src={productImages[req.type]} alt={req.name} className="product-card-img" />
-                <div className="product-card-body">
-                  <div className="product-card-header">
-                    <div>
-                      <h4>{req.name}</h4>
-                      <small>{req.type}</small>
-                    </div>
-                    <span className={riskColors[req.risk]}>{req.risk}</span>
-                  </div>
-                  <p><strong>Expected Returns:</strong> {req.returns}</p>
-                  <p><strong>Min Investment:</strong> {req.price}</p>
-                  <div className="product-actions">
-                    <button className="product-btn-success" onClick={() => approveRequest(req.id)}>Approve</button>
-                    <button className="product-btn-danger" onClick={() => rejectRequest(req.id)}>Reject</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Approved Products */}
+      {/* All products in single grid */}
       <div className="product-grid">
-        {products.map(product => (
-          <div key={product.id} className={`product-card ${!product.enabled ? "product-disabled" : ""}`}>
-            <img src={productImages[product.type]} alt={product.name} className="product-card-img" />
+        {allProducts.map((item) => (
+          <div key={item.id} className={`product-card ${item.status === "approved" && !item.enabled ? "product-disabled" : ""}`}>
+            <img src={productImages[item.type]} alt={item.name} className="product-card-img" />
             <div className="product-card-body">
               <div className="product-card-header">
                 <div>
-                  <h4>{product.name}</h4>
-                  <small>{product.type}</small>
+                  <h4>{item.name}</h4>
+                  <small>{item.type}</small>
                 </div>
-                <span className={riskColors[product.risk]}>{product.risk}</span>
+                <span className={riskColors[item.risk]}>{item.risk}</span>
               </div>
-              <p><strong>Expected Returns:</strong> {product.returns}</p>
-              <p><strong>Min Investment:</strong> {product.price}</p>
-              <button className={`product-btn-full ${product.enabled ? "product-btn-danger" : "product-btn-secondary"}`}>
-                {product.enabled ? "Invest Now" : "Disabled"}
-              </button>
-              <div className="product-actions">
-                <button className="product-btn-primary" onClick={() => handleShow(product)}>Edit</button>
-                <button className="product-btn-danger" onClick={() => handleDelete(product.id)}>Delete</button>
-                <button className={product.enabled ? "product-btn-success" : "product-btn-secondary"} onClick={() => toggleEnable(product.id)}>
-                  {product.enabled ? "Disable" : "Enable"}
-                </button>
-              </div>
+              <p><strong>Expected Returns:</strong> {item.returns}</p>
+              <p><strong>Min Investment:</strong> {item.price}</p>
+
+              {/* Pending request actions */}
+              {item.status === "pending" ? (
+                <div className="product-actions">
+                  <button className="product-btn-success" onClick={() => approveRequest(item.id)}>Approve</button>
+                  <button className="product-btn-danger" onClick={() => rejectRequest(item.id)}>Reject</button>
+                </div>
+              ) : (
+                <>
+                  <button className={`product-btn-full ${item.enabled ? "product-btn-danger" : "product-btn-secondary"}`}>
+                    {item.enabled ? "Invest Now" : "Disabled"}
+                  </button>
+                  <div className="product-actions">
+                    <button className="product-btn-primary" onClick={() => handleShow(item)}>Edit</button>
+                    <button className="product-btn-danger" onClick={() => handleDelete(item.id)}>Delete</button>
+                    <button className={item.enabled ? "product-btn-success" : "product-btn-secondary"} onClick={() => toggleEnable(item.id)}>
+                      {item.enabled ? "Disable" : "Enable"}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         ))}

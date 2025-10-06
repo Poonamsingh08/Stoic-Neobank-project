@@ -1,5 +1,5 @@
-
-* {
+/* Reset only inside transactions-container */
+.transactions-container * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -27,7 +27,6 @@
   color: #fff;
   text-decoration: none;
 }
-
 
 .transactions-main {
   flex: 1;
@@ -234,7 +233,6 @@
   display: block;
 }
 
-
 .transactions-input-group {
   display: flex;
   gap: 0.5rem;
@@ -252,7 +250,6 @@
   list-style: disc;
   padding-left: 1.2rem;
 }
-
 
 @media (max-width: 768px) {
   .transactions-controls {

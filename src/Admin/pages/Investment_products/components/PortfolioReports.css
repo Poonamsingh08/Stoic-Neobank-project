@@ -78,7 +78,7 @@
   color: #666;
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .reports-actions {
     flex-direction: column;

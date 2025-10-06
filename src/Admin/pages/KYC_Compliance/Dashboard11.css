@@ -5,42 +5,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* Sidebar */
-.db-sidebar {
-  width: 220px;
-  background: #900603;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-}
-
-.db-sidebar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-}
-
-.db-sidebar-menu {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.db-sidebar-menu li {
-  cursor: pointer;
-  transition: 0.2s;
-  padding: 0.5rem;
-  border-radius: 6px;
-}
-.db-sidebar-menu li:hover {
-  background: #7a0503;
-}
 
 /* Main Content */
 .db-main {

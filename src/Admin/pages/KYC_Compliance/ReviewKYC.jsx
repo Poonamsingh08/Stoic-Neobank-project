@@ -7,7 +7,6 @@ import {
   FaStickyNote,
   FaUserShield,
 } from "react-icons/fa";
-import Logo from "../../assets/NeoBank_Logo_01.png";
 import "./PendingKYC.css"; // custom CSS file
 
 const initialUsers = [
