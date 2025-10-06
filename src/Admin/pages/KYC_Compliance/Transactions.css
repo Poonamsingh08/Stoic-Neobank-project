@@ -18,6 +18,9 @@
 .transactions-navbar {
   background-color: #900603;
   color: #fff;
+  margin-top: 70px;
+  height: 100px;
+  padding-top: 40px;
   padding: 1rem 2rem;
   font-size: 1.2rem;
   font-weight: 600;

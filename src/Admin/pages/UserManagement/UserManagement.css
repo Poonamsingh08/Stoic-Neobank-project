@@ -1,23 +1,32 @@
 /* ===== Global Layout ===== */
-.user-management-container {
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Page level horizontal scroll off */
+  width: 100%;
   font-family: Arial, sans-serif;
+}
+
+.user-management-container {
   padding: 0 20px 50px;
   background-color: #f8f9fa;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* ===== Header ===== */
 .dashboard-header {
   display: flex;
-  justify-content: center;
+  text-align: left;
   align-items: center;
   background-color: #950606;
   height: 100px;
   width: 100%;
   color: white;
+  padding-left: 8px;
   font-size: 2rem;
   font-weight: bold;
-  text-align: center;
   margin-top: 70px;
 }
 
@@ -109,7 +118,7 @@
 /* ===== User Table ===== */
 .user-table-wrapper {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto;   /* Table scroll only */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -120,7 +129,6 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  min-width: 700px;
 }
 
 .user-table th,
@@ -128,6 +136,7 @@
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
+  white-space: nowrap;
 }
 
 .user-table th {
@@ -186,14 +195,15 @@
 .action-buttons button.deactivate { background-color: #ffc107; color: black; }
 
 /* ===== Pagination ===== */
-.pagination {
+.cl-pagination {
   display: flex;
   justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-.pagination button {
+.cl-pagination button {
   padding: 5px 10px;
   border-radius: 6px;
   border: 1px solid #950606;
@@ -202,7 +212,7 @@
   transition: 0.3s;
 }
 
-.pagination button.active {
+.cl-pagination button.active {
   background-color: #950606;
   color: white;
 }
@@ -304,47 +314,67 @@
   cursor: pointer;
 }
 
-.upm-btn-secondary {
-  background-color: #950606;
-  color: white;
-}
-
-.upm-btn-warning {
-  background-color: #ff9800;
-  color: white;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 1200px) {
-  .card-content { flex-direction: column; align-items: flex-start; }
-  .card-icon { align-self: flex-end; }
-}
-
-@media (max-width: 992px) {
-  .summary-cards { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
-  .summary-card { flex: 1 1 calc(50% - 15px); }
-  .user-controls input[type="text"],
-  .user-controls select { flex: 1 1 45%; }
-}
-
+.upm-btn-secondary { background-color: #950606; color: white; }
+.upm-btn-warning { background-color: #ff9800; color: white; }
 @media (max-width: 768px) {
   .dashboard-header { font-size: 1.5rem; height: 90px; padding: 0 10px; }
   .summary-card h2 { font-size: 1.3rem; }
   .summary-card h6 { font-size: 0.75rem; }
-  .user-controls input[type="text"],
-  .user-controls select { flex: 1 1 100%; }
-  .user-table th, .user-table td { font-size: 0.85rem; padding: 8px; }
-  .action-buttons button { font-size: 0.85rem; padding: 4px 8px; }
-  .pagination button { font-size: 0.85rem; padding: 4px 8px; }
-  .upm-doc-card { height: 140px; }
-  .upm-docs-multiple img { width: 50px; height: 50px; }
-  .upm-preview-images img { width: 90px; height: 90px; }
-}
+  .user-controls input[type="text"], .user-controls select { flex: 1 1 100%; }
+  .user-table-wrapper { overflow-x: visible; }
+  .user-table { display: none; } /* hide desktop table */
 
-@media (max-width: 576px) {
-  .summary-card { flex: 1 1 100%; }
-  .user-table { min-width: 100%; }
-  .upm-doc-card { height: 120px; }
-  .upm-docs-multiple img { width: 40px; height: 40px; }
-  .upm-preview-images img { width: 80px; height: 80px; }
+  .mobile-cards { display: flex; flex-direction: column; gap: 10px; }
+
+  .mobile-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mobile-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .mobile-card .user-name { font-weight: bold; font-size: 1rem; }
+  .mobile-card .user-email, .mobile-card .user-phone, .mobile-card .user-account, .mobile-card .user-type, .mobile-card .user-balance, .mobile-card .user-last-login {
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  .mobile-card .status-badges {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .mobile-card .status-badges .status-badge {
+    font-size: 0.75rem;
+  }
+
+  .mobile-card .action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .mobile-card .action-buttons button {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
 }

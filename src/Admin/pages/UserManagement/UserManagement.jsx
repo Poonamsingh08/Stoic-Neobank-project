@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { faker } from "@faker-js/faker";
 import UserProfileModal from "./UserProfileModal";
-import "./UserManagement.css"; // custom CSS file
+import "./UserManagement.css"; // updated CSS
 
 const PNB_PRIMARY_COLOR = "#900603";
 const PNB_ACCENT_COLOR = "#ff9800";
@@ -9,7 +9,21 @@ const PNB_ACCENT_COLOR = "#ff9800";
 const formatCurrency = (amount) =>
   new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(amount);
 
+// Hook to detect window width
+const useWindowWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return width;
+};
+
 export default function UserManagement() {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768;
+
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [search, setSearch] = useState("");
@@ -19,16 +33,15 @@ export default function UserManagement() {
   const [selectedIds, setSelectedIds] = useState(new Set());
   const pageSize = 10;
 
+  // Generate dummy users with full details
   useEffect(() => {
     const dummyUsers = Array.from({ length: 50 }).map((_, i) => ({
       id: i + 1,
       name: faker.person.fullName(),
+      fatherName: faker.person.fullName(),
       email: faker.internet.email().toLowerCase(),
       phone: faker.phone.number(),
-      fatherName: faker.person.fullName(),
       address: faker.location.streetAddress(),
-      aadhaar: faker.string.numeric(12),
-      pan: faker.string.alphanumeric(10).toUpperCase(),
       account: `XXXX${faker.finance.accountNumber(8)}`,
       type: faker.helpers.arrayElement(["Savings", "Current", "Salary"]),
       balance: formatCurrency(faker.finance.amount({ min: 5000, max: 200000 })),
@@ -36,17 +49,20 @@ export default function UserManagement() {
       frozen: faker.datatype.boolean(),
       lastLogin: faker.date.recent({ days: 30 }).toISOString(),
       photo: `https://i.pravatar.cc/150?u=${i + 1}`,
-      aadhaarFront: `https://dummyimage.com/600x400/cccccc/000000&text=Aadhaar+Front+${i + 1}`,
-      aadhaarBack: `https://dummyimage.com/600x400/cccccc/000000&text=Aadhaar+Back+${i + 1}`,
-      panCard: `https://dummyimage.com/600x400/cccccc/000000&text=PAN+Card+${i + 1}`,
-      signature: `https://dummyimage.com/600x200/cccccc/000000&text=Signature+${i + 1}`,
+      aadhaar: faker.string.numeric(12), // Fixed
+      aadhaarFront: `https://via.placeholder.com/150?text=Aadhaar+Front+${i + 1}`,
+      aadhaarBack: `https://via.placeholder.com/150?text=Aadhaar+Back+${i + 1}`,
+      pan: faker.string.alphanumeric({ length: 10, casing: "upper" }), // Fixed
+      panCard: `https://via.placeholder.com/150?text=PAN+${i + 1}`,
+      signature: `https://via.placeholder.com/150?text=Signature+${i + 1}`,
       documents: [
-        { name: "Bank Statement", url: `https://dummyimage.com/800x600/cccccc/000000&text=Bank+Statement+${i + 1}` },
+        { name: "Bank Statement", url: `https://via.placeholder.com/150?text=Statement+${i + 1}` },
       ],
     }));
     setUsers(dummyUsers);
   }, []);
 
+  // Filter and sort users
   const filteredUsers = useMemo(() => {
     let sortableUsers = [...users].filter((u) => {
       const searchText = search.toLowerCase();
@@ -99,19 +115,6 @@ export default function UserManagement() {
     );
   }, []);
 
-  const handleUpdateUser = (updatedUser) => {
-    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
-  };
-
-  const sortIcon = (key) => {
-    if (sortConfig.key !== key) return <i className="bi bi-arrow-down-up text-muted ms-1"></i>;
-    return sortConfig.direction === "asc" ? (
-      <i className="bi bi-sort-up ms-1"></i>
-    ) : (
-      <i className="bi bi-sort-down ms-1"></i>
-    );
-  };
-
   const toggleSelect = (id) => {
     setSelectedIds((prev) => {
       const newSet = new Set(prev);
@@ -158,10 +161,19 @@ export default function UserManagement() {
     [users]
   );
 
+  const sortIcon = (key) => {
+    if (sortConfig.key !== key) return <i className="bi bi-arrow-down-up text-muted ms-1"></i>;
+    return sortConfig.direction === "asc" ? (
+      <i className="bi bi-sort-up ms-1"></i>
+    ) : (
+      <i className="bi bi-sort-down ms-1"></i>
+    );
+  };
+
   return (
     <>
       <header className="dashboard-header">
-        <h1>User Management Dashboard</h1>
+        <h3>User Management Dashboard</h3>
       </header>
 
       <div className="user-management-container">
@@ -207,110 +219,117 @@ export default function UserManagement() {
           </div>
         </section>
 
-        {/* User Table */}
-        <table className="user-table">
-          <thead>
-            <tr>
-              <th><input type="checkbox" onChange={toggleSelectAll} checked={pagedUsers.length > 0 && pagedUsers.every(u => selectedIds.has(u.id))} /></th>
-              <th onClick={() => handleSort("name")}>User {sortIcon("name")}</th>
-              <th>Email & Phone</th>
-              <th>Account & Type</th>
-              <th onClick={() => handleSort("status")}>Status {sortIcon("status")}</th>
-              <th onClick={() => handleSort("lastLogin")}>Last Login {sortIcon("lastLogin")}</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pagedUsers.map((user) => (
-              <tr key={user.id} className={user.frozen ? "frozen-row" : ""}>
-                <td><input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} /></td>
-                <td className="user-info">
-                  <img src={user.photo} alt={user.name} />
-                  <span>{user.name}</span>
-                </td>
-                <td>
-                  <div>{user.email}</div>
-                  <div className="text-muted">{user.phone}</div>
-                </td>
-                <td>
-                  <div>{user.account}</div>
-                  <div className="text-muted">{user.type}</div>
-                </td>
-                <td>
-                  <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
-                  {user.frozen && <span className="status-badge frozen">Frozen</span>}
-                </td>
-                <td>{new Date(user.lastLogin).toLocaleDateString("en-GB")}</td>
-                <td className="action-buttons">
-                  <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
-                  <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
-                    {user.frozen ? "Unfreeze" : "Freeze"}
-                  </button>
-                  <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
-                    {user.status === "Active" ? "Deactivate" : "Activate"}
-                  </button>
-                </td>
-              </tr>
+        {/* Table / Mobile Cards */}
+        <div className="user-table-wrapper">
+          {!isMobile ? (
+            <table className="user-table desktop-table">
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      onChange={toggleSelectAll}
+                      checked={pagedUsers.length > 0 && pagedUsers.every(u => selectedIds.has(u.id))}
+                    />
+                  </th>
+                  <th onClick={() => handleSort("name")}>User {sortIcon("name")}</th>
+                  <th>Email & Phone</th>
+                  <th>Account & Type</th>
+                  <th onClick={() => handleSort("status")}>Status {sortIcon("status")}</th>
+                  <th onClick={() => handleSort("lastLogin")}>Last Login {sortIcon("lastLogin")}</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pagedUsers.map((user) => (
+                  <tr key={user.id} className={user.frozen ? "frozen-row" : ""}>
+                    <td><input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} /></td>
+                    <td className="user-info">
+                      <img src={user.photo} alt={user.name} />
+                      <span>{user.name}</span>
+                    </td>
+                    <td>
+                      <div>{user.email}</div>
+                      <div className="text-muted">{user.phone}</div>
+                    </td>
+                    <td>
+                      <div>{user.account}</div>
+                      <div className="text-muted">{user.type}</div>
+                    </td>
+                    <td>
+                      <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
+                      {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                    </td>
+                    <td>{new Date(user.lastLogin).toLocaleDateString("en-GB")}</td>
+                    <td className="action-buttons">
+                      <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
+                      <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
+                        {user.frozen ? "Unfreeze" : "Freeze"}
+                      </button>
+                      <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
+                        {user.status === "Active" ? "Deactivate" : "Activate"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="mobile-cards">
+              {pagedUsers.map((user) => (
+                <div key={user.id} className="mobile-card">
+                  <div className="card-header">
+                    <input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} />
+                    <img src={user.photo} alt={user.name} />
+                    <span>{user.name}</span>
+                  </div>
+                  <div><strong>Email:</strong> {user.email}</div>
+                  <div><strong>Phone:</strong> {user.phone}</div>
+                  <div><strong>Account:</strong> {user.account}</div>
+                  <div><strong>Type:</strong> {user.type}</div>
+                  <div>
+                    <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
+                    {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                  </div>
+                  <div><strong>Last Login:</strong> {new Date(user.lastLogin).toLocaleDateString("en-GB")}</div>
+                  <div className="action-buttons">
+                    <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
+                    <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
+                      {user.frozen ? "Unfreeze" : "Freeze"}
+                    </button>
+                    <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
+                      {user.status === "Active" ? "Deactivate" : "Activate"}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="cl-pagination">
+            <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Prev</button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button key={i + 1} className={currentPage === i + 1 ? "active" : ""} onClick={() => setCurrentPage(i + 1)}>
+                {i + 1}
+              </button>
             ))}
-          </tbody>
-        </table>
-{/* Pagination */}
-{totalPages > 1 && (
-  <div className="cl-pagination">
-    <button
-      className="cl-prev-btn"
-      disabled={currentPage === 1}
-      onClick={() => setCurrentPage(prev => prev - 1)}
-    >
-      Prev
-    </button>
+            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+          </div>
+        )}
 
-    {(() => {
-      const pages = [];
-      let startPage = Math.max(1, currentPage - 2);
-      let endPage = Math.min(totalPages, currentPage + 2);
-
-      if (startPage > 1) {
-        pages.push(
-          <button key={1} className={`cl-page-btn ${currentPage === 1 ? "active" : ""}`} onClick={() => setCurrentPage(1)}>
-            1
-          </button>
-        );
-        if (startPage > 2) pages.push(<span key="start-ellipsis" className="cl-ellipsis">...</span>);
-      }
-
-      for (let i = startPage; i <= endPage; i++) {
-        pages.push(
-          <button key={i} className={`cl-page-btn ${i === currentPage ? "active" : ""}`} onClick={() => setCurrentPage(i)}>
-            {i}
-          </button>
-        );
-      }
-
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) pages.push(<span key="end-ellipsis" className="cl-ellipsis">...</span>);
-        pages.push(
-          <button key={totalPages} className={`cl-page-btn ${currentPage === totalPages ? "active" : ""}`} onClick={() => setCurrentPage(totalPages)}>
-            {totalPages}
-          </button>
-        );
-      }
-
-      return pages;
-    })()}
-
-    <button
-      className="cl-next-btn"
-      disabled={currentPage === totalPages}
-      onClick={() => setCurrentPage(prev => prev + 1)}
-    >
-      Next
-    </button>
-  </div>
-)}
-
-        {/* Modal */}
-        {selectedUser && <UserProfileModal user={selectedUser} onClose={() => setSelectedUser(null)} onUpdate={handleUpdateUser} />}
+        {/* User Modal */}
+        {selectedUser && (
+          <UserProfileModal
+            user={selectedUser}
+            onClose={() => setSelectedUser(null)}
+            onUpdate={(updatedUser) => {
+              setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+            }}
+          />
+        )}
       </div>
     </>
   );

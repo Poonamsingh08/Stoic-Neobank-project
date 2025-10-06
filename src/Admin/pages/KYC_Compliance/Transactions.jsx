@@ -133,11 +133,14 @@ export default function Transactions() {
   const [activeTab, setActiveTab] = useState("info");
 
   return (
-    <div className="transactions-container80">
-      {/* Navbar */}
-      <nav className="transactions-navbar">
-        Neo Bank – All Transactions
+<>
+ <nav className="transactions-navbar">
+        <h4> Neo Bank – All Transactions</h4>
       </nav>
+
+    <div className="transactions-container80">
+      
+     
 
       <div className="transactions-main">
         {/* Card Header */}
@@ -342,5 +345,6 @@ export default function Transactions() {
         )}
       </div>
     </div>
+    </>
   );
 }

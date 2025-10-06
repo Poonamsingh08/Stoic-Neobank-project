@@ -104,12 +104,15 @@ export default function ReviewTransactions() {
   };
 
   return (
-    <div className="rt-container">
-
-       <nav className="rt-navbar">
-        Neo Bank – KYC History
+<>
+ <nav className="rt-navbar">
+      <h4>Neo Bank – KYC History</h4>  
       </nav>
 
+
+    <div className="rt-container">
+
+      
       <header className="rt-header">KYC History</header>
 
       <div className="rt-controls">
@@ -231,5 +234,6 @@ export default function ReviewTransactions() {
         </div>
       )}
     </div>
+    </>
   );
 }
