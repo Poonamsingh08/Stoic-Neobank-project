@@ -13,6 +13,18 @@
   color: #900603;
   margin-bottom: 1rem;
 }
+.rt-navbar {
+  background-color: #900603;
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.rt-navbar a {
+  color: #fff;
+  text-decoration: none;
+}
 
 /* Controls*/
 .rt-controls {
