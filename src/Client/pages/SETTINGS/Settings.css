@@ -19,22 +19,22 @@ body {
 }
 
 /* ================= Header ================= */
-.settings-header {
+.settings-header57 {
   background-color: #960603;
   color: #fff;
-  padding: 25px 15px;
+  padding: 15px 1px;
   border-radius: 0; /* round removed */
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.settings-header h1 {
+.settings-header57 h1 {
   font-weight: bold; /* title bold */
-  font-size: 30px;
+  font-size:35px;
   margin-bottom: 10px;
 }
 
-.settings-header p {
+.settings-header57 p {
   font-size: 14px;
   color: #fefefe;
   font-weight: normal;

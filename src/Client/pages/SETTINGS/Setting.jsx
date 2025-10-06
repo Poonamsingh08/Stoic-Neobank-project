@@ -39,7 +39,7 @@ const Setting = () => {
   return (
     <div className="settings-page">
       {/* Header */}
-      <div className="settings-header">
+      <div className="settings-header57">
         <h1>Settings</h1>
         <p>Manage your account preferences and security</p>
       </div>

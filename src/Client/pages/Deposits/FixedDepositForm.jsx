@@ -52,7 +52,7 @@ const FixedDepositForm = () => {
   }, [amount, duration]);
 
   return (
-    <div className="fd-container">
+    <div className="fd-container15">
       <h2 className="fd-title">
         <Book size={24} /> Open New {depositType}
       </h2>
@@ -65,7 +65,7 @@ const FixedDepositForm = () => {
         </div>
       )}
 
-      <div className="fd-card">
+      <div className="fd-card15">
         {/* Account */}
         <div className="fd-form-group">
           <label>Your Saving A/C No.</label>
@@ -139,10 +139,10 @@ const FixedDepositForm = () => {
         )}
 
         {/* Action Buttons */}
-        <div className="fd-buttons">
-          <button className="btn-primary">Open FD</button>
+        <div className="fd-buttons54">
+          <button className="btn-primary55">Open FD</button>
           <button
-            className="btn-outline"
+            className="btn-outline56"
             onClick={() => {
               setAccount("");
               setState("");
