@@ -133,7 +133,7 @@ export default function Transactions() {
   const [activeTab, setActiveTab] = useState("info");
 
   return (
-    <div className="transactions-container">
+    <div className="transactions-container80">
       {/* Navbar */}
       <nav className="transactions-navbar">
         Neo Bank – All Transactions
