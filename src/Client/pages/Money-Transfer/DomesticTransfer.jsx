@@ -18,7 +18,7 @@ const DomesticTransfer = () => {
   xmlns="http://www.w3.org/2000/svg"
   width="28"
   height="28"
-  fill="white"   // ✅ icon color white
+  fill="white"   //
   viewBox="0 0 16 16"
 >
   <path d="M12 1a1 1 0 0 1 1 1v2h-1V2H5v1H4V2a1 1 0 0 1 1-1h7zM3 4h10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4zm3 2a.5.5 0 0 0-.5.5V8H4v1h1v1h1V9h1V8H7V6.5A.5.5 0 0 0 6 6z" />
@@ -66,7 +66,7 @@ const DomesticTransfer = () => {
          <Col xs={6} md={5}>
             <Button
               className="dom-transfer-btn"
-              onClick={() => navigate("/Client/money-transfer/send?type=upi")}
+              onClick={() => navigate("/Client/send-money?type=upi")}
             >
               UPI
             </Button>
