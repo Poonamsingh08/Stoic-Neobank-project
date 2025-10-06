@@ -27,11 +27,13 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 70px;
+  height: 100px;
   padding: 20px;
-  margin-bottom: 20px;
+  
   background-color: var(--primary-color);
-  border: 2px solid #f8e4e4ff;
-  border-radius: var(--card-radius);
+
+ 
   color: #fff;
 }
 

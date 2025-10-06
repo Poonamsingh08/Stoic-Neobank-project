@@ -167,7 +167,7 @@ export default function ViewAlerts() {
     <div className="alerts-container">
       {/* Navbar */}
       <header className="alerts-navbar">
-        <div className="alerts-brand">Neo Bank AML & Complaints</div>
+        <div className="alerts-brand"> <h4>Neo Bank AML & Complaints</h4> </div>
       </header>
 
       {/* Main Content */}

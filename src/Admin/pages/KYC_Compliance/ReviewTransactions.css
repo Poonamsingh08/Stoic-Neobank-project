@@ -8,17 +8,21 @@
 
 /* Header  */
 .rt-header {
+  
   font-size: 1.5rem;
   font-weight: 600;
   color: #900603;
   margin-bottom: 1rem;
 }
 .rt-navbar {
+   margin-top: 70px;
   background-color: #900603;
   color: #fff;
+  height: 100px;
   padding: 1rem 2rem;
   font-size: 1.2rem;
   font-weight: 600;
+  padding-top: 35px;
 }
 
 .rt-navbar a {

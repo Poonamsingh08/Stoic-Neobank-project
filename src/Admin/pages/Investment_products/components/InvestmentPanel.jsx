@@ -30,29 +30,29 @@ export default function InvestmentPanel() {
   ];
 
   return (
-    <div className="investment-panel">
+    <div className="ip-panel">
       {/* Header */}
-      <header className="investment-header">
+      <header className="ip-header">
         <h2>Investment Admin Panel</h2>
         <p>Manage Products, Subscriptions, Reports, Services & API Keys</p>
       </header>
 
       {/* Cards */}
-      <section className="investment-card-container">
+      <section className="ip-card-container">
         {pages.map((p) => (
           <div
             key={p.key}
-            className={`investment-card ${page === p.key ? "active" : ""}`}
+            className={`ip-card ${page === p.key ? "active" : ""}`}
             onClick={() => setPage(p.key)}
           >
-            <div className="card-icon">{p.icon}</div>
-            <div className="card-title">{p.title}</div>
+            <div className="ip-card-icon">{p.icon}</div>
+            <div className="ip-card-title">{p.title}</div>
           </div>
         ))}
       </section>
 
       {/* Main Content */}
-      <main className="investment-main">
+      <main className="ip-main">
         {page === "catalog" && <ProductCatalog />}
         {page === "subscriptions" && <Subscriptions />}
         {page === "reports" && <PortfolioReports />}

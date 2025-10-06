@@ -1,5 +1,5 @@
 /* Global Container */
-.investment-panel {
+.ip-panel {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -8,29 +8,30 @@
 }
 
 /* Header */
-.investment-header {
+.ip-header {
   background: #900603;
   color: #fff;
-  padding: 1.5rem 2rem;
-  text-align: center;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 70px;
+  height: 100px;
+    padding: 1.5rem 2rem;
+  text-align: left;
+
 }
 
-.investment-header h2 {
+.ip-header h2 {
   margin-bottom: 0.3rem;
   font-size: 1.8rem;
   font-weight: 700;
 }
 
-.investment-header p {
+.ip-header p {
   margin: 0;
   opacity: 0.9;
   font-size: 0.95rem;
 }
 
 /* Card Container */
-.investment-card-container {
+.ip-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
@@ -39,7 +40,7 @@
 }
 
 /* Card */
-.investment-card {
+.ip-card {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -57,19 +58,19 @@
   align-items: center;
 }
 
-.investment-card:hover {
+.ip-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.investment-card.active {
+.ip-card.active {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(144, 6, 3, 0.25);
   border-top: 5px solid #b20602;
 }
 
 /* Card Icon */
-.card-icon {
+.ip-card-icon {
   width: 60px;
   height: 60px;
   background: #900603;
@@ -83,14 +84,14 @@
 }
 
 /* Card Title */
-.card-title {
+.ip-card-title {
   font-size: 1rem;
   font-weight: 600;
   color: #333;
 }
 
 /* Main Content */
-.investment-main {
+.ip-main {
   flex: 1;
   background: #fff;
   margin: 1rem 2rem 2rem;
@@ -101,34 +102,34 @@
 
 /* Responsive */
 @media (max-width: 992px) {
-  .investment-header h2 {
+  .ip-header h2 {
     font-size: 1.5rem;
   }
 
-  .investment-card {
+  .ip-card {
     max-width: 200px;
     min-height: 180px;
   }
 }
 
 @media (max-width: 600px) {
-  .investment-card-container {
+  .ip-card-container {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     padding: 1rem;
     gap: 1rem;
   }
 
-  .card-icon {
+  .ip-card-icon {
     width: 50px;
     height: 50px;
     font-size: 1.3rem;
   }
 
-  .card-title {
+  .ip-card-title {
     font-size: 0.9rem;
   }
 
-  .investment-main {
+  .ip-main {
     margin: 1rem;
     padding: 1.2rem;
   }

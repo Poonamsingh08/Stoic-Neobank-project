@@ -119,7 +119,7 @@ export default function PendingKYC() {
   );
 
   return (
-    <div className="kyc-container">
+<>
       {/* Header */}
       <div className="kyc-header">
         <div>
@@ -131,6 +131,12 @@ export default function PendingKYC() {
         </div>
       </div>
 
+
+
+
+
+    <div className="kyc-container">
+     
       {/* Search */}
       <div className="search-bar">
         <div className="search-input">
@@ -240,5 +246,6 @@ export default function PendingKYC() {
         </div>
       )}
     </div>
+    </>
   );
 }
