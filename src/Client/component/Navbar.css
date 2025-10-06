@@ -52,10 +52,10 @@
 }
 
 /* Right side */
-.navbar-right {
+.navbar-right50 {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   margin-right: auto;
 }
 

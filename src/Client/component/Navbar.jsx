@@ -272,10 +272,15 @@ const Navbar = () => {
               <span className="badge">3</span>
             </button>
 
-            <div className="user-section">
-              <span className="user-initials">JD</span>
-            </div>
-
+              {/* ✅ Profile Button from amit_myAccount branch */}
+            <Link
+              to="/Client/profile"
+              className="d-flex align-items-center px-2 py-1 rounded-pill shadow-sm bg-light text-dark text-decoration-none"
+              style={{ transition: "all 0.3s ease" }}
+            >
+              <User size={20} className="me-2 text-danger" />
+              <span className="fw-semibold">Amit Rajput</span>
+            </Link>
             {/* keep menu separate so JD is always right-aligned */}
             <button
               className="menu-btn"

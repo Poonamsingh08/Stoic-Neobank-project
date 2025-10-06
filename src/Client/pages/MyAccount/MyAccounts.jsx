@@ -1,46 +1,86 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {TrendingUp,TrendingDown,ArrowUpRight, ArrowDownLeft,Download,CheckCircle,FileText,BookOpen} from "lucide-react";
+import {
+  TrendingUp,
+  TrendingDown,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Download,
+  CheckCircle,
+  FileText,
+  BookOpen,
+  X,
+  Eye,
+  CreditCard,
+  Banknote,
+  ShoppingCart,
+  Wallet
+} from "lucide-react";
 
 import "./myAccounts.css"; // Custom CSS file
 
 const MyAccountsPage = () => {
   const [showNewAccountMenu, setShowNewAccountMenu] = useState(false);
   const [showCloseAccountMenu, setShowCloseAccountMenu] = useState(false);
+  const [showAccountDetails, setShowAccountDetails] = useState(false);
+  const [showStatementPopup, setShowStatementPopup] = useState(false);
+  const [selectedAccount, setSelectedAccount] = useState(null);
   const navigate = useNavigate();
 
   const accounts = [
     {
+      id: 1,
       type: "Savings Account",
       balance: "₹1,25,480.75",
-      accountNumber: "****3456",
+      accountNumber: "12345678903456",
+      maskedNumber: "****3456",
       ifsc: "NEOB0001567",
       status: "Active",
       statusColor: "mac-status-active",
+      openedDate: "2023-05-15",
+      branch: "Mumbai Main",
+      interestRate: "3.5%",
     },
     {
+      id: 2,
       type: "Current Account",
       balance: "₹89,250.50",
-      accountNumber: "****7890",
+      accountNumber: "12345678907890",
+      maskedNumber: "****7890",
       ifsc: "NEOB0001234",
       status: "Inactive",
       statusColor: "mac-status-inactive",
+      openedDate: "2022-11-20",
+      branch: "Delhi Corporate",
+      interestRate: "0%",
     },
     {
+      id: 3,
       type: "Fixed Deposit",
       balance: "₹2,00,000.00",
-      accountNumber: "****9123",
+      accountNumber: "12345678909123",
+      maskedNumber: "****9123",
       ifsc: "NEOB0001289",
       status: "Active",
       statusColor: "mac-status-active",
+      openedDate: "2024-01-10",
+      branch: "Bangalore South",
+      interestRate: "6.8%",
+      maturityDate: "2025-07-10",
     },
     {
+      id: 4,
       type: "Joint Account",
       balance: "₹1,50,750.00",
-      accountNumber: "****4567",
+      accountNumber: "12345678904567",
+      maskedNumber: "****4567",
       ifsc: "NEOB0001456",
       status: "Active",
       statusColor: "mac-status-active",
+      openedDate: "2023-08-05",
+      branch: "Chennai Central",
+      interestRate: "3.5%",
+      jointHolder: "Priya Sharma",
     },
   ];
 
@@ -52,8 +92,9 @@ const MyAccountsPage = () => {
       reference: "TXN123456789",
       amount: "+₹75,000.00",
       date: "2025-01-10",
-      icon: ArrowDownLeft,
+      icon: "salary",
       amountColor: "mac-amount-credit",
+      category: "Salary",
     },
     {
       type: "debit",
@@ -62,8 +103,9 @@ const MyAccountsPage = () => {
       reference: "TXN123456784",
       amount: "-₹2,500.00",
       date: "2025-01-09",
-      icon: ArrowUpRight,
+      icon: "shopping",
       amountColor: "mac-amount-debit",
+      category: "Shopping",
     },
     {
       type: "credit",
@@ -72,8 +114,9 @@ const MyAccountsPage = () => {
       reference: "TXN123456783",
       amount: "+₹1,250.00",
       date: "2025-01-08",
-      icon: ArrowDownLeft,
+      icon: "interest",
       amountColor: "mac-amount-credit",
+      category: "Interest",
     },
     {
       type: "debit",
@@ -82,8 +125,20 @@ const MyAccountsPage = () => {
       reference: "TXN123456782",
       amount: "-₹5,000.00",
       date: "2025-01-07",
-      icon: ArrowUpRight,
+      icon: "withdrawal",
       amountColor: "mac-amount-debit",
+      category: "Cash",
+    },
+    {
+      type: "debit",
+      title: "Credit Card Payment",
+      account: "Current Account",
+      reference: "TXN123456781",
+      amount: "-₹15,200.00",
+      date: "2025-01-06",
+      icon: "creditcard",
+      amountColor: "mac-amount-debit",
+      category: "Payment",
     },
   ];
 
@@ -124,13 +179,65 @@ const MyAccountsPage = () => {
     { name: "Joint Accounts", icon: "bi-people" },
   ];
 
+  const statementPeriods = [
+    { label: "Last 7 days", value: "7days" },
+    { label: "Last 30 days", value: "30days" },
+    { label: "Last 3 months", value: "3months" },
+    { label: "Last 6 months", value: "6months" },
+    { label: "Custom Range", value: "custom" },
+  ];
+
+  const handleViewDetails = (account) => {
+    setSelectedAccount(account);
+    setShowAccountDetails(true);
+  };
+
+  const handleDownloadStatement = (account) => {
+    setSelectedAccount(account);
+    setShowStatementPopup(true);
+  };
+
+  const getTransactionIcon = (iconType) => {
+    switch (iconType) {
+      case "salary":
+        return <Wallet size={16} className="mac-transaction-icon-salary" />;
+      case "shopping":
+        return <ShoppingCart size={16} className="mac-transaction-icon-shopping" />;
+      case "interest":
+        return <TrendingUp size={16} className="mac-transaction-icon-interest" />;
+      case "withdrawal":
+        return <Banknote size={16} className="mac-transaction-icon-withdrawal" />;
+      case "creditcard":
+        return <CreditCard size={16} className="mac-transaction-icon-creditcard" />;
+      default:
+        return <ArrowUpRight size={16} />;
+    }
+  };
+
+  const getTransactionIconColor = (iconType) => {
+    switch (iconType) {
+      case "salary":
+        return "#28a745";
+      case "shopping":
+        return "#ff6b6b";
+      case "interest":
+        return "#17a2b8";
+      case "withdrawal":
+        return "#6f42c1";
+      case "creditcard":
+        return "#fd7e14";
+      default:
+        return "#6c757d";
+    }
+  };
+
   return (
     <div className="mac-container">
       {/* Header */}
       <div className="mac-header">
         <div className="mac-header-left">
           <h1>My Accounts</h1>
-          <p>App preferences, language, and display settings</p>
+          <p>Manage your accounts, view transactions, and access banking services</p>
         </div>
 
         <div className="mac-header-right">
@@ -204,7 +311,6 @@ const MyAccountsPage = () => {
             <div
               key={index}
               className="mac-account-card"
-              onClick={() => navigate("/Client/account-details")}
             >
               <div className="mac-account-card-body">
                 <div className="mac-account-top">
@@ -221,7 +327,7 @@ const MyAccountsPage = () => {
                 <div className="mac-account-info">
                   <div className="mac-account-info-row">
                     <span>Account Number</span>
-                    <span>{account.accountNumber}</span>
+                    <span>{account.maskedNumber}</span>
                   </div>
                   <div className="mac-account-info-row">
                     <span>IFSC Code</span>
@@ -230,8 +336,22 @@ const MyAccountsPage = () => {
                 </div>
 
                 <div className="mac-account-actions">
-                  <button className="mac-btn-view">View Details</button>
-                  <button className="mac-btn-download">
+                  <button 
+                    className="mac-btn-view"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleViewDetails(account);
+                    }}
+                  >
+                    <Eye size={14} /> View Details
+                  </button>
+                  <button 
+                    className="mac-btn-download"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownloadStatement(account);
+                    }}
+                  >
                     <Download size={14} />
                   </button>
                 </div>
@@ -308,31 +428,31 @@ const MyAccountsPage = () => {
           </div>
 
           <div className="mac-transactions-list">
-            {transactions.map((txn, idx) => {
-              const IconComponent = txn.icon;
-              return (
-                <div key={idx} className="mac-transaction-item">
-                  <div className="mac-transaction-left">
-                    <div className="mac-transaction-icon">
-                      <IconComponent size={14} />
-                    </div>
-                    <div>
-                      <p>{txn.title}</p>
-                      <p className="mac-txn-account">{txn.account}</p>
-                      <p className="mac-txn-ref">Ref: {txn.reference}</p>
-                    </div>
+            {transactions.map((txn, idx) => (
+              <div key={idx} className="mac-transaction-item">
+                <div className="mac-transaction-left">
+                  <div 
+                    className="mac-transaction-icon"
+                    style={{ backgroundColor: `${getTransactionIconColor(txn.icon)}20` }}
+                  >
+                    {getTransactionIcon(txn.icon)}
                   </div>
-                  <div className="mac-transaction-right">
-                    <p className={txn.amountColor}>{txn.amount}</p>
-                    <p className="mac-txn-date">{txn.date}</p>
+                  <div>
+                    <p className="mac-transaction-title">{txn.title}</p>
+                    <p className="mac-txn-account">{txn.account}</p>
+                    <p className="mac-txn-ref">Ref: {txn.reference}</p>
                   </div>
                 </div>
-              );
-            })}
+                <div className="mac-transaction-right">
+                  <p className={txn.amountColor}>{txn.amount}</p>
+                  <p className="mac-txn-date">{txn.date}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Monthly Stats */}
+        {/* Monthly Stats - Moved to Bottom */}
         <div className="mac-stats-grid">
           {monthlyStats.map((stat, index) => {
             const IconComponent = stat.icon;
@@ -351,6 +471,164 @@ const MyAccountsPage = () => {
           })}
         </div>
       </div>
+
+      {/* Account Details Popup */}
+      {showAccountDetails && selectedAccount && (
+        <div className="mac-popup-overlay">
+          <div className="mac-popup-content">
+            <div className="mac-popup-header">
+              <h3>Account Details</h3>
+              <button 
+                className="mac-popup-close"
+                onClick={() => setShowAccountDetails(false)}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="mac-popup-body">
+              <div className="mac-account-detail-section">
+                <h4>{selectedAccount.type}</h4>
+                <div className="mac-detail-grid">
+                  <div className="mac-detail-item">
+                    <span className="mac-detail-label">Account Number</span>
+                    <span className="mac-detail-value">{selectedAccount.accountNumber}</span>
+                  </div>
+                  <div className="mac-detail-item">
+                    <span className="mac-detail-label">IFSC Code</span>
+                    <span className="mac-detail-value">{selectedAccount.ifsc}</span>
+                  </div>
+                  <div className="mac-detail-item">
+                    <span className="mac-detail-label">Current Balance</span>
+                    <span className="mac-detail-value mac-balance-large">{selectedAccount.balance}</span>
+                  </div>
+                  <div className="mac-detail-item">
+                    <span className="mac-detail-label">Account Status</span>
+                    <span className={`mac-detail-value ${selectedAccount.statusColor}`}>
+                      {selectedAccount.status}
+                    </span>
+                  </div>
+                  <div className="mac-detail-item">
+                    <span className="mac-detail-label">Branch</span>
+                    <span className="mac-detail-value">{selectedAccount.branch}</span>
+                  </div>
+                  <div className="mac-detail-item">
+                    <span className="mac-detail-label">Opened Date</span>
+                    <span className="mac-detail-value">{selectedAccount.openedDate}</span>
+                  </div>
+                  {selectedAccount.interestRate && (
+                    <div className="mac-detail-item">
+                      <span className="mac-detail-label">Interest Rate</span>
+                      <span className="mac-detail-value">{selectedAccount.interestRate}</span>
+                    </div>
+                  )}
+                  {selectedAccount.maturityDate && (
+                    <div className="mac-detail-item">
+                      <span className="mac-detail-label">Maturity Date</span>
+                      <span className="mac-detail-value">{selectedAccount.maturityDate}</span>
+                    </div>
+                  )}
+                  {selectedAccount.jointHolder && (
+                    <div className="mac-detail-item">
+                      <span className="mac-detail-label">Joint Holder</span>
+                      <span className="mac-detail-value">{selectedAccount.jointHolder}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="mac-popup-footer">
+              <button 
+                className="mac-btn-secondary"
+                onClick={() => setShowAccountDetails(false)}
+              >
+                Close
+              </button>
+              <button 
+                className="mac-btn-primary"
+                onClick={() => {
+                  setShowAccountDetails(false);
+                  handleDownloadStatement(selectedAccount);
+                }}
+              >
+                Download Statement
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Statement Download Popup */}
+      {showStatementPopup && selectedAccount && (
+        <div className="mac-popup-overlay">
+          <div className="mac-popup-content">
+            <div className="mac-popup-header">
+              <h3>Download Account Statement</h3>
+              <button 
+                className="mac-popup-close"
+                onClick={() => setShowStatementPopup(false)}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="mac-popup-body">
+              <div className="mac-statement-section">
+                <div className="mac-account-info-small">
+                  <h4>{selectedAccount.type}</h4>
+                  <p>{selectedAccount.maskedNumber} • {selectedAccount.ifsc}</p>
+                </div>
+                
+                <div className="mac-statement-period">
+                  <h5>Select Period</h5>
+                  <div className="mac-period-options">
+                    {statementPeriods.map((period, index) => (
+                      <label key={index} className="mac-period-option">
+                        <input type="radio" name="statementPeriod" value={period.value} />
+                        <span>{period.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mac-file-format">
+                  <h5>File Format</h5>
+                  <div className="mac-format-options">
+                    <label className="mac-format-option">
+                      <input type="radio" name="fileFormat" value="pdf" defaultChecked />
+                      <span>PDF</span>
+                    </label>
+                    <label className="mac-format-option">
+                      <input type="radio" name="fileFormat" value="excel" />
+                      <span>Excel</span>
+                    </label>
+                    <label className="mac-format-option">
+                      <input type="radio" name="fileFormat" value="csv" />
+                      <span>CSV</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mac-popup-footer">
+              <button 
+                className="mac-btn-secondary"
+                onClick={() => setShowStatementPopup(false)}
+              >
+                Cancel
+              </button>
+              <button 
+                className="mac-btn-primary"
+                onClick={() => {
+                  // Handle download logic here
+                  alert(`Statement for ${selectedAccount.type} is being downloaded`);
+                  setShowStatementPopup(false);
+                }}
+              >
+                <Download size={16} /> Download Statement
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

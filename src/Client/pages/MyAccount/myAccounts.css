@@ -1,4 +1,4 @@
-/* Container */
+/* My Accounts Page Styles */
 .mac-container {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #f8f8f8, #eaeaea);
@@ -86,15 +86,18 @@
   background-color: #f2f2f2;
 }
 
-/* Accounts Grid */
+/* Main Content */
 .mac-main {
   padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
+/* Accounts Grid */
 .mac-accounts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
@@ -107,15 +110,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid #e0e0e0;
 }
 
 .mac-account-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .mac-account-card-body {
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -186,7 +190,7 @@
 .mac-account-actions {
   display: flex;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .mac-btn-view {
@@ -198,6 +202,11 @@
   cursor: pointer;
   font-weight: bold;
   transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
 .mac-btn-view:hover {
@@ -212,6 +221,10 @@
   color: #900603;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mac-btn-download:hover {
@@ -230,29 +243,30 @@
 .mac-services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .mac-service-card {
   background: white;
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 1.5rem;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
 }
+
 .mac-service-card h5 {
   font-weight: bold;
   color: black;
   margin: 0.5rem 0 0.25rem 0;
 }
 
-
 .mac-service-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .mac-service-icon {
@@ -282,6 +296,7 @@
   transition: 0.2s;
   margin-top: 0.5rem;
   font-weight: bold;
+  border: none;
 }
 
 .mac-service-btn:hover {
@@ -292,9 +307,10 @@
 .mac-transactions-card {
   background: white;
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 1.5rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
 }
 
 .mac-transactions-header {
@@ -303,7 +319,6 @@
   align-items: center;
   margin-bottom: 1rem;
   flex-wrap: wrap;
-  
 }
 
 .mac-transactions-header h4 {
@@ -312,27 +327,25 @@
   margin: 0;
 }
 
-/* Transaction Titles Bold */
-.mac-transaction-left p:first-child {
-  font-weight: bold;
-  margin: 0;
-}
-
-
 .mac-btn-view-all {
   background-color: #900603;
   color: white;
   border: none;
-  padding: 0.3rem 0.8rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.mac-btn-view-all:hover {
+  background-color: #6e0102;
 }
 
 .mac-transactions-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .mac-transaction-item {
@@ -341,23 +354,33 @@
   align-items: center;
   border: 1px solid #e0e0e0;
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.mac-transaction-item:hover {
+  background-color: #f8f9fa;
 }
 
 .mac-transaction-left {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .mac-transaction-icon {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 0.5rem;
-  background-color: #f8f8f8;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mac-transaction-title {
+  font-weight: bold;
+  margin: 0 0 0.25rem 0;
+  color: #333;
 }
 
 .mac-txn-account, .mac-txn-ref {
@@ -369,33 +392,58 @@
 .mac-txn-date {
   font-size: 0.7rem;
   color: #666666;
+  text-align: right;
+}
+
+/* Transaction Icon Colors */
+.mac-transaction-icon-salary {
+  color: #28a745;
+}
+
+.mac-transaction-icon-shopping {
+  color: #ff6b6b;
+}
+
+.mac-transaction-icon-interest {
+  color: #17a2b8;
+}
+
+.mac-transaction-icon-withdrawal {
+  color: #6f42c1;
+}
+
+.mac-transaction-icon-creditcard {
+  color: #fd7e14;
 }
 
 /* Amount Colors */
 .mac-amount-credit {
   color: #28a745;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .mac-amount-debit {
   color: #dc3545;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
-/* Monthly Stats */
+/* Monthly Stats - Now at bottom */
 .mac-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .mac-stat-card {
   background: white;
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 1.5rem;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
 }
 
 .mac-stat-icon {
@@ -409,16 +457,265 @@
   margin: 0 auto 0.5rem auto;
 }
 
+/* Popup Styles */
+.mac-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.mac-popup-content {
+  background: white;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: mac-popup-appear 0.3s ease-out;
+}
+
+@keyframes mac-popup-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.mac-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mac-popup-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.mac-popup-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.mac-popup-close:hover {
+  background-color: #f0f0f0;
+}
+
+.mac-popup-body {
+  padding: 1.5rem;
+}
+
+.mac-popup-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.mac-btn-primary {
+  background-color: #900603;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mac-btn-primary:hover {
+  background-color: #6e0102;
+}
+
+.mac-btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.mac-btn-secondary:hover {
+  background-color: #545b62;
+}
+
+/* Account Details Styles */
+.mac-account-detail-section h4 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.mac-detail-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.mac-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+}
+
+.mac-detail-label {
+  font-weight: bold;
+  color: #666;
+}
+
+.mac-detail-value {
+  color: #333;
+}
+
+.mac-balance-large {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #900603;
+}
+
+/* Statement Download Styles */
+.mac-account-info-small h4 {
+  margin: 0 0 0.25rem 0;
+  color: #333;
+}
+
+.mac-account-info-small p {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.mac-statement-period h5,
+.mac-file-format h5 {
+  margin: 0 0 0.75rem 0;
+  color: #333;
+}
+
+.mac-period-options,
+.mac-format-options {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.mac-period-option,
+.mac-format-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.mac-period-option:hover,
+.mac-format-option:hover {
+  background-color: #f8f9fa;
+}
+
+.mac-period-option input,
+.mac-format-option input {
+  margin: 0;
+}
+
 /* Responsive */
 @media screen and (max-width: 768px) {
+  .mac-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
   .mac-header-right {
     justify-content: flex-start;
     gap: 0.5rem;
+    width: 100%;
+  }
+
+  .mac-header-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .mac-main {
+    padding: 1rem;
   }
 
   .mac-accounts-grid,
   .mac-services-grid,
   .mac-stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: 1fr;
+  }
+
+  .mac-transactions-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .mac-btn-view-all {
+    align-self: flex-end;
+  }
+
+  .mac-popup-content {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+
+  .mac-popup-footer {
+    flex-direction: column;
+  }
+
+  .mac-detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mac-account-actions {
+    flex-direction: column;
+  }
+
+  .mac-transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .mac-transaction-right {
+    align-self: flex-end;
+    text-align: right;
   }
 }

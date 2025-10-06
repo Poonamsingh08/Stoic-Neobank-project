@@ -31,7 +31,7 @@ export default function Subscriptions() {
       <h3 className="subs-title">Subscriptions / Redemptions</h3>
 
       <div className="subs-card">
-        <div className="table-wrapper">
+        <div className="subs-table-wrapper">
           <table className="subs-table">
             <thead>
               <tr>
@@ -50,12 +50,12 @@ export default function Subscriptions() {
                   <td>{sub.amount}</td>
                   <td>
                     <span
-                      className={`status-badge ${
+                      className={`subs-status-badge ${
                         sub.status === "Approved"
-                          ? "approved"
+                          ? "subs-approved"
                           : sub.status === "Rejected"
-                          ? "rejected"
-                          : "pending"
+                          ? "subs-rejected"
+                          : "subs-pending"
                       }`}
                     >
                       {sub.status}
@@ -63,15 +63,15 @@ export default function Subscriptions() {
                   </td>
                   <td>
                     {sub.status === "Pending" ? (
-                      <div className="actions">
+                      <div className="subs-actions">
                         <button
-                          className="btn-outline btn-success"
+                          className="subs-btn-outline subs-btn-success"
                           onClick={() => handleApprove(sub.id)}
                         >
                           Approve
                         </button>
                         <button
-                          className="btn-outline btn-danger"
+                          className="subs-btn-outline subs-btn-danger"
                           onClick={() => handleReject(sub.id)}
                         >
                           Reject
