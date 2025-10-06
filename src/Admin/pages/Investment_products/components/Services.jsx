@@ -10,7 +10,7 @@ const dummyMerchants = [
 export default function ServicesMerchant() {
   const [merchants, setMerchants] = useState(dummyMerchants);
   const [showModal, setShowModal] = useState(false);
-  const [newMerchant, setNewMerchant] = useState({ name: "", service: "" });
+  const [newMerchant, setNewMerchant] = useState({ name: "", merchantId: "", service: "", serviceType: "" });
 
   const toggleStatus = (id) => {
     setMerchants(
@@ -21,9 +21,13 @@ export default function ServicesMerchant() {
   };
 
   const handleAddMerchant = () => {
+    if (!newMerchant.name || !newMerchant.merchantId || !newMerchant.service || !newMerchant.serviceType) {
+      alert("Fill all fields!");
+      return;
+    }
     const nextId = merchants.length + 1;
     setMerchants([...merchants, { id: nextId, ...newMerchant, status: "Enabled" }]);
-    setNewMerchant({ name: "", service: "" });
+    setNewMerchant({ name: "", merchantId: "", service: "", serviceType: "" });
     setShowModal(false);
   };
 
@@ -43,7 +47,9 @@ export default function ServicesMerchant() {
             <thead>
               <tr>
                 <th>Merchant Name</th>
+                <th>Merchant ID</th>
                 <th>Service</th>
+                <th>Service Type</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -52,13 +58,11 @@ export default function ServicesMerchant() {
               {merchants.map((m) => (
                 <tr key={m.id}>
                   <td>{m.name}</td>
+                  <td>{m.merchantId || "-"}</td>
                   <td>{m.service}</td>
+                  <td>{m.serviceType || "-"}</td>
                   <td>
-                    <span
-                      className={`status-badge ${
-                        m.status === "Enabled" ? "enabled" : "disabled"
-                      }`}
-                    >
+                    <span className={`status-badge ${m.status === "Enabled" ? "enabled" : "disabled"}`}>
                       {m.status}
                     </span>
                   </td>
@@ -87,28 +91,57 @@ export default function ServicesMerchant() {
                 ✕
               </button>
             </div>
+
             <div className="modal-body">
-              <label>Merchant Name</label>
-              <input
-                type="text"
-                value={newMerchant.name}
-                onChange={(e) => setNewMerchant({ ...newMerchant, name: e.target.value })}
-                placeholder="Enter Merchant Name"
-              />
-              <label>Service</label>
-              <input
-                type="text"
-                value={newMerchant.service}
-                onChange={(e) => setNewMerchant({ ...newMerchant, service: e.target.value })}
-                placeholder="Enter Service Name"
-              />
+              {/* Merchant Details */}
+              <div className="form-section">
+                <h5>Merchant Details</h5>
+                <label>Merchant Name</label>
+                <input
+                  type="text"
+                  value={newMerchant.name}
+                  onChange={(e) => setNewMerchant({ ...newMerchant, name: e.target.value })}
+                  placeholder="Enter Merchant Name"
+                />
+                <label>Merchant ID</label>
+                <input
+                  type="text"
+                  value={newMerchant.merchantId}
+                  onChange={(e) => setNewMerchant({ ...newMerchant, merchantId: e.target.value })}
+                  placeholder="Enter Merchant ID"
+                />
+              </div>
+
+              {/* Service Details */}
+              <div className="form-section">
+                <h5>Service Details</h5>
+                <label>Service Name</label>
+                <input
+                  type="text"
+                  value={newMerchant.service}
+                  onChange={(e) => setNewMerchant({ ...newMerchant, service: e.target.value })}
+                  placeholder="Enter Service Name"
+                />
+                <label>Service Type</label>
+                <select
+                  value={newMerchant.serviceType}
+                  onChange={(e) => setNewMerchant({ ...newMerchant, serviceType: e.target.value })}
+                >
+                  <option value="">Select Service Type</option>
+                  <option value="UPI">UPI</option>
+                  <option value="NetBanking">Net Banking</option>
+                  <option value="Cards">Cards</option>
+                  <option value="Wallet">Wallet</option>
+                </select>
+              </div>
             </div>
+
             <div className="modal-footer">
               <button className="btn-secondary" onClick={() => setShowModal(false)}>
                 Cancel
               </button>
               <button className="btn-primary" onClick={handleAddMerchant}>
-                Add
+                Add Merchant
               </button>
             </div>
           </div>

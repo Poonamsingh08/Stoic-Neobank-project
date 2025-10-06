@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./ReviewTransactions.css";
 
 export default function ReviewTransactions() {
-  // Dummy KYC data
   const dummyCases = [
     {
       caseId: "C001",
@@ -16,13 +14,7 @@ export default function ReviewTransactions() {
         { type: "PAN", url: "https://via.placeholder.com/150" },
       ],
       auditLogs: [
-        {
-          id: 1,
-          action: "Created",
-          user: "Admin1",
-          date: "2025-09-18 10:00",
-          remark: "KYC started",
-        },
+        { id: 1, action: "Created", user: "Admin1", date: "2025-09-18 10:00", remark: "KYC started" },
       ],
       notes: ["Initial check pending"],
     },
@@ -34,13 +26,7 @@ export default function ReviewTransactions() {
       note: "Verified",
       docs: [{ type: "Passport", url: "https://via.placeholder.com/150" }],
       auditLogs: [
-        {
-          id: 1,
-          action: "Approved",
-          user: "Admin2",
-          date: "2025-09-17 12:00",
-          remark: "Verified",
-        },
+        { id: 1, action: "Approved", user: "Admin2", date: "2025-09-17 12:00", remark: "Verified" },
       ],
       notes: ["Documents verified"],
     },
@@ -52,13 +38,7 @@ export default function ReviewTransactions() {
       note: "Invalid Docs",
       docs: [],
       auditLogs: [
-        {
-          id: 1,
-          action: "Rejected",
-          user: "Admin1",
-          date: "2025-09-16 14:00",
-          remark: "Invalid documents",
-        },
+        { id: 1, action: "Rejected", user: "Admin1", date: "2025-09-16 14:00", remark: "Invalid documents" },
       ],
       notes: ["Documents not valid"],
     },
@@ -71,120 +51,49 @@ export default function ReviewTransactions() {
   const [page, setPage] = useState(1);
   const [selectedCases, setSelectedCases] = useState([]);
   const [viewingCase, setViewingCase] = useState(null);
+  const [activeTab, setActiveTab] = useState("Documents");
   const itemsPerPage = 5;
 
-  let filteredCases = cases.filter(
-    (c) =>
-      (c.name.toLowerCase().includes(search.toLowerCase()) ||
-        c.caseId.toLowerCase().includes(search.toLowerCase())) &&
+  const filteredCases = cases
+    .filter(c =>
+      (c.name.toLowerCase().includes(search.toLowerCase()) || c.caseId.toLowerCase().includes(search.toLowerCase())) &&
       (filter === "All" || c.status === filter)
-  );
-
-  filteredCases.sort((a, b) =>
-    sort === "latest"
-      ? new Date(b.date) - new Date(a.date)
-      : new Date(a.date) - new Date(b.date)
-  );
+    )
+    .sort((a, b) => sort === "latest" ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
 
   const totalPages = Math.ceil(filteredCases.length / itemsPerPage);
-  const paginatedCases = filteredCases.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
+  const paginatedCases = filteredCases.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
+  const toggleCase = (caseId) => setSelectedCases(prev =>
+    prev.includes(caseId) ? prev.filter(id => id !== caseId) : [...prev, caseId]
   );
 
-  const toggleCase = (caseId) =>
-    setSelectedCases((prev) =>
-      prev.includes(caseId)
-        ? prev.filter((id) => id !== caseId)
-        : [...prev, caseId]
-    );
-
-  const toggleAll = () =>
-    setSelectedCases(
-      selectedCases.length === paginatedCases.length
-        ? []
-        : paginatedCases.map((c) => c.caseId)
-    );
+  const toggleAll = () => setSelectedCases(
+    selectedCases.length === paginatedCases.length ? [] : paginatedCases.map(c => c.caseId)
+  );
 
   const bulkAction = (action) => {
-    if (selectedCases.length === 0) return;
-    setCases((prev) => {
-      const updatedCases = prev.map((c) =>
-        selectedCases.includes(c.caseId)
-          ? {
-              ...c,
-              status: action,
-              auditLogs: [
-                ...c.auditLogs,
-                {
-                  id: c.auditLogs.length + 1,
-                  action,
-                  user: "Admin",
-                  date: new Date().toLocaleString(),
-                  remark: `${action} via bulk`,
-                },
-              ],
-            }
-          : c
-      );
-      if (viewingCase && selectedCases.includes(viewingCase.caseId)) {
-        const updatedCase = updatedCases.find(
-          (c) => c.caseId === viewingCase.caseId
-        );
-        setViewingCase(updatedCase);
-      }
-      return updatedCases;
-    });
+    if (!selectedCases.length) return;
+    setCases(prev => prev.map(c =>
+      selectedCases.includes(c.caseId)
+        ? { ...c, status: action, auditLogs: [...c.auditLogs, { id: c.auditLogs.length + 1, action, user: "Admin", date: new Date().toLocaleString(), remark: `${action} via bulk` }] }
+        : c
+    ));
     setSelectedCases([]);
   };
 
   const addNote = (caseId, noteText) => {
-    if (noteText.trim() === "") return;
-    setCases((prev) =>
-      prev.map((c) =>
-        c.caseId === caseId
-          ? {
-              ...c,
-              notes: [...(c.notes || []), noteText],
-              auditLogs: [
-                ...c.auditLogs,
-                {
-                  id: c.auditLogs.length + 1,
-                  action: "Note Added",
-                  user: "Admin",
-                  date: new Date().toLocaleString(),
-                  remark: noteText,
-                },
-              ],
-            }
-          : c
-      )
-    );
+    if (!noteText.trim()) return;
+    setCases(prev => prev.map(c =>
+      c.caseId === caseId ? { ...c, notes: [...c.notes, noteText], auditLogs: [...c.auditLogs, { id: c.auditLogs.length + 1, action: "Note Added", user: "Admin", date: new Date().toLocaleString(), remark: noteText }] } : c
+    ));
   };
 
   const escalateCase = (caseId, reason) => {
-    if (reason.trim() === "") return;
-    setCases((prev) =>
-      prev.map((c) =>
-        c.caseId === caseId
-          ? {
-              ...c,
-              status: "Escalated",
-              note: reason,
-              auditLogs: [
-                ...c.auditLogs,
-                {
-                  id: c.auditLogs.length + 1,
-                  action: "Escalated",
-                  user: "Admin",
-                  date: new Date().toLocaleString(),
-                  remark: reason,
-                },
-              ],
-            }
-          : c
-      )
-    );
+    if (!reason.trim()) return;
+    setCases(prev => prev.map(c =>
+      c.caseId === caseId ? { ...c, status: "Escalated", note: reason, auditLogs: [...c.auditLogs, { id: c.auditLogs.length + 1, action: "Escalated", user: "Admin", date: new Date().toLocaleString(), remark: reason }] } : c
+    ));
   };
 
   const downloadDoc = (url, type) => {
@@ -195,337 +104,127 @@ export default function ReviewTransactions() {
   };
 
   return (
-    <div className="vh-100 d-flex flex-column w-100">
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg w-100 custom-navbar">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            KYC History
-          </a>
-        </div>
-      </nav>
+    <div className="rt-container">
+      <header className="rt-header">KYC History</header>
 
-      {/* Main */}
-      <div className="flex-grow-1 overflow-auto bg-light w-100 px-3 py-4">
-        <div className="container-fluid px-0">
-          <h2 className="mb-3 page-title">KYC History</h2>
-
-          {/* Controls */}
-          <div className="row mb-3 g-2 align-items-center">
-            <div className="col-12 col-md-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search Case ID or Name"
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1);
-                }}
-              />
-            </div>
-            <div className="col-6 col-md-3">
-              <select
-                className="form-select"
-                value={filter}
-                onChange={(e) => {
-                  setFilter(e.target.value);
-                  setPage(1);
-                }}
-              >
-                <option value="All">All Status</option>
-                <option value="Pending">Pending</option>
-                <option value="Approved">Approved</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Escalated">Escalated</option>
-              </select>
-            </div>
-            <div className="col-6 col-md-3">
-              <select
-                className="form-select"
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="latest">Latest First</option>
-                <option value="oldest">Oldest First</option>
-              </select>
-            </div>
-            <div className="col-12 col-md-2 d-flex justify-content-md-end gap-2 mt-2 mt-md-0">
-              <button
-                className="btn btn-success"
-                onClick={() => bulkAction("Approved")}
-              >
-                Bulk Approve
-              </button>
-              <button
-                className="btn btn-danger"
-                onClick={() => bulkAction("Rejected")}
-              >
-                Bulk Reject
-              </button>
-            </div>
-          </div>
-
-          {/* Table */}
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover align-middle text-center custom-table">
-              <thead>
-                <tr>
-                  <th>
-                    <input
-                      type="checkbox"
-                      checked={
-                        selectedCases.length === paginatedCases.length &&
-                        paginatedCases.length > 0
-                      }
-                      onChange={toggleAll}
-                    />
-                  </th>
-                  <th>Case ID</th>
-                  <th>Name</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                  <th>Note</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedCases.map((c) => (
-                  <tr key={c.caseId}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedCases.includes(c.caseId)}
-                        onChange={() => toggleCase(c.caseId)}
-                      />
-                    </td>
-                    <td>{c.caseId}</td>
-                    <td>{c.name}</td>
-                    <td
-                      className={
-                        c.status === "Pending"
-                          ? "status-pending"
-                          : c.status === "Approved"
-                          ? "status-approved"
-                          : c.status === "Escalated"
-                          ? "status-escalated"
-                          : "status-rejected"
-                      }
-                    >
-                      {c.status}
-                    </td>
-                    <td>{c.date}</td>
-                    <td>{c.note}</td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-custom"
-                        onClick={() => setViewingCase(c)}
-                      >
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination */}
-          <nav>
-            <ul className="pagination justify-content-center">
-              <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-                <button
-                  className="page-link"
-                  onClick={() => setPage(page - 1)}
-                >
-                  Previous
-                </button>
-              </li>
-              <li className="page-item disabled">
-                <span className="page-link">
-                  Page {page} of {totalPages}
-                </span>
-              </li>
-              <li
-                className={`page-item ${
-                  page === totalPages ? "disabled" : ""
-                }`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => setPage(page + 1)}
-                >
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
-
-          {/* Modal */}
-          {viewingCase && (
-            <div className="modal show d-block" tabIndex="-1">
-              <div className="modal-dialog modal-xl modal-dialog-centered">
-                <div className="modal-content">
-                  <div className="modal-header custom-header">
-                    <h5 className="modal-title">
-                      Case {viewingCase.caseId} - {viewingCase.name}
-                    </h5>
-                    <button
-                      className="btn-close btn-close-white"
-                      onClick={() => setViewingCase(null)}
-                    ></button>
-                  </div>
-                  <div className="modal-body">
-                    <ul className="nav nav-tabs" role="tablist">
-                      <li className="nav-item">
-                        <button
-                          className="nav-link active"
-                          data-bs-toggle="tab"
-                          data-bs-target="#documentsTab"
-                        >
-                          Documents
-                        </button>
-                      </li>
-                      <li className="nav-item">
-                        <button
-                          className="nav-link"
-                          data-bs-toggle="tab"
-                          data-bs-target="#notesTab"
-                        >
-                          Notes
-                        </button>
-                      </li>
-                      <li className="nav-item">
-                        <button
-                          className="nav-link"
-                          data-bs-toggle="tab"
-                          data-bs-target="#auditTab"
-                        >
-                          Audit Trail
-                        </button>
-                      </li>
-                      <li className="nav-item">
-                        <button
-                          className="nav-link"
-                          data-bs-toggle="tab"
-                          data-bs-target="#escalateTab"
-                        >
-                          Escalate
-                        </button>
-                      </li>
-                    </ul>
-                    <div className="tab-content mt-3">
-                      <div
-                        className="tab-pane fade show active"
-                        id="documentsTab"
-                      >
-                        {viewingCase.docs.length > 0 ? (
-                          <div className="d-flex flex-wrap gap-3">
-                            {viewingCase.docs.map((doc, idx) => (
-                              <div key={idx} className="doc-card">
-                                <img
-                                  src={doc.url}
-                                  alt={doc.type}
-                                  className="img-thumbnail"
-                                />
-                                <div>{doc.type}</div>
-                                <button
-                                  className="btn btn-sm btn-outline-dark mt-1"
-                                  onClick={() => downloadDoc(doc.url, doc.type)}
-                                >
-                                  Download
-                                </button>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <p>No documents uploaded</p>
-                        )}
-                      </div>
-                      <div className="tab-pane fade" id="notesTab">
-                        <ul className="list-group mb-2">
-                          {(viewingCase.notes || []).map((note, idx) => (
-                            <li key={idx} className="list-group-item">
-                              {note}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="input-group mb-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Add note"
-                            id="newNoteInput"
-                          />
-                          <button
-                            className="btn btn-custom"
-                            onClick={() => {
-                              const val =
-                                document.getElementById("newNoteInput").value;
-                              addNote(viewingCase.caseId, val);
-                              document.getElementById("newNoteInput").value = "";
-                            }}
-                          >
-                            Add Note
-                          </button>
-                        </div>
-                      </div>
-                      <div className="tab-pane fade" id="auditTab">
-                        <table className="table table-bordered">
-                          <thead className="table-light text-center">
-                            <tr>
-                              <th>Date</th>
-                              <th>Action</th>
-                              <th>User</th>
-                              <th>Remark</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {viewingCase.auditLogs.map((log) => (
-                              <tr key={log.id} className="text-center">
-                                <td>{log.date}</td>
-                                <td>{log.action}</td>
-                                <td>{log.user}</td>
-                                <td>{log.remark}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="tab-pane fade" id="escalateTab">
-                        <textarea
-                          className="form-control mb-2"
-                          id="escalateInput"
-                          placeholder="Enter escalation reason"
-                        ></textarea>
-                        <button
-                          className="btn btn-custom"
-                          onClick={() => {
-                            const val =
-                              document.getElementById("escalateInput").value;
-                            escalateCase(viewingCase.caseId, val);
-                            document.getElementById("escalateInput").value = "";
-                          }}
-                        >
-                          Escalate Case
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => setViewingCase(null)}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+      <div className="rt-controls">
+        <input type="text" placeholder="Search Case ID or Name" value={search} onChange={e => { setSearch(e.target.value); setPage(1) }} />
+        <select value={filter} onChange={e => { setFilter(e.target.value); setPage(1) }}>
+          <option value="All">All Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Escalated">Escalated</option>
+        </select>
+        <select value={sort} onChange={e => setSort(e.target.value)}>
+          <option value="latest">Latest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+        <div className="rt-bulk-buttons">
+          <button onClick={() => bulkAction("Approved")} className="rt-btn-approve">Bulk Approve</button>
+          <button onClick={() => bulkAction("Rejected")} className="rt-btn-reject">Bulk Reject</button>
         </div>
       </div>
+
+      <div className="rt-table-wrapper">
+        <table className="rt-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" checked={selectedCases.length === paginatedCases.length && paginatedCases.length > 0} onChange={toggleAll} /></th>
+              <th>Case ID</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Note</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedCases.map(c => (
+              <tr key={c.caseId}>
+                <td><input type="checkbox" checked={selectedCases.includes(c.caseId)} onChange={() => toggleCase(c.caseId)} /></td>
+                <td>{c.caseId}</td>
+                <td>{c.name}</td>
+                <td className={`rt-status ${c.status.toLowerCase()}`}>{c.status}</td>
+                <td>{c.date}</td>
+                <td>{c.note}</td>
+                <td><button className="rt-btn-view" onClick={() => { setViewingCase(c); setActiveTab("Documents") }}>View</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="rt-pagination">
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>Prev</button>
+        <span>Page {page} of {totalPages}</span>
+        <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>Next</button>
+      </div>
+
+      {viewingCase && (
+        <div className="rt-modal">
+          <div className="rt-modal-content">
+            <header className="rt-modal-header">
+              <h3>{viewingCase.caseId} - {viewingCase.name}</h3>
+              <button className="rt-btn-close" onClick={() => setViewingCase(null)}>×</button>
+            </header>
+            <div className="rt-modal-body">
+              <div className="rt-tab-buttons">
+                {["Documents", "Notes", "Audit Trail", "Escalate"].map(tab => (
+                  <button key={tab} className={activeTab === tab ? "active" : ""} onClick={() => setActiveTab(tab)}>
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              <div className="rt-tab-content">
+                {activeTab === "Documents" && (
+                  <div className="rt-documents">
+                    {viewingCase.docs.length ? viewingCase.docs.map((doc, idx) => (
+                      <div key={idx} className="rt-doc-card">
+                        <img src={doc.url} alt={doc.type} />
+                        <span>{doc.type}</span>
+                        <button onClick={() => downloadDoc(doc.url, doc.type)}>Download</button>
+                      </div>
+                    )) : <p>No documents uploaded</p>}
+                  </div>
+                )}
+
+                {activeTab === "Notes" && (
+                  <div className="rt-notes">
+                    {viewingCase.notes.map((n, idx) => <p key={idx}>{n}</p>)}
+                    <input type="text" id="rt-noteInput" />
+                    <button onClick={() => {
+                      const val = document.getElementById("rt-noteInput").value;
+                      addNote(viewingCase.caseId, val);
+                      document.getElementById("rt-noteInput").value = "";
+                    }}>Add Note</button>
+                  </div>
+                )}
+
+                {activeTab === "Audit Trail" && (
+                  <div className="rt-audit">
+                    {viewingCase.auditLogs.map(log => (
+                      <p key={log.id}>{log.date} - {log.user} - {log.action} - {log.remark}</p>
+                    ))}
+                  </div>
+                )}
+
+                {activeTab === "Escalate" && (
+                  <div className="rt-escalate">
+                    <input type="text" placeholder="Reason" id="rt-escalateInput" />
+                    <button onClick={() => {
+                      const val = document.getElementById("rt-escalateInput").value;
+                      escalateCase(viewingCase.caseId, val);
+                      document.getElementById("rt-escalateInput").value = "";
+                    }}>Escalate Case</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { FaBell } from "react-icons/fa";
-import "./ViewAlerts.css"; // <-- import CSS
+import "./ViewAlerts.css";
 
 export default function ViewAlerts() {
   const dummyAlerts = [
@@ -50,7 +49,6 @@ export default function ViewAlerts() {
   const [page, setPage] = useState(1);
   const [selectedAlerts, setSelectedAlerts] = useState([]);
   const [viewingAlert, setViewingAlert] = useState(null);
-
   const [newNote, setNewNote] = useState("");
   const [escalateReason, setEscalateReason] = useState("");
 
@@ -166,274 +164,219 @@ export default function ViewAlerts() {
       : "status-escalated";
 
   return (
-    <div className="vh-100 d-flex flex-column overflow-hidden">
+    <div className="alerts-container">
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg custom-navbar">
-        <div className="container-fluid">
-          <span className="navbar-brand">Neo Bank AML & Complaints</span>
-        </div>
-      </nav>
+      <header className="alerts-navbar">
+        <div className="alerts-brand">Neo Bank AML & Complaints</div>
+      </header>
 
       {/* Main Content */}
-      <div className="flex-grow-1 overflow-auto p-3 p-md-4 bg-light">
-        <div className="container-fluid">
-          {/* Heading */}
-          <div className="card mb-4 shadow-sm rounded">
-            <div className="card-body d-flex align-items-center card-heading">
-              <FaBell size={28} className="me-2 heading-icon" />
-              <h3 className="mb-0 heading-title">AML / Complaints Alerts</h3>
-            </div>
+      <main className="alerts-main">
+        {/* Heading */}
+        <div className="alerts-card">
+          <div className="alerts-card-header">
+            <FaBell size={28} />
+            <h3>AML / Complaints Alerts</h3>
           </div>
+        </div>
 
-          {/* Controls */}
-          <div className="row g-2 mb-3 align-items-center">
-            <div className="col-12 col-md-4">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search by ID / Name / Type"
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1);
-                }}
-              />
-            </div>
-
-            <div className="col-6 col-md-2">
-              <select
-                className="form-select"
-                value={filter}
-                onChange={(e) => {
-                  setFilter(e.target.value);
-                  setPage(1);
-                }}
-              >
-                <option value="All">All Status</option>
-                <option value="Pending">Pending</option>
-                <option value="Resolved">Resolved</option>
-                <option value="Escalated">Escalated</option>
-              </select>
-            </div>
-
-            <div className="col-6 col-md-2">
-              <select
-                className="form-select"
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="latest">Latest First</option>
-                <option value="oldest">Oldest First</option>
-              </select>
-            </div>
-
-            <div className="col-12 col-md-4 d-flex flex-wrap gap-2 justify-content-md-end">
-              <button
-                className="btn btn-success flex-grow-1 flex-md-grow-0"
-                onClick={() => bulkAction("Resolved")}
-              >
-                Bulk Resolve
-              </button>
-              <button
-                className="btn btn-danger flex-grow-1 flex-md-grow-0"
-                onClick={() => bulkAction("Escalated")}
-              >
-                Bulk Escalate
-              </button>
-            </div>
+        {/* Controls */}
+        <div className="alerts-controls">
+          <input
+            type="text"
+            className="alerts-input"
+            placeholder="Search by ID / Name / Type"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+          />
+          <select
+            className="alerts-select"
+            value={filter}
+            onChange={(e) => {
+              setFilter(e.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="All">All Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Escalated">Escalated</option>
+          </select>
+          <select
+            className="alerts-select"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="latest">Latest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+          <div className="alerts-bulk-buttons">
+            <button onClick={() => bulkAction("Resolved")} className="alerts-btn alerts-btn-success">
+              Bulk Resolve
+            </button>
+            <button onClick={() => bulkAction("Escalated")} className="alerts-btn alerts-btn-danger">
+              Bulk Escalate
+            </button>
           </div>
+        </div>
 
-          {/* Table */}
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover text-center align-middle">
-              <thead className="custom-table-header">
-                <tr>
-                  <th>
+        {/* Table */}
+        <div className="alerts-table-wrapper">
+          <table className="alerts-table">
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    checked={selectedAlerts.length === paginatedAlerts.length && paginatedAlerts.length > 0}
+                    onChange={toggleAll}
+                  />
+                </th>
+                <th>Alert ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Note</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paginatedAlerts.map((a) => (
+                <tr key={a.alertId}>
+                  <td>
                     <input
                       type="checkbox"
-                      checked={selectedAlerts.length === paginatedAlerts.length && paginatedAlerts.length > 0}
-                      onChange={toggleAll}
+                      checked={selectedAlerts.includes(a.alertId)}
+                      onChange={() => toggleAlert(a.alertId)}
                     />
-                  </th>
-                  <th>Alert ID</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                  <th>Note</th>
-                  <th>Action</th>
+                  </td>
+                  <td>{a.alertId}</td>
+                  <td>{a.name}</td>
+                  <td>{a.type}</td>
+                  <td className={statusColor(a.status)}>{a.status}</td>
+                  <td>{a.date}</td>
+                  <td>{a.note}</td>
+                  <td>
+                    <button onClick={() => setViewingAlert(a)} className="alerts-btn alerts-btn-view">
+                      View
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {paginatedAlerts.map((a) => (
-                  <tr key={a.alertId}>
-                    <td>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Pagination */}
+        <div className="alerts-pagination">
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <div>
+            <button disabled={page === 1} onClick={() => setPage(page - 1)} className="alerts-btn alerts-btn-outline">
+              Prev
+            </button>
+            <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="alerts-btn alerts-btn-outline">
+              Next
+            </button>
+          </div>
+        </div>
+
+        {/* Modal */}
+        {viewingAlert && (
+          <div className="alerts-modal-overlay">
+            <div className="alerts-modal">
+              <div className="alerts-modal-header">
+                <h5>{viewingAlert.name}</h5>
+                <button onClick={() => setViewingAlert(null)} className="alerts-btn-close">✕</button>
+              </div>
+
+              <div className="alerts-modal-body">
+                <div className="alerts-tabs">
+                  <button className="alerts-tab active" data-tab="info">Info</button>
+              
+                </div>
+
+                <div className="alerts-tab-content">
+                  <div className="alerts-tab-pane active" data-tab="info">
+                    <p><strong>Alert ID:</strong> {viewingAlert.alertId}</p>
+                    <p><strong>Type:</strong> {viewingAlert.type}</p>
+                    <p><strong>Status:</strong> {viewingAlert.status}</p>
+                    <p><strong>Note:</strong> {viewingAlert.note}</p>
+                    <p><strong>Date:</strong> {viewingAlert.date}</p>
+
+                    <div className="alerts-input-group">
                       <input
-                        type="checkbox"
-                        checked={selectedAlerts.includes(a.alertId)}
-                        onChange={() => toggleAlert(a.alertId)}
+                        type="text"
+                        placeholder="Add note..."
+                        value={newNote}
+                        onChange={(e) => setNewNote(e.target.value)}
                       />
-                    </td>
-                    <td>{a.alertId}</td>
-                    <td>{a.name}</td>
-                    <td>{a.type}</td>
-                    <td className={statusColor(a.status)}>{a.status}</td>
-                    <td>{a.date}</td>
-                    <td>{a.note}</td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-custom"
-                        onClick={() => setViewingAlert(a)}
-                      >
-                        View
+                      <button onClick={() => addNote(viewingAlert.alertId)} className="alerts-btn alerts-btn-add">
+                        Add Note
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
 
-          {/* Pagination */}
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
-            <span className="mb-2 mb-md-0">
-              Page {page} of {totalPages}
-            </span>
-            <div>
-              <button
-                className="btn btn-outline-secondary me-2"
-                disabled={page === 1}
-                onClick={() => setPage(page - 1)}
-              >
-                Prev
-              </button>
-              <button
-                className="btn btn-outline-secondary"
-                disabled={page === totalPages}
-                onClick={() => setPage(page + 1)}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-
-          {/* Modal */}
-          {viewingAlert && (
-            <div className="modal show d-block" tabIndex="-1">
-              <div className="modal-dialog modal-xl modal-dialog-centered">
-                <div className="modal-content">
-                  <div className="modal-header custom-modal-header">
-                    <h5 className="modal-title">{viewingAlert.name}</h5>
-                    <button className="btn-close btn-close-white" onClick={() => setViewingAlert(null)}></button>
-                  </div>
-                  <div className="modal-body">
-                    <ul className="nav nav-tabs" role="tablist">
-                      <li className="nav-item">
-                        <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#infoTab">
-                          Info
-                        </button>
-                      </li>
-                      <li className="nav-item">
-                        <button className="nav-link" data-bs-toggle="tab" data-bs-target="#auditTab">
-                          Audit Trail
-                        </button>
-                      </li>
-                      <li className="nav-item">
-                        <button className="nav-link" data-bs-toggle="tab" data-bs-target="#notesTab">
-                          Notes
-                        </button>
-                      </li>
-                    </ul>
-                    <div className="tab-content mt-3">
-                      {/* Info Tab */}
-                      <div className="tab-pane fade show active" id="infoTab">
-                        <p><strong>Alert ID:</strong> {viewingAlert.alertId}</p>
-                        <p><strong>Type:</strong> {viewingAlert.type}</p>
-                        <p><strong>Status:</strong> {viewingAlert.status}</p>
-                        <p><strong>Note:</strong> {viewingAlert.note}</p>
-                        <p><strong>Date:</strong> {viewingAlert.date}</p>
-
-                        <div className="input-group mt-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Add note..."
-                            value={newNote}
-                            onChange={(e) => setNewNote(e.target.value)}
-                          />
-                          <button
-                            className="btn btn-custom"
-                            onClick={() => addNote(viewingAlert.alertId)}
-                          >
-                            Add Note
-                          </button>
-                        </div>
-
-                        <div className="input-group mt-2">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Escalate reason..."
-                            value={escalateReason}
-                            onChange={(e) => setEscalateReason(e.target.value)}
-                          />
-                          <button
-                            className="btn btn-danger btn-custom"
-                            onClick={() => escalateAlert(viewingAlert.alertId)}
-                          >
-                            Escalate
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Audit Trail */}
-                      <div className="tab-pane fade" id="auditTab">
-                        <div className="table-responsive">
-                          <table className="table table-bordered text-center">
-                            <thead className="custom-table-header">
-                              <tr>
-                                <th>Date</th>
-                                <th>Action</th>
-                                <th>User</th>
-                                <th>Remark</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {viewingAlert.auditLogs.map((log) => (
-                                <tr key={log.id}>
-                                  <td>{log.date}</td>
-                                  <td>{log.action}</td>
-                                  <td>{log.user}</td>
-                                  <td>{log.remark}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-
-                      {/* Notes */}
-                      <div className="tab-pane fade" id="notesTab">
-                        <ul className="list-group">
-                          {viewingAlert.notes.map((n, idx) => (
-                            <li key={idx} className="list-group-item">{n}</li>
-                          ))}
-                        </ul>
-                      </div>
+                    <div className="alerts-input-group">
+                      <input
+                        type="text"
+                        placeholder="Escalate reason..."
+                        value={escalateReason}
+                        onChange={(e) => setEscalateReason(e.target.value)}
+                      />
+                      <button onClick={() => escalateAlert(viewingAlert.alertId)} className="alerts-btn alerts-btn-danger">
+                        Escalate
+                      </button>
                     </div>
                   </div>
-                  <div className="modal-footer">
-                    <button className="btn btn-secondary" onClick={() => setViewingAlert(null)}>
-                      Close
-                    </button>
+
+                  <div className="alerts-tab-pane" data-tab="audit">
+                    <table className="alerts-table">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Action</th>
+                          <th>User</th>
+                          <th>Remark</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {viewingAlert.auditLogs.map((log) => (
+                          <tr key={log.id}>
+                            <td>{log.date}</td>
+                            <td>{log.action}</td>
+                            <td>{log.user}</td>
+                            <td>{log.remark}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="alerts-tab-pane" data-tab="notes">
+                    <ul className="alerts-notes-list">
+                      {viewingAlert.notes.map((n, idx) => (
+                        <li key={idx}>{n}</li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
 
-        </div>
-      </div>
+              <div className="alerts-modal-footer">
+                <button onClick={() => setViewingAlert(null)} className="alerts-btn alerts-btn-outline">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+      </main>
     </div>
   );
 }
