@@ -1,80 +1,51 @@
-/* Container */
 .apikeys-container {
-  padding: 1rem;
   font-family: Arial, sans-serif;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .apikeys-title {
   color: #900603;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
-/* Card */
 .apikeys-card {
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
 }
 
-/* Actions */
 .apikeys-actions {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
 }
 
-/* Buttons */
-.btn-primary {
-  background-color: #900603;
-  color: #fff;
+.btn-primary, .btn-secondary, .btn-success, .btn-danger {
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s;
 }
 
-.btn-primary:hover {
-  background-color: #b02521;
-}
-
-.btn-secondary {
-  background: #6c757d;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-secondary:hover {
-  background: #5a6268;
-}
-
-.btn-success {
-  background: #28a745;
-  color: #fff;
-  padding: 0.4rem 0.9rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-danger {
-  background: #dc3545;
-  color: #fff;
-  padding: 0.4rem 0.9rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
+.btn-primary { background: #900603; color: #fff; }
+.btn-primary:hover { background: #b02521; }
+.btn-secondary { background: #6c757d; color: #fff; }
+.btn-secondary:hover { background: #5a6268; }
+.btn-success { background: #28a745; color: #fff; }
+.btn-success:hover { background: #218838; }
+.btn-danger { background: #dc3545; color: #fff; }
+.btn-danger:hover { background: #c82333; }
 
 /* Table */
-.table-wrapper {
-  overflow-x: auto;
-}
+.table-wrapper { overflow-x: auto; }
 
 .apikeys-table {
   width: 100%;
@@ -83,93 +54,112 @@
 
 .apikeys-table th,
 .apikeys-table td {
-  padding: 0.8rem;
   border: 1px solid #ddd;
+  padding: 0.8rem 1rem;
   text-align: left;
+  font-size: 0.95rem;
 }
 
 .apikeys-table th {
-  background: #f5f5f5;
-  font-weight: bold;
+  background: #900603;
+  color: #fff;
+  font-weight: 600;
+}
+
+.action-buttons button {
+  margin-right: 0.5rem;
 }
 
 /* Modal */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 3000;
+  padding: 1rem;
 }
 
 .modal-box {
   background: #fff;
-  width: 90%;
-  max-width: 400px;
+  width: 95%;
+  max-width: 550px;
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
   background: #900603;
   color: #fff;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.modal-header h4 {
-  margin: 0;
-}
-
 .modal-close {
-  background: transparent;
+  background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #fff;
   cursor: pointer;
 }
 
 .modal-body {
-  padding: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.form-label {
+.modal-body label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
 }
 
 .form-input {
-  width: 100%;
-  padding: 0.6rem;
-  border: 1px solid #ddd;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: #900603;
+  box-shadow: 0 0 0 2px rgba(144, 6, 3, 0.2);
 }
 
 .modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   border-top: 1px solid #eee;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .apikeys-actions {
-    justify-content: center;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .apikeys-card {
+    padding: 1rem;
   }
-
-  .btn-primary {
-    width: 100%;
-    text-align: center;
+  .modal-box {
+    max-width: 90%;
+  }
+  .modal-header h4 {
+    font-size: 1.1rem;
+  }
+  .apikeys-table th,
+  .apikeys-table td {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
   }
 }

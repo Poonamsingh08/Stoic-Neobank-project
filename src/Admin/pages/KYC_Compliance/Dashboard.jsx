@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/NeoBank_Logo_01.png";
-import "./Dashboard.css";   // <-- Import CSS file
+import { FaUserCheck, FaHistory, FaBell, FaExchangeAlt, FaShieldAlt } from "react-icons/fa";
+import "./Dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -25,130 +25,127 @@ export default function Dashboard() {
     { id: 3, text: "Daily backup completed successfully", time: "6 hours ago" },
   ];
 
+  const summaryCards = [
+    { title: "KYC Approvals", text: "Pending Review", btn: "Review KYC", route: "review-kyc", icon: <FaUserCheck /> },
+    { title: "KYC History", text: "History list", btn: "Review History", route: "review-transactions", icon: <FaHistory /> },
+    { title: "System Alerts", text: "Requires Attention", btn: "View Alerts", route: "view-alerts", icon: <FaBell /> },
+  ];
+
   return (
-    <div className="container-fluid p-0">
+    <div className="db-container">
       {/* Header */}
-      <div className="dashboard-header">
+      <div className="db-header">
         <div>
-          <h5 className="mb-0">KYC & Compliance Dashboard</h5>
+          <h5>KYC & Compliance Dashboard</h5>
           <small>Monitor and manage compliance operations</small>
         </div>
-        <small className="last-updated">
+        <small className="db-last-updated">
           ⏱ Last updated: {lastUpdated.toLocaleTimeString()}
         </small>
       </div>
 
-      {/* Summary Cards */}
-      <div className="row m-3 g-3">
-        {[
-          { title: "KYC Approvals", text: "Pending Review", btn: "Review KYC", route: "review-kyc" },
-          { title: "KYC History", text: "History list", btn: "Review History", route: "review-transactions" },
-          { title: "System Alerts", text: "Requires Attention", btn: "View Alerts", route: "view-alerts" },
-        ].map((item, i) => (
-          <div className="col-md-4" key={i}>
-            <div className="card shadow-sm text-center card-hover">
-              <div className="card-body">
-                <h6 className="text-muted">{item.title}</h6>
-                <h5 className="fw-bold">0</h5>
-                <p className="small text-muted">{item.text}</p>
-                <button className="btn btn-sm btn-custom" onClick={() => navigate(item.route)}>
-                  {item.btn}
-                </button>
-              </div>
-            </div>
+      {/* Summary Cards with Icons */}
+      <div className="db-grid-3">
+        {summaryCards.map((item, i) => (
+          <div className="db-card db-card-hover" key={i}>
+            <div className="db-card-icon">{item.icon}</div>
+            <h6>{item.title}</h6>
+            <h5>0</h5>
+            <p>{item.text}</p>
+            <button className="db-btn db-btn-primary" onClick={() => navigate(item.route)}>
+              {item.btn}
+            </button>
           </div>
         ))}
       </div>
 
       {/* Transactions + Alerts */}
-      <div className="row m-3 g-3">
+      <div className="db-grid-2">
         {/* Transactions */}
-        <div className="col-md-6">
-          <div className="card shadow-sm">
-            <div className="card-header d-flex justify-content-between align-items-center">
-              <strong>Recent Transactions</strong>
-              <button className="btn btn-sm btn-outline-custom" onClick={() => navigate("transactions")}>
-                View All Transactions
-              </button>
-            </div>
-            <div className="card-body">
-              {transactions.map((txn) => (
-                <div key={txn.id} className="txn-item">
-                  <div>
-                    <strong>{txn.id}</strong> <br />
-                    <small>{txn.type}</small>
-                  </div>
-                  <div className="d-flex align-items-center gap-2">
-                    <span className="badge bg-light text-dark">{txn.amount}</span>
-                    {txn.status === "pending" ? (
-                      <button className="btn btn-dark btn-sm">Monitor</button>
-                    ) : (
-                      <button className="btn btn-warning btn-sm">Review</button>
-                    )}
-                  </div>
+        <div className="db-card">
+          <div className="db-card-header">
+            <strong>Recent Transactions</strong>
+            <button className="db-btn db-btn-outline" onClick={() => navigate("transactions")}>
+              View All
+            </button>
+          </div>
+          <div className="db-card-body">
+            {transactions.map((txn) => (
+              <div key={txn.id} className="db-txn-item">
+                <div>
+                  <strong>{txn.id}</strong> <br />
+                  <small>{txn.type}</small>
                 </div>
-              ))}
-            </div>
+                <div className="db-txn-actions">
+                  <span className="db-badge">{txn.amount}</span>
+                  {txn.status === "pending" ? (
+                    <button className="db-btn db-btn-dark">Monitor</button>
+                  ) : (
+                    <button className="db-btn db-btn-warning">Review</button>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Alerts */}
-        <div className="col-md-6">
-          <div className="card shadow-sm">
-            <div className="card-header d-flex justify-content-between align-items-center">
-              <strong>System Alerts</strong>
-              <button className="btn btn-sm btn-outline-custom" onClick={() => navigate("view-alerts")}>
-                Review Now
-              </button>
-            </div>
-            <div className="card-body">
-              {alerts.map((a) => (
-                <div key={a.id} className="alert-item">
-                  <div>
-                    ⚠️ {a.text} <br />
-                    <small>{a.time}</small>
-                  </div>
-                  <button className="btn btn-sm btn-custom" onClick={() => setViewingAlert(a)}>
-                    View Report
-                  </button>
+        <div className="db-card">
+          <div className="db-card-header">
+            <strong>System Alerts</strong>
+            <button className="db-btn db-btn-outline" onClick={() => navigate("view-alerts")}>
+              Review Now
+            </button>
+          </div>
+          <div className="db-card-body">
+            {alerts.map((a) => (
+              <div key={a.id} className="db-alert-item">
+                <div>
+                  ⚠️ {a.text} <br />
+                  <small>{a.time}</small>
                 </div>
-              ))}
-            </div>
+                <button className="db-btn db-btn-primary" onClick={() => setViewingAlert(a)}>
+                  View Report
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       {/* AML Modal */}
       {viewingAlert && (
-        <div className="modal show d-block" tabIndex="-1">
-          <div className="modal-dialog modal-lg modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header modal-header-custom">
-                <h5 className="modal-title">AML Alert Details</h5>
-                <button className="btn-close btn-close-white" onClick={() => setViewingAlert(null)}></button>
-              </div>
-              <div className="modal-body">
-                <h6>{viewingAlert.text}</h6>
-                <p><strong>Time:</strong> {viewingAlert.time}</p>
-                <hr />
-                <p>Here you can show full AML details, transaction list, flagged users, or compliance info.</p>
-              </div>
-              <div className="modal-footer">
-                <button className="btn btn-secondary" onClick={() => setViewingAlert(null)}>
-                  Close
-                </button>
-              </div>
+        <div className="db-modal-overlay">
+          <div className="db-modal-box">
+            <div className="db-modal-header">
+              <h5>AML Alert Details</h5>
+              <button className="db-modal-close" onClick={() => setViewingAlert(null)}>✖</button>
+            </div>
+            <div className="db-modal-body">
+              <h6>{viewingAlert.text}</h6>
+              <p><strong>Time:</strong> {viewingAlert.time}</p>
+              <hr />
+              <p>Here you can show full AML details, transaction list, flagged users, or compliance info.</p>
+            </div>
+            <div className="db-modal-footer">
+              <button className="db-btn db-btn-secondary" onClick={() => setViewingAlert(null)}>Close</button>
             </div>
           </div>
         </div>
       )}
 
       {/* Compliance Overview */}
-      <div className="row m-3 g-3">
-        {["Total Submissions", "Approval Rate", "Pending Review", "Active Alerts"].map((text, i) => (
-          <div className="col-md-3" key={i}>
-            <div className="card compliance-card shadow-sm">
-              <div className="card-body fw-bold">0<br />{text}</div>
+      <div className="db-grid-4">
+        {[
+          { text: "Total Submissions", icon: <FaExchangeAlt /> },
+          { text: "Approval Rate", icon: <FaUserCheck /> },
+          { text: "Pending Review", icon: <FaHistory /> },
+          { text: "Active Alerts", icon: <FaShieldAlt /> },
+        ].map((item, i) => (
+          <div className="db-card db-compliance-card" key={i}>
+            <div className="db-card-icon">{item.icon}</div>
+            <div className="db-card-body">
+              0 <br /> {item.text}
             </div>
           </div>
         ))}

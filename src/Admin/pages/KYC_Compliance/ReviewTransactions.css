@@ -1,85 +1,247 @@
-/* Navbar */
-.custom-navbar {
-  background-color: #900603;
-}
-.custom-navbar .navbar-brand {
-  color: #fff !important;
-  font-weight: bold;
-  margin: 0;
+/* ===== Container ===== */
+.rt-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+  background: #f8f8f8;
+  min-height: 100vh;
 }
 
-/* Heading */
-.page-title {
+/* ===== Header ===== */
+.rt-header {
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #900603;
+  margin-bottom: 1rem;
 }
 
-/* Table header */
-.custom-table thead {
-  background-color: #900603;
+/* ===== Controls ===== */
+.rt-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rt-controls input,
+.rt-controls select {
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  flex: 1;
+  min-width: 150px;
+}
+
+.rt-bulk-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.rt-btn-approve {
+  background-color: #28a745;
   color: #fff;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-/* Status colors */
-.status-pending {
-  color: #ffc107; /* Bootstrap warning */
-  font-weight: bold;
-}
-.status-approved {
-  color: #28a745; /* Bootstrap success */
-  font-weight: bold;
-}
-.status-rejected {
-  color: #dc3545; /* Bootstrap danger */
-  font-weight: bold;
-}
-.status-escalated {
-  color: #0d6efd; /* Bootstrap primary */
-  font-weight: bold;
-}
-
-/* Custom buttons */
-.btn-custom {
-  background-color: #900603;
+.rt-btn-reject {
+  background-color: #dc3545;
   color: #fff;
-}
-.btn-custom:hover {
-  background-color: #750402;
-  color: #fff;
-}
-
-/* Modal header */
-.modal-header.custom-header {
-  background-color: #900603;
-  color: #fff;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-/* Tabs */
-.nav-tabs .nav-link.active {
-  background-color: #900603 !important;
-  color: #fff !important;
-}
-.nav-tabs .nav-link {
-  color: #900603;
-  font-weight: 500;
+/* ===== Table ===== */
+.rt-table-wrapper {
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* Document cards */
-.doc-card {
-  border: 1px solid #ddd;
-  padding: 10px;
+.rt-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
   text-align: center;
-  border-radius: 5px;
-}
-.doc-card img {
-  width: 120px;
-  margin-bottom: 8px;
 }
 
-/* Pagination */
-.pagination .page-link {
-  color: #900603;
+.rt-table th,
+.rt-table td {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ddd;
 }
-.pagination .page-link:hover {
+
+.rt-table th {
   background-color: #900603;
   color: #fff;
+  font-weight: 600;
+}
+
+.rt-status.pending { color: #ffc107; font-weight: 600; }
+.rt-status.approved { color: #28a745; font-weight: 600; }
+.rt-status.rejected { color: #dc3545; font-weight: 600; }
+.rt-status.escalated { color: #ff5722; font-weight: 600; }
+
+.rt-btn-view {
+  background-color: #900603;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== Pagination ===== */
+.rt-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.rt-pagination button {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== Modal ===== */
+.rt-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.rt-modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.rt-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #900603;
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.rt-btn-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.rt-modal-body {
+  padding: 1rem;
+}
+
+/* ===== Tabs ===== */
+.rt-tab-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rt-tab-buttons button {
+  flex: 1;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border-radius: 6px 6px 0 0;
+  font-weight: 600;
+  border: none;
+}
+
+.rt-tab-buttons button.active {
+  background-color: #900603;
+  color: #fff;
+}
+
+.rt-tab-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 0.8rem;
+}
+
+.rt-doc-card {
+  display: inline-block;
+  margin: 0.5rem;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.rt-doc-card img {
+  max-width: 100px;
+  border-radius: 4px;
+}
+
+.rt-doc-card button {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #900603;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ===== Notes / Audit / Escalate Inputs ===== */
+.rt-notes input,
+.rt-escalate input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+}
+
+.rt-notes button,
+.rt-escalate button {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #900603;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .rt-controls { flex-direction: column; }
+  .rt-bulk-buttons { justify-content: space-between; }
+  .rt-controls input, .rt-controls select { width: 100%; }
+  .rt-table { min-width: 600px; }
+  .rt-tab-buttons button { font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+  .rt-table { min-width: 400px; }
+  .rt-tab-buttons button { font-size: 0.8rem; }
+  .rt-btn-view, .rt-notes button, .rt-escalate button { font-size: 0.8rem; padding: 0.4rem 0.5rem; }
 }

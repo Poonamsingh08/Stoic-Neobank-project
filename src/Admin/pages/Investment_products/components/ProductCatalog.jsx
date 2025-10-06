@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ProductCatalog.css";
 
-// Pre-defined images for product types
+// Pre-defined images
 const productImages = {
   "Mutual Fund": "https://images.unsplash.com/photo-1611078484810-0be2b12f2304?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
   "Bank FD": "https://images.unsplash.com/photo-1590502593746-2b7d9456ed13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
@@ -9,7 +9,7 @@ const productImages = {
   "Stock": "https://images.unsplash.com/photo-1581091870625-3b36db248ee8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400"
 };
 
-// Initial products & pending requests
+// Initial products & requests
 const initialProducts = [
   { id: 1, name: "Equity Mutual Fund", type: "Mutual Fund", price: "₹5,000", returns: "12-15% annually", risk: "High Risk", enabled: true, status: "approved" },
   { id: 2, name: "Fixed Deposit", type: "Bank FD", price: "₹1,000", returns: "6-7% annually", risk: "Low Risk", enabled: true, status: "approved" },
@@ -20,7 +20,7 @@ const initialRequests = [
   { id: 102, name: "Bluechip Stocks", type: "Stock", price: "₹10,000", returns: "15% annually", risk: "High Risk", enabled: true, status: "pending" },
 ];
 
-const riskColors = { "High Risk": "danger", "Medium Risk": "warning", "Low Risk": "success" };
+const riskColors = { "High Risk": "product-badge-danger", "Medium Risk": "product-badge-warning", "Low Risk": "product-badge-success" };
 
 export default function ProductCatalog() {
   const [products, setProducts] = useState(initialProducts);
@@ -38,7 +38,11 @@ export default function ProductCatalog() {
     }
     setShowModal(true);
   };
-  const handleClose = () => { setShowModal(false); setEditProduct(null); };
+
+  const handleClose = () => {
+    setShowModal(false);
+    setEditProduct(null);
+  };
 
   const handleSave = () => {
     if (!formData.name || !formData.type || !formData.price || !formData.returns) {
@@ -69,31 +73,31 @@ export default function ProductCatalog() {
     <div className="product-container">
       {/* Header */}
       <div className="product-header">
-        <h3>Investment Options</h3>
-        <button className="btn-primary" onClick={() => handleShow()}>Add Product</button>
+        <h3 className="product-title">Investment Options</h3>
+        <button className="product-btn-primary" onClick={() => handleShow()}>Add Product</button>
       </div>
 
       {/* Pending Requests */}
       {requests.length > 0 && (
-        <div className="pending-section">
-          <h5>Pending Product Requests</h5>
-          <div className="grid">
+        <div className="product-pending-section">
+          <h5 className="product-subtitle">Pending Product Requests</h5>
+          <div className="product-grid">
             {requests.map(req => (
-              <div key={req.id} className="card">
-                <img src={productImages[req.type]} alt={req.name} className="card-img" />
-                <div className="card-body">
-                  <div className="card-header">
+              <div key={req.id} className="product-card">
+                <img src={productImages[req.type]} alt={req.name} className="product-card-img" />
+                <div className="product-card-body">
+                  <div className="product-card-header">
                     <div>
                       <h4>{req.name}</h4>
                       <small>{req.type}</small>
                     </div>
-                    <span className={`badge ${riskColors[req.risk]}`}>{req.risk}</span>
+                    <span className={riskColors[req.risk]}>{req.risk}</span>
                   </div>
                   <p><strong>Expected Returns:</strong> {req.returns}</p>
                   <p><strong>Min Investment:</strong> {req.price}</p>
-                  <div className="actions">
-                    <button className="btn-success" onClick={() => approveRequest(req.id)}>Approve</button>
-                    <button className="btn-danger" onClick={() => rejectRequest(req.id)}>Reject</button>
+                  <div className="product-actions">
+                    <button className="product-btn-success" onClick={() => approveRequest(req.id)}>Approve</button>
+                    <button className="product-btn-danger" onClick={() => rejectRequest(req.id)}>Reject</button>
                   </div>
                 </div>
               </div>
@@ -103,27 +107,27 @@ export default function ProductCatalog() {
       )}
 
       {/* Approved Products */}
-      <div className="grid">
+      <div className="product-grid">
         {products.map(product => (
-          <div key={product.id} className={`card ${!product.enabled ? "disabled" : ""}`}>
-            <img src={productImages[product.type]} alt={product.name} className="card-img" />
-            <div className="card-body">
-              <div className="card-header">
+          <div key={product.id} className={`product-card ${!product.enabled ? "product-disabled" : ""}`}>
+            <img src={productImages[product.type]} alt={product.name} className="product-card-img" />
+            <div className="product-card-body">
+              <div className="product-card-header">
                 <div>
                   <h4>{product.name}</h4>
                   <small>{product.type}</small>
                 </div>
-                <span className={`badge ${riskColors[product.risk]}`}>{product.risk}</span>
+                <span className={riskColors[product.risk]}>{product.risk}</span>
               </div>
               <p><strong>Expected Returns:</strong> {product.returns}</p>
               <p><strong>Min Investment:</strong> {product.price}</p>
-              <button className={`btn-full ${product.enabled ? "btn-danger" : "btn-secondary"}`}>
+              <button className={`product-btn-full ${product.enabled ? "product-btn-danger" : "product-btn-secondary"}`}>
                 {product.enabled ? "Invest Now" : "Disabled"}
               </button>
-              <div className="actions">
-                <button className="btn-primary" onClick={() => handleShow(product)}>Edit</button>
-                <button className="btn-danger" onClick={() => handleDelete(product.id)}>Delete</button>
-                <button className={product.enabled ? "btn-success" : "btn-secondary"} onClick={() => toggleEnable(product.id)}>
+              <div className="product-actions">
+                <button className="product-btn-primary" onClick={() => handleShow(product)}>Edit</button>
+                <button className="product-btn-danger" onClick={() => handleDelete(product.id)}>Delete</button>
+                <button className={product.enabled ? "product-btn-success" : "product-btn-secondary"} onClick={() => toggleEnable(product.id)}>
                   {product.enabled ? "Disable" : "Enable"}
                 </button>
               </div>
@@ -134,13 +138,13 @@ export default function ProductCatalog() {
 
       {/* Modal */}
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-box">
-            <div className="modal-header">
+        <div className="product-modal-overlay">
+          <div className="product-modal-box">
+            <div className="product-modal-header">
               <h4>{editProduct ? "Edit Product" : "Add Product"}</h4>
-              <button className="modal-close" onClick={handleClose}>✕</button>
+              <button className="product-modal-close" onClick={handleClose}>✕</button>
             </div>
-            <div className="modal-body">
+            <div className="product-modal-body">
               <label>Product Name</label>
               <input type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
               <label>Type</label>
@@ -165,9 +169,9 @@ export default function ProductCatalog() {
                 Enable Product
               </label>
             </div>
-            <div className="modal-footer">
-              <button className="btn-secondary" onClick={handleClose}>Cancel</button>
-              <button className="btn-primary" onClick={handleSave}>{editProduct ? "Update" : "Add"}</button>
+            <div className="product-modal-footer">
+              <button className="product-btn-secondary" onClick={handleClose}>Cancel</button>
+              <button className="product-btn-primary" onClick={handleSave}>{editProduct ? "Update" : "Add"}</button>
             </div>
           </div>
         </div>
