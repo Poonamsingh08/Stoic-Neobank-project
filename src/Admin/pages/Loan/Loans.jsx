@@ -11,7 +11,6 @@ const Loans = () => {
   const rowsPerPage = 5;
 
   useEffect(() => {
-    // Mock data
     setLoans([
       {
         LoanID: "L001",
@@ -76,15 +75,15 @@ const Loans = () => {
   );
 
   return (
-    <div className="container full-width">
-      <h1>Loan Management</h1>
+    <div className="loans-container">
+      <h1 className="loans-header">Loan Management</h1>
 
       {/* Tabs */}
-      <div className="tabs full-width">
+      <div className="loans-tabs">
         {["applications", "accounts"].map((tab) => (
           <button
             key={tab}
-            className={activeTab === tab ? "active" : ""}
+            className={`loans-tab-btn ${activeTab === tab ? "active" : ""}`}
             onClick={() => setActiveTab(tab)}
           >
             {tab === "applications" ? "Loan Applications" : "Loan Accounts"}
@@ -93,7 +92,7 @@ const Loans = () => {
       </div>
 
       {/* Filters */}
-      <div className="filters full-width">
+      <div className="loans-filters">
         <input
           type="text"
           placeholder="Search by Loan ID or Customer..."
@@ -102,6 +101,7 @@ const Loans = () => {
             setSearch(e.target.value);
             setCurrentPage(1);
           }}
+          className="loans-search"
         />
         <select
           value={statusFilter}
@@ -109,6 +109,7 @@ const Loans = () => {
             setStatusFilter(e.target.value);
             setCurrentPage(1);
           }}
+          className="loans-status-filter"
         >
           <option value="All">All Status</option>
           <option value="Approved">Approved</option>
@@ -121,8 +122,8 @@ const Loans = () => {
       </div>
 
       {/* Table */}
-      <div className="table-card full-width">
-        <table>
+      <div className="loans-table-card">
+        <table className="loans-table">
           <thead>
             <tr>
               {activeTab === "applications" ? (
@@ -167,7 +168,10 @@ const Loans = () => {
                       <td>{loan.CreditScore}</td>
                       <td>
                         {loan.DocumentsVerified && loan.documents.length > 0 ? (
-                          <button onClick={() => setSelectedDocs(loan.documents)}>
+                          <button
+                            className="loans-view-docs-btn"
+                            onClick={() => setSelectedDocs(loan.documents)}
+                          >
                             View Docs
                           </button>
                         ) : (
@@ -176,13 +180,13 @@ const Loans = () => {
                       </td>
                       <td>{loan.EligibilityCheck}</td>
                       <td>
-                        <span className={`status ${loan.Status.toLowerCase()}`}>
+                        <span className={`loans-status ${loan.Status.toLowerCase()}`}>
                           {loan.Status}
                         </span>
                       </td>
                       <td>
-                        <div className="action-buttons">
-                          {["Approved", "Rejected", "Sanction", "Disburse", "Reschedule", "NPA"].map((act) => (
+                        <div className="loans-action-buttons">
+                          {["Approved","Rejected","Sanction","Disburse","Reschedule","NPA"].map((act) => (
                             <button key={act} onClick={() => handleAction(loan.LoanID, act)}>
                               {act}
                             </button>
@@ -198,12 +202,12 @@ const Loans = () => {
                       <td>{loan.RepaymentSchedule || "-"}</td>
                       <td>{loan.DefaultAlert ? "Yes" : "No"}</td>
                       <td>
-                        <span className={`status ${loan.Status.toLowerCase()}`}>
+                        <span className={`loans-status ${loan.Status.toLowerCase()}`}>
                           {loan.Status}
                         </span>
                       </td>
                       <td>
-                        <div className="action-buttons">
+                        <div className="loans-action-buttons">
                           <button onClick={() => handleAction(loan.LoanID, "Reschedule")}>Reschedule</button>
                           <button onClick={() => handleAction(loan.LoanID, "NPA")}>Mark NPA</button>
                         </div>
@@ -214,7 +218,7 @@ const Loans = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={activeTab === "applications" ? 9 : 11} className="no-data">
+                <td colSpan={activeTab === "applications" ? 9 : 11} className="loans-no-data">
                   No loans found
                 </td>
               </tr>
@@ -224,14 +228,14 @@ const Loans = () => {
       </div>
 
       {/* Pagination */}
-      <div className="pagination full-width">
+      <div className="loans-pagination">
         <button onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))} disabled={currentPage === 1}>
           Prev
         </button>
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i}
-            className={currentPage === i + 1 ? "active-page" : ""}
+            className={currentPage === i + 1 ? "loans-active-page" : ""}
             onClick={() => setCurrentPage(i + 1)}
           >
             {i + 1}
@@ -247,8 +251,8 @@ const Loans = () => {
 
       {/* Modal */}
       {selectedDocs && (
-        <div className="modal-overlay" onClick={() => setSelectedDocs(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="loans-modal-overlay" onClick={() => setSelectedDocs(null)}>
+          <div className="loans-modal" onClick={(e) => e.stopPropagation()}>
             <h3>User Documents</h3>
             <ul>
               {selectedDocs.map((doc, index) => (
@@ -257,7 +261,7 @@ const Loans = () => {
                 </li>
               ))}
             </ul>
-            <button className="btn-close" onClick={() => setSelectedDocs(null)}>Close</button>
+            <button className="loans-btn-close" onClick={() => setSelectedDocs(null)}>Close</button>
           </div>
         </div>
       )}

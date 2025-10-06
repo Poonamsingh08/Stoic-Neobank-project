@@ -153,16 +153,15 @@ const MoneyTransferRequests = () => {
 <>
    {/* Header */}
       <div
-        className="py-4 text-center shadow-sm"
-        style={{ backgroundColor: "#960603" }}
+        className="container-money"
       >
-        <h1 className="fw-bold fs-2 text-white"> Money Transfer Request</h1>
+        <h1 className=""> Money Transfer Request</h1>
         
       </div>
 
 
 
-    <div className="container">
+    <div className="container-money">
  
  
 
