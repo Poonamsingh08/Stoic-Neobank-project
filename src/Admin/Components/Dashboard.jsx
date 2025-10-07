@@ -9,12 +9,11 @@ export default function Dashboard() {
   return (
     <>
       {/* Header */}
-      <div
-        className="py-4 text-center shadow-sm"
-        style={{ backgroundColor: "#960603" }}
-      >
-        <h1 className="fw-bold fs-2 text-white"> Welcome, Khushavant Wagh! Let’s make today amazing.</h1>
-      </div>
+<div className="dashboard-header">
+  <h3 className="header-title">
+    Welcome, Khushavant Wagh! Let’s make today amazing.
+  </h3>
+</div>
 
       <div className="dashboard">
         <p className="dashboard-sub">

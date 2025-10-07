@@ -113,8 +113,12 @@ const AdminDeposits = () => {
   );
 
   return (
+<>
+     <header className="dashboard-header">
+        <h3>User Management Dashboard</h3>
+      </header>
     <div className="dm-container">
-      <h1>Deposits Management</h1>
+      
 
       {/* Tabs */}
       <div className="dm-tabs">
@@ -172,6 +176,7 @@ const AdminDeposits = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
