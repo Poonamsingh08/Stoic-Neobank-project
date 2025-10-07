@@ -1,0 +1,171 @@
+.kyc-container {
+  min-height: 100vh;
+   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  animation: fadeInBackground 1.5s ease forwards;
+}
+
+@keyframes fadeInBackground {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  color: #ffb3b3;
+}
+
+.kyc-card {
+   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+  border-radius: 24px;
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  animation: fadeInCard 1.2s ease forwards;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.kyc-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.kyc-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.kyc-subtitle {
+  font-size: 16px;
+  color: #ffe6e6;
+}
+
+.video-container {
+  margin-bottom: 24px;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffb3b3;
+}
+
+.recording-indicator {
+  text-align: center;
+  color: white;
+}
+
+.recording-dot {
+  width: 12px;
+  height: 12px;
+  background: #ef4444;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.video-prompt {
+  text-align: center;
+}
+
+.camera-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  color: #ffcccc;
+}
+
+.instructions {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.instructions h3 {
+  color: white;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.instructions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.instructions li {
+  color: #ffe6e6;
+  font-size: 14px;
+  margin-bottom: 4px;
+  padding-left: 16px;
+  position: relative;
+}
+
+.instructions li:before {
+  content: "•";
+  color: #900603;
+  position: absolute;
+  left: 0;
+}
+
+.record-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #900603, #900603);
+  color: white;
+  font-weight: 600;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
+}
+
+.record-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #900603, #900603);
+  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+}
+
+.record-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

@@ -1,162 +1,209 @@
+// React imports
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 // Components
 import Navbar from "./component/Navbar";
 import SplashScreen from "./component/SplashScreen";
 
-// Dashboard
-import DashBoard from "./pages/dashboard/DashBoard";
-import HomePage from "./pages/dashboard/HomePage";
-import AddMoney from "./pages/dashboard/AddMoney";
-import SendMoneyDashboard from "./pages/dashboard/SendMoney";
-import PayBills from "./pages/dashboard/PayBills";
+// Onboarding Context
+import { OnboardingProvider, useOnboarding } from "./context/OnboardingContext";
 
-// MyAccounts Pages
-import MyAccounts from "./pages/MyAccount/MyAccounts";
-import Welcome from "./pages/MyAccount/welcome";
-import UpdateKYC from "./pages/MyAccount/UpdateKYC";
-import AccountStatementForm from "./pages/MyAccount/AccountStatement";
-import AccountClosure from "./pages/MyAccount/AccountClosure";
-import Chequebook from "./pages/MyAccount/Chequebook";
+// Onboarding Pages
+import WelcomeScreen from "./Onboarding/WelcomeScreen.jsx";
+import SignupScreen from "./Onboarding/SignupScreen.jsx";
+import AadharScreen from "./Onboarding/AadharScreen.jsx";
+import PANScreen from "./Onboarding/PANScreen.jsx";
+import AccountTypeScreen from "./Onboarding/AccountTypeScreen.jsx";
+import VideoKYCScreen from "./Onboarding/VideoKYCScreen.jsx";
+
+// Dashboard Pages
+import DashBoard from "./pages/dashboard/DashBoard.jsx";
+import HomePage from "./pages/dashboard/HomePage.jsx";
+import AddMoney from "./pages/dashboard/AddMoney.jsx";
+import SendMoneyDashboard from "./pages/dashboard/SendMoney.jsx";
+import PayBills from "./pages/dashboard/PayBills.jsx";
+
+// MyAccount Pages
+import MyAccounts from "./pages/MyAccount/MyAccounts.jsx";
+import Welcome from "./pages/MyAccount/Welcome.jsx";
+import UpdateKYC from "./pages/MyAccount/UpdateKYC.jsx";
+import AccountStatementForm from "./pages/MyAccount/AccountStatement.jsx";
+import AccountClosure from "./pages/MyAccount/AccountClosure.jsx";
+import Chequebook from "./pages/MyAccount/Chequebook.jsx";
 
 // Loan Pages
-import Loan from "./pages/LOAN/Loan";
-import LoanApplicationForm from "./pages/LOAN/LoanApplicationForm";
-import PersonalLoanForm from "./pages/LOAN/PersonalLoanForm";
-import HomeLoanForm from "./pages/LOAN/HomeLoanForm";
-import CarLoanForm from "./pages/LOAN/CarLoanForm";
-import EducationLoanForm from "./pages/LOAN/EducationLoanForm";
-import GoldLoanForm from "./pages/LOAN/GoldLoanForm";
-import BusinessLoanForm from "./pages/LOAN/BusinessLoanForm";
-import ViewLoanStatement from "./pages/LOAN/ViewLoanStatement";
+import Loan from "./pages/LOAN/Loan.jsx";
+import LoanApplicationForm from "./pages/LOAN/LoanApplicationForm.jsx";
+import PersonalLoanForm from "./pages/LOAN/PersonalLoanForm.jsx";
+import HomeLoanForm from "./pages/LOAN/HomeLoanForm.jsx";
+import CarLoanForm from "./pages/LOAN/CarLoanForm.jsx";
+import EducationLoanForm from "./pages/LOAN/EducationLoanForm.jsx";
+import GoldLoanForm from "./pages/LOAN/GoldLoanForm.jsx";
+import BusinessLoanForm from "./pages/LOAN/BusinessLoanForm.jsx";
+import ViewLoanStatement from "./pages/LOAN/ViewLoanStatement.jsx";
 
 // Services & Deposits Pages
-import Services from "./pages/Services/Services";
-import DepositsPage from "./pages/Deposits/DepositsPage";
-import FixedDepositForm from "./pages/Deposits/FixedDepositForm";
-import RDPage from "./pages/Deposits/RDPage";
-import FdCalculator from "./pages/Deposits/FdCalculator";
-import TaxSaverFD from "./pages/Deposits/TaxSaverFD";
+import Services from "./pages/Services/Services.jsx";
+import DepositsPage from "./pages/Deposits/DepositsPage.jsx";
+import FixedDepositForm from "./pages/Deposits/FixedDepositForm.jsx";
+import RDPage from "./pages/Deposits/RDPage.jsx";
+import FdCalculator from "./pages/Deposits/FdCalculator.jsx";
+import TaxSaverFD from "./pages/Deposits/TaxSaverFD.jsx";
 
 // Investment Pages
-import Investment from "./pages/Investment/Investment";
-import AddGoal from "./pages/Investment/AddGoal";
+import Investment from "./pages/Investment/Investment.jsx";
+import AddGoal from "./pages/Investment/AddGoal.jsx";
 
-// Settings
-import Setting from "./pages/SETTINGS/setting";
-import NotificationsPage from "./pages/SETTINGS/NotificationsPage";
-import GeneralSettings from "./pages/SETTINGS/GeneralSettings";
-import PersonalDetails from "./pages/SETTINGS/PersonalDetails";
+// Settings Pages
+import Setting from "./pages/SETTINGS/Setting.jsx";
+import NotificationsPage from "./pages/SETTINGS/NotificationsPage.jsx";
+import GeneralSettings from "./pages/SETTINGS/GeneralSettings.jsx";
+import PersonalDetails from "./pages/SETTINGS/PersonalDetails.jsx";
 
-// Money-transfer
-import MoneyTransfer from "./pages/Money-Transfer/MoneyTransfer";
-import DomesticTransfer from "./pages/Money-Transfer/DomesticTransfer";
-import SendMoneyTransfer from "./pages/Money-Transfer/SendMoney";
-import Kyc from "./pages/Money-Transfer/Kyc";
-import Bills from "./pages/Money-Transfer/Bills";
-import History from "./pages/Money-Transfer/History";
-import NEFTFormPage from "./pages/Money-Transfer/NEFTFormPage";
-import RtgsForm from "./pages/Money-Transfer/RtgsForm";
-import ImpsForm from "./pages/Money-Transfer/ImpsForm";
-import InternationalTransferPage from "./pages/Money-Transfer/InternationalTransferPage";
+// Money Transfer Pages
+import MoneyTransfer from "./pages/Money-Transfer/MoneyTransfer.jsx";
+import DomesticTransfer from "./pages/Money-Transfer/DomesticTransfer.jsx";
+import SendMoneyTransfer from "./pages/Money-Transfer/SendMoney.jsx";
+import Kyc from "./pages/Money-Transfer/Kyc.jsx";
+import Bills from "./pages/Money-Transfer/Bills.jsx";
+import History from "./pages/Money-Transfer/History.jsx";
+import NEFTFormPage from "./pages/Money-Transfer/NEFTFormPage.jsx";
+import RtgsForm from "./pages/Money-Transfer/RtgsForm.jsx";
+import ImpsForm from "./pages/Money-Transfer/ImpsForm.jsx";
+import InternationalTransferPage from "./pages/Money-Transfer/InternationalTransferPage.jsx";
 
-// Cards
-import ClientCard from "./pages/cards/ClientCard";
-import ApplyNewCard from "./pages/cards/ApplyNewCard";
+// Cards Pages
+import ClientCard from "./pages/cards/ClientCard.jsx";
+import ApplyNewCard from "./pages/cards/ApplyNewCard.jsx";
 
 // Complaint & Feedback
 import ComplaintFeedback from "./pages/Complaint & Feedback/ComplaintFeedback";
 import EmailSupport from "./pages/Complaint & Feedback/EmailSupport";
 
-import Profile from "./pages/Profile/Profile";
+// Profile
+import Profile from "./pages/Profile/Profile.jsx";
 
-
-const ClientApp = () => {
+// ------------------- Onboarding Flow -------------------
+function OnboardingFlow({ onComplete }) {
   const [showSplash, setShowSplash] = useState(true);
+  
+    if (showSplash) {
+      return <SplashScreen onFinish={() => setShowSplash(false)} />;
+    }
+  const { currentStep } = useOnboarding();
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
+  switch (currentStep) {
+    case "welcome":
+      return <WelcomeScreen />;
+    case "signup":
+      return <SignupScreen />;
+    case "aadhar":
+      return <AadharScreen />;
+    case "pan":
+      return <PANScreen />;
+    case "account-type":
+      return <AccountTypeScreen />;
+    case "kyc":
+      return <VideoKYCScreen onComplete={onComplete} />;
+    default:
+      return <WelcomeScreen />;
+  }
+}
 
-  if (showSplash) return <SplashScreen />;
+// ------------------- Main App -------------------
+function MainApp() {
+  
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
-         {/* Profile Page */}
-        <Route path="/profile" element={<Profile />} /> 
+        {/* Profile */}
+        <Route path="/profile" element={<Profile />} />
 
         {/* Dashboard */}
         <Route path="/" element={<DashBoard />} />
-        <Route path="homepage" element={<HomePage />} />
-        <Route path="add-money" element={<AddMoney />} />
-        <Route path="send-money" element={<SendMoneyDashboard />} />
-        <Route path="pay-bills" element={<PayBills />} />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/add-money" element={<AddMoney />} />
+        <Route path="/send-money" element={<SendMoneyDashboard />} />
+        <Route path="/pay-bills" element={<PayBills />} />
 
-        {/* My Accounts */}
-        <Route path="myAccount" element={<MyAccounts />} />
-        <Route path="welcome" element={<Welcome />} />
-        <Route path="update-kyc" element={<UpdateKYC />} />
-        <Route path="account-statement" element={<AccountStatementForm />} />
-        <Route path="close-account" element={<AccountClosure />} />
-        <Route path="chequebook" element={<Chequebook />} />
+        {/* MyAccount */}
+        <Route path="/myAccount" element={<MyAccounts />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/update-kyc" element={<UpdateKYC />} />
+        <Route path="/account-statement" element={<AccountStatementForm />} />
+        <Route path="/close-account" element={<AccountClosure />} />
+        <Route path="/chequebook" element={<Chequebook />} />
 
         {/* Loan */}
-        <Route path="loan" element={<Loan />} />
-        <Route path="apply-loan" element={<LoanApplicationForm />} />
-        <Route path="personal-loan" element={<PersonalLoanForm />} />
-        <Route path="home-loan" element={<HomeLoanForm />} />
-        <Route path="car-loan" element={<CarLoanForm />} />
-        <Route path="education-loan" element={<EducationLoanForm />} />
-        <Route path="gold-loan" element={<GoldLoanForm />} />
-        <Route path="business-loan" element={<BusinessLoanForm />} />
-        <Route path="view-loan-statement" element={<ViewLoanStatement />} />
+        <Route path="/loan" element={<Loan />} />
+        <Route path="/apply-loan" element={<LoanApplicationForm />} />
+        <Route path="/personal-loan" element={<PersonalLoanForm />} />
+        <Route path="/home-loan" element={<HomeLoanForm />} />
+        <Route path="/car-loan" element={<CarLoanForm />} />
+        <Route path="/education-loan" element={<EducationLoanForm />} />
+        <Route path="/gold-loan" element={<GoldLoanForm />} />
+        <Route path="/business-loan" element={<BusinessLoanForm />} />
+        <Route path="/view-loan-statement" element={<ViewLoanStatement />} />
 
         {/* Services */}
-        <Route path="services" element={<Services />} />
+        <Route path="/services" element={<Services />} />
 
         {/* Deposits */}
-        <Route path="deposit" element={<DepositsPage />} />
-        <Route path="fd-calculator" element={<FdCalculator />} />
-        <Route path="fixed-deposit" element={<FixedDepositForm />} />
-        <Route path="recurring-deposit" element={<RDPage />} />
-        <Route path="tax-saver-fd11" element={<TaxSaverFD />} />
+        <Route path="/deposit" element={<DepositsPage />} />
+        <Route path="/fd-calculator" element={<FdCalculator />} />
+        <Route path="/fixed-deposit" element={<FixedDepositForm />} />
+        <Route path="/recurring-deposit" element={<RDPage />} />
+        <Route path="/tax-saver-fd" element={<TaxSaverFD />} />
 
         {/* Investment */}
-        <Route path="investment" element={<Investment />} />
-        <Route path="add-goal" element={<AddGoal />} />
+        <Route path="/investment" element={<Investment />} />
+        <Route path="/add-goal" element={<AddGoal />} />
 
         {/* Settings */}
-        <Route path="setting" element={<Setting />} />
-        <Route path="notifications" element={<NotificationsPage />} />
-        <Route path="GeneralSettings" element={<GeneralSettings />} />
-        <Route path="personal-details" element={<PersonalDetails />} />
+        <Route path="/setting" element={<Setting />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/general-settings" element={<GeneralSettings />} />
+        <Route path="/personal-details" element={<PersonalDetails />} />
 
-        {/* Money-transfer */}
-        <Route path="money-transfer" element={<MoneyTransfer />} />
-        <Route path="money-transfer/send" element={<SendMoneyTransfer />} />
-        <Route path="kyc" element={<Kyc />} />
-        <Route path="pay-bills-transfer" element={<Bills />} />
-        <Route path="history" element={<History />} />
-        <Route path="neft" element={<NEFTFormPage />} />
-        <Route path="rtgs" element={<RtgsForm />} />
-        <Route path="imps" element={<ImpsForm />} />
-        <Route path="domestic-transfers" element={<DomesticTransfer />} />
-        <Route path="international-transfer" element={<InternationalTransferPage />} />
+        {/* Money Transfer */}
+        <Route path="/money-transfer" element={<MoneyTransfer />} />
+        <Route path="/money-transfer/send" element={<SendMoneyTransfer />} />
+        <Route path="/kyc" element={<Kyc />} />
+        <Route path="/pay-bills-transfer" element={<Bills />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/neft" element={<NEFTFormPage />} />
+        <Route path="/rtgs" element={<RtgsForm />} />
+        <Route path="/imps" element={<ImpsForm />} />
+        <Route path="/domestic-transfers" element={<DomesticTransfer />} />
+        <Route path="/international-transfer" element={<InternationalTransferPage />} />
 
         {/* Cards */}
-        <Route path="cards" element={<ClientCard />} />
-        <Route path="applynewcard" element={<ApplyNewCard />} />
+        <Route path="/cards" element={<ClientCard />} />
+        <Route path="/applynewcard" element={<ApplyNewCard />} />
 
         {/* Complaint & Feedback */}
-        <Route path="complaintfeedback" element={<ComplaintFeedback />} />
-        <Route path="email-support" element={<EmailSupport />} />
-       
+        <Route path="/complaintfeedback" element={<ComplaintFeedback />} />
+        <Route path="/email-support" element={<EmailSupport />} />
       </Routes>
     </div>
+  );
+}
+
+// ------------------- ClientApp -------------------
+const ClientApp = () => {
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
+
+  return (
+    <OnboardingProvider>
+      {!onboardingComplete ? (
+        <OnboardingFlow onComplete={() => setOnboardingComplete(true)} />
+      ) : (
+        <MainApp />
+      )}
+    </OnboardingProvider>
   );
 };
 

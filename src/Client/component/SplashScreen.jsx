@@ -9,7 +9,7 @@ export default function SplashScreen({ onFinish }) {
 
   useEffect(() => {
     // Stage 1 → Loading bar (2s)
-    const timer1 = setTimeout(() => setStage(2), 1000);
+    const timer1 = setTimeout(() => setStage(2), 2000);
 
     // Stage 2 → Fly logo to navbar (after 2s of welcome)
     const timer2 = setTimeout(() => {
@@ -21,7 +21,7 @@ export default function SplashScreen({ onFinish }) {
     // Stage 3 → Exit splash completely (after logo lands)
     const timer3 = setTimeout(() => {
       if (onFinish) onFinish();
-    }, 4000); // total 6s
+    }, 6000); // total 6s
 
     return () => {
       clearTimeout(timer1);
