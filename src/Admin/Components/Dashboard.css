@@ -1,5 +1,4 @@
-/* ✅ Full-width Welcome Banner */
-/* Reset default body/html spacing */
+/* Reset */
 html,
 body {
   margin: 0;
@@ -7,108 +6,138 @@ body {
   box-sizing: border-box;
 }
 
-.dashboard {
+/* ============================= */
+/* Welcome Banner (Above Header) */
+/* ============================= */
+.neoDash-welcomeBanner {
+  background-color: #fff;
+  text-align: center;
+  padding: 25px 0 10px;
+}
+
+.neoDash-welcomeText {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.neoDash-username {
+  color: #950606;
+}
+
+/* ============================= */
+/* Header Bar (Red Line Section) */
+/* ============================= */
+.neoDash-header {
+  background-color: #960603;
+  color: #fff;
+  padding: 16px 0;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================= */
+/* Main Container */
+/* ============================= */
+.neoDash-container {
   padding: 20px;
 }
 
-.dashboard-title {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.dashboard-sub {
+.neoDash-sub {
   font-size: 16px;
-  /* normal size for rest of the text */
   color: #333;
-  /* normal dark text */
+  text-align: center;
 }
 
-.dashboard-sub .highlight {
+.neoDash-highlight {
   color: #950606;
-  /* red color */
   font-size: 24px;
-  /* bigger */
   font-weight: bold;
 }
 
-/* Stats */
-.stats-grid {
+/* ============================= */
+/* Stats Section */
+/* ============================= */
+.neoDash-statsGrid {
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
 }
 
-.stat-card {
+.neoDash-statCard {
   flex: 1;
   background: white;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
   color: #333;
-  /* default text color */
 }
 
-.stat-card:hover {
+.neoDash-statCard:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
   background: #950606;
-  /* 🔴 full background */
   color: #fff;
-  /* make text white for contrast */
 }
 
-.stat-card:hover h3,
-.stat-card:hover .stat-value,
-.stat-card:hover .stat-change {
+.neoDash-statCard:hover h3,
+.neoDash-statCard:hover .neoDash-statValue,
+.neoDash-statCard:hover .neoDash-statChange {
   color: #fff;
-  /* ensure all text is visible */
 }
 
-.stat-value {
+.neoDash-statValue {
   font-size: 1.8rem;
   font-weight: bold;
 }
 
-.stat-change {
+.neoDash-statChange {
   color: #666;
   font-size: 0.9rem;
 }
 
+.neoDash-clickable {
+  cursor: pointer;
+}
+
+/* ============================= */
 /* Quick Actions */
-.section-title {
+/* ============================= */
+.neoDash-sectionTitle {
   margin: 20px 0 10px;
   font-size: 1.3rem;
   font-weight: 600;
 }
 
-.quick-actions {
+.neoDash-quickActions {
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
 }
 
-.action-card {
+.neoDash-actionCard {
   flex: 1;
   background: white;
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.action-card:hover {
+.neoDash-actionCard:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
-.action-header {
+.neoDash-actionHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.badge {
+.neoDash-badge {
   background: #f8c7c7;
   color: #950606;
   padding: 4px 10px;
@@ -117,7 +146,7 @@ body {
   font-weight: bold;
 }
 
-.action-btn {
+.neoDash-actionBtn {
   background: #950606;
   color: white;
   padding: 8px 14px;
@@ -129,19 +158,21 @@ body {
   transition: background 0.3s;
 }
 
-.action-btn:hover {
+.neoDash-actionBtn:hover {
   background: #750505;
 }
 
-/* Bottom Section Layout */
-.bottom-grid {
+/* ============================= */
+/* Bottom Section: Transactions + Alerts */
+/* ============================= */
+.neoDash-bottomGrid {
   display: flex;
   gap: 20px;
   margin-top: 20px;
 }
 
-/* Recent Transactions */
-.recent-transactions {
+.neoDash-transactions,
+.neoDash-alerts {
   flex: 1;
   background: white;
   padding: 20px;
@@ -149,13 +180,14 @@ body {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-.transaction-list {
+/* Transactions */
+.neoDash-txnList {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.transaction-list li {
+.neoDash-txnList li {
   display: grid;
   grid-template-columns: 80px 100px 1fr 100px 100px;
   align-items: center;
@@ -164,58 +196,45 @@ body {
   font-size: 0.95rem;
 }
 
-.transaction-list li:last-child {
+.neoDash-txnList li:last-child {
   border-bottom: none;
 }
 
-.transaction-list strong {
-  font-weight: 600;
-  color: #333;
-}
-
-.transaction-list p {
-  margin: 0;
-  color: #444;
-}
-
-.amount {
+.neoDash-amount {
   font-weight: bold;
   color: #111;
 }
 
-.time {
+.neoDash-time {
   font-size: 0.8rem;
   color: #777;
   text-align: right;
 }
 
-/* Transaction Status Tags */
-.tag {
+.neoDash-tag {
   padding: 4px 10px;
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: capitalize;
   display: inline-block;
-  text-align: center;
 }
 
-.tag.pending {
+.neoDash-pending {
   background: #fff3cd;
   color: #856404;
 }
 
-.tag.flagged {
+.neoDash-flagged {
   background: #f8d7da;
   color: #721c24;
 }
 
-.tag.approved {
+.neoDash-approved {
   background: #d4edda;
   color: #155724;
 }
 
-.view-all {
+.neoDash-viewAll {
   margin-top: 12px;
   background: #950606;
   color: white;
@@ -227,26 +246,18 @@ body {
   transition: background 0.3s;
 }
 
-.view-all:hover {
+.neoDash-viewAll:hover {
   background: #750505;
 }
 
-/* System Alerts */
-.system-alerts {
-  flex: 1;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-}
-
-.alert-list {
+/* Alerts */
+.neoDash-alertList {
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
-.alert-list li {
+.neoDash-alertList li {
   padding: 14px 12px;
   margin-bottom: 12px;
   background: #fafafa;
@@ -257,21 +268,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.alert-list li:last-child {
-  margin-bottom: 0;
-}
-
-.alert-list strong {
-  font-weight: 600;
-  color: #222;
-}
-
-.alert-list .time {
-  font-size: 0.8rem;
-  color: #777;
-}
-
-.alert-btn {
+.neoDash-alertBtn {
   align-self: flex-start;
   background: #950606;
   color: white;
@@ -283,12 +280,12 @@ body {
   transition: background 0.3s;
 }
 
-.alert-btn:hover {
+.neoDash-alertBtn:hover {
   background: #750505;
 }
 
-/* Alert status dots */
-.dot {
+/* Dots */
+.neoDash-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -296,300 +293,83 @@ body {
   margin-right: 6px;
 }
 
-.dot.red {
+.neoDash-red {
   background: red;
 }
-
-.dot.orange {
+.neoDash-orange {
   background: orange;
 }
-
-.dot.green {
+.neoDash-green {
   background: green;
 }
 
-/* Make stat cards clickable */
-.stat-card.clickable {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.stat-card.clickable:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-}
-
-/* ✅ Credit Card Section */
-.credit-cards {
-  margin: 40px 0;
-}
-
-.cards-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-/* Credit Card Box */
-.credit-card {
-  flex: 1;
-  min-width: 280px;
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  text-align: center;
-  overflow: hidden;
-}
-
-/* Subtle gradient overlay for style */
-.credit-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top left, rgba(149, 6, 6, 0.05), transparent 70%);
-  pointer-events: none;
-  border-radius: 18px;
-}
-
-.credit-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Ribbon Banner */
-.card-banner {
-  position: absolute;
-  top: 12px;
-  left: -10px;
-  background: #ff6600;
-  color: #fff;
-  padding: 6px 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  transform: rotate(-8deg);
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.card-banner.hot {
-  background: #ff3d00;
-}
-
-.card-banner.popular {
-  background: #d00000;
-}
-
-/* Card Image */
-.card-img {
-  width: 100%;
-  max-width: 300px;
-  margin: 20px auto;
-  background: #fff;
-  /* ✅ Full white background */
-  border-radius: 14px;
-  /* padding: 12px; */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-img:hover {
-  transform: scale(1.05) rotate(-1deg);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
-}
-
-/* Card Title */
-.credit-card h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-top: 16px;
-  color: #222;
-}
-
-/* Best For */
-.best-for {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #28a745;
-  margin: 8px 0;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-/* Subtitle */
-.card-sub {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 22px;
-  line-height: 1.4;
-}
-
-/* Actions */
-.card-actions {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-}
-
-.apply-btn,
-.details-btn {
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.apply-btn {
-  background: #950606;
-  color: #fff;
-  box-shadow: 0 3px 10px rgba(149, 6, 6, 0.25);
-}
-
-.apply-btn:hover {
-  background: #750505;
-  box-shadow: 0 5px 15px rgba(117, 5, 5, 0.3);
-}
-
-.details-btn {
-  background: #f1f1f1;
-  color: #333;
-  border: 1px solid #ddd;
-}
-
-.details-btn:hover {
-  background: #e7e7e7;
-  border-color: #bbb;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .cards-grid {
-    flex-direction: column;
-  }
-}
-
-/* Mobile Responsive CSS */
-/* ✅ Tablets (up to 1024px) */
+/* ============================= */
+/* Responsive Design */
+/* ============================= */
 @media (max-width: 1024px) {
-
-  .stats-grid,
-  .quick-actions,
-  .bottom-grid {
+  .neoDash-statsGrid,
+  .neoDash-quickActions,
+  .neoDash-bottomGrid {
     flex-direction: column;
-    /* stack vertically */
   }
 
-  .stat-card,
-  .action-card,
-  .recent-transactions,
-  .system-alerts {
-    width: 100%;
-  }
-
-  .transaction-list li {
+  .neoDash-txnList li {
     grid-template-columns: 70px 1fr 1fr;
-    /* simplify layout */
     font-size: 0.85rem;
   }
 }
 
-/* ✅ Mobile (up to 768px) */
 @media (max-width: 768px) {
-  .dashboard {
+  .neoDash-container {
     padding: 12px;
   }
 
-  .dashboard-title {
-    font-size: 1.6rem;
-    text-align: center;
+  .neoDash-welcomeText {
+    font-size: 1.2rem;
   }
 
-  .dashboard-sub {
+  .neoDash-sub {
     font-size: 14px;
-    text-align: center;
   }
 
-  .stats-grid {
+  .neoDash-statsGrid {
     gap: 12px;
   }
 
-  .stat-card {
+  .neoDash-statCard {
     padding: 16px;
     text-align: center;
   }
 
-  .transaction-list li {
+  .neoDash-txnList li {
     grid-template-columns: 1fr 1fr;
-    /* only show essential info */
     padding: 10px 6px;
   }
 
-  .transaction-list strong,
-  .amount {
-    font-size: 0.9rem;
-  }
-
-  .quick-actions {
+  .neoDash-quickActions {
     flex-direction: column;
   }
 
-  .action-card {
+  .neoDash-actionCard {
     padding: 14px;
-  }
-
-  .card-img {
-    max-width: 100%;
-    /* shrink image properly */
-  }
-
-  .card-actions {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .apply-btn,
-  .details-btn {
-    width: 100%;
-    /* full width buttons on mobile */
   }
 }
 
-/* ✅ Small phones (up to 480px) */
 @media (max-width: 480px) {
-  .dashboard-title {
-    font-size: 1.3rem;
+  .neoDash-welcomeText {
+    font-size: 1rem;
   }
 
-  .dashboard-sub .highlight {
+  .neoDash-sub .neoDash-highlight {
     font-size: 18px;
   }
 
-  .transaction-list li {
+  .neoDash-txnList li {
     grid-template-columns: 1fr;
-    /* stack everything */
     text-align: left;
   }
 
-  .stat-card {
+  .neoDash-statCard {
     font-size: 0.9rem;
-  }
-
-  .credit-card {
-    padding: 16px;
-  }
-
-  .credit-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .card-sub {
-    font-size: 0.85rem;
   }
 }
