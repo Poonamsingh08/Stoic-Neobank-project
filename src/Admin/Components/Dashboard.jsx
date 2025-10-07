@@ -8,16 +8,16 @@ export default function Dashboard() {
 
   return (
     <>
+      {/* ===== Welcome Banner ===== */}
+      <div className="neoDash-welcomeBanner">
+        <h2 className="neoDash-welcomeText">
+          Welcome, <span className="neoDash-username">Khushavant Wagh</span> 👋
+        </h2>
+      </div>
+
       {/* ===== Red Header Bar ===== */}
-      <div
-        className="neoDash-header py-4 text-center shadow-sm"
-        style={{ backgroundColor: "#960603" }}
-      >
-        <h1 className="fw-bold fs-2 text-white">
-          Welcome,{" "}
-          <span className="fw-bold fs-2 text-white">Khushavant Wagh!</span>{" "}
-          Let’s make today amazing.
-        </h1>
+      <div className="neoDash-header">
+        <h1 className="neoDash-headerText">Let’s make today amazing.</h1>
       </div>
 
       {/* ===== Main Content ===== */}
