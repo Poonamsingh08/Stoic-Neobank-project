@@ -206,7 +206,7 @@ const AccountsDashboard = () => {
 <>
       {/* Header */}
       <div className="header">
-        <h1>Accounts & Wallets</h1>
+        <h2>Accounts & Wallets</h2>
         <p>Manage customer accounts, wallets, and financial operations</p>
       </div>
 

@@ -10,7 +10,10 @@
   color: #fff;
   padding: 20px 0;
   margin: 0 0 20px 0;
-  text-align: center;
+  margin-top: 70px;
+  text-align: left;
+  height: 100px;
+  padding-left: 10px;
 }
 
 .page-header h1 {

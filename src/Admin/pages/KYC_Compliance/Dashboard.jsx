@@ -36,7 +36,7 @@ export default function Dashboard() {
       {/* Header */}
       <div className="db-header">
         <div>
-          <h5>KYC & Compliance Dashboard</h5>
+          <h3>KYC & Compliance Dashboard</h3>
           <small>Monitor and manage compliance operations</small>
         </div>
         <small className="db-last-updated">

@@ -8,15 +8,16 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* ===== Welcome Section Above Red Header ===== */}
-
       {/* ===== Red Header Bar ===== */}
       <div
         className="neoDash-header py-4 text-center shadow-sm"
         style={{ backgroundColor: "#960603" }}
       >
-        <h1 className="fw-bold fs-2 text-white"> Welcome, <span className="fw-bold fs-2 text-white">Khushavant Wagh!</span>{" "}
-         Let’s make today amazing.</h1>
+        <h1 className="fw-bold fs-2 text-white">
+          Welcome,{" "}
+          <span className="fw-bold fs-2 text-white">Khushavant Wagh!</span>{" "}
+          Let’s make today amazing.
+        </h1>
       </div>
 
       {/* ===== Main Content ===== */}
@@ -104,6 +105,7 @@ export default function Dashboard() {
 
         {/* ===== Transactions + Alerts ===== */}
         <div className="neoDash-bottomGrid">
+          {/* ===== Recent Transactions ===== */}
           <div className="neoDash-transactions">
             <h2 className="neoDash-sectionTitle">Recent Transactions</h2>
             <p className="neoDash-sectionSub">
@@ -140,6 +142,7 @@ export default function Dashboard() {
             </button>
           </div>
 
+          {/* ===== System Alerts ===== */}
           <div className="neoDash-alerts">
             <h2 className="neoDash-sectionTitle">System Alerts</h2>
             <p className="neoDash-sectionSub">
