@@ -6,7 +6,40 @@ body {
   box-sizing: border-box;
 }
 
+/* ============================= */
+/* Welcome Banner (Above Header) */
+/* ============================= */
+.neoDash-welcomeBanner {
+  background-color: #fff;
+  text-align: center;
+  padding: 25px 0 10px;
+}
+
+.neoDash-welcomeText {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.neoDash-username {
+  color: #950606;
+}
+
+/* ============================= */
+/* Header Bar (Red Line Section) */
+/* ============================= */
+.neoDash-header {
+  background-color: #960603;
+  color: #fff;
+  padding: 16px 0;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================= */
 /* Main Container */
+/* ============================= */
 .neoDash-container {
   padding: 20px;
 }
@@ -14,6 +47,7 @@ body {
 .neoDash-sub {
   font-size: 16px;
   color: #333;
+  text-align: center;
 }
 
 .neoDash-highlight {
@@ -22,7 +56,9 @@ body {
   font-weight: bold;
 }
 
-/* Stats */
+/* ============================= */
+/* Stats Section */
+/* ============================= */
 .neoDash-statsGrid {
   display: flex;
   gap: 20px;
@@ -66,7 +102,9 @@ body {
   cursor: pointer;
 }
 
+/* ============================= */
 /* Quick Actions */
+/* ============================= */
 .neoDash-sectionTitle {
   margin: 20px 0 10px;
   font-size: 1.3rem;
@@ -124,7 +162,9 @@ body {
   background: #750505;
 }
 
-/* Bottom Section */
+/* ============================= */
+/* Bottom Section: Transactions + Alerts */
+/* ============================= */
 .neoDash-bottomGrid {
   display: flex;
   gap: 20px;
@@ -263,7 +303,9 @@ body {
   background: green;
 }
 
-/* Responsive */
+/* ============================= */
+/* Responsive Design */
+/* ============================= */
 @media (max-width: 1024px) {
   .neoDash-statsGrid,
   .neoDash-quickActions,
@@ -282,9 +324,12 @@ body {
     padding: 12px;
   }
 
+  .neoDash-welcomeText {
+    font-size: 1.2rem;
+  }
+
   .neoDash-sub {
     font-size: 14px;
-    text-align: center;
   }
 
   .neoDash-statsGrid {
@@ -311,6 +356,10 @@ body {
 }
 
 @media (max-width: 480px) {
+  .neoDash-welcomeText {
+    font-size: 1rem;
+  }
+
   .neoDash-sub .neoDash-highlight {
     font-size: 18px;
   }

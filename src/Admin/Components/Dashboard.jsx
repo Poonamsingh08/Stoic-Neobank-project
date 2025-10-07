@@ -8,23 +8,25 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* Header */}
+      {/* ===== Welcome Section Above Red Header ===== */}
+
+      {/* ===== Red Header Bar ===== */}
       <div
         className="neoDash-header py-4 text-center shadow-sm"
         style={{ backgroundColor: "#960603" }}
       >
-        <h1 className="fw-bold fs-2 text-white">
-          Welcome, Khushavant Wagh! Let’s make today amazing.
-        </h1>
+        <h1 className="fw-bold fs-2 text-white"> Welcome, <span className="fw-bold fs-2 text-white">Khushavant Wagh!</span>{" "}
+         Let’s make today amazing.</h1>
       </div>
 
+      {/* ===== Main Content ===== */}
       <div className="neoDash-container">
         <p className="neoDash-sub">
           Welcome back! Here's an overview of your{" "}
           <span className="neoDash-highlight">Neo-Bank</span> operations.
         </p>
 
-        {/* Top Stats */}
+        {/* ===== Top Stats ===== */}
         <div className="neoDash-statsGrid">
           <div
             className="neoDash-statCard neoDash-clickable"
@@ -54,7 +56,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* ===== Quick Actions ===== */}
         <h2 className="neoDash-sectionTitle">Quick Actions</h2>
         <div className="neoDash-quickActions">
           <div className="neoDash-actionCard">
@@ -100,7 +102,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Transactions + Alerts */}
+        {/* ===== Transactions + Alerts ===== */}
         <div className="neoDash-bottomGrid">
           <div className="neoDash-transactions">
             <h2 className="neoDash-sectionTitle">Recent Transactions</h2>
