@@ -1,31 +1,29 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { faker } from "@faker-js/faker";
-import {
-  Button,
-  Table,
-  Form,
-  Badge,
-  Pagination,
-  Card,
-  Row,
-  Col,
-  ButtonGroup,
-  Image,
-} from "react-bootstrap";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import UserProfileModal from "./UserProfileModal";
+import "./UserManagement.css"; // updated CSS
 
 const PNB_PRIMARY_COLOR = "#900603";
 const PNB_ACCENT_COLOR = "#ff9800";
 
-const formatCurrency = (amount) => {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-  }).format(amount);
+const formatCurrency = (amount) =>
+  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(amount);
+
+// Hook to detect window width
+const useWindowWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return width;
 };
 
 export default function UserManagement() {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768;
+
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [search, setSearch] = useState("");
@@ -35,16 +33,15 @@ export default function UserManagement() {
   const [selectedIds, setSelectedIds] = useState(new Set());
   const pageSize = 10;
 
+  // Generate dummy users with full details
   useEffect(() => {
     const dummyUsers = Array.from({ length: 50 }).map((_, i) => ({
       id: i + 1,
       name: faker.person.fullName(),
+      fatherName: faker.person.fullName(),
       email: faker.internet.email().toLowerCase(),
       phone: faker.phone.number(),
-      fatherName: faker.person.fullName(),
       address: faker.location.streetAddress(),
-      aadhaar: faker.string.numeric(12),
-      pan: faker.string.alphanumeric(10).toUpperCase(),
       account: `XXXX${faker.finance.accountNumber(8)}`,
       type: faker.helpers.arrayElement(["Savings", "Current", "Salary"]),
       balance: formatCurrency(faker.finance.amount({ min: 5000, max: 200000 })),
@@ -52,20 +49,20 @@ export default function UserManagement() {
       frozen: faker.datatype.boolean(),
       lastLogin: faker.date.recent({ days: 30 }).toISOString(),
       photo: `https://i.pravatar.cc/150?u=${i + 1}`,
-      aadhaarFront: `https://dummyimage.com/600x400/cccccc/000000&text=Aadhaar+Front+${i + 1}`,
-      aadhaarBack: `https://dummyimage.com/600x400/cccccc/000000&text=Aadhaar+Back+${i + 1}`,
-      panCard: `https://dummyimage.com/600x400/cccccc/000000&text=PAN+Card+${i + 1}`,
-      signature: `https://dummyimage.com/600x200/cccccc/000000&text=Signature+${i + 1}`,
+      aadhaar: faker.string.numeric(12), // Fixed
+      aadhaarFront: `https://via.placeholder.com/150?text=Aadhaar+Front+${i + 1}`,
+      aadhaarBack: `https://via.placeholder.com/150?text=Aadhaar+Back+${i + 1}`,
+      pan: faker.string.alphanumeric({ length: 10, casing: "upper" }), // Fixed
+      panCard: `https://via.placeholder.com/150?text=PAN+${i + 1}`,
+      signature: `https://via.placeholder.com/150?text=Signature+${i + 1}`,
       documents: [
-        {
-          name: "Bank Statement",
-          url: `https://dummyimage.com/800x600/cccccc/000000&text=Bank+Statement+${i + 1}`,
-        },
+        { name: "Bank Statement", url: `https://via.placeholder.com/150?text=Statement+${i + 1}` },
       ],
     }));
     setUsers(dummyUsers);
   }, []);
 
+  // Filter and sort users
   const filteredUsers = useMemo(() => {
     let sortableUsers = [...users].filter((u) => {
       const searchText = search.toLowerCase();
@@ -77,6 +74,7 @@ export default function UserManagement() {
       const matchesStatus = statusFilter === "All" || u.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
+
     if (sortConfig.key) {
       sortableUsers.sort((a, b) => {
         let valA = a[sortConfig.key];
@@ -86,6 +84,7 @@ export default function UserManagement() {
         return 0;
       });
     }
+
     return sortableUsers;
   }, [users, search, statusFilter, sortConfig]);
 
@@ -95,38 +94,27 @@ export default function UserManagement() {
   }, [filteredUsers, currentPage, pageSize]);
 
   const totalPages = Math.ceil(filteredUsers.length / pageSize);
-  const handleSort = useCallback(
-    (key) => {
-      setSortConfig((prevConfig) => ({
-        key,
-        direction:
-          prevConfig.key === key && prevConfig.direction === "asc" ? "desc" : "asc",
-      }));
-    },
-    []
-  );
+
+  const handleSort = useCallback((key) => {
+    setSortConfig((prev) => ({
+      key,
+      direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  }, []);
+
   const toggleFreeze = useCallback((userId) => {
-    setUsers((prevUsers) =>
-      prevUsers.map((u) => (u.id === userId ? { ...u, frozen: !u.frozen } : u))
+    setUsers((prev) =>
+      prev.map((u) => (u.id === userId ? { ...u, frozen: !u.frozen } : u))
     );
   }, []);
+
   const toggleStatus = useCallback((userId, currentStatus) => {
     const newStatus = currentStatus === "Active" ? "Suspended" : "Active";
-    setUsers((prevUsers) =>
-      prevUsers.map((u) => (u.id === userId ? { ...u, status: newStatus } : u))
+    setUsers((prev) =>
+      prev.map((u) => (u.id === userId ? { ...u, status: newStatus } : u))
     );
   }, []);
-  const handleUpdateUser = (updatedUser) => {
-    setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
-  };
-  const sortIcon = (key) => {
-    if (sortConfig.key !== key) return <i className="bi bi-arrow-down-up text-muted ms-1"></i>;
-    return sortConfig.direction === "asc" ? (
-      <i className="bi bi-sort-up ms-1"></i>
-    ) : (
-      <i className="bi bi-sort-down ms-1"></i>
-    );
-  };
+
   const toggleSelect = (id) => {
     setSelectedIds((prev) => {
       const newSet = new Set(prev);
@@ -135,6 +123,7 @@ export default function UserManagement() {
       return newSet;
     });
   };
+
   const toggleSelectAll = () => {
     if (pagedUsers.length > 0 && pagedUsers.every((u) => selectedIds.has(u.id))) {
       setSelectedIds((prev) => {
@@ -150,17 +139,18 @@ export default function UserManagement() {
       });
     }
   };
+
   const bulkFreeze = () => {
-    setUsers((prev) =>
-      prev.map((u) => (selectedIds.has(u.id) ? { ...u, frozen: true } : u))
-    );
+    setUsers((prev) => prev.map((u) => (selectedIds.has(u.id) ? { ...u, frozen: true } : u)));
     alert(`Frozen ${selectedIds.size} users!`);
   };
+
   const bulkExport = () => {
     const exportData = users.filter((u) => selectedIds.has(u.id));
     console.log("Exported:", exportData);
     alert(`Exported ${exportData.length} users (check console)`);
   };
+
   const summaryData = useMemo(
     () => ({
       total: users.length,
@@ -171,195 +161,176 @@ export default function UserManagement() {
     [users]
   );
 
+  const sortIcon = (key) => {
+    if (sortConfig.key !== key) return <i className="bi bi-arrow-down-up text-muted ms-1"></i>;
+    return sortConfig.direction === "asc" ? (
+      <i className="bi bi-sort-up ms-1"></i>
+    ) : (
+      <i className="bi bi-sort-down ms-1"></i>
+    );
+  };
+
   return (
-   <div className="container-fluid px-0">  {/* px-0 = remove container padding */}
-  <style>
-    {`
-      .pnb-pagination .page-item.active .page-link {
-        background-color: ${PNB_PRIMARY_COLOR};
-        border-color: ${PNB_PRIMARY_COLOR};
-        color: white;
-      }
-      .pnb-pagination .page-link {
-        color: ${PNB_PRIMARY_COLOR};
-      }
-    `}
-  </style>
+    <>
+      <header className="dashboard-header">
+        <h3>User Management Dashboard</h3>
+      </header>
 
-  {/* Header */}
-      <div
-        className="py-4 text-center shadow-sm"
-        style={{ backgroundColor: "#960603" }}
-      >
-        <h1 className="fw-bold fs-2 text-white">User Management Dashboard</h1>
-        
-      </div>
+      <div className="user-management-container">
+        {/* Summary Cards */}
+        <section className="summary-cards">
+          {[
+            { title: "Total Users", value: summaryData.total, icon: "bi-people-fill", color: PNB_PRIMARY_COLOR },
+            { title: "Active Users", value: summaryData.active, icon: "bi-person-check-fill", color: "#28a745" },
+            { title: "Frozen Accounts", value: summaryData.frozen, icon: "bi-snow", color: "#6c757d" },
+            { title: "Pending KYC", value: summaryData.pending, icon: "bi-card-checklist", color: PNB_ACCENT_COLOR },
+          ].map((card, idx) => (
+            <div className="summary-card" key={idx} style={{ borderLeftColor: card.color }}>
+              <div className="card-content">
+                <div>
+                  <h6>{card.title}</h6>
+                  <h2>{card.value}</h2>
+                </div>
+                <div className="card-icon" style={{ backgroundColor: card.color }}>
+                  <i className={`bi ${card.icon}`}></i>
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
 
-  <Card className="shadow-sm px-0 pt-0 w-100">
-    
-        <Card.Body className="p-3">
-          <Row className="mb-4 g-3">
-            {[
-              { title: "Total Users", value: summaryData.total, icon: "bi-people-fill", color: PNB_PRIMARY_COLOR },
-              { title: "Active Users", value: summaryData.active, icon: "bi-person-check-fill", color: "#28a745" },
-              { title: "Frozen Accounts", value: summaryData.frozen, icon: "bi-snow", color: "#6c757d" },
-              { title: "Pending KYC", value: summaryData.pending, icon: "bi-card-checklist", color: PNB_ACCENT_COLOR },
-            ].map((card, idx) => (
-              <Col md={6} lg={3} key={idx}>
-                <Card className="shadow-sm border-0 border-start border-5" style={{ borderColor: card.color }}>
-                  <Card.Body className="d-flex align-items-center justify-content-between">
-                    <div>
-                      <h6 className="text-muted">{card.title}</h6>
-                      <h2 className="fw-bold mb-0">{card.value}</h2>
-                    </div>
-                    <div
-                      className="d-flex align-items-center justify-content-center rounded-circle text-white"
-                      style={{ width: "50px", height: "50px", fontSize: "1.5rem", backgroundColor: card.color }}
-                    >
-                      <i className={`bi ${card.icon}`}></i>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+        {/* Controls */}
+        <section className="user-controls">
+          <input
+            type="text"
+            placeholder="Search by name, email, phone, account..."
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
+          />
+          <select value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}>
+            <option value="All">All Status</option>
+            <option>Active</option>
+            <option>Pending KYC</option>
+            <option>Suspended</option>
+          </select>
+          <div className="action-buttons">
+            <button onClick={bulkFreeze} disabled={!selectedIds.size}><i className="bi bi-snow"></i> Freeze</button>
+            <button onClick={bulkExport} disabled={!selectedIds.size}><i className="bi bi-download"></i> Export</button>
+          </div>
+        </section>
 
-          <Card className="border">
-            <Card.Header className="bg-white p-3">
-              <Row className="align-items-center g-2">
-                <Col md={6} lg={5}>
-                  <Form.Control
-                    type="text"
-                    placeholder="Search by name, email, phone, account..."
-                    value={search}
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                  />
-                </Col>
-                <Col md={3} lg={2}>
-                  <Form.Select
-                    value={statusFilter}
-                    onChange={(e) => {
-                      setStatusFilter(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <option value="All">All Status</option>
-                    <option>Active</option>
-                    <option>Pending KYC</option>
-                    <option>Suspended</option>
-                  </Form.Select>
-                </Col>
-                <Col md={3} lg={5} className="text-md-end">
-                  <Button
-                    onClick={bulkFreeze}
-                    disabled={!selectedIds.size}
-                    style={{ backgroundColor: PNB_PRIMARY_COLOR, border: "none" }}
-                  >
-                    <i className="bi bi-snow me-1"></i>Freeze
-                  </Button>{" "}
-                  <Button variant="outline-secondary" onClick={bulkExport} disabled={!selectedIds.size}>
-                    <i className="bi bi-download me-1"></i>Export
-                  </Button>
-                </Col>
-              </Row>
-            </Card.Header>
-
-            <Card.Body className="p-0">
-              <Table hover responsive className="m-0">
-                <thead style={{ backgroundColor: PNB_PRIMARY_COLOR, color: "white" }}>
-                  <tr>
-                    <th className="text-center">
-                      <Form.Check
-                        type="checkbox"
-                        onChange={toggleSelectAll}
-                        checked={pagedUsers.length > 0 && pagedUsers.every((u) => selectedIds.has(u.id))}
-                      />
-                    </th>
-                    <th onClick={() => handleSort("name")} style={{ cursor: "pointer" }}>
-                      User {sortIcon("name")}
-                    </th>
-                    <th>Email & Phone</th>
-                    <th>Account & Type</th>
-                    <th onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>
-                      Status {sortIcon("status")}
-                    </th>
-                    <th onClick={() => handleSort("lastLogin")} style={{ cursor: "pointer" }}>
-                      Last Login {sortIcon("lastLogin")}
-                    </th>
-                    <th className="text-center">Actions</th>
+        {/* Table / Mobile Cards */}
+        <div className="user-table-wrapper">
+          {!isMobile ? (
+            <table className="user-table desktop-table">
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      onChange={toggleSelectAll}
+                      checked={pagedUsers.length > 0 && pagedUsers.every(u => selectedIds.has(u.id))}
+                    />
+                  </th>
+                  <th onClick={() => handleSort("name")}>User {sortIcon("name")}</th>
+                  <th>Email & Phone</th>
+                  <th>Account & Type</th>
+                  <th onClick={() => handleSort("status")}>Status {sortIcon("status")}</th>
+                  <th onClick={() => handleSort("lastLogin")}>Last Login {sortIcon("lastLogin")}</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pagedUsers.map((user) => (
+                  <tr key={user.id} className={user.frozen ? "frozen-row" : ""}>
+                    <td><input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} /></td>
+                    <td className="user-info">
+                      <img src={user.photo} alt={user.name} />
+                      <span>{user.name}</span>
+                    </td>
+                    <td>
+                      <div>{user.email}</div>
+                      <div className="text-muted">{user.phone}</div>
+                    </td>
+                    <td>
+                      <div>{user.account}</div>
+                      <div className="text-muted">{user.type}</div>
+                    </td>
+                    <td>
+                      <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
+                      {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                    </td>
+                    <td>{new Date(user.lastLogin).toLocaleDateString("en-GB")}</td>
+                    <td className="action-buttons">
+                      <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
+                      <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
+                        {user.frozen ? "Unfreeze" : "Freeze"}
+                      </button>
+                      <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
+                        {user.status === "Active" ? "Deactivate" : "Activate"}
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {pagedUsers.map((user) => (
-                    <tr key={user.id} className={`align-middle ${user.frozen ? "table-light" : ""}`}>
-                      <td className="text-center">
-                        <Form.Check type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} />
-                      </td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <Image
-                            src={user.photo}
-                            alt={user.name}
-                            roundedCircle
-                            style={{ width: "40px", height: "40px", objectFit: "cover", marginRight: "10px" }}
-                          />
-                          <span className="fw-bold">{user.name}</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div>{user.email}</div>
-                        <div className="small text-muted">{user.phone}</div>
-                      </td>
-                      <td>
-                        <div>{user.account}</div>
-                        <div className="small text-muted">{user.type}</div>
-                      </td>
-                      <td>
-                        <Badge
-                          bg={user.status === "Active" ? "success" : user.status === "Pending KYC" ? "warning" : "danger"}
-                          text={user.status === "Pending KYC" ? "dark" : "light"}
-                        >
-                          {user.status}
-                        </Badge>{" "}
-                        {user.frozen && <Badge bg="secondary">Frozen</Badge>}
-                      </td>
-                      <td>{new Date(user.lastLogin).toLocaleDateString("en-GB")}</td>
-                      <td className="text-center">
-                        <ButtonGroup size="sm">
-                          <Button variant="outline-secondary" onClick={() => setSelectedUser(user)}>
-                            <i className="bi bi-eye-fill"></i>
-                          </Button>
-                          <Button variant={user.frozen ? "success" : "danger"} onClick={() => toggleFreeze(user.id)}>
-                            {user.frozen ? "Unfreeze" : "Freeze"}
-                          </Button>
-                          <Button variant={user.status === "Active" ? "warning" : "info"} onClick={() => toggleStatus(user.id, user.status)}>
-                            {user.status === "Active" ? "Deactivate" : "Activate"}
-                          </Button>
-                        </ButtonGroup>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Card.Body>
-
-            <Card.Footer className="d-flex justify-content-center p-3 bg-white">
-              <Pagination className="pnb-pagination">
-                {[...Array(totalPages).keys()].map((num) => (
-                  <Pagination.Item key={num + 1} active={num + 1 === currentPage} onClick={() => setCurrentPage(num + 1)}>
-                    {num + 1}
-                  </Pagination.Item>
                 ))}
-              </Pagination>
-            </Card.Footer>
-          </Card>
-        </Card.Body>
-      </Card>
+              </tbody>
+            </table>
+          ) : (
+            <div className="mobile-cards">
+              {pagedUsers.map((user) => (
+                <div key={user.id} className="mobile-card">
+                  <div className="card-header">
+                    <input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} />
+                    <img src={user.photo} alt={user.name} />
+                    <span>{user.name}</span>
+                  </div>
+                  <div><strong>Email:</strong> {user.email}</div>
+                  <div><strong>Phone:</strong> {user.phone}</div>
+                  <div><strong>Account:</strong> {user.account}</div>
+                  <div><strong>Type:</strong> {user.type}</div>
+                  <div>
+                    <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
+                    {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                  </div>
+                  <div><strong>Last Login:</strong> {new Date(user.lastLogin).toLocaleDateString("en-GB")}</div>
+                  <div className="action-buttons">
+                    <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
+                    <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
+                      {user.frozen ? "Unfreeze" : "Freeze"}
+                    </button>
+                    <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
+                      {user.status === "Active" ? "Deactivate" : "Activate"}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
-      {selectedUser && <UserProfileModal user={selectedUser} onClose={() => setSelectedUser(null)} onUpdate={handleUpdateUser} />}
-    </div>
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="cl-pagination">
+            <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Prev</button>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button key={i + 1} className={currentPage === i + 1 ? "active" : ""} onClick={() => setCurrentPage(i + 1)}>
+                {i + 1}
+              </button>
+            ))}
+            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
+          </div>
+        )}
+
+        {/* User Modal */}
+        {selectedUser && (
+          <UserProfileModal
+            user={selectedUser}
+            onClose={() => setSelectedUser(null)}
+            onUpdate={(updatedUser) => {
+              setUsers((prev) => prev.map((u) => (u.id === updatedUser.id ? updatedUser : u)));
+            }}
+          />
+        )}
+      </div>
+    </>
   );
 }

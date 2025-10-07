@@ -1,31 +1,35 @@
 import React, { useState } from "react";
-import { Card, ListGroup, Form, Button } from "react-bootstrap";
+import "./TicketChat.css";
 
 export default function TicketChat({ ticket, onSendMessage }) {
   const [msg, setMsg] = useState("");
 
   const send = () => {
-    if(msg.trim()==="") return;
-    onSendMessage(ticket.id, msg);
+    if (!msg.trim()) return;
+    onSendMessage(msg);
     setMsg("");
-  }
+  };
 
   return (
-    <Card className="my-2">
-      <Card.Header>Conversation with {ticket.user}</Card.Header>
-      <Card.Body style={{ maxHeight: "200px", overflowY: "auto" }}>
-        <ListGroup variant="flush">
-          {ticket.messages.map((m,i)=>(
-            <ListGroup.Item key={i} className={m.sender==="User"?"":"text-end bg-light"}>
-              <b>{m.sender}:</b> {m.text}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </Card.Body>
-      <Card.Footer className="d-flex">
-        <Form.Control type="text" placeholder="Type reply..." value={msg} onChange={e=>setMsg(e.target.value)} />
-        <Button className="ms-2" onClick={send}>Send</Button>
-      </Card.Footer>
-    </Card>
+    <div className="tc-chat">
+      <div className="tc-messages">
+        {(ticket.messages || []).map((m, i) => (
+          <div key={i} className={`tc-message ${m.sender === "User" ? "user" : "agent"}`}>
+            <p>{m.text}</p>
+            <small>{m.sender} | {m.time}</small>
+          </div>
+        ))}
+      </div>
+      <div className="tc-reply">
+        <input
+          type="text"
+          placeholder="Type reply..."
+          value={msg}
+          onChange={e => setMsg(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && send()}
+        />
+        <button onClick={send}>Send</button>
+      </div>
+    </div>
   );
 }

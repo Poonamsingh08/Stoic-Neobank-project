@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import ReviewKYC from "./ReviewKYC";
+import ReviewKYC from "./ReviewKYC.jsx";
 import ReviewTransactions from "./ReviewTransactions";
 import ViewAlerts from "./ViewAlerts";
 import Transactions from "./Transactions";

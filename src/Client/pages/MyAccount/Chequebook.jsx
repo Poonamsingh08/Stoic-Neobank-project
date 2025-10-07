@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import {
-  CreditCard,
-  Home,
-  Building,
-  User,
-  MapPin,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
-import { Container, Row, Col, Form, Button, Card, Alert } from "react-bootstrap";
+import {CreditCard,Home,Building,User,MapPin,CheckCircle,AlertCircle} from "lucide-react";
+import "./Chequebook.css"; // Import custom CSS
+import logoWhite from '../../assets/neobank-white.png';
+
 
 function ChequeBookRequest() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -37,246 +31,220 @@ function ChequeBookRequest() {
   const prevStep = () => currentStep > 1 && setCurrentStep(currentStep - 1);
   const handleSubmit = () => setIsSubmitted(true);
 
+  const resetForm = () => {
+    setIsSubmitted(false);
+    setCurrentStep(1);
+    setFormData({
+      accountType: "",
+      accountNumber: "",
+      numberOfBooks: "1",
+      deliveryType: "home",
+      fullName: "",
+      mobileNumber: "",
+      email: "",
+      address: "",
+      city: "",
+      state: "",
+      pincode: "",
+      landmark: "",
+    });
+  };
+
   if (isSubmitted) {
     return (
-      <Container fluid className="py-5" style={{ backgroundColor: "#ffffff", minHeight: "100vh" }}>
-        <Row className="justify-content-center">
-          <Col md={6}>
-            <Card className="p-5 shadow-lg text-center">
-              <div className="bg-success bg-opacity-25 rounded-circle p-4 mb-3 d-inline-flex justify-content-center align-items-center">
-                <CheckCircle className="text-success" size={40} />
-              </div>
-              <h3 className="fw-bold">Request Submitted Successfully!</h3>
-              <p className="text-muted">
-                Your cheque book request has been received. You will receive a confirmation SMS and email shortly.
-              </p>
-              <Alert variant="danger" className="text-start">
-                <p><strong>Request ID:</strong> CB{Math.random().toString().substr(2, 8)}</p>
-                <p><strong>Expected delivery:</strong> 3-5 business days</p>
-              </Alert>
-              <Button
-                variant="danger"
-                className="w-100 rounded-pill fw-semibold"
-                onClick={() => {
-                  setIsSubmitted(false);
-                  setCurrentStep(1);
-                  setFormData({
-                    accountType: "",
-                    accountNumber: "",
-                    numberOfBooks: "1",
-                    deliveryType: "home",
-                    fullName: "",
-                    mobileNumber: "",
-                    email: "",
-                    address: "",
-                    city: "",
-                    state: "",
-                    pincode: "",
-                    landmark: "",
-                  });
-                }}
-              >
-                Make Another Request
-              </Button>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+      <div className="cbr-container">
+        <div className="cbr-center-card">
+          <div className="cbr-success-icon">
+            <CheckCircle className="cbr-check-icon" size={40} />
+          </div>
+          <h3 className="cbr-title">Request Submitted Successfully!</h3>
+          <p className="cbr-subtext">
+            Your cheque book request has been received. You will receive a confirmation SMS and email shortly.
+          </p>
+          <div className="cbr-alert">
+            <p><strong>Request ID:</strong> CB{Math.random().toString().substr(2, 8)}</p>
+            <p><strong>Expected delivery:</strong> 3-5 business days</p>
+          </div>
+          <button className="cbr-btn-danger" onClick={resetForm}>
+            Make Another Request
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Container fluid className="py-5" style={{ backgroundColor: "#ffffff", minHeight: "100vh" }}>
-      <Row className="justify-content-center">
-        <Col md={10} lg={9}>
-          <div className="row shadow-lg rounded-3 w-100" style={{ backgroundColor: "#fff", margin: "0 auto" }}>
-            {/* Left Branding Panel */}
-            <Col md={4} className="d-flex flex-column justify-content-center align-items-center p-4" style={{ backgroundColor: "#e60000", color: "#fff", borderTopLeftRadius: "15px", borderBottomLeftRadius: "15px" }}>
-              <img src="src/assets/neobank-logo.png" alt="Neo Bank Logo" className="img-fluid mb-3" style={{ maxHeight: 120 }} />
-              <h4 className="fw-bold text-center">Neo Bank Cheque Book</h4>
-              <p className="text-light text-center mt-2" style={{ fontSize: "14px" }}>
-                Quick and secure cheque book ordering in just a few steps
-              </p>
-            </Col>
+    <div className="cbr-container">
+      <div className="cbr-form-wrapper">
+        {/* Left Panel */}
+        <div className="cbr-left-panel">
+          <img src={logoWhite} alt="Neo Bank Logo" className="cbr-logo" />
+          <h4 className="cbr-left-title">Neo Bank Cheque Book</h4>
+          <p className="cbr-left-subtitle">
+            Quick and secure cheque book ordering in just a few steps
+          </p>
+        </div>
 
-            {/* Right Form Panel */}
-            <Col md={8} className="p-4">
-              {/* Stepper */}
-              <div className="d-flex justify-content-between align-items-center mb-4 position-relative">
-                {["Account Details", "Personal Info", "Delivery"].map((label, index) => {
-                  const stepNumber = index + 1;
-                  const isActive = currentStep >= stepNumber;
-                  return (
-                    <div key={index} className="flex-fill text-center position-relative">
-                      <div
-                        className={`mx-auto rounded-circle d-flex align-items-center justify-content-center ${isActive ? "bg-danger text-white" : "bg-light text-muted"}`}
-                        style={{ width: 50, height: 50, fontWeight: "bold", fontSize: "18px", zIndex: 1 }}
-                      >
-                        {stepNumber}
-                      </div>
-                      <small className={`d-block mt-2 ${isActive ? "fw-semibold text-dark" : "text-muted"}`}>{label}</small>
-                      {index < 2 && (
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "25px",
-                            right: "-50%",
-                            width: "100%",
-                            height: "4px",
-                            backgroundColor: currentStep > stepNumber ? "#e60000" : "#d1d1d1",
-                            zIndex: 0,
-                          }}
-                        />
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              <Card className="shadow-lg p-4">
-                {/* STEP 1 */}
-                {currentStep === 1 && (
-                  <>
-                    <h4 className="fw-bold mb-3 text-danger"><CreditCard className="me-2" size={20} /> Account Details</h4>
-                    <Form>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Account Type</Form.Label>
-                        <Form.Select name="accountType" value={formData.accountType} onChange={handleInputChange}>
-                          <option value="">Select Account Type</option>
-                          <option value="savings">Savings Account</option>
-                          <option value="current">Current Account</option>
-                          <option value="salary">Salary Account</option>
-                        </Form.Select>
-                      </Form.Group>
-
-                      <Form.Group className="mb-3">
-                        <Form.Label>Account Number</Form.Label>
-                        <Form.Control type="text" name="accountNumber" value={formData.accountNumber} onChange={handleInputChange} placeholder="Enter your account number" />
-                      </Form.Group>
-
-                      <Form.Group className="mb-3">
-                        <Form.Label>Number of Cheque Books</Form.Label>
-                        <Form.Select name="numberOfBooks" value={formData.numberOfBooks} onChange={handleInputChange}>
-                          <option value="1">1 Book (25 leaves)</option>
-                          <option value="2">2 Books (50 leaves)</option>
-                          <option value="3">3 Books (75 leaves)</option>
-                        </Form.Select>
-                      </Form.Group>
-
-                      <Form.Group className="mb-3">
-                        <Form.Label>Delivery Type</Form.Label>
-                        <div className="d-flex gap-3">
-                          <Form.Check type="radio" id="home" name="deliveryType" value="home" checked={formData.deliveryType === "home"} onChange={handleInputChange} label={<><Home className="me-2 text-danger" /> Home Delivery</>} />
-                          <Form.Check type="radio" id="branch" name="deliveryType" value="branch" checked={formData.deliveryType === "branch"} onChange={handleInputChange} label={<><Building className="me-2 text-danger" /> Branch Collection</>} />
-                        </div>
-                      </Form.Group>
-                    </Form>
-                  </>
-                )}
-
-                {/* STEP 2 */}
-                {currentStep === 2 && (
-                  <>
-                    <h4 className="fw-bold mb-3 text-danger"><User className="me-2" size={20} /> Personal Information</h4>
-                    <Form>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Full Name</Form.Label>
-                        <Form.Control type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your full name" />
-                      </Form.Group>
-
-                      <Row>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Mobile Number</Form.Label>
-                            <Form.Control type="tel" name="mobileNumber" value={formData.mobileNumber} onChange={handleInputChange} placeholder="Enter mobile number" />
-                          </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Email Address</Form.Label>
-                            <Form.Control type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Enter email address" />
-                          </Form.Group>
-                        </Col>
-                      </Row>
-
-                      <Alert variant="info">
-                        <AlertCircle className="me-2" size={18} />
-                        <strong>Important:</strong> Please ensure your contact details are up to date for delivery notifications.
-                      </Alert>
-                    </Form>
-                  </>
-                )}
-
-                {/* STEP 3 */}
-                {currentStep === 3 && (
-                  <>
-                    <h4 className="fw-bold mb-3 text-danger"><MapPin className="me-2" size={20} /> Delivery Address</h4>
-                    <Form>
-                      <Form.Group className="mb-3">
-                        <Form.Label>Complete Address</Form.Label>
-                        <Form.Control as="textarea" rows={3} name="address" value={formData.address} onChange={handleInputChange} placeholder="Enter your complete address" />
-                      </Form.Group>
-
-                      <Row>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>City</Form.Label>
-                            <Form.Control type="text" name="city" value={formData.city} onChange={handleInputChange} />
-                          </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>State</Form.Label>
-                            <Form.Control type="text" name="state" value={formData.state} onChange={handleInputChange} />
-                          </Form.Group>
-                        </Col>
-                      </Row>
-
-                      <Row>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>PIN Code</Form.Label>
-                            <Form.Control type="text" name="pincode" value={formData.pincode} onChange={handleInputChange} />
-                          </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Landmark (Optional)</Form.Label>
-                            <Form.Control type="text" name="landmark" value={formData.landmark} onChange={handleInputChange} />
-                          </Form.Group>
-                        </Col>
-                      </Row>
-
-                      <Card className="p-3 mt-3 bg-light">
-                        <h6 className="fw-bold">Request Summary</h6>
-                        <p><strong>Account Type:</strong> {formData.accountType}</p>
-                        <p><strong>Number of Books:</strong> {formData.numberOfBooks} Book(s)</p>
-                        <p><strong>Delivery Type:</strong> {formData.deliveryType === "home" ? "Home Delivery" : "Branch Collection"}</p>
-                        <p><strong>Mobile:</strong> {formData.mobileNumber}</p>
-                      </Card>
-                    </Form>
-                  </>
-                )}
-
-                {/* Navigation Buttons */}
-                <div className="d-flex justify-content-between mt-4">
-                  <Button variant="outline-secondary" disabled={currentStep === 1} onClick={prevStep} className="px-4 py-2 rounded-pill fw-semibold">← Previous</Button>
-                  {currentStep < 3 ? (
-                    <Button style={{ background: "linear-gradient(90deg,#dc3545,#b02a37)", border: "none" }} className="px-4 py-2 rounded-pill fw-semibold" onClick={nextStep}>Next Step →</Button>
-                  ) : (
-                    <Button style={{ background: "linear-gradient(90deg,#198754,#0d6efd)", border: "none" }} className="px-4 py-2 rounded-pill fw-semibold" onClick={handleSubmit}>✅ Submit Request</Button>
+        {/* Right Panel */}
+        <div className="cbr-right-panel">
+          {/* Stepper */}
+          <div className="cbr-stepper">
+            {["Account Details", "Personal Info", "Delivery"].map((label, index) => {
+              const stepNumber = index + 1;
+              const isActive = currentStep >= stepNumber;
+              return (
+                <div key={index} className="cbr-step">
+                  <div className={`cbr-step-circle ${isActive ? "cbr-active-step" : ""}`}>
+                    {stepNumber}
+                  </div>
+                  <small className={`cbr-step-label ${isActive ? "cbr-step-active-label" : ""}`}>
+                    {label}
+                  </small>
+                  {index < 2 && (
+                    <div className={`cbr-step-line ${currentStep > stepNumber ? "cbr-step-line-active" : ""}`} />
                   )}
                 </div>
-              </Card>
-
-              <div className="text-center text-muted mt-3">
-                <small>Need help? Contact our customer support at 1800-XXX-XXXX <br /> Available 24/7 for your assistance</small>
-              </div>
-            </Col>
+              );
+            })}
           </div>
-        </Col>
-      </Row>
-    </Container>
+
+          {/* Form Card */}
+          <div className="cbr-form-card">
+            {/* STEP 1 */}
+            {currentStep === 1 && (
+              <div>
+                <h4 className="cbr-form-title"><CreditCard className="cbr-icon" size={20} /> Account Details</h4>
+                <div className="cbr-form-group">
+                  <label>Account Type</label>
+                  <select name="accountType" value={formData.accountType} onChange={handleInputChange}>
+                    <option value="">Select Account Type</option>
+                    <option value="savings">Savings Account</option>
+                    <option value="current">Current Account</option>
+                    <option value="salary">Salary Account</option>
+                  </select>
+                </div>
+
+                <div className="cbr-form-group">
+                  <label>Account Number</label>
+                  <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleInputChange} placeholder="Enter your account number" />
+                </div>
+
+                <div className="cbr-form-group">
+                  <label>Number of Cheque Books</label>
+                  <select name="numberOfBooks" value={formData.numberOfBooks} onChange={handleInputChange}>
+                    <option value="1">1 Book (25 leaves)</option>
+                    <option value="2">2 Books (50 leaves)</option>
+                    <option value="3">3 Books (75 leaves)</option>
+                  </select>
+                </div>
+
+                <div className="cbr-form-group">
+                  <label>Delivery Type</label>
+                  <div className="cbr-radio-group">
+                    <label className="cbr-radio">
+                      <input type="radio" name="deliveryType" value="home" checked={formData.deliveryType === "home"} onChange={handleInputChange} />
+                      <Home className="cbr-radio-icon" /> Home Delivery
+                    </label>
+                    <label className="cbr-radio">
+                      <input type="radio" name="deliveryType" value="branch" checked={formData.deliveryType === "branch"} onChange={handleInputChange} />
+                      <Building className="cbr-radio-icon" /> Branch Collection
+                    </label>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* STEP 2 */}
+            {currentStep === 2 && (
+              <div>
+                <h4 className="cbr-form-title"><User className="cbr-icon" size={20} /> Personal Information</h4>
+                <div className="cbr-form-group">
+                  <label>Full Name</label>
+                  <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} placeholder="Enter your full name" />
+                </div>
+                <div className="cbr-row">
+                  <div className="cbr-col">
+                    <div className="cbr-form-group">
+                      <label>Mobile Number</label>
+                      <input type="tel" name="mobileNumber" value={formData.mobileNumber} onChange={handleInputChange} placeholder="Enter mobile number" />
+                    </div>
+                  </div>
+                  <div className="cbr-col">
+                    <div className="cbr-form-group">
+                      <label>Email Address</label>
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} placeholder="Enter email address" />
+                    </div>
+                  </div>
+                </div>
+                <div className="cbr-alert-info">
+                  <AlertCircle size={18} /> <strong>Important:</strong> Please ensure your contact details are up to date for delivery notifications.
+                </div>
+              </div>
+            )}
+
+            {/* STEP 3 */}
+            {currentStep === 3 && (
+              <div>
+                <h4 className="cbr-form-title"><MapPin className="cbr-icon" size={20} /> Delivery Address</h4>
+                <div className="cbr-form-group">
+                  <label>Complete Address</label>
+                  <textarea name="address" value={formData.address} onChange={handleInputChange} rows={3} placeholder="Enter your complete address"></textarea>
+                </div>
+                <div className="cbr-row">
+                  <div className="cbr-col">
+                    <div className="cbr-form-group">
+                      <label>City</label>
+                      <input type="text" name="city" value={formData.city} onChange={handleInputChange} />
+                    </div>
+                  </div>
+                  <div className="cbr-col">
+                    <div className="cbr-form-group">
+                      <label>State</label>
+                      <input type="text" name="state" value={formData.state} onChange={handleInputChange} />
+                    </div>
+                  </div>
+                </div>
+                <div className="cbr-row">
+                  <div className="cbr-col">
+                    <div className="cbr-form-group">
+                      <label>PIN Code</label>
+                      <input type="text" name="pincode" value={formData.pincode} onChange={handleInputChange} />
+                    </div>
+                  </div>
+                  <div className="cbr-col">
+                    <div className="cbr-form-group">
+                      <label>Landmark (Optional)</label>
+                      <input type="text" name="landmark" value={formData.landmark} onChange={handleInputChange} />
+                    </div>
+                  </div>
+                </div>
+                <div className="cbr-summary-card">
+                  <h6>Request Summary</h6>
+                  <p><strong>Account Type:</strong> {formData.accountType}</p>
+                  <p><strong>Number of Books:</strong> {formData.numberOfBooks} Book(s)</p>
+                  <p><strong>Delivery Type:</strong> {formData.deliveryType === "home" ? "Home Delivery" : "Branch Collection"}</p>
+                  <p><strong>Mobile:</strong> {formData.mobileNumber}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation */}
+            <div className="cbr-nav-buttons">
+              <button className="cbr-btn-outline" disabled={currentStep === 1} onClick={prevStep}>← Previous</button>
+              {currentStep < 3 ? (
+                <button className="cbr-btn-next" onClick={nextStep}>Next Step →</button>
+              ) : (
+                <button className="cbr-btn-submit" onClick={handleSubmit}> Submit Request</button>
+              )}
+            </div>
+
+            <div className="cbr-help-text">
+              Need help? Contact our customer support at 1800-XXX-XXXX <br /> Available 24/7 for your assistance
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

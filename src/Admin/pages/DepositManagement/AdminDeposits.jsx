@@ -32,7 +32,6 @@ const AdminDeposits = () => {
     return ((amount * rate * durationYears) / 100).toFixed(2);
   };
 
-  // Open modal to adjust interest before approval
   const openInterestModal = (row, setRows, action) => {
     const interest = calculateInterest(row.amount, row.startDate, row.dueDate);
     setModalData({ row, setRows, action, interest });
@@ -42,9 +41,7 @@ const AdminDeposits = () => {
     const { row, setRows, action, interest } = modalData;
     setRows((prev) =>
       prev.map((r) =>
-        r.id === row.id
-          ? { ...r, status: action, interest: interest }
-          : r
+        r.id === row.id ? { ...r, status: action, interest: interest } : r
       )
     );
     showMessage(`✅ Request ${action} successfully`);
@@ -53,14 +50,13 @@ const AdminDeposits = () => {
 
   const handleGenerateInstrument = (row) => {
     showMessage(`📄 Instrument generated for ${row.user}`);
-    // Here you can call backend or generate PDF using jsPDF
   };
 
   const renderTable = (rows, setRows, title) => (
-    <section className="table-card">
+    <section className="dm-table-card">
       <h2>{title}</h2>
-      {notification && <div className="notification">{notification}</div>}
-      <table>
+      {notification && <div className="dm-notification">{notification}</div>}
+      <table className="dm-table">
         <thead>
           <tr>
             <th>User</th>
@@ -82,12 +78,12 @@ const AdminDeposits = () => {
               <td>{row.startDate}</td>
               <td>{row.dueDate}</td>
               <td>
-                <span className={`status ${row.status.toLowerCase()}`}>
+                <span className={`dm-status ${row.status.toLowerCase()}`}>
                   {row.status}
                 </span>
               </td>
               <td>{row.interest}</td>
-              <td className="action-buttons">
+              <td className="dm-action-buttons">
                 <button
                   className="approve"
                   onClick={() => openInterestModal(row, setRows, "Approved")}
@@ -102,7 +98,7 @@ const AdminDeposits = () => {
                 </button>
                 {row.status === "Approved" && (
                   <button
-                    className="interest"
+                    className="generate"
                     onClick={() => handleGenerateInstrument(row)}
                   >
                     Generate Instrument
@@ -117,11 +113,11 @@ const AdminDeposits = () => {
   );
 
   return (
-    <div className="admin-deposits">
+    <div className="dm-container">
       <h1>Deposits Management</h1>
 
       {/* Tabs */}
-      <div className="tabs">
+      <div className="dm-tabs">
         <button
           className={activeTab === "applications" ? "active" : ""}
           onClick={() => setActiveTab("applications")}
@@ -142,18 +138,22 @@ const AdminDeposits = () => {
         </button>
       </div>
 
-      {/* Table Content */}
+      {/* Tables */}
       {activeTab === "applications" &&
         renderTable(applications, setApplications, "Deposit Applications")}
       {activeTab === "maturities" &&
         renderTable(maturities, setMaturities, "Maturities")}
       {activeTab === "withdrawals" &&
-        renderTable(earlyWithdrawals, setEarlyWithdrawals, "Early Withdrawal Requests")}
+        renderTable(
+          earlyWithdrawals,
+          setEarlyWithdrawals,
+          "Early Withdrawal Requests"
+        )}
 
-      {/* Modal for Adjust Interest */}
+      {/* Modal */}
       {modalData && (
-        <div className="modal-backdrop">
-          <div className="modal">
+        <div className="dm-modal-backdrop">
+          <div className="dm-modal">
             <h3>Adjust Interest for {modalData.row.user}</h3>
             <input
               type="number"
@@ -162,9 +162,11 @@ const AdminDeposits = () => {
                 setModalData({ ...modalData, interest: e.target.value })
               }
             />
-            <div className="modal-actions">
+            <div className="dm-modal-actions">
               <button onClick={() => setModalData(null)}>Cancel</button>
-              <button onClick={handleModalSave}>Save & {modalData.action}</button>
+              <button onClick={handleModalSave}>
+                Save & {modalData.action}
+              </button>
             </div>
           </div>
         </div>

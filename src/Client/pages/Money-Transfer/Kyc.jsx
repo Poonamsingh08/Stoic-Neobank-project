@@ -148,13 +148,13 @@ const Kyc = () => {
                   onMouseEnter={(e) => (e.target.style.backgroundColor = "#780606")}
               onMouseLeave={(e) => (e.target.style.backgroundColor = "#900603")}
                   >
-                    ← Back
+                    Back
                   </Button>
                   <Button onClick={nextStep} style={buttonStyle} size="lg"
                   onMouseEnter={(e) => (e.target.style.backgroundColor = "#780606")}
               onMouseLeave={(e) => (e.target.style.backgroundColor = "#900603")}
                   >
-                    Next →
+                    Next
                   </Button>
                 </div>
               </>
@@ -198,13 +198,13 @@ const Kyc = () => {
                   onMouseEnter={(e) => (e.target.style.backgroundColor = "#780606")}
               onMouseLeave={(e) => (e.target.style.backgroundColor = "#900603")}
                   >
-                    ← Back
+                    Back
                   </Button>
                   <Button onClick={nextStep} style={buttonStyle} size="lg"
                   onMouseEnter={(e) => (e.target.style.backgroundColor = "#780606")}
               onMouseLeave={(e) => (e.target.style.backgroundColor = "#900603")}
                   >
-                    Next →
+                    Next 
                   </Button>
                 </div>
               </>
@@ -229,7 +229,7 @@ const Kyc = () => {
                   onMouseEnter={(e) => (e.target.style.backgroundColor = "#780606")}
               onMouseLeave={(e) => (e.target.style.backgroundColor = "#900603")}
                   >
-                    ← Back
+                    Back
                   </Button>
                   <Button onClick={nextStep} style={buttonStyle} size="lg"
                   onMouseEnter={(e) => (e.target.style.backgroundColor = "#780606")}

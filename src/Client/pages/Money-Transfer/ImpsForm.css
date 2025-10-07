@@ -1,0 +1,125 @@
+/* ===== IMPS Page Container ===== */
+.imps-page-container {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* ===== IMPS Card ===== */
+.imps-card {
+  max-width: 600px;
+  width: 95%;
+  padding: 1.5rem 1.25rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Card Title */
+.imps-card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #950606;
+  margin-bottom: 1rem;
+}
+
+/* ===== Form Groups ===== */
+.imps-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.imps-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.imps-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  color: #1a202c;
+}
+
+.imps-input {
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imps-input:focus {
+  border-color: #950606;
+  box-shadow: 0 0 0 2px rgba(149,6,6,0.2);
+}
+
+/* OR separator */
+.imps-or {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin: 0.5rem 0;
+}
+
+/* ===== Buttons ===== */
+.imps-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.imps-btn-submit,
+.imps-btn-back {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 25px;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.imps-btn-submit {
+  background-color: #950606;
+}
+
+.imps-btn-submit:hover {
+  background-color: #780606;
+}
+
+.imps-btn-back {
+  background-color: #950606;
+}
+
+.imps-btn-back:hover {
+  background-color: #780606;
+}
+
+/* ===== Success Alert ===== */
+.imps-alert {
+  margin-top: 1rem;
+  padding: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #155724;
+  background-color: #d4edda;
+  border-radius: 8px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 576px) {
+  .imps-buttons {
+    flex-direction: column;
+  }
+}

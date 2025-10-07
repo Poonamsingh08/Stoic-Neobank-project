@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Book } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import "./FixedDepositForm.css";
 
 const FixedDepositForm = () => {
   const location = useLocation();
-  const data = location.state || {}; // safe handling
+  const data = location.state || {};
 
   const depositType = data.type || "Fixed Deposit";
   const [amount, setAmount] = useState(data.amount || 5000);
@@ -52,37 +52,25 @@ const FixedDepositForm = () => {
   }, [amount, duration]);
 
   return (
-    <div className="container my-5" >
-      <h2
-        className="mb-4 fw-bold"
-        style={{ color: "#900603", display: "flex", alignItems: "center", gap: "0.5rem" }}
-      >
+    <div className="fd-container15">
+      <h2 className="fd-title">
         <Book size={24} /> Open New {depositType}
       </h2>
 
-      {/* 🔹 Summary from Calculator */}
+      {/* Summary */}
       {amount && duration && calculated.maturity > 0 && (
-        <div
-          className="alert text-white shadow-lg mb-2 border-0"
-          style={{
-            background: "linear-gradient(135deg, #900603, #b71c1c)",
-            borderRadius: "0.9rem",
-            padding: "1.2rem 1.5rem",
-            fontSize: "1rem",
-          }}
-        >
+        <div className="fd-summary-alert">
           <strong>Summary from Calculator:</strong> You selected ₹{amount.toLocaleString()} for {duration} months at{" "}
           {data.interestRate}% → Expected Maturity: ₹{data.maturity.toLocaleString()}
         </div>
       )}
 
-      <div className="card shadow-sm p-4"style={{  backgroundColor: "#FFF0F0" }}>
+      <div className="fd-card15">
         {/* Account */}
-        <div className="mb-3">
-          <label className="form-label fw-bold">Your Saving A/C No.</label>
+        <div className="fd-form-group">
+          <label>Your Saving A/C No.</label>
           <input
             type="text"
-            className="form-control"
             placeholder="Enter your Account Number"
             value={account}
             onChange={(e) => setAccount(e.target.value)}
@@ -90,26 +78,26 @@ const FixedDepositForm = () => {
         </div>
 
         {/* Location */}
-        <div className="row g-3 mb-3">
-          <div className="col-md-4">
-            <label className="form-label fw-bold">State</label>
-            <select className="form-select" value={state} onChange={(e) => setState(e.target.value)}>
+        <div className="fd-form-row">
+          <div className="fd-form-col">
+            <label>State</label>
+            <select value={state} onChange={(e) => setState(e.target.value)}>
               <option value="">Select State</option>
               <option value="State1">State1</option>
               <option value="State2">State2</option>
             </select>
           </div>
-          <div className="col-md-4">
-            <label className="form-label fw-bold">City</label>
-            <select className="form-select" value={city} onChange={(e) => setCity(e.target.value)}>
+          <div className="fd-form-col">
+            <label>City</label>
+            <select value={city} onChange={(e) => setCity(e.target.value)}>
               <option value="">Select City</option>
               <option value="City1">City1</option>
               <option value="City2">City2</option>
             </select>
           </div>
-          <div className="col-md-4">
-            <label className="form-label fw-bold">Branch</label>
-            <select className="form-select" value={branch} onChange={(e) => setBranch(e.target.value)}>
+          <div className="fd-form-col">
+            <label>Branch</label>
+            <select value={branch} onChange={(e) => setBranch(e.target.value)}>
               <option value="">Select Branch</option>
               <option value="Branch1">Branch1</option>
               <option value="Branch2">Branch2</option>
@@ -118,11 +106,10 @@ const FixedDepositForm = () => {
         </div>
 
         {/* Amount */}
-        <div className="mb-3">
-          <label className="form-label fw-bold">Deposit Amount (₹)</label>
+        <div className="fd-form-group">
+          <label>Deposit Amount (₹)</label>
           <input
             type="number"
-            className="form-control"
             value={amount}
             min={minAmount}
             max={maxAmount}
@@ -131,11 +118,10 @@ const FixedDepositForm = () => {
         </div>
 
         {/* Duration */}
-        <div className="mb-3">
-          <label className="form-label fw-bold">Deposit Duration (Months)</label>
+        <div className="fd-form-group">
+          <label>Deposit Duration (Months)</label>
           <input
             type="number"
-            className="form-control"
             value={duration}
             min={minDuration}
             max={maxDuration}
@@ -143,35 +129,20 @@ const FixedDepositForm = () => {
           />
         </div>
 
-        {/* Interest & Maturity Summary */}
+        {/* Interest & Maturity */}
         {calculated.maturity > 0 && (
-          <div
-            className="mb-3 p-4 shadow-lg"
-            style={{
-              background: "linear-gradient(135deg, #f5f7fa, #d7d7d8, #f5f7fa)",
-              borderRadius: "1rem",
-              color: "#2c3e50",
-            }}
-          >
-            <h5 className="fw-bold mb-3 d-flex align-items-center gap-2">
-              💰 Interest & Maturity Summary
-            </h5>
-            <p className="mb-2 fs-6">
-              <strong>📈 Interest Rate:</strong> {data.interestRate}% Per Annum
-            </p>
-            <p className="mb-0 fs-5 fw-bold">
-              🎯 Estimated Maturity: ₹{data.maturity.toLocaleString()}
-            </p>
+          <div className="fd-maturity-card">
+            <h5>💰 Interest & Maturity Summary</h5>
+            <p>📈 Interest Rate: {data.interestRate}% Per Annum</p>
+            <p>🎯 Estimated Maturity: ₹{data.maturity.toLocaleString()}</p>
           </div>
         )}
 
         {/* Action Buttons */}
-        <div className="d-flex gap-3">
-          <button className="btn text-white fw-bold" style={{ backgroundColor: "#900603" }}>
-            Open FD
-          </button>
+        <div className="fd-buttons54">
+          <button className="btn-primary55">Open FD</button>
           <button
-            className="btn btn-outline-secondary"
+            className="btn-outline56"
             onClick={() => {
               setAccount("");
               setState("");
