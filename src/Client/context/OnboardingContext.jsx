@@ -7,7 +7,7 @@ export function OnboardingProvider({ children }) {
   const [userData, setUserData] = useState({});
 
   const updateUserData = (data) => {
-    setUserData(prev => ({ ...prev, ...data }));
+    setUserData((prev) => ({ ...prev, ...data }));
   };
 
   const resetOnboarding = () => {

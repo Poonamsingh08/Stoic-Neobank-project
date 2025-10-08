@@ -16,6 +16,7 @@ import AadharScreen from "./Onboarding/AadharScreen.jsx";
 import PANScreen from "./Onboarding/PANScreen.jsx";
 import AccountTypeScreen from "./Onboarding/AccountTypeScreen.jsx";
 import VideoKYCScreen from "./Onboarding/VideoKYCScreen.jsx";
+import UpdateKYC33 from "./Onboarding/UpdateKYC33.jsx";
 
 // Dashboard Pages
 import DashBoard from "./pages/dashboard/DashBoard.jsx";
@@ -105,7 +106,9 @@ function OnboardingFlow({ onComplete }) {
     case "account-type":
       return <AccountTypeScreen />;
     case "kyc":
-      return <VideoKYCScreen onComplete={onComplete} />;
+      return <VideoKYCScreen />;
+    case "updateKYC33":
+      return <UpdateKYC33 onComplete={onComplete} />; // ✅ correct usage
     default:
       return <WelcomeScreen />;
   }

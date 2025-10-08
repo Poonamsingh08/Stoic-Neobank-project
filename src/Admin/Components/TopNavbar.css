@@ -1,219 +1,301 @@
-/* ---------- Top Navbar ---------- */
-.top-navbar {
+/* TopNavbar.css */
+
+/* ---------- TopNavbar Base ---------- */
+.tn-navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 70px;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
   z-index: 1000;
 }
 
-.navbar-container {
+.tn-navbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
   width: 100%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 20px;
 }
 
-
-.navbar-logo {
+/* Logo */
+.tn-navbar-brand {
   display: flex;
   align-items: center;
   font-weight: bold;
   text-decoration: none;
-  color: #950606;
 }
-
-.navbar-logo img {
+.tn-logo {
   height: 40px;
   width: 40px;
   object-fit: contain;
 }
-
-.navbar-logo span {
-  margin-left: 10px;
-  font-size: 1.25rem;
+.tn-brand-text {
+  margin-left: 8px;
+  font-size: 1.5rem;
+  color: #900603;
+  text-transform: uppercase;
 }
 
-.navbar-search-form {
+/* Search */
+.tn-search-form {
   flex: 1;
-  margin-left: 30px;
-}
-
-.navbar-search {
-  width: 100%;
+  display: flex;
+  justify-content: center;
   max-width: 500px;
+}
+.tn-search-input {
+  width: 100%;
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 6px;
+  outline: none;
 }
 
-.navbar-right {
+/* Right Side */
+.tn-navbar-right {
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-left: auto;
 }
-
-.bell-icon {
+.tn-icon-btn {
   position: relative;
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.tn-icon-btn:hover {
+  background-color: #900603;
 }
 
-.bell-icon .badge {
+/* --- MODIFIED BELL ICON STYLE --- */
+.tn-bell-icon {
+  color: #900603;
+  font-size: 22px; /* Font Awesome icon ka size control karne ke liye */
+  transition: color 0.3s ease;
+}
+.tn-icon-btn:hover .tn-bell-icon {
+  color: white; /* Hover par icon ka color badalne ke liye */
+}
+
+.tn-badge {
   position: absolute;
   top: -6px;
-  right: -6px;
-  width: 16px;
-  height: 16px;
-  background-color: red;
+  right: -8px;
+  background: #900603;
   color: white;
-  font-size: 10px;
+  font-size: 12px;
   border-radius: 50%;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+.tn-profile-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.username {
-  font-weight: bold;
-}
-
-/* ---------- Middle Navbar ---------- */
-.middle-navbar {
-  position: relative;
-  top: 70px; /* below top navbar */
-  background-color: #f8f8f8;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  overflow-x: auto;
-  white-space: nowrap;
-  z-index: 900;
-}
-
-.middle-navbar ul {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 20px;
-  margin: 0;
-}
-
-.middle-navbar li {
-  list-style: none;
-}
-
-/* ---------- Bottom Navbar ---------- */
-.bottom-navbar {
-  position: relative;
-  top: 70px;
-  background-color: #f0f0f0;
-  overflow-x: auto;
-  white-space: nowrap;
-  z-index: 800;
-}
-
-.bottom-navbar ul {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 10px 20px;
-  margin: 0 auto;
-  max-width: 1200px;
-}
-
-.bottom-navbar li {
-  list-style: none;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 6px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #333;
   font-weight: 500;
   text-decoration: none;
+  color: #333;
+  padding: 4px 8px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+.tn-profile-btn:hover {
+  background-color: #f5f5f5;
+}
+.tn-profile-icon {
+  color: #900603;
+}
+
+/* Menu button */
+.tn-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.tn-menu-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* ---------- Secondary Navbar ---------- */
+.tn-secondary-navbar {
+  margin-top: 70px;
+  background: #f8f9fa;
+  border-top: 2px solid #ddd;
+}
+.tn-nav-list {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+}
+.tn-nav-item {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.tn-nav-item:hover {
+  background: #900603;
+  color: #fff;
+}
+.tn-active {
+  background: #900603;
+  color: #fff;
+}
+
+/* Dropdown */
+.tn-dropdown {
+  position: relative;
+}
+.tn-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tn-dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  list-style: none;
+  padding: 5px 0;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  z-index: 999;
+  margin: 0;
+}
+.tn-dropdown:hover .tn-dropdown-menu {
+  display: block;
+}
+.tn-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
   transition: 0.2s;
-  white-space: nowrap;
 }
-
-.nav-link:hover {
-  background-color: #eee;
-}
-
-.nav-link.active {
-  background-color: #950606;
+.tn-dropdown-item:hover {
+  background-color: #900603;
   color: white;
 }
 
-.nav-link .icon {
+/* Icons */
+.tn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 /* ---------- Mobile Menu ---------- */
-.mobile-menu {
+.tn-mobile-menu {
   position: absolute;
   top: 70px;
   left: 0;
   right: 0;
-  background-color: #fff;
-  z-index: 9999;
+  background: #fff;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  animation: slideDown 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 10px 10px;
+  animation: tn-slideDown 0.3s ease;
+  z-index: 1001;
 }
-
-.mobile-menu ul {
+.tn-mobile-nav-list {
+  list-style: none;
+  padding: 12px;
+  margin: 0;
+}
+.tn-mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  color: #333;
   padding: 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tn-mobile-nav-item:hover {
+  background-color: #f5f5f5;
+}
+.tn-mobile-dropdown {
+  list-style: none;
+  padding-left: 20px;
+  margin: 0;
+}
+.tn-mobile-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  color: #444;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+.tn-mobile-dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+.tn-mobile-active {
+  background: #e0e0e0;
+  color: #000;
+}
+.tn-mobile-dropdown-toggle {
+  cursor: pointer;
+}
+.tn-chevron {
+  transition: transform 0.3s ease;
+}
+.tn-chevron-open {
+  transform: rotate(180deg);
 }
 
-.mobile-menu li {
-  margin-bottom: 5px;
-}
-
-@keyframes slideDown {
-  0% { transform: translateY(-20px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-/* ---------- Scrollbar ---------- */
-.middle-navbar::-webkit-scrollbar,
-.bottom-navbar::-webkit-scrollbar {
-  height: 6px;
-}
-
-.middle-navbar::-webkit-scrollbar-thumb,
-.bottom-navbar::-webkit-scrollbar-thumb {
-  background: #950606;
-  border-radius: 10px;
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 1024px) {
-  .middle-navbar,
-  .bottom-navbar {
-    display: none;
+@keyframes tn-slideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-@media (max-width: 768px) {
-  .navbar-search-form {
+/* ---------- Responsive ---------- */
+@media (max-width: 992px) {
+  .tn-menu-btn {
+    display: block;
+  }
+  .tn-search-form {
+    display: none;
+  }
+  .tn-secondary-navbar {
     display: none;
   }
 }
