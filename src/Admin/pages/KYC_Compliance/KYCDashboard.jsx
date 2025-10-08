@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCheck, FaHistory, FaBell, FaExchangeAlt, FaShieldAlt } from "react-icons/fa";
-import "./Dashboard11.css";
+import "./KYCDashboard11.css";
 
-export default function Dashboard() {
+export default function KYCDashboard() {
   const navigate = useNavigate();
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const [viewingAlert, setViewingAlert] = useState(null);
+
+  // ✅ New States for Monitor & Review Modals
+  const [monitorTxn, setMonitorTxn] = useState(null);
+  const [reviewTxn, setReviewTxn] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => setLastUpdated(new Date()), 1000);
@@ -36,7 +40,7 @@ export default function Dashboard() {
       {/* Header */}
       <div className="db-header">
         <div>
-          <h3>KYC & Compliance Dashboard</h3>
+          <h5>KYC & Compliance Dashboard</h5>
           <small>Monitor and manage compliance operations</small>
         </div>
         <small className="db-last-updated">
@@ -79,9 +83,13 @@ export default function Dashboard() {
                 <div className="db-txn-actions">
                   <span className="db-badge">{txn.amount}</span>
                   {txn.status === "pending" ? (
-                    <button className="db-btn db-btn-dark">Monitor</button>
+                    <button className="db-btn db-btn-dark" onClick={() => setMonitorTxn(txn)}>
+                      Monitor
+                    </button>
                   ) : (
-                    <button className="db-btn db-btn-warning">Review</button>
+                    <button className="db-btn db-btn-warning" onClick={() => setReviewTxn(txn)}>
+                      Review
+                    </button>
                   )}
                 </div>
               </div>
@@ -113,7 +121,74 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* AML Modal */}
+      {/* ✅ Monitor Modal with Live Progress */}
+{monitorTxn && (
+  <div className="db-modal-overlay">
+    <div className="db-modal-box">
+      <div className="db-modal-header">
+        <h5>Monitor Transaction</h5>
+        <button className="db-modal-close" onClick={() => setMonitorTxn(null)}>✖</button>
+      </div>
+      <div className="db-modal-body">
+        <h6>{monitorTxn.id} - {monitorTxn.type}</h6>
+        <p><strong>Amount:</strong> {monitorTxn.amount}</p>
+        <p>Status: <span className="db-badge">Pending Monitoring</span></p>
+        <hr />
+        <p>Live updates:</p>
+        <ul>
+          <li>Source & Destination Accounts: XXXX123 → YYYY456</li>
+          <li>AML / Risk Check: Running...</li>
+          <li>Progress: <progress value={Math.floor(Math.random() * 100)} max="100"></progress></li>
+          <li>Suspicious activity: None detected</li>
+        </ul>
+      </div>
+      <div className="db-modal-footer">
+        <button className="db-btn db-btn-secondary" onClick={() => setMonitorTxn(null)}>Close</button>
+      </div>
+    </div>
+  </div>
+)}
+
+{/* ✅ Review Modal with Actions & Comments */}
+{reviewTxn && (
+  <div className="db-modal-overlay">
+    <div className="db-modal-box">
+      <div className="db-modal-header">
+        <h5>Review Transaction</h5>
+        <button className="db-modal-close" onClick={() => setReviewTxn(null)}>✖</button>
+      </div>
+      <div className="db-modal-body">
+        <h6>{reviewTxn.id} - {reviewTxn.type}</h6>
+        <p><strong>Amount:</strong> {reviewTxn.amount}</p>
+        <p>Status: <span className="db-badge">Flagged for Review</span></p>
+        <hr />
+        <p>Transaction Details:</p>
+        <ul>
+          <li>Sender Account: XXXX123</li>
+          <li>Receiver Account: YYYY456</li>
+          <li>Compliance Checks: Passed / Failed</li>
+          <li>Risk Score: Medium</li>
+        </ul>
+        <hr />
+        <p>Admin Comments:</p>
+        <textarea
+          className="db-textarea"
+          placeholder="Add remarks..."
+          rows={3}
+        ></textarea>
+      </div>
+      <div className="db-modal-footer">
+        <button className="db-btn db-btn-secondary" onClick={() => setReviewTxn(null)}>Close</button>
+        <button className="db-btn db-btn-primary">Approve</button>
+        <button className="db-btn db-btn-warning">Reject</button>
+        <button className="db-btn db-btn-dark">Escalate</button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+      {/* ✅ AML Modal */}
       {viewingAlert && (
         <div className="db-modal-overlay">
           <div className="db-modal-box">

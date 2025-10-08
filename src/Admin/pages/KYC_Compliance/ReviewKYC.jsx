@@ -120,7 +120,7 @@ export default function PendingKYC() {
 
   return (
 <>
-      {/* Header */}
+     {/* Header */}
       <div className="kyc-header">
         <div>
           <h4>KYC Approve</h4>
@@ -130,13 +130,9 @@ export default function PendingKYC() {
           <FaUserCheck size="2.5rem" color="#fff" />
         </div>
       </div>
-
-
-
-
-
     <div className="kyc-container">
      
+
       {/* Search */}
       <div className="search-bar">
         <div className="search-input">

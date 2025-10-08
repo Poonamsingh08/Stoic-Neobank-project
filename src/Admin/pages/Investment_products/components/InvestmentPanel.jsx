@@ -1,58 +1,49 @@
 import React, { useState } from "react";
-import {
-  FaBoxOpen,
-  FaExchangeAlt,
-  FaChartBar,
-  FaCog,
-  FaKey,
-} from "react-icons/fa";
-
+import { FaBoxOpen, FaExchangeAlt, FaChartBar, FaCog, FaKey } from "react-icons/fa";
 import ProductCatalog from "./ProductCatalog";
 import Subscriptions from "./Subscriptions";
 import PortfolioReports from "./PortfolioReports";
 import Services from "./Services";
 import APIKeys from "./APIKeys";
-import "./InvestmentPanel.css";
+import "./InvestmentPanel.css"; // custom CSS file
 
 export default function InvestmentPanel() {
   const [page, setPage] = useState("catalog");
 
   const pages = [
     { key: "catalog", title: "Product Catalog", icon: <FaBoxOpen /> },
-    {
-      key: "subscriptions",
-      title: "Subscriptions / Redemptions",
-      icon: <FaExchangeAlt />,
-    },
+    { key: "subscriptions", title: "Subscriptions/Redemptions", icon: <FaExchangeAlt /> },
     { key: "reports", title: "Portfolio Reports", icon: <FaChartBar /> },
     { key: "services", title: "Services & Merchant", icon: <FaCog /> },
     { key: "apikeys", title: "API Keys & Integrations", icon: <FaKey /> },
   ];
 
   return (
-    <div className="ip-panel">
+    <div className="invp-panel">
       {/* Header */}
-      <header className="ip-header">
+      <header className="invp-header">
         <h2>Investment Admin Panel</h2>
-        <p>Manage Products, Subscriptions, Reports, Services & API Keys</p>
+        <small>
+          Manage Products, Subscriptions, Reports, Services & API Keys
+        </small>
       </header>
 
-      {/* Cards */}
-      <section className="ip-card-container">
+      {/* Cards Section */}
+      <div className="invp-cards">
         {pages.map((p) => (
           <div
             key={p.key}
-            className={`ip-card ${page === p.key ? "active" : ""}`}
+            className={`invp-card ${page === p.key ? "active" : ""}`}
             onClick={() => setPage(p.key)}
           >
-            <div className="ip-card-icon">{p.icon}</div>
-            <div className="ip-card-title">{p.title}</div>
+            <div className="invp-card-icon">{p.icon}</div>
+            <h6 className="invp-card-title">{p.title}</h6>
           </div>
         ))}
-      </section>
+      </div>
 
       {/* Main Content */}
-      <main className="ip-main">
+      <main className="invp-content">
         {page === "catalog" && <ProductCatalog />}
         {page === "subscriptions" && <Subscriptions />}
         {page === "reports" && <PortfolioReports />}

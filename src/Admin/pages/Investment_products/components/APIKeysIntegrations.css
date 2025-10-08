@@ -25,24 +25,18 @@
   margin-bottom: 1rem;
 }
 
-.btn-primary, .btn-secondary, .btn-success, .btn-danger {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: background 0.2s;
-}
+/* Buttons Override */
+.btn.btn-primary { background: #900603 !important; color: #fff !important; }
+.btn.btn-primary:hover { background: #b02521 !important; }
 
-.btn-primary { background: #900603; color: #fff; }
-.btn-primary:hover { background: #b02521; }
-.btn-secondary { background: #6c757d; color: #fff; }
-.btn-secondary:hover { background: #5a6268; }
-.btn-success { background: #28a745; color: #fff; }
-.btn-success:hover { background: #218838; }
-.btn-danger { background: #dc3545; color: #fff; }
-.btn-danger:hover { background: #c82333; }
+.btn.btn-secondary { background: #6c757d !important; color: #fff !important; }
+.btn.btn-secondary:hover { background: #5a6268 !important; }
+
+.btn.btn-success { background: #28a745 !important; color: #fff !important; }
+.btn.btn-success:hover { background: #218838 !important; }
+
+.btn.btn-danger { background: #dc3545 !important; color: #fff !important; }
+.btn.btn-danger:hover { background: #c82333 !important; }
 
 /* Table */
 .table-wrapper { overflow-x: auto; }
@@ -82,10 +76,11 @@
   padding: 1rem;
 }
 
-.modal-box {
+.api-modal-box {
   background: #fff;
   width: 95%;
   max-width: 550px;
+  max-height: 300px;
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   overflow: hidden;

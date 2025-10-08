@@ -82,12 +82,14 @@
 
 .modal-box {
   background: #fff;
-  width: 100%;
-  height: 80vh; /* full screen height */
-  border-radius: 0;
+  width: 95%;
+  max-width: 550px;
+  max-height: 500px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 .modal-header {
@@ -162,6 +164,42 @@
   box-shadow: 0 0 0 2px rgba(144,6,3,0.2);
 }
 
+/* === React-Select Overrides === */
+.modal-body .react-select__control {
+  border-radius: 6px !important;
+  border: 1px solid #ccc !important;
+  padding: 2px !important;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-body .react-select__control--is-focused {
+  border-color: #900603 !important;
+  box-shadow: 0 0 0 2px rgba(144,6,3,0.2) !important;
+}
+
+.modal-body .react-select__single-value {
+  color: #900603 !important;
+}
+
+.modal-body .react-select__placeholder {
+  color: #900603 !important;
+}
+
+.modal-body .react-select__option {
+  color: #000 !important;
+}
+
+.modal-body .react-select__option--is-selected {
+  background-color: #900603 !important;
+  color: #fff !important;
+}
+
+.modal-body .react-select__option--is-focused {
+  background-color: #f8d7da !important;
+  color: #000 !important;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .modal-box {
@@ -170,6 +208,13 @@
     border-radius: 0;
   }
   .services-card { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .modal-body .react-select__control {
+    width: 100% !important;
+    min-width: unset !important;
+  }
 }
 
 @media (max-height: 600px) {

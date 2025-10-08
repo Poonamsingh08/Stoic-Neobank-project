@@ -55,7 +55,7 @@ export default function APIKeysIntegrations() {
 
       <div className="apikeys-card">
         <div className="apikeys-actions">
-          <button className="btn-primary" onClick={() => setShowModal(true)}>
+          <button className="btn btn-primary" onClick={() => setShowModal(true)}>
             Generate New API Key
           </button>
         </div>
@@ -77,17 +77,17 @@ export default function APIKeysIntegrations() {
                   <td>{k.status}</td>
                   <td>{k.created}</td>
                   <td className="action-buttons">
-                    <button className="btn-success" title="Copy Key" onClick={() => handleCopyKey(k.value)}>
+                    <button className="btn btn-success" title="Copy Key" onClick={() => handleCopyKey(k.value)}>
                       Copy
                     </button>
                     <button
-                      className={k.status === "Active" ? "btn-danger" : "btn-success"}
+                      className={`btn ${k.status === "Active" ? "btn-danger" : "btn-success"}`}
                       title={k.status === "Active" ? "Disable Key" : "Enable Key"}
                       onClick={() => toggleStatus(k.id)}
                     >
                       {k.status === "Active" ? "Disable" : "Enable"}
                     </button>
-                    <button className="btn-secondary" title="Revoke Key" onClick={() => handleRevokeKey(k.id)}>
+                    <button className="btn btn-secondary" title="Revoke Key" onClick={() => handleRevokeKey(k.id)}>
                       Revoke
                     </button>
                   </td>
@@ -101,7 +101,7 @@ export default function APIKeysIntegrations() {
       {/* Modal */}
       {showModal && (
         <div className="modal-overlay">
-          <div className="modal-box">
+          <div className="api-modal-box">
             <div className="modal-header">
               <h4>Generate New API Key</h4>
               <button className="modal-close" onClick={() => setShowModal(false)}>✕</button>
@@ -117,8 +117,8 @@ export default function APIKeysIntegrations() {
               />
             </div>
             <div className="modal-footer">
-              <button className="btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
-              <button className="btn-primary" onClick={handleGenerateKey}>Generate</button>
+              <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
+              <button className="btn btn-primary" onClick={handleGenerateKey}>Generate</button>
             </div>
           </div>
         </div>

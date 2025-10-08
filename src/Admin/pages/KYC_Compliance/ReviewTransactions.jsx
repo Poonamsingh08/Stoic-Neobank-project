@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ReviewTransactions.css";
-
+import Select from "react-select";
 export default function ReviewTransactions() {
   const dummyCases = [
     {
@@ -105,34 +105,85 @@ export default function ReviewTransactions() {
 
   return (
 <>
- <nav className="rt-navbar">
-      <h4>Neo Bank – KYC History</h4>  
+     <nav className="rt-navbar">
+        Neo Bank – KYC History
       </nav>
-
-
     <div className="rt-container">
 
-      
       <header className="rt-header">KYC History</header>
 
       <div className="rt-controls">
-        <input type="text" placeholder="Search Case ID or Name" value={search} onChange={e => { setSearch(e.target.value); setPage(1) }} />
-        <select value={filter} onChange={e => { setFilter(e.target.value); setPage(1) }}>
-          <option value="All">All Status</option>
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Escalated">Escalated</option>
-        </select>
-        <select value={sort} onChange={e => setSort(e.target.value)}>
-          <option value="latest">Latest First</option>
-          <option value="oldest">Oldest First</option>
-        </select>
-        <div className="rt-bulk-buttons">
-          <button onClick={() => bulkAction("Approved")} className="rt-btn-approve">Bulk Approve</button>
-          <button onClick={() => bulkAction("Rejected")} className="rt-btn-reject">Bulk Reject</button>
-        </div>
-      </div>
+  <input
+    type="text"
+    placeholder="Search Case ID or Name"
+    value={search}
+    onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+  />
+
+{/* Filter Select */}
+<Select
+  options={[
+    { value: "All", label: "All Status" },
+    { value: "Pending", label: "Pending" },
+    { value: "Approved", label: "Approved" },
+    { value: "Rejected", label: "Rejected" },
+    { value: "Escalated", label: "Escalated" },
+  ]}
+  value={{ value: filter, label: filter }}
+  onChange={(option) => { setFilter(option.value); setPage(1); }}
+  styles={{
+    container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: state.isFocused ? "#900603" : "#ccc",
+      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+      "&:hover": { borderColor: "#900603" },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+      color: state.isSelected ? "#fff" : "#000",
+    }),
+    singleValue: (provided) => ({ ...provided, color: "#900603" }),
+  }}
+  menuPortalTarget={document.body}
+  menuPosition="fixed"
+/>
+
+{/* Sort Select */}
+<Select
+  options={[
+    { value: "latest", label: "Latest First" },
+    { value: "oldest", label: "Oldest First" },
+  ]}
+  value={{ value: sort, label: sort === "latest" ? "Latest First" : "Oldest First" }}
+  onChange={(option) => setSort(option.value)}
+  styles={{
+    container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: state.isFocused ? "#900603" : "#ccc",
+      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+      "&:hover": { borderColor: "#900603" },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+      color: state.isSelected ? "#fff" : "#000",
+    }),
+    singleValue: (provided) => ({ ...provided, color: "#900603" }),
+  }}
+  menuPortalTarget={document.body}
+  menuPosition="fixed"
+/>
+
+  <div className="rt-bulk-buttons">
+    <button onClick={() => bulkAction("Approved")} className="rt-btn-approve">Bulk Approve</button>
+    <button onClick={() => bulkAction("Rejected")} className="rt-btn-reject">Bulk Reject</button>
+  </div>
+</div>
 
       <div className="rt-table-wrapper">
         <table className="rt-table">

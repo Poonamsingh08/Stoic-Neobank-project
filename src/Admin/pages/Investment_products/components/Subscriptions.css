@@ -88,7 +88,6 @@
 
 .subs-btn-outline {
   padding: 0.4rem 0.8rem;
-  border: 2px solid #900603;
   border-radius: 6px;
   background: none;
   cursor: pointer;
@@ -98,22 +97,22 @@
 }
 
 .subs-btn-success {
-  border-color: #28a745;
-  color: #28a745;
+  background-color: #28a745;
+  color: #ffffff;
 }
 
 .subs-btn-success:hover {
-  background-color: #28a745;
+  background-color: #900603;
   color: #fff;
 }
 
 .subs-btn-danger {
-  border-color: #dc3545;
-  color: #dc3545;
+ background-color: #dc3545;
+  color: #ffffff;
 }
 
 .subs-btn-danger:hover {
-  background-color: #dc3545;
+  background-color: #900603;
   color: #fff;
 }
 

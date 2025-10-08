@@ -1,4 +1,4 @@
-/* Container */
+/* ===== Container ===== */
 .rt-container {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
@@ -6,31 +6,24 @@
   min-height: 100vh;
 }
 
-/* Header  */
+/* ===== Navbar & Header ===== */
+.rt-navbar {
+  background-color: #900603;
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.rt-navbar a { color: #fff; text-decoration: none; }
+
 .rt-header {
-  
   font-size: 1.5rem;
   font-weight: 600;
   color: #900603;
   margin-bottom: 1rem;
 }
-.rt-navbar {
-   margin-top: 70px;
-  background-color: #900603;
-  color: #fff;
-  height: 100px;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding-top: 35px;
-}
 
-.rt-navbar a {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* Controls*/
+/* ===== Controls ===== */
 .rt-controls {
   display: flex;
   flex-wrap: wrap;
@@ -71,7 +64,7 @@
   cursor: pointer;
 }
 
-/* Table */
+/* ===== Table ===== */
 .rt-table-wrapper {
   overflow-x: auto;
   background-color: #fff;
@@ -112,7 +105,7 @@
   cursor: pointer;
 }
 
-
+/* ===== Pagination ===== */
 .rt-pagination {
   display: flex;
   justify-content: space-between;
@@ -179,14 +172,16 @@
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .rt-tab-buttons button {
   flex: 1;
   padding: 0.5rem 0.8rem;
   text-align: center;
+  color: black;
   cursor: pointer;
-  background-color: #f0f0f0;
+  background-color: #eeecec;
   border-radius: 6px 6px 0 0;
   font-weight: 600;
   border: none;
@@ -228,7 +223,6 @@
   cursor: pointer;
 }
 
-
 .rt-notes input,
 .rt-escalate input {
   padding: 0.5rem;
@@ -247,17 +241,28 @@
   cursor: pointer;
 }
 
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .rt-controls { flex-direction: column; gap: 0.5rem; }
+  .rt-bulk-buttons { justify-content: flex-start; gap: 0.5rem; flex-wrap: wrap; }
+  .rt-controls input, .rt-controls select { width: 100%; flex: none; min-width: unset; }
+  .rt-table { min-width: 600px; }
+  .rt-tab-buttons button { font-size: 0.95rem; }
+}
 
 @media (max-width: 768px) {
-  .rt-controls { flex-direction: column; }
-  .rt-bulk-buttons { justify-content: space-between; }
-  .rt-controls input, .rt-controls select { width: 100%; }
-  .rt-table { min-width: 600px; }
+  .rt-table { min-width: unset; width: 100%; }
   .rt-tab-buttons button { font-size: 0.9rem; }
 }
 
 @media (max-width: 480px) {
-  .rt-table { min-width: 400px; }
+  .rt-table { min-width: unset; width: 100%; }
   .rt-tab-buttons button { font-size: 0.8rem; }
-  .rt-btn-view, .rt-notes button, .rt-escalate button { font-size: 0.8rem; padding: 0.4rem 0.5rem; }
+  .rt-btn-view,
+  .rt-notes button,
+  .rt-escalate button { font-size: 0.8rem; padding: 0.35rem 0.5rem; }
+  .rt-controls input,
+  .rt-controls select { width: 100%; flex: none; min-width: unset; }
+  .rt-bulk-buttons { width: 100%; justify-content: space-between; }
+  .rt-doc-card img { max-width: 80px; }
 }

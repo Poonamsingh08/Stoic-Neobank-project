@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaExchangeAlt } from "react-icons/fa";
+import Select from "react-select";
 import "./Transactions.css";
 
 export default function Transactions() {
@@ -52,6 +53,7 @@ export default function Transactions() {
   const [selected, setSelected] = useState([]);
   const [viewingTxn, setViewingTxn] = useState(null);
   const itemsPerPage = 5;
+  const [activeTab, setActiveTab] = useState("info");
 
   // Filter & sort
   const filtered = transactions.filter(
@@ -74,7 +76,7 @@ export default function Transactions() {
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const toggleAll = () =>
-    setSelected(selected.length === paginated.length ? [] : paginated.map((t) => t.id));
+    setSelected(selected.length === paginated.length && paginated.length > 0 ? [] : paginated.map((t) => t.id));
 
   // Bulk action
   const bulkAction = (action) => {
@@ -127,33 +129,27 @@ export default function Transactions() {
   };
 
   const statusClass = (status) =>
-    status === "Completed" ? "status-completed" : status === "Pending" ? "status-pending" : "status-flagged";
-
-  // Tabs state
-  const [activeTab, setActiveTab] = useState("info");
+    status === "Completed"
+      ? "transactions-app-status-completed"
+      : status === "Pending"
+      ? "transactions-app-status-pending"
+      : "transactions-app-status-flagged";
 
   return (
-<>
- <nav className="transactions-navbar">
-        <h4> Neo Bank – All Transactions</h4>
-      </nav>
+    <div className="transactions-app-container">
+      <nav className="transactions-app-navbar">Neo Bank – All Transactions</nav>
 
-    <div className="transactions-container80">
-      
-     
-
-      <div className="transactions-main">
-        {/* Card Header */}
-        <div className="transactions-card-header" style={{ marginBottom: "1rem" }}>
+      <div className="transactions-app-main">
+        <div className="transactions-app-card-header" style={{ marginBottom: "1rem" }}>
           <FaExchangeAlt size={28} color="#900603" />
           <h3>All Transactions</h3>
         </div>
 
         {/* Controls */}
-        <div className="transactions-controls">
+        <div className="transactions-app-controls">
           <input
             type="text"
-            className="transactions-input"
+            className="transactions-app-input"
             placeholder="Search by ID / User / Type"
             value={search}
             onChange={(e) => {
@@ -161,40 +157,89 @@ export default function Transactions() {
               setPage(1);
             }}
           />
-          <select
-            className="transactions-select"
-            value={filter}
-            onChange={(e) => {
-              setFilter(e.target.value);
+
+          {/* Filter */}
+          <Select
+            options={[
+              { value: "All", label: "All Status" },
+              { value: "Pending", label: "Pending" },
+              { value: "Completed", label: "Completed" },
+              { value: "Flagged", label: "Flagged" },
+            ]}
+            value={{ value: filter, label: filter }}
+            onChange={(option) => {
+              setFilter(option.value);
               setPage(1);
             }}
-          >
-            <option value="All">All Status</option>
-            <option value="Completed">Completed</option>
-            <option value="Pending">Pending</option>
-            <option value="Flagged">Flagged</option>
-          </select>
-          <select className="transactions-select" value={sort} onChange={(e) => setSort(e.target.value)}>
-            <option value="latest">Latest First</option>
-            <option value="oldest">Oldest First</option>
-          </select>
-          <div className="transactions-bulk-buttons">
-            <button className="transactions-btn transactions-btn-success" onClick={() => bulkAction("Completed")}>
+            styles={{
+              container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+              menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+              control: (provided, state) => ({
+                ...provided,
+                borderColor: state.isFocused ? "#900603" : "#ccc",
+                boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+                "&:hover": { borderColor: "#900603" },
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+                color: state.isSelected ? "#fff" : "#000",
+              }),
+              singleValue: (provided) => ({ ...provided, color: "#900603" }),
+            }}
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+          />
+
+          {/* Sort */}
+          <Select
+            options={[
+              { value: "latest", label: "Latest First" },
+              { value: "oldest", label: "Oldest First" },
+            ]}
+            value={{ value: sort, label: sort === "latest" ? "Latest First" : "Oldest First" }}
+            onChange={(option) => setSort(option.value)}
+            styles={{
+              container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+              menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+              control: (provided, state) => ({
+                ...provided,
+                borderColor: state.isFocused ? "#900603" : "#ccc",
+                boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+                "&:hover": { borderColor: "#900603" },
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+                color: state.isSelected ? "#fff" : "#000",
+              }),
+              singleValue: (provided) => ({ ...provided, color: "#900603" }),
+            }}
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+          />
+
+          <div className="transactions-app-bulk-buttons">
+            <button className="transactions-app-btn transactions-app-btn-success" onClick={() => bulkAction("Completed")}>
               Bulk Completed
             </button>
-            <button className="transactions-btn transactions-btn-flagged" onClick={() => bulkAction("Flagged")}>
+            <button className="transactions-app-btn transactions-app-btn-flagged" onClick={() => bulkAction("Flagged")}>
               Bulk Flagged
             </button>
           </div>
         </div>
 
         {/* Table */}
-        <div className="transactions-table-wrapper">
-          <table className="transactions-table">
+        <div className="transactions-app-table-wrapper">
+          <table className="transactions-app-table">
             <thead>
               <tr>
                 <th>
-                  <input type="checkbox" checked={selected.length === paginated.length && paginated.length > 0} onChange={toggleAll} />
+                  <input
+                    type="checkbox"
+                    checked={selected.length === paginated.length && paginated.length > 0}
+                    onChange={toggleAll}
+                  />
                 </th>
                 <th>Txn ID</th>
                 <th>User</th>
@@ -218,7 +263,13 @@ export default function Transactions() {
                   <td className={statusClass(t.status)}>{t.status}</td>
                   <td>{t.date}</td>
                   <td>
-                    <button className="transactions-btn transactions-btn-view" onClick={() => { setViewingTxn(t); setActiveTab("info"); }}>
+                    <button
+                      className="transactions-app-btn transactions-app-btn-view"
+                      onClick={() => {
+                        setViewingTxn(t);
+                        setActiveTab("info");
+                      }}
+                    >
                       View
                     </button>
                   </td>
@@ -229,18 +280,18 @@ export default function Transactions() {
         </div>
 
         {/* Pagination */}
-        <div className="transactions-pagination">
+        <div className="transactions-app-pagination">
           <span>Page {page} of {totalPages}</span>
           <div style={{ display: "flex", gap: "0.5rem" }}>
             <button
-              className="transactions-btn"
+              className="transactions-app-btn"
               disabled={page === 1}
               onClick={() => setPage(page - 1)}
             >
               Prev
             </button>
             <button
-              className="transactions-btn"
+              className="transactions-app-btn"
               disabled={page === totalPages}
               onClick={() => setPage(page + 1)}
             >
@@ -251,41 +302,52 @@ export default function Transactions() {
 
         {/* Modal */}
         {viewingTxn && (
-          <div className="transactions-modal-overlay">
-            <div className="transactions-modal">
-              <div className="transactions-modal-header">
+          <div className="transactions-app-modal-overlay">
+            <div className="transactions-app-modal">
+              <div className="transactions-app-modal-header">
                 <span>Transaction {viewingTxn.id}</span>
-                <button className="transactions-btn-close" onClick={() => setViewingTxn(null)}>×</button>
+                <button className="transactions-app-btn-close" onClick={() => setViewingTxn(null)}>
+                  ×
+                </button>
               </div>
 
-              <div className="transactions-modal-body">
+              <div className="transactions-app-modal-body">
                 {/* Tabs */}
-                <div className="transactions-tabs">
-                  <div className={`transactions-tab ${activeTab === "info" ? "active" : ""}`} onClick={() => setActiveTab("info")}>
+                <div className="transactions-app-tabs">
+                  <div
+                    className={`transactions-app-tab ${activeTab === "info" ? "active" : ""}`}
+                    onClick={() => setActiveTab("info")}
+                  >
                     Info
                   </div>
-                  <div className={`transactions-tab ${activeTab === "audit" ? "active" : ""}`} onClick={() => setActiveTab("audit")}>
+                  <div
+                    className={`transactions-app-tab ${activeTab === "audit" ? "active" : ""}`}
+                    onClick={() => setActiveTab("audit")}
+                  >
                     Audit Trail
                   </div>
-                  <div className={`transactions-tab ${activeTab === "notes" ? "active" : ""}`} onClick={() => setActiveTab("notes")}>
+                  <div
+                    className={`transactions-app-tab ${activeTab === "notes" ? "active" : ""}`}
+                    onClick={() => setActiveTab("notes")}
+                  >
                     Notes
                   </div>
                 </div>
 
                 {/* Tab content */}
-                <div className="transactions-tab-content">
+                <div className="transactions-app-tab-content">
                   {activeTab === "info" && (
-                    <div className="transactions-tab-pane active">
+                    <div className="transactions-app-tab-pane active">
                       <p><strong>User:</strong> {viewingTxn.user}</p>
                       <p><strong>Type:</strong> {viewingTxn.type}</p>
                       <p><strong>Amount:</strong> ₹ {viewingTxn.amount.toLocaleString()}</p>
                       <p><strong>Status:</strong> {viewingTxn.status}</p>
                       <p><strong>Date:</strong> {viewingTxn.date}</p>
 
-                      <div className="transactions-input-group">
+                      <div className="transactions-app-input-group">
                         <input type="text" placeholder="Add note..." id="txnNote" />
                         <button
-                          className="transactions-btn transactions-btn-note"
+                          className="transactions-app-btn transactions-app-btn-note"
                           onClick={() => {
                             const text = document.getElementById("txnNote").value;
                             addNote(viewingTxn.id, text);
@@ -299,9 +361,9 @@ export default function Transactions() {
                   )}
 
                   {activeTab === "audit" && (
-                    <div className="transactions-tab-pane active">
-                      <div className="transactions-table-wrapper">
-                        <table className="transactions-table">
+                    <div className="transactions-app-tab-pane active">
+                      <div className="transactions-app-table-wrapper">
+                        <table className="transactions-app-table">
                           <thead>
                             <tr>
                               <th>Date</th>
@@ -326,8 +388,8 @@ export default function Transactions() {
                   )}
 
                   {activeTab === "notes" && (
-                    <div className="transactions-tab-pane active">
-                      <ul className="transactions-notes-list">
+                    <div className="transactions-app-tab-pane active">
+                      <ul className="transactions-app-notes-list">
                         {viewingTxn.notes.map((n, idx) => (
                           <li key={idx}>{n}</li>
                         ))}
@@ -338,13 +400,14 @@ export default function Transactions() {
               </div>
 
               <div style={{ padding: "0.8rem", textAlign: "right" }}>
-                <button className="transactions-btn" onClick={() => setViewingTxn(null)}>Close</button>
+                <button className="transactions-app-btn" onClick={() => setViewingTxn(null)}>
+                  Close
+                </button>
               </div>
             </div>
           </div>
         )}
       </div>
     </div>
-    </>
   );
 }

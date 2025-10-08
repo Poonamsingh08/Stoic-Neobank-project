@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaBell } from "react-icons/fa";
 import "./ViewAlerts.css";
+import Select from "react-select";
 
 export default function ViewAlerts() {
   const dummyAlerts = [
@@ -51,6 +52,7 @@ export default function ViewAlerts() {
   const [viewingAlert, setViewingAlert] = useState(null);
   const [newNote, setNewNote] = useState("");
   const [escalateReason, setEscalateReason] = useState("");
+  const [activeTab, setActiveTab] = useState("info"); // <-- Tab state
 
   const itemsPerPage = 5;
 
@@ -163,16 +165,20 @@ export default function ViewAlerts() {
       ? "status-resolved"
       : "status-escalated";
 
+  const openModal = (alert) => {
+    setViewingAlert(alert);
+    setActiveTab("info"); // reset tab to info when opening modal
+    setNewNote("");
+    setEscalateReason("");
+  };
+
   return (
     <div className="alerts-container">
-      {/* Navbar */}
       <header className="alerts-navbar">
-        <div className="alerts-brand"> <h4>Neo Bank AML & Complaints</h4> </div>
+        <div className="alerts-brand">Neo Bank AML & Complaints</div>
       </header>
 
-      {/* Main Content */}
       <main className="alerts-main">
-        {/* Heading */}
         <div className="alerts-card">
           <div className="alerts-card-header">
             <FaBell size={28} />
@@ -187,32 +193,67 @@ export default function ViewAlerts() {
             className="alerts-input"
             placeholder="Search by ID / Name / Type"
             value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           />
-          <select
-            className="alerts-select"
-            value={filter}
-            onChange={(e) => {
-              setFilter(e.target.value);
-              setPage(1);
-            }}
-          >
-            <option value="All">All Status</option>
-            <option value="Pending">Pending</option>
-            <option value="Resolved">Resolved</option>
-            <option value="Escalated">Escalated</option>
-          </select>
-          <select
-            className="alerts-select"
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-          >
-            <option value="latest">Latest First</option>
-            <option value="oldest">Oldest First</option>
-          </select>
+                  {/* Filter Select */}
+<Select
+  options={[
+    { value: "All", label: "All Status" },
+    { value: "Pending", label: "Pending" },
+    { value: "Approved", label: "Approved" },
+    { value: "Rejected", label: "Rejected" },
+    { value: "Escalated", label: "Escalated" },
+  ]}
+  value={{ value: filter, label: filter }}
+  onChange={(option) => { setFilter(option.value); setPage(1); }}
+  styles={{
+    container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: state.isFocused ? "#900603" : "#ccc",
+      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+      "&:hover": { borderColor: "#900603" },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+      color: state.isSelected ? "#fff" : "#000",
+    }),
+    singleValue: (provided) => ({ ...provided, color: "#900603" }),
+  }}
+  menuPortalTarget={document.body}
+  menuPosition="fixed"
+/>
+
+{/* Sort Select */}
+<Select
+  options={[
+    { value: "latest", label: "Latest First" },
+    { value: "oldest", label: "Oldest First" },
+  ]}
+  value={{ value: sort, label: sort === "latest" ? "Latest First" : "Oldest First" }}
+  onChange={(option) => setSort(option.value)}
+  styles={{
+    container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: state.isFocused ? "#900603" : "#ccc",
+      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+      "&:hover": { borderColor: "#900603" },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+      color: state.isSelected ? "#fff" : "#000",
+    }),
+    singleValue: (provided) => ({ ...provided, color: "#900603" }),
+  }}
+  menuPortalTarget={document.body}
+  menuPosition="fixed"
+/>
+
           <div className="alerts-bulk-buttons">
             <button onClick={() => bulkAction("Resolved")} className="alerts-btn alerts-btn-success">
               Bulk Resolve
@@ -228,13 +269,7 @@ export default function ViewAlerts() {
           <table className="alerts-table">
             <thead>
               <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    checked={selectedAlerts.length === paginatedAlerts.length && paginatedAlerts.length > 0}
-                    onChange={toggleAll}
-                  />
-                </th>
+                <th><input type="checkbox" checked={selectedAlerts.length === paginatedAlerts.length && paginatedAlerts.length > 0} onChange={toggleAll} /></th>
                 <th>Alert ID</th>
                 <th>Name</th>
                 <th>Type</th>
@@ -247,42 +282,26 @@ export default function ViewAlerts() {
             <tbody>
               {paginatedAlerts.map((a) => (
                 <tr key={a.alertId}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={selectedAlerts.includes(a.alertId)}
-                      onChange={() => toggleAlert(a.alertId)}
-                    />
-                  </td>
+                  <td><input type="checkbox" checked={selectedAlerts.includes(a.alertId)} onChange={() => toggleAlert(a.alertId)} /></td>
                   <td>{a.alertId}</td>
                   <td>{a.name}</td>
                   <td>{a.type}</td>
                   <td className={statusColor(a.status)}>{a.status}</td>
                   <td>{a.date}</td>
                   <td>{a.note}</td>
-                  <td>
-                    <button onClick={() => setViewingAlert(a)} className="alerts-btn alerts-btn-view">
-                      View
-                    </button>
-                  </td>
+                  <td><button onClick={() => openModal(a)} className="alerts-btn alerts-btn-view">View</button></td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* Pagination */}
+        {/* Pagination same as before */}
         <div className="alerts-pagination">
-          <span>
-            Page {page} of {totalPages}
-          </span>
+          <span>Page {page} of {totalPages}</span>
           <div>
-            <button disabled={page === 1} onClick={() => setPage(page - 1)} className="alerts-btn alerts-btn-outline">
-              Prev
-            </button>
-            <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="alerts-btn alerts-btn-outline">
-              Next
-            </button>
+            <button disabled={page === 1} onClick={() => setPage(page - 1)} className="alerts-btn alerts-btn-outline">Prev</button>
+            <button disabled={page === totalPages} onClick={() => setPage(page + 1)} className="alerts-btn alerts-btn-outline">Next</button>
           </div>
         </div>
 
@@ -296,81 +315,57 @@ export default function ViewAlerts() {
               </div>
 
               <div className="alerts-modal-body">
+                {/* Tabs */}
                 <div className="alerts-tabs">
-                  <button className="alerts-tab active" data-tab="info">Info</button>
-              
+                  <button className={`alerts-tab ${activeTab === "info" ? "active" : ""}`} onClick={() => setActiveTab("info")}>Info</button>
+                  <button className={`alerts-tab ${activeTab === "audit" ? "active" : ""}`} onClick={() => setActiveTab("audit")}>Audit Logs</button>
+                  <button className={`alerts-tab ${activeTab === "notes" ? "active" : ""}`} onClick={() => setActiveTab("notes")}>Notes</button>
                 </div>
 
                 <div className="alerts-tab-content">
-                  <div className="alerts-tab-pane active" data-tab="info">
-                    <p><strong>Alert ID:</strong> {viewingAlert.alertId}</p>
-                    <p><strong>Type:</strong> {viewingAlert.type}</p>
-                    <p><strong>Status:</strong> {viewingAlert.status}</p>
-                    <p><strong>Note:</strong> {viewingAlert.note}</p>
-                    <p><strong>Date:</strong> {viewingAlert.date}</p>
+                  {activeTab === "info" && (
+                    <div className="alerts-tab-pane active">
+                      <p><strong>Alert ID:</strong> {viewingAlert.alertId}</p>
+                      <p><strong>Type:</strong> {viewingAlert.type}</p>
+                      <p><strong>Status:</strong> {viewingAlert.status}</p>
+                      <p><strong>Note:</strong> {viewingAlert.note}</p>
+                      <p><strong>Date:</strong> {viewingAlert.date}</p>
 
-                    <div className="alerts-input-group">
-                      <input
-                        type="text"
-                        placeholder="Add note..."
-                        value={newNote}
-                        onChange={(e) => setNewNote(e.target.value)}
-                      />
-                      <button onClick={() => addNote(viewingAlert.alertId)} className="alerts-btn alerts-btn-add">
-                        Add Note
-                      </button>
+                      <div className="alerts-input-group">
+                        <input type="text" placeholder="Add note..." value={newNote} onChange={(e) => setNewNote(e.target.value)} />
+                        <button onClick={() => addNote(viewingAlert.alertId)} className="alerts-btn alerts-btn-add">Add Note</button>
+                      </div>
+
+                      <div className="alerts-input-group">
+                        <input type="text" placeholder="Escalate reason..." value={escalateReason} onChange={(e) => setEscalateReason(e.target.value)} />
+                        <button onClick={() => escalateAlert(viewingAlert.alertId)} className="alerts-btn alerts-btn-danger">Escalate</button>
+                      </div>
                     </div>
-
-                    <div className="alerts-input-group">
-                      <input
-                        type="text"
-                        placeholder="Escalate reason..."
-                        value={escalateReason}
-                        onChange={(e) => setEscalateReason(e.target.value)}
-                      />
-                      <button onClick={() => escalateAlert(viewingAlert.alertId)} className="alerts-btn alerts-btn-danger">
-                        Escalate
-                      </button>
+                  )}
+                  {activeTab === "audit" && (
+                    <div className="alerts-tab-pane active">
+                      <table className="alerts-table">
+                        <thead>
+                          <tr><th>Date</th><th>Action</th><th>User</th><th>Remark</th></tr>
+                        </thead>
+                        <tbody>
+                          {viewingAlert.auditLogs.map(log => (
+                            <tr key={log.id}><td>{log.date}</td><td>{log.action}</td><td>{log.user}</td><td>{log.remark}</td></tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
-                  </div>
-
-                  <div className="alerts-tab-pane" data-tab="audit">
-                    <table className="alerts-table">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Action</th>
-                          <th>User</th>
-                          <th>Remark</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {viewingAlert.auditLogs.map((log) => (
-                          <tr key={log.id}>
-                            <td>{log.date}</td>
-                            <td>{log.action}</td>
-                            <td>{log.user}</td>
-                            <td>{log.remark}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="alerts-tab-pane" data-tab="notes">
-                    <ul className="alerts-notes-list">
-                      {viewingAlert.notes.map((n, idx) => (
-                        <li key={idx}>{n}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  )}
+                  {activeTab === "notes" && (
+                    <div className="alerts-tab-pane active">
+                      <ul className="alerts-notes-list">{viewingAlert.notes.map((n, idx) => <li key={idx}>{n}</li>)}</ul>
+                    </div>
+                  )}
                 </div>
               </div>
 
               <div className="alerts-modal-footer">
-                <button onClick={() => setViewingAlert(null)} className="alerts-btn alerts-btn-outline">
-                  Close
-                </button>
+                <button onClick={() => setViewingAlert(null)} className="alerts-btn alerts-btn-outline">Close</button>
               </div>
             </div>
           </div>

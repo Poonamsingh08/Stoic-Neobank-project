@@ -1,16 +1,25 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import "./ServicesMerchant.css";
 
 const dummyMerchants = [
-  { id: 1, name: "Merchant A", service: "Payment Gateway", status: "Enabled" },
-  { id: 2, name: "Merchant B", service: "Bill Payment", status: "Disabled" },
-  { id: 3, name: "Merchant C", service: "Wallet Integration", status: "Enabled" },
+  { id: 1, name: "Merchant A", service: "Payment Gateway", serviceType: "UPI", status: "Enabled", merchantId: "M001" },
+  { id: 2, name: "Merchant B", service: "Bill Payment", serviceType: "NetBanking", status: "Disabled", merchantId: "M002" },
+  { id: 3, name: "Merchant C", service: "Wallet Integration", serviceType: "Wallet", status: "Enabled", merchantId: "M003" },
 ];
 
 export default function ServicesMerchant() {
   const [merchants, setMerchants] = useState(dummyMerchants);
   const [showModal, setShowModal] = useState(false);
   const [newMerchant, setNewMerchant] = useState({ name: "", merchantId: "", service: "", serviceType: "" });
+
+  const serviceOptions = [
+    { value: "", label: "Select Service Type" },
+    { value: "UPI", label: "UPI" },
+    { value: "NetBanking", label: "Net Banking" },
+    { value: "Cards", label: "Cards" },
+    { value: "Wallet", label: "Wallet" },
+  ];
 
   const toggleStatus = (id) => {
     setMerchants(
@@ -122,17 +131,32 @@ export default function ServicesMerchant() {
                   onChange={(e) => setNewMerchant({ ...newMerchant, service: e.target.value })}
                   placeholder="Enter Service Name"
                 />
+
                 <label>Service Type</label>
-                <select
-                  value={newMerchant.serviceType}
-                  onChange={(e) => setNewMerchant({ ...newMerchant, serviceType: e.target.value })}
-                >
-                  <option value="">Select Service Type</option>
-                  <option value="UPI">UPI</option>
-                  <option value="NetBanking">Net Banking</option>
-                  <option value="Cards">Cards</option>
-                  <option value="Wallet">Wallet</option>
-                </select>
+                <Select
+                  options={serviceOptions}
+                  value={serviceOptions.find(option => option.value === newMerchant.serviceType)}
+                  onChange={(option) => setNewMerchant({ ...newMerchant, serviceType: option.value })}
+                  styles={{
+                    control: (provided, state) => ({
+                      ...provided,
+                      borderColor: state.isFocused ? "#900603" : "#ccc",
+                      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+                      "&:hover": { borderColor: "#900603" },
+                      borderRadius: 6,
+                      padding: 2,
+                    }),
+                    option: (provided, state) => ({
+                      ...provided,
+                      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+                      color: state.isSelected ? "#fff" : "#000",
+                    }),
+                    singleValue: (provided) => ({ ...provided, color: "#900603" }),
+                    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                  }}
+                  menuPortalTarget={document.body}
+                  menuPosition="fixed"
+                />
               </div>
             </div>
 
