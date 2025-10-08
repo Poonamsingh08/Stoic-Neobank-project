@@ -74,14 +74,9 @@ const AccountsDashboard = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const totalAccounts = accounts.length;
-  const activeAccounts = accounts.filter(
-    (acc) => acc.status === "Active"
-  ).length;
+  const activeAccounts = accounts.filter((acc) => acc.status === "Active").length;
   const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
-  const totalWalletBalance = accounts.reduce(
-    (sum, acc) => sum + acc.walletBalance,
-    0
-  );
+  const totalWalletBalance = accounts.reduce((sum, acc) => sum + acc.walletBalance, 0);
 
   useEffect(() => {
     let filtered = accounts;
@@ -89,9 +84,7 @@ const AccountsDashboard = () => {
     if (searchTerm) {
       filtered = filtered.filter(
         (account) =>
-          account.customerName
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
+          account.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
           account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -101,9 +94,7 @@ const AccountsDashboard = () => {
     }
 
     if (typeFilter !== "All") {
-      filtered = filtered.filter(
-        (account) => account.accountType === typeFilter
-      );
+      filtered = filtered.filter((account) => account.accountType === typeFilter);
     }
 
     if (balanceRangeFilter !== "All") {
@@ -126,30 +117,17 @@ const AccountsDashboard = () => {
     if (dateFromFilter || dateToFilter) {
       filtered = filtered.filter((account) => {
         const transactionDate = new Date(account.lastTransaction);
-        const fromDate = dateFromFilter
-          ? new Date(dateFromFilter)
-          : new Date("1900-01-01");
-        const toDate = dateToFilter
-          ? new Date(dateToFilter)
-          : new Date("2099-12-31");
-
+        const fromDate = dateFromFilter ? new Date(dateFromFilter) : new Date("1900-01-01");
+        const toDate = dateToFilter ? new Date(dateToFilter) : new Date("2099-12-31");
         return transactionDate >= fromDate && transactionDate <= toDate;
       });
     }
 
     setFilteredAccounts(filtered);
-  }, [
-    accounts,
-    searchTerm,
-    statusFilter,
-    typeFilter,
-    balanceRangeFilter,
-    dateFromFilter,
-    dateToFilter,
-  ]);
+  }, [accounts, searchTerm, statusFilter, typeFilter, balanceRangeFilter, dateFromFilter, dateToFilter]);
 
   const StatusBadge = ({ status }) => {
-    return <span className={`status-badge ${status.toLowerCase()}`}>{status}</span>;
+    return <span className={`ad-status-badge ad-${status.toLowerCase()}`}>{status}</span>;
   };
 
   const clearFilters = () => {
@@ -169,26 +147,26 @@ const AccountsDashboard = () => {
       balance: account.balance,
       walletBalance: account.walletBalance,
       status: account.status,
-      kycStatus: account.kycStatus
+      kycStatus: account.kycStatus,
     });
   };
 
   const handleEditFormChange = (field, value) => {
-    setEditFormData(prev => ({
+    setEditFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   const handleSaveEdit = () => {
-    setAccounts(prevAccounts => 
-      prevAccounts.map(acc => 
-        acc.id === editingAccount.id 
+    setAccounts((prevAccounts) =>
+      prevAccounts.map((acc) =>
+        acc.id === editingAccount.id
           ? {
               ...acc,
               ...editFormData,
               balance: parseFloat(editFormData.balance) || 0,
-              walletBalance: parseFloat(editFormData.walletBalance) || 0
+              walletBalance: parseFloat(editFormData.walletBalance) || 0,
             }
           : acc
       )
@@ -203,45 +181,41 @@ const AccountsDashboard = () => {
   };
 
   return (
-<>
+    <div className="ad-dashboard">
       {/* Header */}
-      <div className="header">
-        <h2>Accounts & Wallets</h2>
+      <div className="ad-header">
+        <h1>Accounts & Wallets</h1>
         <p>Manage customer accounts, wallets, and financial operations</p>
       </div>
 
-
-    <div className="accounts-dashboard">
-    
-
       {/* Summary Cards */}
-      <div className="summary-cards">
-        <div className="card">
+      <div className="ad-summary-cards">
+        <div className="ad-card">
           <p>Total Accounts</p>
           <h4>{totalAccounts}</h4>
           <small>{activeAccounts} active</small>
         </div>
-        <div className="card">
+        <div className="ad-card">
           <p>Total Balance</p>
-          <h4 className="green">${totalBalance.toLocaleString()}</h4>
+          <h4 className="ad-green">${totalBalance.toLocaleString()}</h4>
           <small>Account balances</small>
         </div>
-        <div className="card">
+        <div className="ad-card">
           <p>Wallet Balance</p>
-          <h4 className="blue">${totalWalletBalance.toLocaleString()}</h4>
+          <h4 className="ad-blue">${totalWalletBalance.toLocaleString()}</h4>
           <small>Digital wallet funds</small>
         </div>
-        <div className="card">
+        <div className="ad-card">
           <p>Pending Actions</p>
-          <h4 className="yellow">5</h4>
+          <h4 className="ad-yellow">5</h4>
           <small>Requires attention</small>
         </div>
       </div>
 
       {/* Search + Filters */}
-      <div className="filters-container">
-        <div className="filters-header">
-          <div className="search-box">
+      <div className="ad-filters-container">
+        <div className="ad-filters-header">
+          <div className="ad-search-box">
             <input
               type="text"
               placeholder="Search accounts, customers..."
@@ -249,16 +223,16 @@ const AccountsDashboard = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="actions">
+          <div className="ad-actions">
             <button onClick={() => setShowFilters(!showFilters)}>🔍 Filters</button>
-            <button className="primary">⬇ Export</button>
-            <button className="primary">➕ New Account</button>
+            <button className="ad-primary">⬇ Export</button>
+            <button className="ad-primary">➕ New Account</button>
           </div>
         </div>
 
         {showFilters && (
-          <div className="filters-panel">
-            <div className="grid">
+          <div className="ad-filters-panel">
+            <div className="ad-grid">
               <div>
                 <label>Status</label>
                 <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
@@ -280,10 +254,7 @@ const AccountsDashboard = () => {
               </div>
               <div>
                 <label>Balance Range</label>
-                <select
-                  value={balanceRangeFilter}
-                  onChange={(e) => setBalanceRangeFilter(e.target.value)}
-                >
+                <select value={balanceRangeFilter} onChange={(e) => setBalanceRangeFilter(e.target.value)}>
                   <option value="All">All Ranges</option>
                   <option value="0-1000">$0 - $1,000</option>
                   <option value="1000-10000">$1,000 - $10,000</option>
@@ -293,22 +264,14 @@ const AccountsDashboard = () => {
               </div>
               <div>
                 <label>Date From</label>
-                <input
-                  type="date"
-                  value={dateFromFilter}
-                  onChange={(e) => setDateFromFilter(e.target.value)}
-                />
+                <input type="date" value={dateFromFilter} onChange={(e) => setDateFromFilter(e.target.value)} />
               </div>
               <div>
                 <label>Date To</label>
-                <input
-                  type="date"
-                  value={dateToFilter}
-                  onChange={(e) => setDateToFilter(e.target.value)}
-                />
+                <input type="date" value={dateToFilter} onChange={(e) => setDateToFilter(e.target.value)} />
               </div>
             </div>
-            <button className="secondary" onClick={clearFilters}>
+            <button className="ad-secondary" onClick={clearFilters}>
               Clear All Filters
             </button>
           </div>
@@ -316,12 +279,12 @@ const AccountsDashboard = () => {
       </div>
 
       {/* Accounts Table */}
-      <div className="table-container">
-        <div className="table-header">
+      <div className="ad-table-container">
+        <div className="ad-table-header">
           <h5>All Accounts ({filteredAccounts.length})</h5>
         </div>
-        <div className="table-scroll">
-          <table>
+        <div className="ad-table-scroll">
+          <table className="ad-table">
             <thead>
               <tr>
                 <th>Customer</th>
@@ -337,7 +300,7 @@ const AccountsDashboard = () => {
               {filteredAccounts.map((acc, index) => (
                 <tr
                   key={acc.id}
-                  className={index % 2 === 0 ? "even" : "odd"}
+                  className={index % 2 === 0 ? "ad-even" : "ad-odd"}
                   onClick={() => setSelectedAccount(acc)}
                 >
                   <td>
@@ -348,7 +311,7 @@ const AccountsDashboard = () => {
                     </div>
                   </td>
                   <td>
-                    <span className="badge">{acc.accountType}</span>
+                    <span className="ad-badge">{acc.accountType}</span>
                   </td>
                   <td>${acc.balance.toLocaleString()}</td>
                   <td>${acc.walletBalance.toLocaleString()}</td>
@@ -357,9 +320,9 @@ const AccountsDashboard = () => {
                   </td>
                   <td>{acc.lastTransaction}</td>
                   <td>
-                    <div className="table-actions">
-                      <button 
-                        className="blue"
+                    <div className="ad-table-actions">
+                      <button
+                        className="ad-blue"
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedAccount(acc);
@@ -367,8 +330,8 @@ const AccountsDashboard = () => {
                       >
                         👁
                       </button>
-                      <button 
-                        className="green"
+                      <button
+                        className="ad-green"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleEdit(acc);
@@ -376,7 +339,7 @@ const AccountsDashboard = () => {
                       >
                         ✏
                       </button>
-                      <button className="gray">⋯</button>
+                      <button className="ad-gray">⋯</button>
                     </div>
                   </td>
                 </tr>
@@ -388,14 +351,14 @@ const AccountsDashboard = () => {
 
       {/* Account Detail Modal */}
       {selectedAccount && !editingAccount && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <div className="modal-header">
+        <div className="ad-modal-overlay">
+          <div className="ad-modal">
+            <div className="ad-modal-header">
               <h5>Account Details</h5>
               <button onClick={() => setSelectedAccount(null)}>×</button>
             </div>
-            <div className="modal-body">
-              <div className="grid">
+            <div className="ad-modal-body">
+              <div className="ad-grid">
                 <div>
                   <h6>Customer Information</h6>
                   <p>
@@ -428,11 +391,11 @@ const AccountsDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="modal-footer">
-              <button className="primary">Generate Statement</button>
-              <button className="green">Manual Adjustment</button>
-              <button className="yellow">Update Limits</button>
-              <button className="red">Freeze Account</button>
+            <div className="ad-modal-footer">
+              <button className="ad-primary">Generate Statement</button>
+              <button className="ad-green">Manual Adjustment</button>
+              <button className="ad-yellow">Update Limits</button>
+              <button className="ad-red">Freeze Account</button>
             </div>
           </div>
         </div>
@@ -440,52 +403,52 @@ const AccountsDashboard = () => {
 
       {/* Edit Account Modal */}
       {editingAccount && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <div className="modal-header edit-header">
+        <div className="ad-modal-overlay">
+          <div className="ad-modal">
+            <div className="ad-modal-header ad-edit-header">
               <h5>Edit Account</h5>
               <button onClick={handleCancelEdit}>×</button>
             </div>
-            <div className="modal-body">
-              <div className="grid">
+            <div className="ad-modal-body">
+              <div className="ad-grid">
                 <div>
                   <h6>Customer Information</h6>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Name:</label>
                     <input
                       type="text"
-                      className="form-input"
-                      value={editFormData.customerName || ''}
-                      onChange={(e) => handleEditFormChange('customerName', e.target.value)}
+                      className="ad-form-input"
+                      value={editFormData.customerName || ""}
+                      onChange={(e) => handleEditFormChange("customerName", e.target.value)}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Account Number:</label>
                     <input
                       type="text"
-                      className="form-input disabled"
+                      className="ad-form-input ad-disabled"
                       value={editingAccount.accountNumber}
                       disabled
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Account Type:</label>
                     <select
-                      className="form-input"
-                      value={editFormData.accountType || ''}
-                      onChange={(e) => handleEditFormChange('accountType', e.target.value)}
+                      className="ad-form-input"
+                      value={editFormData.accountType || ""}
+                      onChange={(e) => handleEditFormChange("accountType", e.target.value)}
                     >
                       <option value="Savings">Savings</option>
                       <option value="Current">Current</option>
                       <option value="Business">Business</option>
                     </select>
                   </div>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>KYC Status:</label>
                     <select
-                      className="form-input"
-                      value={editFormData.kycStatus || ''}
-                      onChange={(e) => handleEditFormChange('kycStatus', e.target.value)}
+                      className="ad-form-input"
+                      value={editFormData.kycStatus || ""}
+                      onChange={(e) => handleEditFormChange("kycStatus", e.target.value)}
                     >
                       <option value="Verified">Verified</option>
                       <option value="Pending">Pending</option>
@@ -495,32 +458,32 @@ const AccountsDashboard = () => {
                 </div>
                 <div>
                   <h6>Balance Information</h6>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Account Balance:</label>
                     <input
                       type="number"
                       step="0.01"
-                      className="form-input"
-                      value={editFormData.balance || ''}
-                      onChange={(e) => handleEditFormChange('balance', e.target.value)}
+                      className="ad-form-input"
+                      value={editFormData.balance || ""}
+                      onChange={(e) => handleEditFormChange("balance", e.target.value)}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Wallet Balance:</label>
                     <input
                       type="number"
                       step="0.01"
-                      className="form-input"
-                      value={editFormData.walletBalance || ''}
-                      onChange={(e) => handleEditFormChange('walletBalance', e.target.value)}
+                      className="ad-form-input"
+                      value={editFormData.walletBalance || ""}
+                      onChange={(e) => handleEditFormChange("walletBalance", e.target.value)}
                     />
                   </div>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Status:</label>
                     <select
-                      className="form-input"
-                      value={editFormData.status || ''}
-                      onChange={(e) => handleEditFormChange('status', e.target.value)}
+                      className="ad-form-input"
+                      value={editFormData.status || ""}
+                      onChange={(e) => handleEditFormChange("status", e.target.value)}
                     >
                       <option value="Active">Active</option>
                       <option value="Pending">Pending</option>
@@ -528,11 +491,11 @@ const AccountsDashboard = () => {
                       <option value="Closed">Closed</option>
                     </select>
                   </div>
-                  <div className="form-group">
+                  <div className="ad-form-group">
                     <label>Last Transaction:</label>
                     <input
                       type="text"
-                      className="form-input disabled"
+                      className="ad-form-input ad-disabled"
                       value={editingAccount.lastTransaction}
                       disabled
                     />
@@ -540,11 +503,11 @@ const AccountsDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="modal-footer">
-              <button className="secondary" onClick={handleCancelEdit}>
+            <div className="ad-modal-footer">
+              <button className="ad-secondary" onClick={handleCancelEdit}>
                 Cancel
               </button>
-              <button className="primary" onClick={handleSaveEdit}>
+              <button className="ad-primary" onClick={handleSaveEdit}>
                 Save Changes
               </button>
             </div>
@@ -552,7 +515,6 @@ const AccountsDashboard = () => {
         </div>
       )}
     </div>
-    /</>
   );
 };
 
