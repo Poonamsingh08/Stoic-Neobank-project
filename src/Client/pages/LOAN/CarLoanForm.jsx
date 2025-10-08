@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import "./style/loanForm.css";
 
@@ -36,10 +38,12 @@ function CarLoanForm() {
 
   if (submitted) {
     return (
-      <div className="loan-form-container">
-        <div className="loan-form-card">
-          <div className="loan-success">
-            ✅ Your Car Loan Application has been submitted successfully!
+      <div className="form-container">
+        <div className="card">
+          <div className="card-body">
+            <div className="alert success">
+              ✅ Your Car Loan Application has been submitted successfully!
+            </div>
           </div>
         </div>
       </div>
@@ -47,14 +51,14 @@ function CarLoanForm() {
   }
 
   return (
-    <div className="loan-form-container">
-      <h2 className="loan-form-title">🚗 Car Loan Application Form</h2>
+    <div className="form-container">
+      <h2 className="form-title">🚗 Car Loan Application Form</h2>
 
-      <form className="loan-form-card" onSubmit={handleSubmit}>
+      <form className="loan-form" onSubmit={handleSubmit}>
         {/* Personal Details */}
-        <h5 className="loan-form-section">Personal Details</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Personal Details</h5>
+        <div className="grid">
+          <div>
             <label>Full Name</label>
             <input
               type="text"
@@ -64,7 +68,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Date of Birth</label>
             <input
               type="date"
@@ -74,7 +79,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Mobile Number</label>
             <input
               type="text"
@@ -84,7 +90,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Email Address</label>
             <input
               type="email"
@@ -94,7 +101,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>PAN / Aadhaar Number</label>
             <input
               type="text"
@@ -104,22 +112,23 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div className="full-width">
             <label>Current Address</label>
-            <input
-              type="text"
+            <textarea
               name="address"
+              rows="2"
               value={formData.address}
               onChange={handleChange}
               required
-            />
+            ></textarea>
           </div>
         </div>
 
         {/* Employment & Income */}
-        <h5 className="loan-form-section">Employment & Income</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Employment & Income</h5>
+        <div className="grid">
+          <div>
             <label>Occupation</label>
             <select
               name="occupation"
@@ -133,7 +142,8 @@ function CarLoanForm() {
               <option>Business</option>
             </select>
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Company / Business Name</label>
             <input
               type="text"
@@ -142,7 +152,8 @@ function CarLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Monthly Income (₹)</label>
             <input
               type="number"
@@ -151,7 +162,8 @@ function CarLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Work Experience (Years)</label>
             <input
               type="number"
@@ -163,9 +175,9 @@ function CarLoanForm() {
         </div>
 
         {/* Vehicle Details */}
-        <h5 className="loan-form-section">Vehicle Details</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Vehicle Details</h5>
+        <div className="grid">
+          <div>
             <label>Car Make & Model</label>
             <input
               type="text"
@@ -175,7 +187,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Variant / Fuel Type</label>
             <input
               type="text"
@@ -185,7 +198,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Ex-Showroom Price (₹)</label>
             <input
               type="number"
@@ -194,7 +208,8 @@ function CarLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>On-Road Price (₹)</label>
             <input
               type="number"
@@ -203,7 +218,8 @@ function CarLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div className="full-width">
             <label>Dealer Name</label>
             <input
               type="text"
@@ -215,9 +231,9 @@ function CarLoanForm() {
         </div>
 
         {/* Loan Details */}
-        <h5 className="loan-form-section">Loan Details</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Loan Details</h5>
+        <div className="grid">
+          <div>
             <label>Loan Amount (₹)</label>
             <input
               type="number"
@@ -227,7 +243,8 @@ function CarLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Down Payment (₹)</label>
             <input
               type="number"
@@ -236,7 +253,8 @@ function CarLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Tenure (Months)</label>
             <input
               type="number"
@@ -249,19 +267,17 @@ function CarLoanForm() {
         </div>
 
         {/* Declaration */}
-        <div className="form-group">
+        <div className="loan-checkbox">
+          <input type="checkbox" required />
           <label>
-            <input type="checkbox" required /> I hereby declare that the
-            information provided is true and correct.
+            I hereby declare that the information provided is true and correct.
           </label>
         </div>
 
         {/* Submit */}
-        <div className="form-submit">
-          <button type="submit" className="loan-submit-btn">
-            Submit Application
-          </button>
-        </div>
+        <button type="submit" className="btn-submit">
+          Submit Application
+        </button>
       </form>
     </div>
   );

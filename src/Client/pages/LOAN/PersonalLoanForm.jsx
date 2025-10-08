@@ -1,6 +1,5 @@
-
- import React, { useState } from "react";
-import "./style/loanForm.css"; // Import CSS file
+import React, { useState } from "react";
+import "./style/loanForm.css";
 
 function PersonalLoanForm() {
   const [formData, setFormData] = useState({
@@ -17,12 +16,17 @@ function PersonalLoanForm() {
     tenure: "",
     purpose: "",
     idProof: "",
+    declaration: false,
   });
 
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -30,22 +34,30 @@ function PersonalLoanForm() {
     setSubmitted(true);
   };
 
-  return (
-    <div className="loan-form-container">
-      <h2 className="loan-form-title">Personal Loan Application Form</h2>
-
-      {submitted && (
-        <div className="loan-success">
-          ✅ Personal Loan Application Submitted! <br />
-          Name: {formData.applicantName}
+  if (submitted) {
+    return (
+      <div className="form-container">
+        <div className="card">
+          <div className="card-body">
+            <div className="alert success">
+              ✅ Personal Loan Application Submitted! <br />
+              Name: {formData.applicantName}
+            </div>
+          </div>
         </div>
-      )}
+      </div>
+    );
+  }
 
-      <form onSubmit={handleSubmit} className="loan-form-card">
+  return (
+    <div className="form-container">
+      <form className="loan-form" onSubmit={handleSubmit}>
+        <h2 className="form-title">Personal Loan Application Form</h2>
+
         {/* Applicant Details */}
-        <h5 className="loan-form-section">Applicant Details</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h4 className="section-title">Applicant Details</h4>
+        <div className="grid">
+          <div>
             <label>Full Name</label>
             <input
               type="text"
@@ -55,7 +67,7 @@ function PersonalLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div>
             <label>Date of Birth</label>
             <input
               type="date"
@@ -65,7 +77,7 @@ function PersonalLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div>
             <label>Gender</label>
             <select
               name="gender"
@@ -79,22 +91,19 @@ function PersonalLoanForm() {
               <option>Other</option>
             </select>
           </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
+          <div>
             <label>Contact Number</label>
             <input
               type="tel"
               name="contact"
               value={formData.contact}
               onChange={handleChange}
-              pattern="[0-9]{10}"
               placeholder="10-digit number"
+              pattern="[0-9]{10}"
               required
             />
           </div>
-          <div className="form-group">
+          <div>
             <label>Email ID</label>
             <input
               type="email"
@@ -103,23 +112,22 @@ function PersonalLoanForm() {
               onChange={handleChange}
             />
           </div>
-        </div>
-
-        <div className="form-group">
-          <label>Address</label>
-          <textarea
-            rows={2}
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
+          <div className="full-width">
+            <label>Address</label>
+            <textarea
+              rows={2}
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
         {/* Employment & Income */}
-        <h5 className="loan-form-section">Employment & Income</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h4 className="section-title">Employment & Income</h4>
+        <div className="grid">
+          <div>
             <label>Occupation</label>
             <select
               name="occupation"
@@ -134,32 +142,30 @@ function PersonalLoanForm() {
               <option>Other</option>
             </select>
           </div>
-          <div className="form-group">
+          <div>
             <label>Company / Business Name</label>
             <input
               type="text"
               name="company"
               value={formData.company}
               onChange={handleChange}
-              required
             />
           </div>
-          <div className="form-group">
+          <div>
             <label>Monthly Income (₹)</label>
             <input
               type="number"
               name="income"
               value={formData.income}
               onChange={handleChange}
-              required
             />
           </div>
         </div>
 
         {/* Loan Details */}
-        <h5 className="loan-form-section">Loan Details</h5>
-        <div className="form-row">
-          <div className="form-group">
+        <h4 className="section-title">Loan Details</h4>
+        <div className="grid">
+          <div>
             <label>Loan Amount (₹)</label>
             <input
               type="number"
@@ -169,7 +175,7 @@ function PersonalLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div>
             <label>Tenure (Months)</label>
             <input
               type="number"
@@ -179,7 +185,7 @@ function PersonalLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="full-width">
             <label>Purpose of Loan</label>
             <input
               type="text"
@@ -193,27 +199,41 @@ function PersonalLoanForm() {
         </div>
 
         {/* Documents */}
-        <h5 className="loan-form-section">Documents</h5>
-        <div className="form-group">
-          <label>Identity Proof</label>
-          <select
-            name="idProof"
-            value={formData.idProof}
+        <h4 className="section-title">Documents</h4>
+        <div className="grid">
+          <div className="full-width">
+            <label>Identity Proof</label>
+            <select
+              name="idProof"
+              value={formData.idProof}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select</option>
+              <option>Aadhar Card</option>
+              <option>PAN Card</option>
+              <option>Passport</option>
+              <option>Voter ID</option>
+              <option>Driving License</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Declaration */}
+        <div className="loan-checkbox">
+          <input
+            type="checkbox"
+            name="declaration"
+            checked={formData.declaration}
             onChange={handleChange}
             required
-          >
-            <option value="">Select</option>
-            <option>Aadhar Card</option>
-            <option>PAN Card</option>
-            <option>Passport</option>
-            <option>Voter ID</option>
-            <option>Driving License</option>
-          </select>
+          />
+          <span >I hereby declare that the information provided is true and correct.</span>
         </div>
 
         {/* Submit */}
-        <div className="form-submit">
-          <button type="submit" className="loan-submit-btn">
+        <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
+          <button type="submit" className="btn-submit">
             Submit Application
           </button>
         </div>

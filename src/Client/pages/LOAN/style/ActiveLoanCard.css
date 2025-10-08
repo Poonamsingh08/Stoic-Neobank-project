@@ -35,13 +35,15 @@
 .loan-status {
   display: flex;
   align-items: center;
+  justify-content: right;
   gap: 0.5rem;
-  background: #f8f9fa;
+  
   padding: 0.3rem 0.8rem;
-  border-radius: 50px;
+  
   font-weight: 500;
   color: #900603;
   font-size: 0.85rem;
+
 }
 
 /* Content Layout */
