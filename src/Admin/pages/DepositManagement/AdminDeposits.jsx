@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./AdminDeposits.css";
+import styles from "./AdminDeposits.module.css";
 
 const AdminDeposits = () => {
   const [activeTab, setActiveTab] = useState("applications");
   const [notification, setNotification] = useState("");
-  const [modalData, setModalData] = useState(null); // For interest modal
+  const [modalData, setModalData] = useState(null);
 
   const [applications, setApplications] = useState([
     { id: 1, user: "Alice", type: "FD", amount: 50000, status: "Pending", startDate: "2025-01-01", dueDate: "2025-12-31", interest: "-" },
@@ -41,7 +41,7 @@ const AdminDeposits = () => {
     const { row, setRows, action, interest } = modalData;
     setRows((prev) =>
       prev.map((r) =>
-        r.id === row.id ? { ...r, status: action, interest: interest } : r
+        r.id === row.id ? { ...r, status: action, interest } : r
       )
     );
     showMessage(`✅ Request ${action} successfully`);
@@ -53,10 +53,10 @@ const AdminDeposits = () => {
   };
 
   const renderTable = (rows, setRows, title) => (
-    <section className="dm-table-card">
+    <section className={styles["adm-tableCard"]}>
       <h2>{title}</h2>
-      {notification && <div className="dm-notification">{notification}</div>}
-      <table className="dm-table">
+      {notification && <div className={styles["adm-notification"]}>{notification}</div>}
+      <table>
         <thead>
           <tr>
             <th>User</th>
@@ -78,27 +78,27 @@ const AdminDeposits = () => {
               <td>{row.startDate}</td>
               <td>{row.dueDate}</td>
               <td>
-                <span className={`dm-status ${row.status.toLowerCase()}`}>
+                <span className={`${styles["adm-status"]} ${styles[`adm-${row.status.toLowerCase()}`]}`}>
                   {row.status}
                 </span>
               </td>
               <td>{row.interest}</td>
-              <td className="dm-action-buttons">
+              <td className={styles["adm-actionButtons"]}>
                 <button
-                  className="approve"
+                  className={styles["adm-approve"]}
                   onClick={() => openInterestModal(row, setRows, "Approved")}
                 >
                   Approve
                 </button>
                 <button
-                  className="reject"
+                  className={styles["adm-reject"]}
                   onClick={() => openInterestModal(row, setRows, "Rejected")}
                 >
                   Reject
                 </button>
                 {row.status === "Approved" && (
                   <button
-                    className="generate"
+                    className={styles["adm-interest"]}
                     onClick={() => handleGenerateInstrument(row)}
                   >
                     Generate Instrument
@@ -113,51 +113,46 @@ const AdminDeposits = () => {
   );
 
   return (
-<>
-     <header className="dashboard-header">
-        <h3>User Management Dashboard</h3>
-      </header>
-    <div className="dm-container">
-      
+    <>
+    <div className={styles["adm-headingBar"]}>
+        <h1>Deposits Management</h1>
+      </div>
+    <div className={styles["adm-adminDeposits"]}>
+      {/* <div className={styles["adm-headingBar"]}>
+        <h1>Deposits Management</h1>
+      </div> */}
 
-      {/* Tabs */}
-      <div className="dm-tabs">
+      <div className={styles["adm-tabs"]}>
         <button
-          className={activeTab === "applications" ? "active" : ""}
+          className={activeTab === "applications" ? styles["adm-active"] : ""}
           onClick={() => setActiveTab("applications")}
         >
           Deposit Applications
         </button>
         <button
-          className={activeTab === "maturities" ? "active" : ""}
+          className={activeTab === "maturities" ? styles["adm-active"] : ""}
           onClick={() => setActiveTab("maturities")}
         >
           Maturities
         </button>
         <button
-          className={activeTab === "withdrawals" ? "active" : ""}
+          className={activeTab === "withdrawals" ? styles["adm-active"] : ""}
           onClick={() => setActiveTab("withdrawals")}
         >
           Early Withdrawal Requests
         </button>
       </div>
 
-      {/* Tables */}
       {activeTab === "applications" &&
         renderTable(applications, setApplications, "Deposit Applications")}
       {activeTab === "maturities" &&
         renderTable(maturities, setMaturities, "Maturities")}
       {activeTab === "withdrawals" &&
-        renderTable(
-          earlyWithdrawals,
-          setEarlyWithdrawals,
-          "Early Withdrawal Requests"
-        )}
+        renderTable(earlyWithdrawals, setEarlyWithdrawals, "Early Withdrawal Requests")}
 
-      {/* Modal */}
       {modalData && (
-        <div className="dm-modal-backdrop">
-          <div className="dm-modal">
+        <div className={styles["adm-modalBackdrop"]}>
+          <div className={styles["adm-modal"]}>
             <h3>Adjust Interest for {modalData.row.user}</h3>
             <input
               type="number"
@@ -166,7 +161,7 @@ const AdminDeposits = () => {
                 setModalData({ ...modalData, interest: e.target.value })
               }
             />
-            <div className="dm-modal-actions">
+            <div className={styles["adm-modalActions"]}>
               <button onClick={() => setModalData(null)}>Cancel</button>
               <button onClick={handleModalSave}>
                 Save & {modalData.action}

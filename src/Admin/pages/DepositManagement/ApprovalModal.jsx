@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import styles from "./ApprovalModal.module.css"; // 👈 Scoped import
 
 const ApprovalModal = ({ row, onClose, onConfirm }) => {
-  // Pre-fill with existing rate/tenure if available
   const initialRate = (row?.rate || "").toString().replace("%", "");
   const initialTenure = (row?.tenure || "").toString();
 
@@ -19,8 +19,8 @@ const ApprovalModal = ({ row, onClose, onConfirm }) => {
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
+    <div className={styles["adm-modalBackdrop"]}>
+      <div className={styles["adm-modal"]}>
         <h3>Approve Request</h3>
         <p>{row?.name ? `Customer: ${row.name}` : "Customer details unavailable"}</p>
 
@@ -37,9 +37,9 @@ const ApprovalModal = ({ row, onClose, onConfirm }) => {
           onChange={(e) => setTenure(e.target.value)}
         />
 
-        <div className="modal-actions">
-          <button onClick={onClose}>Cancel</button>
-          <button className="approve" onClick={handleConfirm}>Confirm</button>
+        <div className={styles["adm-modalActions"]}>
+          <button className={styles["adm-cancel"]} onClick={onClose}>Cancel</button>
+          <button className={styles["adm-approve"]} onClick={handleConfirm}>Confirm</button>
         </div>
       </div>
     </div>

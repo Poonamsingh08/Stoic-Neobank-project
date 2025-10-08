@@ -1,8 +1,9 @@
 import React from "react";
+import "./NotificationBanner.css";
 
 const NotificationBanner = ({ message }) => {
   return (
-    <div className="notification">
+    <div className="adm-notification">
       {message}
     </div>
   );

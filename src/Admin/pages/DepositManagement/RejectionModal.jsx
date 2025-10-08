@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./RejectionModal.css";
 
 const RejectionModal = ({ row, onClose, onConfirm }) => {
   const [reason, setReason] = useState("");
@@ -14,8 +15,8 @@ const RejectionModal = ({ row, onClose, onConfirm }) => {
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
+    <div className="adm-rejection-modal-backdrop">
+      <div className="adm-rejection-modal">
         <h3>Reject Request</h3>
         <p>{row?.name ? `Customer: ${row.name}` : ""}</p>
 
@@ -24,9 +25,12 @@ const RejectionModal = ({ row, onClose, onConfirm }) => {
           value={reason}
           onChange={(e) => setReason(e.target.value)}
         />
-        <div className="modal-actions">
+
+        <div className="adm-rejection-modal-actions">
           <button onClick={onClose}>Cancel</button>
-          <button className="reject" onClick={handleReject}>Reject</button>
+          <button className="adm-reject" onClick={handleReject}>
+            Reject
+          </button>
         </div>
       </div>
     </div>

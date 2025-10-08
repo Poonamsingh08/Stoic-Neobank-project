@@ -1,0 +1,181 @@
+/* ====================================
+   Rejection Modal (Responsive Version)
+==================================== */
+
+.adm-rejection-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(20, 20, 20, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+/* ========================
+   Modal Box
+======================== */
+.adm-rejection-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  width: 420px;
+  max-width: 95%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.adm-rejection-modal h3 {
+  color: #950606;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #950606;
+  padding-bottom: 6px;
+  text-align: center;
+}
+
+.adm-rejection-modal p {
+  margin: 6px 0 12px;
+  color: #333;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ========================
+   Textarea
+======================== */
+.adm-rejection-modal textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.adm-rejection-modal textarea:focus {
+  outline: none;
+  border-color: #950606;
+  box-shadow: 0 0 0 3px rgba(149, 6, 6, 0.1);
+}
+
+/* ========================
+   Modal Actions
+======================== */
+.adm-rejection-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.adm-rejection-modal-actions button {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.adm-rejection-modal-actions button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Cancel button */
+.adm-rejection-modal-actions button:not(.adm-reject) {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.adm-rejection-modal-actions button:not(.adm-reject):hover {
+  background-color: #e0e0e0;
+}
+
+/* Reject button */
+.adm-rejection-modal-actions .adm-reject {
+  background-color: #950606;
+  color: #fff;
+}
+
+.adm-rejection-modal-actions .adm-reject:hover {
+  background-color: #900603;
+}
+
+/* ========================
+   Animation
+======================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================
+   Responsive Design
+======================== */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .adm-rejection-modal {
+    width: 85%;
+    padding: 22px;
+  }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+  .adm-rejection-modal {
+    width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .adm-rejection-modal h3 {
+    font-size: 1.15rem;
+  }
+
+  .adm-rejection-modal textarea {
+    height: 90px;
+  }
+
+  .adm-rejection-modal-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .adm-rejection-modal-actions button {
+    width: 100%;
+  }
+}
+
+/* Small Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .adm-rejection-modal {
+    padding: 16px;
+  }
+
+  .adm-rejection-modal h3 {
+    font-size: 1rem;
+  }
+
+  .adm-rejection-modal textarea {
+    font-size: 0.88rem;
+  }
+}

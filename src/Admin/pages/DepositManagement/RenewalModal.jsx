@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./RenewalModal.module.css";
 
 const RenewalModal = ({ row, onClose, onConfirm }) => {
   const [tenure, setTenure] = useState("");
@@ -6,7 +7,11 @@ const RenewalModal = ({ row, onClose, onConfirm }) => {
   const [overrideReason, setOverrideReason] = useState("");
 
   const handleRenew = () => {
-    const payload = { tenure, interest: interest ? `${interest}%` : undefined, overrideReason };
+    const payload = {
+      tenure,
+      interest: interest ? `${interest}%` : undefined,
+      overrideReason,
+    };
     if (onConfirm) {
       onConfirm(payload);
     } else {
@@ -16,8 +21,8 @@ const RenewalModal = ({ row, onClose, onConfirm }) => {
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
+    <div className={styles["adm-modal-backdrop"]}>
+      <div className={styles["adm-modal"]}>
         <h3>Renew Deposit</h3>
         <p>{row?.name ? `Customer: ${row.name}` : ""}</p>
 
@@ -38,9 +43,11 @@ const RenewalModal = ({ row, onClose, onConfirm }) => {
           value={overrideReason}
           onChange={(e) => setOverrideReason(e.target.value)}
         />
-        <div className="modal-actions">
+        <div className={styles["adm-modal-actions"]}>
           <button onClick={onClose}>Cancel</button>
-          <button className="renew" onClick={handleRenew}>Confirm Renewal</button>
+          <button className={styles["adm-renew"]} onClick={handleRenew}>
+            Confirm Renewal
+          </button>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./EarlyWithdrawalsTable.css"; // Scoped CSS import
 
 const EarlyWithdrawalsTable = () => {
   const [rows, setRows] = useState([
@@ -27,36 +28,42 @@ const EarlyWithdrawalsTable = () => {
   };
 
   return (
-    <div>
-      {/* <h2>Early Withdrawal Requests</h2> */}
-      {notification && <div className="notification">{notification}</div>}
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Penalty</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
-              <td>{row.user}</td>
-              <td>{row.type}</td>
-              <td>{row.amount}</td>
-              <td>{row.penalty}</td>
-              <td>{row.status}</td>
-              <td className="action-buttons">
-                <button className="approve" onClick={() => handleApprove(row.id)}>Approve</button>
-                <button className="reject" onClick={() => handleReject(row.id)}>Reject</button>
-              </td>
+    <div className="adm-early-withdrawals-table">
+      {notification && <div className="adm-notification">{notification}</div>}
+
+      <div className="adm-table-container">
+        <table className="adm-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Penalty</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.id} className={`adm-status-${row.status.toLowerCase()}`}>
+                <td>{row.user}</td>
+                <td>{row.type}</td>
+                <td>₹{row.amount}</td>
+                <td>₹{row.penalty}</td>
+                <td className="adm-status">{row.status}</td>
+                <td className="adm-action-buttons">
+                  <button className="adm-approve" onClick={() => handleApprove(row.id)}>
+                    Approve
+                  </button>
+                  <button className="adm-reject" onClick={() => handleReject(row.id)}>
+                    Reject
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

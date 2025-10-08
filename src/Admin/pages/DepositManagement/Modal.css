@@ -1,0 +1,208 @@
+/* ================================
+   ADM Modal - Responsive Version
+================================ */
+
+.adm-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(20, 20, 20, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.adm-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px 28px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  animation: adm-fadeIn 0.2s ease-in-out;
+}
+
+.adm-modal h3 {
+  margin-bottom: 10px;
+  color: #950606;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-bottom: 2px solid #950606;
+  padding-bottom: 6px;
+  text-align: center;
+}
+
+.adm-modal p {
+  margin: 8px 0;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Textarea styling */
+.adm-modal textarea {
+  width: 100%;
+  height: 90px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.adm-modal textarea:focus {
+  outline: none;
+  border-color: #950606;
+}
+
+/* Action buttons */
+.adm-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.adm-modal-actions button {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.adm-modal-actions button:hover {
+  opacity: 0.9;
+}
+
+/* Cancel button */
+.adm-modal-actions button:not(.adm-approve) {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.adm-modal-actions button:not(.adm-approve):hover {
+  background-color: #e0e0e0;
+}
+
+/* Submit/Approve button */
+.adm-modal-actions .adm-approve {
+  background-color: #950606;
+  color: #fff;
+}
+
+.adm-modal-actions .adm-approve:hover {
+  background-color: #900603;
+}
+
+/* Fade animation */
+@keyframes adm-fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ================================
+   Responsive Design
+================================ */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .adm-modal {
+    width: 360px;
+    padding: 20px 24px;
+  }
+
+  .adm-modal h3 {
+    font-size: 1.2rem;
+  }
+
+  .adm-modal p {
+    font-size: 0.9rem;
+  }
+
+  .adm-modal textarea {
+    height: 80px;
+  }
+
+  .adm-modal-actions button {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+  .adm-modal {
+    width: 95%;
+    padding: 18px 20px;
+  }
+
+  .adm-modal h3 {
+    font-size: 1.1rem;
+  }
+
+  .adm-modal p {
+    font-size: 0.85rem;
+  }
+
+  .adm-modal textarea {
+    height: 80px;
+    font-size: 0.9rem;
+  }
+
+  .adm-modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .adm-modal-actions button {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
+
+/* Very Small Devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .adm-modal {
+    padding: 16px;
+    width: 95%;
+  }
+
+  .adm-modal h3 {
+    font-size: 1rem;
+  }
+
+  .adm-modal p {
+    font-size: 0.8rem;
+  }
+
+  .adm-modal textarea {
+    height: 70px;
+    font-size: 0.85rem;
+  }
+
+  .adm-modal-actions button {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+}

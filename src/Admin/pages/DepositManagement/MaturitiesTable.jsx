@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./MaturitiesTable.css"; // Scoped CSS import
 
 const MaturitiesTable = () => {
   const [rows, setRows] = useState([
@@ -27,36 +28,42 @@ const MaturitiesTable = () => {
   };
 
   return (
-    <div>
-      <h2>Maturities</h2>
+    <div className="maturities-table">
       {notification && <div className="notification">{notification}</div>}
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Maturity Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
-              <td>{row.user}</td>
-              <td>{row.type}</td>
-              <td>{row.amount}</td>
-              <td>{row.maturityDate}</td>
-              <td>{row.status}</td>
-              <td className="action-buttons">
-                <button className="approve" onClick={() => handleRenew(row.id)}>Renew</button>
-                <button className="reject" onClick={() => handleClose(row.id)}>Close</button>
-              </td>
+
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Maturity Date</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.id} className={`status-${row.status.toLowerCase()}`}>
+                <td>{row.user}</td>
+                <td>{row.type}</td>
+                <td>₹{row.amount}</td>
+                <td>{row.maturityDate}</td>
+                <td className="status">{row.status}</td>
+                <td className="action-buttons">
+                  <button className="renew" onClick={() => handleRenew(row.id)}>
+                    Renew
+                  </button>
+                  <button className="close" onClick={() => handleClose(row.id)}>
+                    Close
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

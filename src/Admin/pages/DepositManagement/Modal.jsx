@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Modal.css"; // Keep your CSS file
 
 const Modal = ({ action, row, onClose, onSubmit }) => {
   const [remarks, setRemarks] = useState("");
@@ -14,8 +15,8 @@ const Modal = ({ action, row, onClose, onSubmit }) => {
   };
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
+    <div className="adm-modal-backdrop">
+      <div className="adm-modal">
         <h3>{action} Request</h3>
         <p>User: {row?.name || row?.id}</p>
         <p>Amount: {row?.amount ?? "N/A"}</p>
@@ -26,9 +27,9 @@ const Modal = ({ action, row, onClose, onSubmit }) => {
           onChange={(e) => setRemarks(e.target.value)}
         />
 
-        <div className="modal-actions">
+        <div className="adm-modal-actions">
           <button onClick={onClose}>Cancel</button>
-          <button className="approve" onClick={handleSubmit}>
+          <button className="adm-approve" onClick={handleSubmit}>
             Submit
           </button>
         </div>

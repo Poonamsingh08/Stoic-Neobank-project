@@ -1,6 +1,7 @@
 
 
 
+
 import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   Bell, User, CreditCard, DollarSign,
@@ -10,15 +11,16 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import "./Navbar.css"; // Assuming you have a CSS file for styling
 
-
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [secondaryOpen, setSecondaryOpen] = useState(false);
   const location = useLocation();
 
-  // 👇 If we are on profile page, don't render Navbar at all
-  if (location.pathname === "/Client/profile") {
-    return null;
-  }
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setSecondaryOpen(false);
+  }, [location.pathname]);
+
   const menuItems = [
     { name: "Dashboard", icon: <LayoutDashboard size={18} />, path: "/client" },
     { name: "My Account", icon: <User size={18} />, path: "/client/myaccount" },
@@ -48,42 +50,42 @@ const Navbar = () => {
           <form className="search-form">
             <input type="text" className="search-input" placeholder="Search users, transactions..." />
           </form>
-           </div>
+        </div>
 
-          {/* Right side */}
-          <div
-            className="navbar-right"
-            style={{
-              marginLeft: "auto",
-              marginRight: "30px",
-              display: "flex",
-              alignItems: "center",
-              gap: "15px"
-            }}
+        {/* Right side */}
+        <div
+          className="navbar-right"
+          style={{
+            marginLeft: "auto",
+            marginRight: "30px",
+            display: "flex",
+            alignItems: "center",
+            gap: "15px"
+          }}
+        >
+          <button className="icon-btn">
+            <Bell size={22} />
+            <span className="badge">3</span>
+          </button>
+
+          {/* ✅ Profile Button from amit_myAccount branch */}
+          <Link
+            to="/Client/profile"
+            className="d-flex align-items-center px-2 py-1 rounded-pill shadow-sm bg-light text-dark text-decoration-none"
+            style={{ transition: "all 0.3s ease" }}
           >
-            <button className="icon-btn">
-              <Bell size={22} />
-              <span className="badge">3</span>
-            </button>
+            <User size={20} className="me-2 text-danger" />
+            <span className="fw-semibold">Amit Rajput</span>
+          </Link>
+          {/* keep menu separate so JD is always right-aligned */}
+          <button
+            className="menu-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Menu size={24} />
+          </button>
+          {/* </div> */}
 
-              {/* ✅ Profile Button from amit_myAccount branch */}
-            <Link
-              to="/Client/profile"
-              className="d-flex align-items-center px-2 py-1 rounded-pill shadow-sm bg-light text-dark text-decoration-none"
-              style={{ transition: "all 0.3s ease" }}
-            >
-              <User size={20} className="me-2 text-danger" />
-              <span className="fw-semibold">Amit Rajput</span>
-            </Link>
-            {/* keep menu separate so JD is always right-aligned */}
-            <button
-              className="menu-btn"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <Menu size={24} />
-            </button>
-            {/* </div> */}
-         
         </div>
       </nav>
 
@@ -95,6 +97,7 @@ const Navbar = () => {
               <li key={item.name}>
                 <NavLink
                   to={item.path}
+                  end
                   className={({ isActive }) =>
                     `nav-item ${isActive ? "active" : ""}`
                   }

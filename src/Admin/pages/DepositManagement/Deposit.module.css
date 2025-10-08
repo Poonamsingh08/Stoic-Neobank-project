@@ -1,0 +1,363 @@
+/* =======================
+   Container
+======================= */
+.adm-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =======================
+   Headings
+======================= */
+.adm-title {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  margin: 0;
+  padding: 18px;
+  background-color: #900603;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.adm-subtitle {
+  font-size: 1.5rem; /* 24px */
+  margin: 10px 0 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* =======================
+   Tabs
+======================= */
+.adm-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.adm-tabButton {
+  padding: 10px 20px;
+  border: 1px solid #950606;
+  background: #fff;
+  color: #950606;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.adm-tabButton:hover {
+  opacity: 0.85;
+}
+
+.adm-activeTab {
+  background-color: #950606;
+  color: #fff;
+}
+
+/* =======================
+   Filters
+======================= */
+.adm-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+
+.adm-input,
+.adm-select,
+.adm-search {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.adm-input:focus,
+.adm-select:focus,
+.adm-search:focus {
+  outline: none;
+  border-color: #950606;
+  box-shadow: 0 0 0 3px rgba(149, 6, 6, 0.15);
+}
+
+.adm-input,
+.adm-search {
+  flex: 1;
+  min-width: 240px;
+}
+
+.adm-select {
+  min-width: 180px;
+}
+
+/* =======================
+   Table Card Wrapper
+======================= */
+.adm-tableCard {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.adm-tableCard:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* =======================
+   Table
+======================= */
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-size: 14px;
+  min-width: 800px;
+}
+
+.adm-table th,
+.adm-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-table th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.adm-table tbody tr:nth-child(even) {
+  background-color: #fdf2f2;
+}
+
+.adm-table tbody tr:hover {
+  background-color: rgba(149, 6, 6, 0.05);
+}
+
+/* =======================
+   Status Badges
+======================= */
+.adm-status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.adm-pending { background: #fff3cd; color: #856404; }
+.adm-approved { background: #d4edda; color: #155724; }
+.adm-rejected { background: #f8d7da; color: #950606; }
+.adm-closed { background: #d1ecf1; color: #0c5460; }
+.adm-defaulted { background: #f5c6cb; color: #721c24; }
+
+/* =======================
+   Action Buttons
+======================= */
+.adm-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.adm-actionBtn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #950606;
+  color: #fff;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.adm-actionBtn:hover {
+  background-color: #7a0505;
+  transform: translateY(-1px);
+}
+
+/* =======================
+   Pagination
+======================= */
+.adm-pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.adm-pageBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #950606;
+  background-color: #fff;
+  color: #950606;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.adm-pageBtn:hover {
+  background-color: #950606;
+  color: #fff;
+}
+
+.adm-activePage {
+  background-color: #950606;
+  color: #fff;
+  border-color: #950606;
+}
+
+/* =======================
+   Responsive Layout
+======================= */
+
+/* ===== Mobile (≤767px) ===== */
+@media (max-width: 767px) {
+  .adm-container {
+    padding: 15px;
+    gap: 16px;
+  }
+
+  .adm-title {
+    font-size: 1.5rem;
+    padding: 14px;
+  }
+
+  .adm-filters {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .adm-input,
+  .adm-select,
+  .adm-search {
+    width: 100%;
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+
+  .adm-tabs {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .adm-tabButton {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .adm-tableCard {
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  .adm-table {
+    display: block;
+    width: 100%;
+    min-width: 500px;
+    font-size: 13px;
+    overflow-x: auto;
+  }
+
+  .adm-table th,
+  .adm-table td {
+    padding: 10px 8px;
+  }
+
+  .adm-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .adm-actionBtn {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .adm-pagination {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .adm-pageBtn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* ===== Tablet (768px–1023px) ===== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .adm-title {
+    font-size: 1.7rem;
+  }
+
+  .adm-filters {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .adm-table {
+    font-size: 13.5px;
+  }
+
+  .adm-actionBtn {
+    padding: 8px 12px;
+  }
+
+  .adm-pagination {
+    justify-content: center;
+  }
+}
+
+/* ===== Desktop (≥1024px) ===== */
+@media (min-width: 1024px) {
+  .adm-container {
+    padding: 30px 40px;
+  }
+
+  .adm-title {
+    font-size: 2rem;
+  }
+
+  .adm-table {
+    font-size: 14px;
+  }
+}
