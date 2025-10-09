@@ -27,7 +27,7 @@ body, html {
   padding-left: 8px;
   font-size: 2rem;
   font-weight: bold;
-  margin-top: 70px;
+  
 }
 
 /* ===== Summary Cards ===== */
@@ -41,7 +41,7 @@ body, html {
 .summary-card {
   flex: 1 1 220px;
   background: white;
-  border-left: 5px solid;
+  
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   min-width: 150px;
@@ -175,9 +175,10 @@ body, html {
   margin-right: 5px;
 }
 
-.status-badge.active { background-color: #28a745; }
-.status-badge.suspended { background-color: #dc3545; }
-.status-badge.frozen { background-color: #6c757d; }
+.status-badge.active { background-color: #28a745;color: white; }
+.status-badge.suspended { background-color: #dc3545; color: white; }
+.status-badge.frozen { background-color: #6c757d; color: white; }
+.status-badge.pending-kyc {background-color: #900603;}
 
 /* ===== Action Buttons ===== */
 .action-buttons button {
@@ -194,6 +195,7 @@ body, html {
 .action-buttons button.activate { background-color: #0dcaf0; color: white; }
 .action-buttons button.deactivate { background-color: #ffc107; color: black; }
 
+
 /* ===== Pagination ===== */
 .cl-pagination {
   display: flex;
@@ -207,7 +209,8 @@ body, html {
   padding: 5px 10px;
   border-radius: 6px;
   border: 1px solid #950606;
-  background-color: white;
+  background-color: white; /* normal state */
+  color: #950606;          /* text color always visible */
   cursor: pointer;
   transition: 0.3s;
 }
@@ -216,6 +219,12 @@ body, html {
   background-color: #950606;
   color: white;
 }
+
+.cl-pagination button:hover {
+  background-color: #950606; /* change bg on hover */
+  color: white;               /* text color on hover */
+}
+
 
 /* ===== KYC Cards ===== */
 .upm-doc-card {
@@ -317,7 +326,7 @@ body, html {
 .upm-btn-secondary { background-color: #950606; color: white; }
 .upm-btn-warning { background-color: #ff9800; color: white; }
 @media (max-width: 768px) {
-  .dashboard-header { font-size: 1.5rem; height: 90px; padding: 0 10px; }
+  .dashboard-header { font-size: 1.5rem; height: 90px; padding: 0 10px; margin-top: 90px;}
   .summary-card h2 { font-size: 1.3rem; }
   .summary-card h6 { font-size: 0.75rem; }
   .user-controls input[type="text"], .user-controls select { flex: 1 1 100%; }

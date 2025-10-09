@@ -173,17 +173,17 @@ export default function UserManagement() {
   return (
     <>
       <header className="dashboard-header">
-        <h3>User Management Dashboard</h3>
+        <h4>User Management Dashboard</h4>
       </header>
 
       <div className="user-management-container">
         {/* Summary Cards */}
         <section className="summary-cards">
           {[
-            { title: "Total Users", value: summaryData.total, icon: "bi-people-fill", color: PNB_PRIMARY_COLOR },
-            { title: "Active Users", value: summaryData.active, icon: "bi-person-check-fill", color: "#28a745" },
-            { title: "Frozen Accounts", value: summaryData.frozen, icon: "bi-snow", color: "#6c757d" },
-            { title: "Pending KYC", value: summaryData.pending, icon: "bi-card-checklist", color: PNB_ACCENT_COLOR },
+            { title: "Total Users", value: summaryData.total, icon: "bi-people-fill", color: "#900603" },
+            { title: "Active Users", value: summaryData.active, icon: "bi-person-check-fill", color: "#900603" },
+            { title: "Frozen Accounts", value: summaryData.frozen, icon: "bi-snow", color: "#900603"  },
+            { title: "Pending KYC", value: summaryData.pending, icon: "bi-card-checklist", color: "#900603" },
           ].map((card, idx) => (
             <div className="summary-card" key={idx} style={{ borderLeftColor: card.color }}>
               <div className="card-content">
@@ -259,6 +259,7 @@ export default function UserManagement() {
                     <td>
                       <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
                       {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                      
                     </td>
                     <td>{new Date(user.lastLogin).toLocaleDateString("en-GB")}</td>
                     <td className="action-buttons">
@@ -306,19 +307,60 @@ export default function UserManagement() {
             </div>
           )}
         </div>
+{/* Pagination */}
+{totalPages > 1 && (
+  <div className="cl-pagination">
+    <button
+      disabled={currentPage === 1}
+      onClick={() => setCurrentPage(prev => prev - 1)}
+    >
+      Prev
+    </button>
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="cl-pagination">
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Prev</button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i + 1} className={currentPage === i + 1 ? "active" : ""} onClick={() => setCurrentPage(i + 1)}>
-                {i + 1}
+    {Array.from({ length: totalPages }, (_, i) => i + 1)
+      .filter((page) => {
+        // Always show first, last, current ±2 pages
+        return (
+          page === 1 ||
+          page === totalPages ||
+          (page >= currentPage - 2 && page <= currentPage + 2)
+        );
+      })
+      .map((page, idx, arr) => {
+        const prevPage = arr[idx - 1];
+        if (prevPage && page - prevPage > 1) {
+          // Insert ellipsis if gap > 1
+          return (
+            <React.Fragment key={page}>
+              <span className="ellipsis">...</span>
+              <button
+                className={currentPage === page ? "active" : ""}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
               </button>
-            ))}
-            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(prev => prev + 1)}>Next</button>
-          </div>
-        )}
+            </React.Fragment>
+          );
+        }
+        return (
+          <button
+            key={page}
+            className={currentPage === page ? "active" : ""}
+            onClick={() => setCurrentPage(page)}
+          >
+            {page}
+          </button>
+        );
+      })}
+
+    <button
+      disabled={currentPage === totalPages}
+      onClick={() => setCurrentPage(prev => prev + 1)}
+    >
+      Next
+    </button>
+  </div>
+)}
 
         {/* User Modal */}
         {selectedUser && (

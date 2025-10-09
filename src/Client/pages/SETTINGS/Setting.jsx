@@ -11,7 +11,7 @@ const settings = [
     title: "General Settings",
     description: "App preferences, language, and display settings",
     icon: <FaCog className="icon-color" />,
-    path: "/Client/GeneralSettings",
+    path: "/Client/General",
   },
   {
     title: "Personal Details",

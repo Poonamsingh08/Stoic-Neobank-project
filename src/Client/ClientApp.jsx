@@ -168,7 +168,7 @@ function MainApp() {
         {/* Settings */}
         <Route path="/setting" element={<Setting />} />
         <Route path="/notifications" element={<NotificationsPage />} />
-        <Route path="/general-settings" element={<GeneralSettings />} />
+        <Route path="/General" element={<GeneralSettings />} />
         <Route path="/personal-details" element={<PersonalDetails />} />
 
         {/* Money Transfer */}

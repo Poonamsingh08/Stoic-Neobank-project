@@ -5,8 +5,8 @@ import Escalations from "./Escalations";
 import TicketDetails from "./TicketDetails";
 import { getTickets } from "../services/ticketService";
 
-const PNB_PRIMARY_COLOR = "#900603";
-const PNB_ACCENT_COLOR = "#ff9800";
+const PRIMARY_COLOR = "#900603";
+const ACCENT_COLOR = "#ff9800";
 const PAGE_SIZE = 10;
 
 export default function ComplaintsLayout() {
@@ -20,17 +20,21 @@ export default function ComplaintsLayout() {
     getTickets().then(setTickets);
   }, []);
 
-  const summaryData = useMemo(() => ({
-    total: tickets.length,
-    open: tickets.filter(t => t.status === "Open").length,
-    highPriority: tickets.filter(t => t.priority === "High").length,
-    closed: tickets.filter(t => t.status === "Closed").length
-  }), [tickets]);
+  const summaryData = useMemo(
+    () => ({
+      total: tickets.length,
+      open: tickets.filter((t) => t.status === "Open").length,
+      highPriority: tickets.filter((t) => t.priority === "High").length,
+      closed: tickets.filter((t) => t.status === "Closed").length,
+    }),
+    [tickets]
+  );
 
   const filteredTickets = useMemo(() => {
-    return tickets.filter(t =>
-      t.id.toString().includes(search) ||
-      t.username?.toLowerCase().includes(search.toLowerCase())
+    return tickets.filter(
+      (t) =>
+        t.id.toString().includes(search) ||
+        t.username?.toLowerCase().includes(search.toLowerCase())
     );
   }, [tickets, search]);
 
@@ -42,135 +46,185 @@ export default function ComplaintsLayout() {
   const totalPages = Math.ceil(filteredTickets.length / PAGE_SIZE);
 
   const renderTab = () => {
-    if (selectedTicket) return (
-      <TicketDetails
-        ticketId={selectedTicket}
-        goBack={() => setSelectedTicket(null)}
-        onUpdate={updated => setTickets(prev => prev.map(t => t.id === updated.id ? { ...t, ...updated } : t))}
-      />
-    );
+    if (selectedTicket)
+      return (
+        <TicketDetails
+          ticketId={selectedTicket}
+          goBack={() => setSelectedTicket(null)}
+          onUpdate={(updated) =>
+            setTickets((prev) =>
+              prev.map((t) => (t.id === updated.id ? { ...t, ...updated } : t))
+            )
+          }
+        />
+      );
 
-    if (activeTab === "queue") return (
-      <TicketQueue tickets={pagedTickets} search={search} onView={setSelectedTicket} />
-    );
+    if (activeTab === "queue")
+      return (
+        <TicketQueue
+          tickets={pagedTickets}
+          search={search}
+          onView={setSelectedTicket}
+        />
+      );
 
-    if (activeTab === "escalations") return (
-      <Escalations tickets={pagedTickets} search={search} onView={setSelectedTicket} />
-    );
+    if (activeTab === "escalations")
+      return (
+        <Escalations
+          tickets={pagedTickets}
+          search={search}
+          onView={setSelectedTicket}
+        />
+      );
   };
 
   const summaryCards = [
-    { title: "Total Tickets", value: summaryData.total, color: PNB_PRIMARY_COLOR, icon: "bi-people-fill" },
-    { title: "Open Tickets", value: summaryData.open, color: "#28a745", icon: "bi-folder2-open" },
-    { title: "High Priority", value: summaryData.highPriority, color: PNB_ACCENT_COLOR, icon: "bi-exclamation-circle-fill" },
-    { title: "Closed Tickets", value: summaryData.closed, color: "gray", icon: "bi-check-circle-fill" }
+    {
+      title: "Total Tickets",
+      value: summaryData.total,
+      color: PRIMARY_COLOR,
+      icon: "bi-people-fill",
+    },
+    {
+      title: "Open Tickets",
+      value: summaryData.open,
+      color: "#28a745",
+      icon: "bi-folder2-open",
+    },
+    {
+      title: "High Priority",
+      value: summaryData.highPriority,
+      color: ACCENT_COLOR,
+      icon: "bi-exclamation-circle-fill",
+    },
+    {
+      title: "Closed Tickets",
+      value: summaryData.closed,
+      color: "gray",
+      icon: "bi-check-circle-fill",
+    },
   ];
 
   return (
     <>
-      <header className="cl-header" style={{ backgroundColor: PNB_PRIMARY_COLOR }}>
-        <h4>📩 Complaints & Supports</h4>
-        <div className="cl-tabs">
+      <header className="clx-header" style={{ backgroundColor: PRIMARY_COLOR }}>
+        <h4>Complaints & Supports</h4>
+        <div className="clx-tabs">
           <button
-            className={`cl-tab-btn ${activeTab === "queue" ? "active" : ""}`}
-            onClick={() => { setSelectedTicket(null); setActiveTab("queue"); setCurrentPage(1); }}
+            className={`clx-tab-btn ${activeTab === "queue" ? "active" : ""}`}
+            onClick={() => {
+              setSelectedTicket(null);
+              setActiveTab("queue");
+              setCurrentPage(1);
+            }}
           >
             Ticket Queue
           </button>
           <button
-            className={`cl-tab-btn ${activeTab === "escalations" ? "active" : ""}`}
-            onClick={() => { setSelectedTicket(null); setActiveTab("escalations"); setCurrentPage(1); }}
+            className={`clx-tab-btn ${activeTab === "escalations" ? "active" : ""}`}
+            onClick={() => {
+              setSelectedTicket(null);
+              setActiveTab("escalations");
+              setCurrentPage(1);
+            }}
           >
             Escalations
           </button>
         </div>
       </header>
 
-      <div className="cl-layout">
-        <main className="cl-container">
+      <div className="clx-layout">
+        <main className="clx-container">
           {!selectedTicket && (
-            <div className="cl-summary-cards">
+            <div className="clx-summary-cards">
               {summaryCards.map((card, idx) => (
-                <div key={idx} className="cl-card" style={{ borderLeftColor: card.color }}>
-                  <div className="cl-card-body">
+                <div
+                  key={idx}
+                  className="clx-card"
+                  style={{ borderLeftColor: card.color }}
+                >
+                  <div className="clx-card-body">
                     <div>
                       <h6>{card.title}</h6>
                       <h2>{card.value}</h2>
                     </div>
-                    <div className="cl-card-icon" style={{ backgroundColor: card.color }}>
-                      <i className={`bi ${card.icon}`}></i>
-                    </div>
+                   <div className="clx-card-icon">
+  <i className={`bi ${card.icon}`}></i>
+</div>
+
                   </div>
                 </div>
               ))}
             </div>
           )}
 
-          <div className="cl-card cl-table-card">
+          <div className="clx-card clx-table-card">
             {!selectedTicket && (
-              <div className="cl-card-header">
-                <div className="cl-search-wrapper">
-                  <i className="bi bi-search cl-search-icon"></i>
+              <div className="clx-card-header">
+                <div className="clx-search-wrapper">
+                  <i className="bi bi-search clx-search-icon"></i>
                   <input
                     type="text"
                     placeholder="Search by Ticket ID / Username..."
                     value={search}
-                    onChange={e => { setSearch(e.target.value); setCurrentPage(1); }}
-                    className="cl-search-input"
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    className="clx-search-input"
                   />
                 </div>
               </div>
             )}
 
-            <div className="cl-card-body">{renderTab()}</div>
-
-          {/* Pagination */}
+            <div className="clx-card-body">{renderTab()}</div>
+{/* Pagination */}
 {totalPages > 1 && (
   <div className="cl-pagination">
     <button
-      className="cl-prev-btn"
       disabled={currentPage === 1}
       onClick={() => setCurrentPage(prev => prev - 1)}
     >
       Prev
     </button>
 
-    {(() => {
-      const pages = [];
-      let startPage = Math.max(1, currentPage - 2);
-      let endPage = Math.min(totalPages, currentPage + 2);
-
-      if (startPage > 1) {
-        pages.push(
-          <button key={1} className={`cl-page-btn ${currentPage === 1 ? "active" : ""}`} onClick={() => setCurrentPage(1)}>
-            1
+    {Array.from({ length: totalPages }, (_, i) => i + 1)
+      .filter((page) => {
+        // Always show first, last, current ±2 pages
+        return (
+          page === 1 ||
+          page === totalPages ||
+          (page >= currentPage - 2 && page <= currentPage + 2)
+        );
+      })
+      .map((page, idx, arr) => {
+        const prevPage = arr[idx - 1];
+        if (prevPage && page - prevPage > 1) {
+          // Insert ellipsis if gap > 1
+          return (
+            <React.Fragment key={page}>
+              <span className="ellipsis">...</span>
+              <button
+                className={currentPage === page ? "active" : ""}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </button>
+            </React.Fragment>
+          );
+        }
+        return (
+          <button
+            key={page}
+            className={currentPage === page ? "active" : ""}
+            onClick={() => setCurrentPage(page)}
+          >
+            {page}
           </button>
         );
-        if (startPage > 2) pages.push(<span key="start-ellipsis" className="cl-ellipsis">...</span>);
-      }
-
-      for (let i = startPage; i <= endPage; i++) {
-        pages.push(
-          <button key={i} className={`cl-page-btn ${i === currentPage ? "active" : ""}`} onClick={() => setCurrentPage(i)}>
-            {i}
-          </button>
-        );
-      }
-
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) pages.push(<span key="end-ellipsis" className="cl-ellipsis">...</span>);
-        pages.push(
-          <button key={totalPages} className={`cl-page-btn ${currentPage === totalPages ? "active" : ""}`} onClick={() => setCurrentPage(totalPages)}>
-            {totalPages}
-          </button>
-        );
-      }
-
-      return pages;
-    })()}
+      })}
 
     <button
-      className="cl-next-btn"
       disabled={currentPage === totalPages}
       onClick={() => setCurrentPage(prev => prev + 1)}
     >
@@ -181,7 +235,6 @@ export default function ComplaintsLayout() {
 
           </div>
         </main>
-
       </div>
     </>
   );
