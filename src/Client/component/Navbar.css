@@ -64,6 +64,17 @@
   background: none;
   border: none;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-btn .icon {
+  color: #333; /* default icon color */
+  transition: color 0.3s ease;
+}
+
+/* ✅ Hover: icons turn white */
+.icon-btn:hover .icon {
+  color: #fff;
 }
 
 .badge {
@@ -122,6 +133,12 @@
 
 .nav-item .icon {
   margin-right: 6px;
+  transition: color 0.3s ease;
+}
+
+/* ✅ Hover: nav icons turn white */
+.nav-item:hover .icon {
+  color: #fff;
 }
 
 .nav-item:hover {
@@ -166,6 +183,12 @@
 
 .mobile-nav-item .icon {
   margin-right: 8px;
+  transition: color 0.3s ease;
+}
+
+/* ✅ Hover: mobile menu icons turn white */
+.mobile-nav-item:hover .icon {
+  color: #fff;
 }
 
 .mobile-nav-item:hover {
@@ -194,4 +217,81 @@
   .secondary-navbar {
     display: none; /* hide secondary navbar */
   }
+}
+/* Right side icons */
+.icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon-btn .icon {
+  color: #333; /* default */
+  transition: color 0.3s ease;
+}
+
+/* Hover or Active */
+.icon-btn:hover .icon,
+.icon-btn.active .icon {
+  color: #fff;
+}
+
+/* Navbar menu items */
+.nav-item {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item .icon {
+  margin-right: 6px;
+  transition: color 0.3s ease;
+}
+
+/* Hover or Active */
+.nav-item:hover,
+.nav-item.active {
+  background: #950606;
+  color: #fff;
+}
+
+.nav-item:hover .icon,
+.nav-item.active .icon {
+  color: #fff;
+}
+
+/* Mobile Menu items */
+.mobile-nav-item {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #333;
+  padding: 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item .icon {
+  margin-right: 8px;
+  transition: color 0.3s ease;
+}
+
+/* Hover or Active for mobile */
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+  background: #e0e0e0;
+  color: #000;
+}
+
+.mobile-nav-item:hover .icon,
+.mobile-nav-item.active .icon {
+  color: #fff; /* icons stay white if active */
 }

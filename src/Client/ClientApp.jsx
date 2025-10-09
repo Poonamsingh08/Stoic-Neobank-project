@@ -103,7 +103,7 @@ function OnboardingFlow({ onComplete }) {
     case "welcome":
       return <WelcomeScreen />;
       case "signIn":
-        return <SignInPage />
+        return <SignInPage onComplete={onComplete} />
     case "signup":
       return <SignupScreen />;
     case "aadhar":
