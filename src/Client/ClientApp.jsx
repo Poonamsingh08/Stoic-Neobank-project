@@ -20,6 +20,7 @@ import UpdateKYC33 from "./Onboarding/UpdateKYC33.jsx";
 import CustomerIDPage from "./Onboarding/CustomerIDPage.jsx"; // ✅ NEW PAGE
 
 
+
 // Dashboard Pages
 import DashBoard from "./pages/dashboard/DashBoard.jsx";
 import HomePage from "./pages/dashboard/HomePage.jsx";
@@ -87,6 +88,7 @@ import EmailSupport from "./pages/Complaint & Feedback/EmailSupport";
 
 // Profile
 import Profile from "./pages/Profile/Profile.jsx";
+import SignInPage from "./Onboarding/SignInPage.jsx";
 
 // ------------------- Onboarding Flow -------------------
 function OnboardingFlow({ onComplete }) {
@@ -100,6 +102,8 @@ function OnboardingFlow({ onComplete }) {
   switch (currentStep) {
     case "welcome":
       return <WelcomeScreen />;
+      case "signIn":
+        return <SignInPage />
     case "signup":
       return <SignupScreen />;
     case "aadhar":
@@ -108,7 +112,7 @@ function OnboardingFlow({ onComplete }) {
       return <PANScreen />;
     case "account-type":
       return <AccountTypeScreen />;
-
+     
      case "customer-id": // ✅ NEW STEP ADDED HERE
       return <CustomerIDPage />;
     case "kyc":

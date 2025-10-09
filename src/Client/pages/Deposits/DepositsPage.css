@@ -1,18 +1,9 @@
-/* Global font */
-body, div, p, h1, h3, input, select, button, ul, li {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* Page background */
-.page { background: #f8f9fa; min-height: 100vh; }
+.depositsUnique-page { background: #f8f9fa; min-height: 100vh; }
 
 /* Header */
-.header {
-   display: flex;
+.depositsUnique-header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 25px 2rem;
@@ -22,22 +13,22 @@ body, div, p, h1, h3, input, select, button, ul, li {
   z-index: 1000;
   flex-wrap: wrap;
 }
-.header h2 { 
+
+.depositsUnique-header h2 { 
   font-size: 1.75rem;
   margin-bottom: 0.25rem;
   font-weight: bold;
 }
 
-.header p {
+.depositsUnique-header p {
   font-size: 0.9rem;
   color: #F0F0F0;
-
 }
 
-
 /* Dropdown */
-.dropdown { position: relative; }
-.dropdown-btn {
+.depositsUnique-dropdown { position: relative; }
+
+.depositsUnique-dropdown-btn {
   background-color: #900603;
   color: white;
   padding: 0.5rem 1.2rem;
@@ -47,57 +38,200 @@ body, div, p, h1, h3, input, select, button, ul, li {
   align-items: center;
   font-weight: 500;
   margin-top: 15px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
-.dropdown-menu {
+
+/* 👇 Added hover fix */
+.depositsUnique-dropdown:hover .depositsUnique-dropdown-btn {
+  color: black;
+}
+
+/* also change icon color to black on hover */
+.depositsUnique-dropdown:hover .depositsUnique-dropdown-btn svg {
+  color: black;
+  stroke: black;
+}
+
+.depositsUnique-dropdown-menu {
   position: absolute; top: 110%; right: 0;
   background: white; border: 1px solid #ddd;
   border-radius: 6px; display: none; flex-direction: column;
 }
-.dropdown:hover .dropdown-menu { display: flex; }
-.dropdown-menu button {
+
+.depositsUnique-dropdown:hover .depositsUnique-dropdown-menu { display: flex; }
+
+.depositsUnique-dropdown-menu button {
   padding: 8px 12px; border: none; background: transparent; text-align: left; cursor: pointer;
   font-weight: bold;
 }
-.dropdown-menu button:hover { background: #900603; color: white; }
+
+.depositsUnique-dropdown-menu button:hover { background: #900603; color: white; }
 
 /* Content */
-.content { padding: 7px; display: flex; flex-direction: column; gap: 13px; }
+.depositsUnique-content { padding: 7px; display: flex; flex-direction: column; gap: 13px; }
 
 /* Cards */
-.card12 { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-.card12 h3 { font-weight: bold; font-size: 20px; } /* Bold & bigger */
-.form-grid { display: grid; gap: 12px; }
-@media (min-width:768px){ .form-grid { grid-template-columns: repeat(4, 1fr); } }
-.form-grid input, .form-grid select { padding: 5px;margin-top: 6px;height: 45px; border-radius: 6px; border: 1px solid #ccc; }
-.maturity-box { background: #fdd; padding: 8px; border-radius: 6px; text-align: right; font-weight:bold; font-size:16px; }
+.depositsUnique-card12 { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+
+.depositsUnique-card12 h3 { font-weight: bold; font-size: 20px; }
+
+.depositsUnique-form-grid { display: grid; gap: 12px; }
+
+@media (min-width:768px){ .depositsUnique-form-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.depositsUnique-form-grid input,
+.depositsUnique-form-grid select {
+  padding: 5px; margin-top: 6px; height: 45px; border-radius: 6px; border: 1px solid #ccc;
+}
+
+.depositsUnique-maturity-box {
+  background: #fdd;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+}
 
 /* Plan Cards */
-.grid-3 { display: grid; gap: 16px; }
-@media(min-width:768px){ .grid-3 { grid-template-columns: repeat(3,1fr); } }
-.plan-card { background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); padding:16px; display:flex; flex-direction:column; gap:8px; font-size:14px; }
-.plan-card div { font-weight: bold; } /* All text bold inside plan card */
-.plan-header { display:flex; justify-content:space-between; align-items:flex-start; }
-.plan-left { display:flex; gap:8px; align-items:center; }
-.badge { background:#fdd; color:#900603; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:14px; }
-.plan-info { font-size:14px; color:#555; font-weight: normal; } /* keep smaller info normal */
-.plan-card ul { margin:0; padding-left:16px; color:#555; font-size:14px; font-weight: normal; }
-.plan-card button { margin-top:auto; background:#900603; color:white; padding:8px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; font-size:14px; }
-.plan-card button:hover { background:#700402; }
+.depositsUnique-grid-3 { display: grid; gap: 16px; }
+
+@media(min-width:768px){ .depositsUnique-grid-3 { grid-template-columns: repeat(3,1fr); } }
+
+.depositsUnique-plan-card {
+  background:white;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  font-size:14px;
+}
+
+.depositsUnique-plan-card div { font-weight: bold; }
+
+.depositsUnique-plan-header { display:flex; justify-content:space-between; align-items:flex-start; }
+
+.depositsUnique-plan-left { display:flex; gap:8px; align-items:center; }
+
+.depositsUnique-badge {
+  background:#fdd;
+  color:#900603;
+  padding:4px 8px;
+  border-radius:4px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.depositsUnique-plan-info { font-size:14px; color:#555; font-weight: normal; }
+
+.depositsUnique-plan-card ul { margin:0; padding-left:16px; color:#555; font-size:14px; font-weight: normal; }
+
+.depositsUnique-plan-card button {
+  margin-top:auto;
+  background:#900603;
+  color:white;
+  padding:8px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.depositsUnique-plan-card button:hover { background:#700402; }
 
 /* My Deposits */
-.list { display:flex; flex-direction:column; gap:12px; }
-.list-item { display:flex; justify-content:space-between; background:#f9f9f9; padding:12px; border-radius:6px; align-items:center; font-size:14px; font-weight:bold; } /* bold */
-.list-left { display:flex; gap:8px; align-items:center; }
-.list-left div { font-weight:bold; } /* bold type & rate */
-.list-right { text-align:right; }
-.amount { font-weight:bold; font-size:16px; }
-.maturity { color:green; font-size:16px; font-weight:bold; }
+.depositsUnique-list { display:flex; flex-direction:column; gap:12px; }
+
+.depositsUnique-list-item {
+  display:flex;
+  justify-content:space-between;
+  background:#f9f9f9;
+  padding:12px;
+  border-radius:6px;
+  align-items:center;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.depositsUnique-list-left { display:flex; gap:8px; align-items:center; }
+
+.depositsUnique-list-left div { font-weight:bold; }
+
+.depositsUnique-list-right { text-align:right; }
+
+.depositsUnique-amount { font-weight:bold; font-size:16px; }
+
+.depositsUnique-maturity { color:green; font-size:16px; font-weight:bold; }
 
 /* Summary Cards */
-.grid-4 { display:grid; gap:16px; }
-@media(min-width:768px){ .grid-4 { grid-template-columns: repeat(4,1fr); } }
-.summary-card { background:white; border-radius:8px; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.1); font-size:14px; }
-.summary-title { color:#555; font-size:15px; font-weight:bold; }
-.summary-value { color:#900603; font-weight:bold; margin:4px 0; font-size:16px; }
-.summary-subtitle { color:#777; font-size:14px; font-weight:bold; }
+.depositsUnique-grid-4 { display:grid; gap:16px; }
+
+@media(min-width:768px){ .depositsUnique-grid-4 { grid-template-columns: repeat(4,1fr); } }
+
+.depositsUnique-summary-card {
+  background:white;
+  border-radius:8px;
+  padding:16px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  font-size:14px;
+}
+
+.depositsUnique-summary-title { color:#555; font-size:15px; font-weight:bold; }
+
+.depositsUnique-summary-value { color:#900603; font-weight:bold; margin:4px 0; font-size:16px; }
+
+.depositsUnique-summary-subtitle { color:#777; font-size:14px; font-weight:bold; }
+/* Dropdown */
+.depositsUnique-dropdown { position: relative; }
+
+.depositsUnique-dropdown-btn {
+  background-color: #900603;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  margin-top: 15px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Button turns black on hover */
+.depositsUnique-dropdown:hover .depositsUnique-dropdown-btn {
+  color: black;
+}
+
+.depositsUnique-dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: none;
+  flex-direction: column;
+}
+
+/* Show dropdown on hover */
+.depositsUnique-dropdown:hover .depositsUnique-dropdown-menu { display: flex; }
+
+/* 👇 Make dropdown text black by default */
+.depositsUnique-dropdown-menu button {
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-weight: bold;
+  color: black; /* ✅ Added this line */
+}
+
+/* Hover effect */
+.depositsUnique-dropdown-menu button:hover {
+  background: #900603;
+  color: white;
+}

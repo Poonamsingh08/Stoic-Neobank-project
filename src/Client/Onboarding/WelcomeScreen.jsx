@@ -35,6 +35,7 @@ export default function WelcomeScreen() {
           </div>
         </div>
 
+        {/* Get Started → SignUp Page */}
         <button
           onClick={() => setCurrentStep('signup')}
           className="get-started-btn"
@@ -43,8 +44,12 @@ export default function WelcomeScreen() {
           <div className="arrow-icon">→</div>
         </button>
 
+        {/* Sign In → SignInPage */}
         <div className="login-link">
-          <button className="login-btn">
+          <button
+            className="login-btn"
+            onClick={() => setCurrentStep('signIn')}
+          >
             Already have an account? <span className="login-text">Sign In</span>
           </button>
         </div>
