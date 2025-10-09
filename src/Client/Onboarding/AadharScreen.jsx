@@ -18,9 +18,8 @@ export default function AadharScreen() {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
-
       if (value && index < 5) {
-        const nextInput = document.getElementById(`otp-${index + 1}`);
+        const nextInput = document.getElementById(`otpinput-${index + 1}`);
         if (nextInput) nextInput.focus();
       }
     }
@@ -32,31 +31,36 @@ export default function AadharScreen() {
   };
 
   return (
-    <div className="aadhar-container">
+    <div className="aadharscreen-container">
+
+      {/* Back Button */}
       <button
         onClick={() => setCurrentStep('signup')}
-        className="back-btn"
+        className="aadharscreen-back-btn"
       >
-        <div className="back-arrow">←</div>
+        <div className="aadharscreen-back-arrow">←</div>
         <span>Back</span>
       </button>
 
-      <div className="aadhar-card">
-        <div className="aadhar-icon-container">
-          <div className="aadhar-icon">🆔</div>
+      {/* Card */}
+      <div className="aadharscreen-card">
+
+        {/* Icon */}
+        <div className="aadharscreen-icon-container">
+          <div className="aadharscreen-icon">🆔</div>
         </div>
 
-        <div className="aadhar-header">
-          <h2 className="aadhar-title">Verify Aadhar</h2>
-          <p className="aadhar-subtitle">Enter your 12-digit Aadhar number</p>
+        {/* Header */}
+        <div className="aadharscreen-header">
+          <h2 className="aadharscreen-title">Verify Aadhar</h2>
+          <p className="aadharscreen-subtitle">Enter your 12-digit Aadhar number</p>
         </div>
 
-       
-
+        {/* Form / OTP */}
         {!otpSent ? (
-          <form onSubmit={handleAadharSubmit} className="aadhar-form">
-            <div className="form-group">
-              <label className="form-label">Aadhar Number</label>
+          <form onSubmit={handleAadharSubmit} className="aadharscreen-form">
+            <div className="aadharscreen-form-group">
+              <label className="aadharscreen-label">Aadhar Number</label>
               <input
                 type="text"
                 required
@@ -65,36 +69,38 @@ export default function AadharScreen() {
                 placeholder="XXXX XXXX XXXX"
                 maxLength={12}
                 pattern="[0-9]{12}"
-                className="aadhar-input"
+                className="aadharscreen-input"
               />
             </div>
 
-            <div className="info-box">
-              <div className="info-icon">🔒</div>
-              <p className="info-text">
+            <div className="aadharscreen-info-box">
+              <div className="aadharscreen-info-icon">🔒</div>
+              <p className="aadharscreen-info-text">
                 Your Aadhar details are encrypted and securely stored. We comply with all UIDAI regulations.
               </p>
             </div>
 
-            <button type="submit" className="send-otp-btn">
+            <button type="submit" className="aadharscreen-send-otp-btn">
               <span>Send OTP</span>
-              <div className="arrow-icon">→</div>
+              <div className="aadharscreen-arrow-icon">→</div>
             </button>
           </form>
         ) : (
-          <div className="otp-container">
-            <div className="form-group">
-              <label className="form-label">Enter 6-digit OTP sent to your registered mobile</label>
-              <div className="otp-inputs">
+          <div className="aadharscreen-otp-container">
+            <div className="aadharscreen-form-group">
+              <label className="aadharscreen-label">
+                Enter 6-digit OTP sent to your registered mobile
+              </label>
+              <div className="aadharscreen-otp-inputs">
                 {otp.map((digit, index) => (
                   <input
                     key={index}
-                    id={`otp-${index}`}
+                    id={`otpinput-${index}`}
                     type="text"
                     value={digit}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     maxLength={1}
-                    className="otp-input"
+                    className="aadharscreen-otp-input"
                   />
                 ))}
               </div>
@@ -103,15 +109,15 @@ export default function AadharScreen() {
             <button
               onClick={handleVerify}
               disabled={otp.some(digit => !digit)}
-              className="verify-btn"
+              className="aadharscreen-verify-btn"
             >
               <span>Verify & Continue</span>
-              <div className="arrow-icon">→</div>
+              <div className="aadharscreen-arrow-icon">→</div>
             </button>
 
             <button
               onClick={() => setOtpSent(false)}
-              className="resend-btn"
+              className="aadharscreen-resend-btn"
             >
               Resend OTP
             </button>

@@ -21,7 +21,7 @@ export default function VideoKYCScreen() {
 
   return (
     <div className="kyc-container">
-      <button onClick={() => setCurrentStep("pan")} className="back-btn">
+      <button onClick={() => setCurrentStep("account-type")} className="back-btn">
         <div className="back-arrow">←</div>
         <span>Back</span>
       </button>

@@ -1,21 +1,23 @@
-.aadhar-container {
+/* Container */
+.aadharscreen-container {
   min-height: 100vh;
-   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+  background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 6px;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  animation: fadeInBackground 1.5s ease forwards;
+  animation: aadharscreen-fadeInBackground 1.5s ease forwards;
 }
 
-@keyframes fadeInBackground {
+@keyframes aadharscreen-fadeInBackground {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.back-btn {
+/* Back Button */
+.aadharscreen-back-btn {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -23,93 +25,116 @@
   border: none;
   color: white;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.back-btn:hover {
+.aadharscreen-back-btn:hover {
   color: #ffb3b3;
 }
 
-.aadhar-card {
+.aadharscreen-back-arrow {
+  font-size: 18px;
+}
+
+/* Card */
+.aadharscreen-card {
   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
   border-radius: 24px;
-  padding: 40px 32px;
+  padding: 30px 32px;
   width: 100%;
   max-width: 400px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  animation: fadeInCard 1.2s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: aadharscreen-fadeInCard 1.2s ease forwards;
 }
 
-@keyframes fadeInCard {
-  
+@keyframes aadharscreen-fadeInCard {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.aadhar-header {
+/* Icon */
+.aadharscreen-icon-container {
+  margin-bottom: 2px;
+}
+
+.aadharscreen-icon {
+  font-size: 48px;
+}
+
+/* Header */
+.aadharscreen-header {
   text-align: center;
   margin-bottom: 32px;
 }
 
-.aadhar-title {
-  
+.aadharscreen-title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 8px;
+  color: white;
 }
 
-.aadhar-subtitle {
-   color: #ffe6e6;
+.aadharscreen-subtitle {
   font-size: 16px;
- 
+  color: #ffe6e6;
 }
 
-.progress-step {
-  height: 40px;
-  flex: 1;
-  background: #660202;
-  border-radius: 2px;
-}
-
-.progress-step.active {
-  background: #900603;
-}
-
-.aadhar-form {
+/* Form */
+.aadharscreen-form {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 100%;
 }
 
-.aadhar-input {
+.aadharscreen-form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aadharscreen-label {
+  color: #ffe6e6;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.aadharscreen-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 16px;
-  color: white;
   font-size: 24px;
-  text-align: center;
   letter-spacing: 4px;
+  text-align: center;
+  color: white;
   transition: all 0.3s ease;
 }
 
-.aadhar-input:focus {
+.aadharscreen-input:focus {
   outline: none;
- 
   box-shadow: 0 0 0 3px rgba(255, 153, 153, 0.2);
 }
 
-.aadhar-input::placeholder {
-
+.aadharscreen-input::placeholder {
   letter-spacing: normal;
   font-size: 16px;
 }
 
-.info-box {
+/* Info Box */
+.aadharscreen-info-box {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -119,13 +144,19 @@
   gap: 12px;
 }
 
-.info-text {
+.aadharscreen-info-icon {
+  font-size: 20px;
+}
+
+.aadharscreen-info-text {
   color: #ffe6e6;
   font-size: 14px;
   line-height: 1.4;
 }
 
-.send-otp-btn, .verify-btn {
+/* Buttons */
+.aadharscreen-send-otp-btn,
+.aadharscreen-verify-btn {
   width: 100%;
   background: #900603;
   color: white;
@@ -136,33 +167,37 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
 }
 
-.verify-btn:disabled {
+.aadharscreen-verify-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  transform: none;
 }
 
-.otp-container {
+.aadharscreen-arrow-icon {
+  font-size: 18px;
+}
+
+/* OTP Inputs */
+.aadharscreen-otp-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.otp-inputs {
+.aadharscreen-otp-inputs {
   display: flex;
   justify-content: center;
   gap: 12px;
   margin-top: 16px;
 }
 
-.otp-input {
+.aadharscreen-otp-input {
   width: 48px;
   height: 56px;
   background: rgba(255, 255, 255, 0.05);
@@ -174,21 +209,23 @@
   transition: all 0.3s ease;
 }
 
-.otp-input:focus {
+.aadharscreen-otp-input:focus {
   outline: none;
   border-color: #ff9999;
   box-shadow: 0 0 0 3px rgba(255, 153, 153, 0.2);
 }
 
-.resend-btn {
+/* Resend OTP */
+.aadharscreen-resend-btn {
   background: none;
   border: none;
   color: #ffb3b3;
   cursor: pointer;
   font-size: 14px;
   transition: color 0.3s ease;
+  text-align: center;
 }
 
-.resend-btn:hover {
+.aadharscreen-resend-btn:hover {
   color: white;
 }

@@ -17,6 +17,8 @@ import PANScreen from "./Onboarding/PANScreen.jsx";
 import AccountTypeScreen from "./Onboarding/AccountTypeScreen.jsx";
 import VideoKYCScreen from "./Onboarding/VideoKYCScreen.jsx";
 import UpdateKYC33 from "./Onboarding/UpdateKYC33.jsx";
+import CustomerIDPage from "./Onboarding/CustomerIDPage.jsx"; // ✅ NEW PAGE
+
 
 // Dashboard Pages
 import DashBoard from "./pages/dashboard/DashBoard.jsx";
@@ -105,6 +107,9 @@ function OnboardingFlow({ onComplete }) {
       return <PANScreen />;
     case "account-type":
       return <AccountTypeScreen />;
+
+     case "customer-id": // ✅ NEW STEP ADDED HERE
+      return <CustomerIDPage />;
     case "kyc":
       return <VideoKYCScreen />;
     case "updateKYC33":

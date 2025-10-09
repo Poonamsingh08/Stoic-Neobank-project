@@ -1,12 +1,14 @@
-.signup-container {
+/* ===================== Container ===================== */
+.signupscreen-container {
   min-height: 100vh;
-   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
-   display: flex;
+  background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 6px;
   font-family: 'Segoe UI', system-ui, sans-serif;
   animation: fadeInBackground 1.5s ease forwards;
+  position: relative;
 }
 
 @keyframes fadeInBackground {
@@ -14,28 +16,35 @@
   to { opacity: 1; }
 }
 
-.back-btn {
+/* ===================== Back/Next Buttons ===================== */
+.signupscreen-back-btn, .signupscreen-next-btn {
   position: absolute;
   top: 20px;
-  left: 20px;
   background: none;
   border: none;
   color: white;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
-.back-btn:hover {
+.signupscreen-back-btn { left: 20px; }
+.signupscreen-next-btn { right: 20px; }
+
+.signupscreen-back-btn:hover, .signupscreen-next-btn:hover {
   color: #ffb3b3;
+  transform: scale(1.05);
 }
 
-.signup-card {
-   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+/* ===================== Card ===================== */
+.signupscreen-card {
+  background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
   border-radius: 24px;
   padding: 40px 32px;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
@@ -47,48 +56,43 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.signup-header {
-  
+/* ===================== Header ===================== */
+.signupscreen-header {
+  text-align: center;
   margin-bottom: 32px;
 }
 
-.signup-title {
-  
+.signupscreen-title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 8px;
-  
 }
 
-.signup-subtitle {
-  
+.signupscreen-subtitle {
   font-size: 16px;
+  color: #ffe6e6;
 }
 
-
-.progress-step.active {
-  background: #900603;
-}
-
-.signup-form {
+/* ===================== Form ===================== */
+.signupscreen-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.form-group {
+.signupscreen-form-group {
   display: flex;
   flex-direction: column;
 }
 
-.form-label {
-
+.signupscreen-label {
+  color: #ffe6e6;  /* FIXED: label color */
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: 500;
 }
 
-.form-input {
+.signupscreen-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -99,16 +103,20 @@
   transition: all 0.3s ease;
 }
 
-.form-input:focus {
+.signupscreen-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.signupscreen-input:focus {
   outline: none;
   border-color: #ff9999;
   box-shadow: 0 0 0 3px rgba(255, 153, 153, 0.2);
 }
 
-
-.continue-btn {
+/* ===================== Continue Button ===================== */
+.signupscreen-continue-btn {
   width: 100%;
-  background: #900603;
+  background: linear-gradient(135deg, #900603, #900603);
   color: white;
   font-weight: 600;
   padding: 16px;
@@ -117,10 +125,78 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(145, 5, 5, 0.712);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 8px;
+}
+
+.signupscreen-continue-btn:hover {
+  background: linear-gradient(135deg, #900603, #900603);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
+}
+
+/* ===================== Terms Text ===================== */
+.signupscreen-terms-text {
+  text-align: center;
+  font-size: 12px;
+  color: #ffb3b3;
+  margin-top: 16px;
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 768px) {
+  .signupscreen-card {
+    padding: 32px 24px;
+  }
+
+  .signupscreen-title {
+    font-size: 28px;
+  }
+
+  .signupscreen-subtitle {
+    font-size: 14px;
+  }
+
+  .signupscreen-input {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .signupscreen-continue-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signupscreen-card {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+
+  .signupscreen-title {
+    font-size: 24px;
+  }
+
+  .signupscreen-subtitle {
+    font-size: 13px;
+  }
+
+  .signupscreen-input {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .signupscreen-continue-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .signupscreen-back-btn, .signupscreen-next-btn {
+    font-size: 14px;
+    top: 15px;
+  }
 }

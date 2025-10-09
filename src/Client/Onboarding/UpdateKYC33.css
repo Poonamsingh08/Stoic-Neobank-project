@@ -27,6 +27,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .back-btn:hover {
@@ -37,7 +38,7 @@
 .account-type-card {
   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
   border-radius: 24px;
-  padding: 40px 32px;
+  padding: 30px 32px;
   width: 100%;
   max-width: 500px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
@@ -190,4 +191,117 @@
   text-align: center;
   font-size: 12px;
   margin-top: 20px;
+}
+
+/* Progress bar */
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.progress-step {
+  flex: 1;
+  height: 6px;
+  margin: 0 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.progress-step.active {
+  background: #ff4d4d;
+}
+
+/* Recording indicator */
+.recording-indicator-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.recording-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: red;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 768px) {
+  .account-type-card {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .account-type-title {
+    font-size: 28px;
+  }
+
+  .account-type-subtitle {
+    font-size: 14px;
+  }
+
+  .kyc-input {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .record-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .instructions h3 {
+    font-size: 14px;
+  }
+
+  .instructions li {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-type-card {
+    padding: 24px 16px;
+  }
+
+  .account-type-title {
+    font-size: 24px;
+  }
+
+  .account-type-subtitle {
+    font-size: 13px;
+  }
+
+  .kyc-input {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .record-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .instructions h3 {
+    font-size: 13px;
+  }
+
+  .instructions li {
+    font-size: 12px;
+  }
+
+  .back-btn {
+    font-size: 14px;
+    top: 15px;
+    left: 15px;
+  }
 }

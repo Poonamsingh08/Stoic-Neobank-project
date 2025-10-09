@@ -31,7 +31,7 @@ function AccountTypeScreen() {
 
   const handleSelect = (type) => {
     updateUserData({ accountType: type });
-    setCurrentStep('kyc');
+    setCurrentStep('customer-id');
   };
 
   return (

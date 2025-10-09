@@ -1,21 +1,23 @@
-.pan-container {
+/* Container */
+.panscreen-container {
   min-height: 100vh;
-    background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+  background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 6px;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  animation: fadeInBackground 1.5s ease forwards;
+  animation: panscreen-fadeInBackground 1.5s ease forwards;
 }
 
-@keyframes fadeInBackground {
+@keyframes panscreen-fadeInBackground {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.back-btn {
+/* Back Button */
+.panscreen-back-btn {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -24,71 +26,90 @@
   color: white;
   font-size: 16px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   transition: all 0.3s ease;
 }
 
-.back-btn:hover {
+.panscreen-back-btn:hover {
   color: #ffb3b3;
 }
 
-.pan-card {
+.panscreen-back-arrow {
+  font-size: 18px;
+}
+
+/* Card */
+.panscreen-card {
   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
   border-radius: 24px;
-  padding: 40px 32px;
+  padding: 30px 32px;
   width: 100%;
   max-width: 400px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  animation: fadeInCard 1.2s ease forwards;
+  animation: panscreen-fadeInCard 1.2s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@keyframes fadeInCard {
+@keyframes panscreen-fadeInCard {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.pan-header {
+/* Icon */
+.panscreen-icon-container {
+  margin-bottom: 2px;
+}
+
+.panscreen-icon {
+  font-size: 48px;
+}
+
+/* Header */
+.panscreen-header {
   text-align: center;
   margin-bottom: 32px;
 }
 
-.pan-title {
+.panscreen-title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 8px;
   color: white;
 }
 
-.pan-subtitle {
+.panscreen-subtitle {
   font-size: 16px;
   color: #ffe6e6;
 }
 
-.progress-bar {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 32px;
-}
-
-.progress-step {
-  height: 4px;
-  flex: 1;
-  background: #660202;
-  border-radius: 2px;
-}
-
-.progress-step.active {
-  background: #ff9999;
-}
-
-.pan-form {
+/* Form */
+.panscreen-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
-.pan-input {
+.panscreen-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.panscreen-label {
+  color: #ffe6e6;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.panscreen-input {
   width: 100%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -102,20 +123,21 @@
   transition: all 0.3s ease;
 }
 
-.pan-input:focus {
+.panscreen-input:focus {
   outline: none;
   border-color: #ff9999;
   box-shadow: 0 0 0 3px rgba(255, 153, 153, 0.2);
 }
 
-.format-note {
+.panscreen-format-note {
   color: #ffcccc;
   font-size: 12px;
   text-align: center;
   margin-top: 8px;
 }
 
-.info-box {
+/* Info Box */
+.panscreen-info-box {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -123,12 +145,13 @@
   text-align: center;
 }
 
-.info-text {
+.panscreen-info-text {
   color: #ffe6e6;
   font-size: 14px;
 }
 
-.verify-pan-btn {
+/* Verify Button */
+.panscreen-verify-btn {
   width: 100%;
   background: #900603;
   color: white;
@@ -139,7 +162,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,4 +170,11 @@
   margin-top: 8px;
 }
 
+.panscreen-verify-btn:hover {
+  background: linear-gradient(135deg, #900603, #ff3333);
+  box-shadow: 0 10px 25px rgba(255, 0, 0, 0.5);
+}
 
+.panscreen-arrow-icon {
+  font-size: 18px;
+}
