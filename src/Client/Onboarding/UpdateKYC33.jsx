@@ -121,7 +121,7 @@ export default function UpdateKYC33({ onComplete }) {
 
       <div className="account-type-card">
         <div className="account-type-header">
-          <h2 className="account-type-title">Update KYC</h2>
+          <h2 className="account-type-title">KYC</h2>
           <p className="account-type-subtitle">
             Complete your verification in three simple steps
           </p>

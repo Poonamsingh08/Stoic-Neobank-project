@@ -1,7 +1,7 @@
 .account-type-container {
   min-height: 100vh;
-   background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
-  display: flex;
+  background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -15,6 +15,7 @@
   to { opacity: 1; }
 }
 
+/* Back Button */
 .back-btn {
   position: absolute;
   top: 20px;
@@ -24,23 +25,29 @@
   color: white;
   font-size: 16px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   transition: all 0.3s ease;
 }
 
 .back-btn:hover {
   color: #ffb3b3;
+  transform: translateX(-3px);
 }
 
-.account-type-card {
-  background: linear-gradient(135deg, #900603 0%, #0f172a 50%, #900603 100%);
+/* Main Card Container */
+.account-type-card11 {
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 24px;
-  padding: 40px 32px;
+  padding: 4px 3px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1100px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   animation: fadeInCard 1.2s ease forwards;
+  text-align: center;
 }
 
 @keyframes fadeInCard {
@@ -48,9 +55,9 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Header */
 .account-type-header {
   margin-bottom: 32px;
-  text-align: center;
 }
 
 .account-type-title {
@@ -65,6 +72,7 @@
   color: #ffe6e6;
 }
 
+/* Progress Bar */
 .progress-bar {
   display: flex;
   gap: 4px;
@@ -82,13 +90,16 @@
   background: #ff9999;
 }
 
+/* === ACCOUNT TYPE CARDS === */
 .account-types-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  justify-items: center;
   margin-bottom: 32px;
 }
 
+/* Individual Card */
 .account-type-option {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -99,23 +110,24 @@
   transition: all 0.3s ease;
   color: white;
   width: 100%;
+  max-width: 320px;
 }
 
 .account-type-option:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-6px) scale(1.02);
 }
 
 .account-icon {
-  font-size: 32px;
+  font-size: 36px;
   margin-bottom: 16px;
   color: #ffcccc;
 }
 
 .account-type-name {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 700;
   margin-bottom: 8px;
   color: white;
 }
@@ -144,7 +156,7 @@
 .feature-dot {
   width: 6px;
   height: 6px;
-  background: #900603;
+  background: #ff9999;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -153,7 +165,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #900603;
+  color: #ff9999;
   font-weight: 600;
   transition: transform 0.3s ease;
 }
@@ -162,8 +174,54 @@
   transform: translateX(4px);
 }
 
+/* Footer Note */
 .footer-note {
   color: #ffb3b3;
   text-align: center;
   font-size: 12px;
+  margin-top: 24px;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Tablets (2 in a row) */
+@media (max-width: 992px) {
+  .account-types-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .account-type-card {
+    max-width: 900px;
+    padding: 32px 24px;
+  }
+
+  .account-type-title {
+    font-size: 28px;
+  }
+}
+
+/* Mobiles (1 per row) */
+@media (max-width: 600px) {
+  .account-types-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .account-type-card {
+    max-width: 95%;
+    padding: 24px 16px;
+  }
+
+  .account-type-option {
+    max-width: 100%;
+  }
+
+  .account-type-title {
+    font-size: 24px;
+  }
+
+  .account-type-subtitle {
+    font-size: 14px;
+  }
 }

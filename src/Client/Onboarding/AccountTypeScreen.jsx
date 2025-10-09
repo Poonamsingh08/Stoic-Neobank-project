@@ -44,7 +44,7 @@ function AccountTypeScreen() {
         <span>Back</span>
       </button>
 
-      <div className="account-type-card">
+      <div className="account-type-card11">
         <div className="account-type-header">
           <h2 className="account-type-title">Choose Account Type</h2>
           <p className="account-type-subtitle">Select the account that best fits your needs</p>
