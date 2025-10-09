@@ -7,35 +7,36 @@
 }
 
 /* Header Section */
-.money-transfer-header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
 
 .header-content {
-  text-align: center;
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: center;
   padding: 25px 2rem;
   background-color: #900603;
-  width: 100%;
+  color: white;
+  top: 0;
+  z-index: 1000;
+  min-height: 125px;
+  flex-wrap: wrap;
 }
 
-.header-title {
-  font-size: 2rem;
-  /* font-weight: 700; */
-  color: white;
-  margin: 0;
+.header-content h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.07rem;
+  font-weight: bold;
 }
 
-.header-subtitle {
-  color: white;
-  margin-top: 1rem;
-  margin-bottom: 0;
+.header-content p {
+  font-size: 0.9rem;
+  color: #F0F0F0;
+  padding-right: 40rem;
 }
 
 /* Feature Cards Section */
 .feature-cards-container {
   padding: 0 0.75rem;
+  margin-top: 20px;
 }
 
 @media (min-width: 768px) {

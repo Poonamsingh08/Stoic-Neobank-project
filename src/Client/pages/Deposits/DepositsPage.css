@@ -12,29 +12,42 @@ body, div, p, h1, h3, input, select, button, ul, li {
 
 /* Header */
 .header {
-  background: #900603;
-  color: white;
-  padding: 25px;
-  display: flex;
+   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  padding: 25px 2rem;
+  background-color: #900603;
+  color: white;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
-.header h1 { font-weight: bold; font-size: 30px; } /* Bigger & bold */
+.header h2 { 
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
 
-.header p { font-weight: bold; font-size: 15px; }
+.header p {
+  font-size: 0.9rem;
+  color: #F0F0F0;
+
+}
 
 
 /* Dropdown */
 .dropdown { position: relative; }
 .dropdown-btn {
-  background: #900603; color: white;
-  border: 2px solid white; padding: 10px 20px;
-  border-radius: 4px; cursor: pointer;
-  display: flex; align-items: center; gap: 4px;
-  font-weight: bold;
+  background-color: #900603;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  margin-top: 15px;
+  transition: background-color 0.2s;
 }
 .dropdown-menu {
   position: absolute; top: 110%; right: 0;

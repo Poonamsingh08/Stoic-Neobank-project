@@ -11,7 +11,7 @@ const settings = [
     title: "General Settings",
     description: "App preferences, language, and display settings",
     icon: <FaCog className="icon-color" />,
-    path: "/Client/General",
+    path: "/Client/GeneralSettings",
   },
   {
     title: "Personal Details",
@@ -40,7 +40,7 @@ const Setting = () => {
     <div className="settings-page">
       {/* Header */}
       <div className="settings-header57">
-        <h1>Settings</h1>
+        <h2>Settings</h2>
         <p>Manage your account preferences and security</p>
       </div>
 

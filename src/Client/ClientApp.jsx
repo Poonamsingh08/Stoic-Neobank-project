@@ -63,6 +63,7 @@ import Setting from "./pages/SETTINGS/Setting.jsx";
 import NotificationsPage from "./pages/SETTINGS/NotificationsPage.jsx";
 import GeneralSettings from "./pages/SETTINGS/GeneralSettings.jsx";
 import PersonalDetails from "./pages/SETTINGS/PersonalDetails.jsx";
+import Security from "./pages/SETTINGS/Security.jsx";
 
 // Money Transfer Pages
 import MoneyTransfer from "./pages/Money-Transfer/MoneyTransfer.jsx";
@@ -175,6 +176,7 @@ function MainApp() {
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/General" element={<GeneralSettings />} />
         <Route path="/personal-details" element={<PersonalDetails />} />
+        <Route path="Security" element={<Security/>}/>
 
         {/* Money Transfer */}
         <Route path="/money-transfer" element={<MoneyTransfer />} />

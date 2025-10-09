@@ -256,8 +256,8 @@ export default function ComplaintFeedback() {
   return (
     <div className="cf-root">
       <header className="cf-header">
-        <h1 className="cf-header-title">Complaint & Feedback</h1>
-        <p className="cf-header-subtitle">
+        <h2>Complaint & Feedback</h2>
+        <p>
           Fill in the details and we'll get back to you within the stipulated business hours
         </p>
       </header>

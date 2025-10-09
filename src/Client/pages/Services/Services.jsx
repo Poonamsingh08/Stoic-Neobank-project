@@ -112,15 +112,9 @@ const Services = () => {
   return (
     <div className="services-container">
        {/* Header */}
-      <div
-        className="py-4 text-center shadow-sm"
-        style={{ backgroundColor: "#960603" }}
-      >
-        <h1 className="fw-bold fs-2 text-white">Our Services</h1>
-        <p className="text-light mb-0">
-          Explore all the banking services we provide
-        </p>
-      
+      <div className="Client-services-header">
+        <h2>Our Services</h2>
+        <p>  Explore all the banking services we provide  </p>    
       </div>
 
       {/* Category-wise services */}

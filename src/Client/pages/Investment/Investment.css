@@ -7,35 +7,37 @@
 }
 /* Header */
 .invp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #900603;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 2rem;
+  background-color: #900603;
+  color: white;
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
-.invp-header .invp-title {
-    color: white;
-    margin: 10;
-    font-weight: 700;
+.invp-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
 }
-.invp-header .invp-subtitle {
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
+.invp-header p {
+  font-size: 0.9rem;
+  color: #F0F0F0;
 }
 .invp-start-btn {
-    display: flex;
-    align-items: center;
-    background-color: #780606;
-    border: 2px solid white;
-    border-radius: 6px;
-    color: white;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 0.95rem;
+  background-color: #900603;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 10px;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 .invp-start-btn svg {
     margin-right: 5px;

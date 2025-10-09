@@ -67,13 +67,14 @@ const Loan = () => {
 
   return (
     <>
-      {/* Header Section */}
+     {/* Header Section */}
       <div className="loan-header">
         {/* Left side: Title & Subtitle */}
         <div className="loan-title">
-          <h1>Loans</h1>
+          <h2>Loans</h2>
           <p style={{color:'white'}}>Achieve your dreams with flexible loan options</p>
         </div>
+
 
         {/* Right side: Button */}
         <div className="loan-action">

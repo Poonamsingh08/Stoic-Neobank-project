@@ -62,7 +62,7 @@ export default function DepositsPage() {
       {/* Header */}
       <header className="header">
         <div>
-          <h1>Deposits</h1>
+          <h2>Deposits</h2>
           <p>Secure your future with guaranteed returns</p>
         </div>
         <div className="dropdown">

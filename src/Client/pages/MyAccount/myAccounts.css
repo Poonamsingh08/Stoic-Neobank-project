@@ -13,7 +13,6 @@
   padding: 25px 2rem;
   background-color: #900603;
   color: white;
-  position: sticky;
   top: 0;
   z-index: 1000;
   flex-wrap: wrap;

@@ -311,8 +311,8 @@ const InvestmentPage = () => {
             {/* Header */}
             <div className="invp-header">
                 <div>
-                    <h2 className="invp-title">Investment Portfolios</h2>
-                    <p className="invp-subtitle">Grow your wealth with smart investments</p>
+                    <h2>Investment Portfolios</h2>
+                    <p>Grow your wealth with smart investments</p>
                 </div>
                 <button className="invp-start-btn" onClick={handleScrollToInvestments}>
                     <Plus size={25} /> Start Investing

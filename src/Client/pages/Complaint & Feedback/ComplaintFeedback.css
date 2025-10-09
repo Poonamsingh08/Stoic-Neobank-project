@@ -7,18 +7,26 @@
 
 /* ================= Header ================= */
 .cf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 2rem;
   background-color: #900603;
   color: white;
-  text-align: center;
-  padding: 2rem 0;
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
-.cf-header-title {
-  margin: 0;
+.cf-header h2 {
   font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
 }
-.cf-header-subtitle {
-  margin: 0.5rem 0 0;
-  font-size: 1rem;
+.cf-header p {
+  font-size: 0.9rem;
+  color: #F0F0F0;
+   margin-bottom: 16px;
+  padding-right: 40rem;
 }
 
 /* ================= Main Container & Grid ================= */

@@ -1,34 +1,43 @@
-.client-card-wrapper {
-  padding: 0px 0px;
-  /* max-width: 1200px; */
-  margin: 0 auto;
-}
-
 .client-card-header {
-  display: flex;
+   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 25px 2rem;
   background-color: #900603;
-  padding: 35px 20px;
-  color: #fff;
-  /* border-radius: 8px; */
+  color: white;
+  top: 0;
+  z-index: 1000;
   flex-wrap: wrap;
+  min-height: 125px;
 }
 
-.client-card-header h1 {
-  font-size: 28px;
-  margin: 0;
+.client-card-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+.client-card-header p {
+  font-size: 0.9rem;
+  color: #F0F0F0;
+  /* margin: 0px; */
+  padding-right: 900px;
 }
 
 .add-card-btn {
-  background-color: #900603;
-  border: 2px solid #fff;
-  color: #fff;
-  font-weight: bold;
-  padding: 8px 16px;
+   background-color: #900603;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid white;
   cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-left: 63.125rem;
+  margin-top: -60px;
+
+
 }
 
 .client-card-subheading {

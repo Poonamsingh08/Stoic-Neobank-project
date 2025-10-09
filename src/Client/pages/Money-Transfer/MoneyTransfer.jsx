@@ -6,14 +6,12 @@ const MoneyTransferPage = () => {
   return (
     <div className="money-transfer-container">
       {/* Header Section */}
-      <div className="money-transfer-header">
         <div className="header-content">
-          <h1 className="header-title">Money Transfer</h1>
-          <p className="header-subtitle">
+          <h2>Money Transfer</h2>
+          <p>
             Send money instantly and securely to anyone, anywhere
           </p>
         </div>
-      </div>
 
       {/* Main Feature Cards */}
       <div className="feature-cards-container">
