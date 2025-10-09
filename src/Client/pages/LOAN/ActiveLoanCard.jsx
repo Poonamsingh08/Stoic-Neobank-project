@@ -15,15 +15,15 @@ function ActiveLoanCard() {
       <div className="loan-card">
         <div className="loan-card-body">
           {/* Header */}
-          <div className="loan-header111">
+          <div className="loan-header">
             <div>
               <h5>My Active Loan</h5>
               <p>Track your current loan details</p>
             </div>
 
             <div className="loan-status">
-              <CheckCircle size={16} color="#900603" />
-              <span>Active</span>
+              <CheckCircle size={16}  color="white"/>
+              <span style={{ color: "white" }}>Active</span>
             </div>
           </div>
 

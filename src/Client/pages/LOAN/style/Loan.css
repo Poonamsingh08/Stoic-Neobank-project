@@ -83,3 +83,27 @@
   background-color: #a90a0a;
   transform: translateY(-2px);
 }
+/* ===== Checkbox & Declaration Section ===== */
+.form-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #900603; /* same deep red tone */
+  cursor: pointer;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.form-group label {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.form-group label:hover {
+  color: #900603;
+  transition: color 0.3s ease;
+}

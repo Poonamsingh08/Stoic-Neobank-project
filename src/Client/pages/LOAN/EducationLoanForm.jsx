@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import "./style/loanForm.css";
 
@@ -42,23 +44,27 @@ function EducationLoanForm() {
 
   if (submitted) {
     return (
-      <div className="loan-form-container">
-        <div className="loan-success">
-          ✅ Your Education Loan Application has been submitted successfully!
+      <div className="form-container">
+        <div className="card">
+          <div className="card-body">
+            <div className="alert success">
+              ✅ Your Education Loan Application has been submitted successfully!
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="loan-form-container">
-      <h2 className="loan-form-title">🎓 Education Loan Application Form</h2>
+    <div className="form-container">
+      <h2 className="form-title">🎓 Education Loan Application Form</h2>
 
-      <form onSubmit={handleSubmit} className="loan-form-card">
+      <form onSubmit={handleSubmit} className="loan-form">
         {/* Personal Details */}
-        <h4 className="loan-form-section">Personal Details</h4>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Personal Details</h5>
+        <div className="grid">
+          <div>
             <label>Full Name</label>
             <input
               type="text"
@@ -68,7 +74,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Date of Birth</label>
             <input
               type="date"
@@ -78,7 +85,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Mobile Number</label>
             <input
               type="tel"
@@ -90,10 +98,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
+          <div>
             <label>Email</label>
             <input
               type="email"
@@ -103,7 +109,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>PAN / Aadhaar</label>
             <input
               type="text"
@@ -113,23 +120,23 @@ function EducationLoanForm() {
               required
             />
           </div>
-        </div>
 
-        <div className="form-group">
-          <label>Address</label>
-          <textarea
-            name="address"
-            rows="2"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          ></textarea>
+          <div className="full-width">
+            <label>Address</label>
+            <textarea
+              name="address"
+              rows="2"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
         </div>
 
         {/* Course & Institute Details */}
-        <h4 className="loan-form-section">Course & Institute Details</h4>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Course & Institute Details</h5>
+        <div className="grid">
+          <div>
             <label>Course Name</label>
             <input
               type="text"
@@ -139,7 +146,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Course Type</label>
             <select
               name="courseType"
@@ -154,10 +162,8 @@ function EducationLoanForm() {
               <option>PhD</option>
             </select>
           </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
+          <div>
             <label>Institute / University Name</label>
             <input
               type="text"
@@ -167,7 +173,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Institute Address</label>
             <input
               type="text"
@@ -177,10 +184,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-        </div>
 
-        <div className="form-row">
-          <div className="form-group">
+          <div>
             <label>Course Duration (Years)</label>
             <input
               type="number"
@@ -190,7 +195,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Annual Fees (₹)</label>
             <input
               type="number"
@@ -203,9 +209,9 @@ function EducationLoanForm() {
         </div>
 
         {/* Loan Details */}
-        <h4 className="loan-form-section">Loan Details</h4>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Loan Details</h5>
+        <div className="grid">
+          <div>
             <label>Loan Amount (₹)</label>
             <input
               type="number"
@@ -215,7 +221,8 @@ function EducationLoanForm() {
               required
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Tenure (Months)</label>
             <input
               type="number"
@@ -225,23 +232,23 @@ function EducationLoanForm() {
               required
             />
           </div>
-        </div>
 
-        <div className="form-group">
-          <label>Purpose (Tuition, Hostel, Books, etc.)</label>
-          <input
-            type="text"
-            name="purpose"
-            value={formData.purpose}
-            onChange={handleChange}
-            required
-          />
+          <div className="full-width">
+            <label>Purpose (Tuition, Hostel, Books, etc.)</label>
+            <input
+              type="text"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
         {/* Co-Applicant Details */}
-        <h4 className="loan-form-section">Co-Applicant / Parent Details</h4>
-        <div className="form-row">
-          <div className="form-group">
+        <h5 className="section-title">Co-Applicant / Parent Details</h5>
+        <div className="grid">
+          <div>
             <label>Co-Applicant Full Name</label>
             <input
               type="text"
@@ -250,7 +257,8 @@ function EducationLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Relationship</label>
             <select
               name="relationship"
@@ -263,7 +271,8 @@ function EducationLoanForm() {
               <option>Guardian</option>
             </select>
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Occupation</label>
             <input
               type="text"
@@ -272,7 +281,8 @@ function EducationLoanForm() {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+
+          <div>
             <label>Annual Income (₹)</label>
             <input
               type="number"
@@ -284,28 +294,27 @@ function EducationLoanForm() {
         </div>
 
         {/* Declaration */}
-        <div className="form-group">
+        <div className="loan-checkbox">
+          <input
+            type="checkbox"
+            name="declaration"
+            checked={formData.declaration}
+            onChange={handleChange}
+            required
+          />
           <label>
-            <input
-              type="checkbox"
-              name="declaration"
-              checked={formData.declaration}
-              onChange={handleChange}
-              required
-            />{" "}
             I hereby declare that the information provided is true and correct.
           </label>
         </div>
 
         {/* Submit */}
-        <div className="form-submit">
-          <button type="submit" className="loan-submit-btn">
-            Submit Application
-          </button>
-        </div>
+        <button type="submit" className="btn-submit">
+          Submit Application
+        </button>
       </form>
     </div>
   );
 }
 
 export default EducationLoanForm;
+
