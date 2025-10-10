@@ -1,4 +1,5 @@
-.invp-panel {
+.invp-panel 
+{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -11,23 +12,30 @@
 /* Header */
 .invp-header {
   background-color: #900603;
-  color: #fff;
-  padding: 1.2rem 2rem;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  text-align: center;
+  padding: 30px 2rem;
+  color: white;
+  display: flex;
+  align-items: flex-start; /* ensures content aligns top-left */
+  justify-content: flex-start;
+  flex-direction: column; /* places h2 and p vertically */
+  text-align: left;
+  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
 
 .invp-header h2 {
-  margin: 0 0 0.2rem 0;
-  font-size: 1.6rem;
+  font-size: 1.75rem;
+  margin-bottom: 6px; /* gives spacing before <p> */
+  font-weight: bold;
 }
 
-.invp-header small {
-  font-size: 0.9rem;
-  opacity: 0.9;
+.invp-header p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0; /* removes default gap */
 }
-
 /* Cards Section */
 .invp-cards {
   display: grid;

@@ -1,19 +1,4 @@
-/* Reset */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* ============================= */
-/* Welcome Banner (Above Header) */
-/* ============================= */
-.neoDash-welcomeBanner {
-  background-color: #fff;
-  text-align: center;
-  padding: 25px 0 10px;
-}
 
 .neoDash-welcomeText {
   font-size: 1.6rem;
@@ -30,12 +15,32 @@ body {
 /* Header Bar (Red Line Section) */
 /* ============================= */
 .neoDash-header {
-  background-color: #960603;
-  color: #fff;
-  padding: 16px 0;
-  text-align: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  background-color: #900603;
+  padding: 30px 2rem;
+  color: white;
+  display: flex;
+  align-items: flex-start; /* ensures content aligns top-left */
+  justify-content: flex-start;
+  flex-direction: column; /* places h2 and p vertically */
+  text-align: left;
+  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
+
+.neoDash-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 6px; /* gives spacing before <p> */
+  font-weight: bold;
+}
+
+.neoDash-header p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0; /* removes default gap */
+}
+
 
 /* ============================= */
 /* Main Container */

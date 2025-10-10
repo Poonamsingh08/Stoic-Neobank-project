@@ -101,9 +101,12 @@ const Reports = () => {
   };
 
   return (
+    <>
+    <div className="reports-container-header">
+      <h2>Admin Reports & Analytics</h2>
+      <p>View detailed reports and analytics to monitor system performance and user activity.</p>
+       </div>
     <div className="reports-container">
-      <h1>Admin Reports & Analytics</h1>
-
       {/* Summary Cards */}
       <div className="summary-cards">
         <div className="card">
@@ -235,6 +238,7 @@ const Reports = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

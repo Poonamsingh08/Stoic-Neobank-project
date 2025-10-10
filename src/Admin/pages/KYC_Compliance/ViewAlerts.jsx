@@ -174,9 +174,10 @@ export default function ViewAlerts() {
 
   return (
     <div className="alerts-container">
-      <header className="alerts-navbar">
-        <div className="alerts-brand">Neo Bank AML & Complaints</div>
-      </header>
+      <div className="alerts-headings">
+        <h2 className="alerts-brand">Neo Bank AML & Complaints</h2>
+         <p>View and manage all AML reports and customer complaints here.</p>
+      </div>
 
       <main className="alerts-main">
         <div className="alerts-card">

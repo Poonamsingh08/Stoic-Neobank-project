@@ -114,63 +114,64 @@ const AdminDeposits = () => {
 
   return (
     <>
-    <div className={styles["adm-headingBar"]}>
-        <h1>Deposits Management</h1>
+      <div className={styles["adm-headingBar"]}>
+        <h2>Deposits Management</h2>
+        <p>Manage and track all user deposit transactions efficiently.</p>
       </div>
-    <div className={styles["adm-adminDeposits"]}>
-      {/* <div className={styles["adm-headingBar"]}>
+      <div className={styles["adm-adminDeposits"]}>
+        {/* <div className={styles["adm-headingBar"]}>
         <h1>Deposits Management</h1>
       </div> */}
 
-      <div className={styles["adm-tabs"]}>
-        <button
-          className={activeTab === "applications" ? styles["adm-active"] : ""}
-          onClick={() => setActiveTab("applications")}
-        >
-          Deposit Applications
-        </button>
-        <button
-          className={activeTab === "maturities" ? styles["adm-active"] : ""}
-          onClick={() => setActiveTab("maturities")}
-        >
-          Maturities
-        </button>
-        <button
-          className={activeTab === "withdrawals" ? styles["adm-active"] : ""}
-          onClick={() => setActiveTab("withdrawals")}
-        >
-          Early Withdrawal Requests
-        </button>
-      </div>
+        <div className={styles["adm-tabs"]}>
+          <button
+            className={activeTab === "applications" ? styles["adm-active"] : ""}
+            onClick={() => setActiveTab("applications")}
+          >
+            Deposit Applications
+          </button>
+          <button
+            className={activeTab === "maturities" ? styles["adm-active"] : ""}
+            onClick={() => setActiveTab("maturities")}
+          >
+            Maturities
+          </button>
+          <button
+            className={activeTab === "withdrawals" ? styles["adm-active"] : ""}
+            onClick={() => setActiveTab("withdrawals")}
+          >
+            Early Withdrawal Requests
+          </button>
+        </div>
 
-      {activeTab === "applications" &&
-        renderTable(applications, setApplications, "Deposit Applications")}
-      {activeTab === "maturities" &&
-        renderTable(maturities, setMaturities, "Maturities")}
-      {activeTab === "withdrawals" &&
-        renderTable(earlyWithdrawals, setEarlyWithdrawals, "Early Withdrawal Requests")}
+        {activeTab === "applications" &&
+          renderTable(applications, setApplications, "Deposit Applications")}
+        {activeTab === "maturities" &&
+          renderTable(maturities, setMaturities, "Maturities")}
+        {activeTab === "withdrawals" &&
+          renderTable(earlyWithdrawals, setEarlyWithdrawals, "Early Withdrawal Requests")}
 
-      {modalData && (
-        <div className={styles["adm-modalBackdrop"]}>
-          <div className={styles["adm-modal"]}>
-            <h3>Adjust Interest for {modalData.row.user}</h3>
-            <input
-              type="number"
-              value={modalData.interest}
-              onChange={(e) =>
-                setModalData({ ...modalData, interest: e.target.value })
-              }
-            />
-            <div className={styles["adm-modalActions"]}>
-              <button onClick={() => setModalData(null)}>Cancel</button>
-              <button onClick={handleModalSave}>
-                Save & {modalData.action}
-              </button>
+        {modalData && (
+          <div className={styles["adm-modalBackdrop"]}>
+            <div className={styles["adm-modal"]}>
+              <h3>Adjust Interest for {modalData.row.user}</h3>
+              <input
+                type="number"
+                value={modalData.interest}
+                onChange={(e) =>
+                  setModalData({ ...modalData, interest: e.target.value })
+                }
+              />
+              <div className={styles["adm-modalActions"]}>
+                <button onClick={() => setModalData(null)}>Cancel</button>
+                <button onClick={handleModalSave}>
+                  Save & {modalData.action}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
     </>
   );
 };

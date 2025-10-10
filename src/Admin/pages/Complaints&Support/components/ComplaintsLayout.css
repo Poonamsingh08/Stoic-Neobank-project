@@ -9,55 +9,66 @@
 /* -------- Header -------- */
 .clx-header {
   display: flex;
+  justify-content: space-between; /* heading left, buttons right */
+  align-items: flex-start;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #900603;
+  padding: 30px 2rem;
   color: white;
-  height: 100px;
-  margin-top: 2px;
-  padding: 12px 20px;
-  margin-bottom: 15px;
-  position: relative;
-  z-index: 1;
 }
 
-.clx-header h4 {
+.clx-header h2,
+.clx-header p {
   margin: 0;
-  font-size: 2rem;
-   font-weight: bold;
 }
 
+.clx-header h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.clx-header p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+}
+
+/* Heading wrapper to stack h2 and p vertically */
+.clx-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tabs/buttons container */
 .clx-tabs {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 /* ---- Header Buttons ---- */
 .clx-tab-btn {
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  padding: 6px 12px;
-  font-size: 14px;
+  background-color: #900603;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: 2px solid white;
   cursor: pointer;
-  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 500;
+  transition: background-color 0.2s;
 }
 
 .clx-tab-btn:hover {
-  background:  #6e0102;;
+  background-color: #6e0102;
+}
+
+.clx-tab-btn.active {
+  background: #6e0102;
   color: white;
   border-color: white;
 }
 
-.clx-tab-btn.active {
-   background:  #6e0102;;
-  color: white;
-  border-color: white;
-}
 
 /* -------- Summary Cards -------- */
 

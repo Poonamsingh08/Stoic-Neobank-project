@@ -19,15 +19,18 @@ export default function InvestmentPanel() {
   ];
 
   return (
-    <div className="invp-panel">
-      {/* Header */}
-      <header className="invp-header">
-        <h2>Investment Admin Panel</h2>
-        <small>
-          Manage Products, Subscriptions, Reports, Services & API Keys
-        </small>
-      </header>
 
+<>
+      {/* Header */}
+      <div className="invp-header">
+        <h2>Investment Admin Panel</h2>
+        <p>
+          Manage Products, Subscriptions, Reports, Services & API Keys
+        </p>
+      </div>
+
+    <div className="invp-panel">
+    
       {/* Cards Section */}
       <div className="invp-cards">
         {pages.map((p) => (
@@ -51,5 +54,6 @@ export default function InvestmentPanel() {
         {page === "apikeys" && <APIKeys />}
       </main>
     </div>
+    </>
   );
 }

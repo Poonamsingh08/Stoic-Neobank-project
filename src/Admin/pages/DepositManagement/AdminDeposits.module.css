@@ -8,36 +8,33 @@
 }
 
 /* ===== Header ===== */
-.adm-adminDeposits h1 {
-  font-size: 1.8rem;
-  color: #950606;
-  text-align: center;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
 
-.adm-headingBar {
-  width: 100%;
-  margin-top: 75px;
+.adm-headingBar  {
   background-color: #900603;
-  color: #fff;
-  padding: 0 20px;
-  /* remove top-bottom padding for better centering */
+  padding: 30px 2rem;
+  color: white;
   display: flex;
-  /* added */
-  align-items: center;
-  /* vertically center */
-  height: 100px;
-  border-radius: 0;
-  box-sizing: border-box;
+  align-items: flex-start; /* ensures content aligns top-left */
+  justify-content: flex-start;
+  flex-direction: column; /* places h2 and p vertically */
+  text-align: left;
+  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
 
-.adm-headingBar h1 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 500;
+.adm-headingBar  h2 {
+  font-size: 1.75rem;
+  margin-bottom: 6px; /* gives spacing before <p> */
+  font-weight: bold;
 }
 
+.adm-headingBar p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0; /* removes default gap */
+}
 
 /* ===== Tabs ===== */
 .adm-tabs {

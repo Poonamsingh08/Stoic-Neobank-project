@@ -150,383 +150,378 @@ const MoneyTransferRequests = () => {
   });
 
   return (
-<>
-   {/* Header */}
+    <>
+      {/* Header */}
       <div
-        className="container-money"
-      >
-        <h1 className=""> Money Transfer Request</h1>
-        
+        className="container-money-header">
+        <h2 className=""> Money Transfer Request</h2>
+        <p>Review and approve pending money transfer requests from users.</p>
       </div>
 
 
 
-    <div className="container-money">
- 
- 
+      <div className="container-money">
 
-      {/* Tabs */}
-      <div className="tabs">
-        <button
-          className={activeTab === "transfers" ? "active" : ""}
-          onClick={() => setActiveTab("transfers")}
-        >
-          Money Transfers
-        </button>
-        <button
-          className={activeTab === "outgoing" ? "active" : ""}
-          onClick={() => setActiveTab("outgoing")}
-        >
-          Outgoing Transfers
-        </button>
-        <button
-          className={activeTab === "incoming" ? "active" : ""}
-          onClick={() => setActiveTab("incoming")}
-        >
-          Incoming Transfers
-        </button>
-        <button
-          className={activeTab === "beneficiaries" ? "active" : ""}
-          onClick={() => setActiveTab("beneficiaries")}
-        >
-          Beneficiary Management
-        </button>
-        <button
-          className={activeTab === "bills" ? "active" : ""}
-          onClick={() => setActiveTab("bills")}
-        >
-          Bill Payments
-        </button>
-      </div>
 
-      {/* Transfers Tab */}
-      {activeTab === "transfers" && (
-        <>
-          <div className="filters">
-            <input
-              type="text"
-              placeholder="Search by ID, Sender, Receiver..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
 
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-            >
-              <option value="All">All Status</option>
-              <option value="Pending">Pending</option>
-              <option value="Approved">Approved</option>
-              <option value="Rejected">Rejected</option>
-              <option value="On Hold">On Hold</option>
-            </select>
-          </div>
+        {/* Tabs */}
+        <div className="tabs">
+          <button
+            className={activeTab === "transfers" ? "active" : ""}
+            onClick={() => setActiveTab("transfers")}
+          >
+            Money Transfers
+          </button>
+          <button
+            className={activeTab === "outgoing" ? "active" : ""}
+            onClick={() => setActiveTab("outgoing")}
+          >
+            Outgoing Transfers
+          </button>
+          <button
+            className={activeTab === "incoming" ? "active" : ""}
+            onClick={() => setActiveTab("incoming")}
+          >
+            Incoming Transfers
+          </button>
+          <button
+            className={activeTab === "beneficiaries" ? "active" : ""}
+            onClick={() => setActiveTab("beneficiaries")}
+          >
+            Beneficiary Management
+          </button>
+          <button
+            className={activeTab === "bills" ? "active" : ""}
+            onClick={() => setActiveTab("bills")}
+          >
+            Bill Payments
+          </button>
+        </div>
 
+        {/* Transfers Tab */}
+        {activeTab === "transfers" && (
+          <>
+            <div className="filters">
+              <input
+                type="text"
+                placeholder="Search by ID, Sender, Receiver..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="All">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="On Hold">On Hold</option>
+              </select>
+            </div>
+
+            <div className="table-card">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Request ID</th>
+                    <th>Date</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredRequests.length > 0 ? (
+                    filteredRequests.map((req) => (
+                      <tr key={req.id}>
+                        <td>{req.id}</td>
+                        <td>{req.date}</td>
+                        <td>
+                          {req.senderName}
+                          <br />
+                          <span className="small">{req.senderAcc}</span>
+                        </td>
+                        <td>
+                          {req.receiverName}
+                          <br />
+                          <span className="small">{req.receiverAcc}</span>
+                        </td>
+                        <td>
+                          {req.currency} {req.amount.toLocaleString()}
+                        </td>
+                        <td>{req.method}</td>
+                        <td>
+                          <span
+                            className={`status ${req.status === "On Hold"
+                                ? "on-hold"
+                                : req.status.toLowerCase()
+                              }`}
+                          >
+                            {req.status}
+                          </span>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() =>
+                              handleAction(req.id, "Approved", "request")
+                            }
+                          >
+                            Approve
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleAction(req.id, "Rejected", "request")
+                            }
+                          >
+                            Reject
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleAction(req.id, "On Hold", "request")
+                            }
+                          >
+                            Hold
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleAction(req.id, "Pending", "request")
+                            }
+                          >
+                            Pending
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8" className="no-data">
+                        No requests found
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+
+        {/* Outgoing Transfers */}
+        {activeTab === "outgoing" && (
           <div className="table-card">
+            <h2>Queued / Scheduled Outgoing Transfers</h2>
             <table>
               <thead>
                 <tr>
-                  <th>Request ID</th>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Beneficiary</th>
+                  <th>Amount</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {outgoing.map((o) => (
+                  <tr key={o.id}>
+                    <td>{o.id}</td>
+                    <td>{o.date}</td>
+                    <td>{o.beneficiary}</td>
+                    <td>
+                      {o.currency} {o.amount.toLocaleString()}
+                    </td>
+                    <td>{o.type}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Incoming Transfers */}
+        {activeTab === "incoming" && (
+          <div className="table-card">
+            <h2>Large Incoming Transfers Requiring Review</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
                   <th>Date</th>
                   <th>Sender</th>
-                  <th>Receiver</th>
                   <th>Amount</th>
-                  <th>Method</th>
+                  <th>Review Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {incoming.map((i) => (
+                  <tr key={i.id}>
+                    <td>{i.id}</td>
+                    <td>{i.date}</td>
+                    <td>{i.sender}</td>
+                    <td>
+                      {i.currency} {i.amount.toLocaleString()}
+                    </td>
+                    <td>
+                      <span
+                        className={`status ${i.review === "On Hold" ? "on-hold" : i.review.toLowerCase()
+                          }`}
+                      >
+                        {i.review}
+                      </span>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleAction(i.id, "Approved", "incoming")}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => handleAction(i.id, "Rejected", "incoming")}
+                      >
+                        Reject
+                      </button>
+                      <button
+                        onClick={() => handleAction(i.id, "On Hold", "incoming")}
+                      >
+                        Hold
+                      </button>
+                      <button
+                        onClick={() => handleAction(i.id, "Pending", "incoming")}
+                      >
+                        Pending
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* Beneficiary Management Section */}
+        {activeTab === "beneficiaries" && (
+          <div className="table-card">
+            <h2>Beneficiary Management</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Beneficiary ID</th>
+                  <th>Name</th>
+                  <th>Account</th>
+                  <th>Bank</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredRequests.length > 0 ? (
-                  filteredRequests.map((req) => (
-                    <tr key={req.id}>
-                      <td>{req.id}</td>
-                      <td>{req.date}</td>
-                      <td>
-                        {req.senderName}
-                        <br />
-                        <span className="small">{req.senderAcc}</span>
-                      </td>
-                      <td>
-                        {req.receiverName}
-                        <br />
-                        <span className="small">{req.receiverAcc}</span>
-                      </td>
-                      <td>
-                        {req.currency} {req.amount.toLocaleString()}
-                      </td>
-                      <td>{req.method}</td>
+                {beneficiaries.length > 0 ? (
+                  beneficiaries.map((b) => (
+                    <tr key={b.id}>
+                      <td>{b.id}</td>
+                      <td>{b.name}</td>
+                      <td>{b.account}</td>
+                      <td>{b.bank}</td>
                       <td>
                         <span
-                          className={`status ${
-                            req.status === "On Hold"
+                          className={`status ${b.status === "On Hold"
                               ? "on-hold"
-                              : req.status.toLowerCase()
-                          }`}
+                              : b.status.toLowerCase()
+                            }`}
                         >
-                          {req.status}
+                          {b.status}
                         </span>
                       </td>
                       <td>
                         <button
-                          onClick={() =>
-                            handleAction(req.id, "Approved", "request")
-                          }
+                          onClick={() => handleAction(b.id, "Approved", "beneficiary")}
                         >
                           Approve
                         </button>
                         <button
-                          onClick={() =>
-                            handleAction(req.id, "Rejected", "request")
-                          }
+                          onClick={() => handleAction(b.id, "Rejected", "beneficiary")}
                         >
-                          Reject
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleAction(req.id, "On Hold", "request")
-                          }
-                        >
-                          Hold
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleAction(req.id, "Pending", "request")
-                          }
-                        >
-                          Pending
+                          Blacklist
                         </button>
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="8" className="no-data">
-                      No requests found
+                    <td colSpan="6" className="no-data">
+                      No beneficiaries found
                     </td>
                   </tr>
                 )}
               </tbody>
             </table>
           </div>
-        </>
-      )}
+        )}
 
-      {/* Outgoing Transfers */}
-      {activeTab === "outgoing" && (
-        <div className="table-card">
-          <h2>Queued / Scheduled Outgoing Transfers</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Beneficiary</th>
-                <th>Amount</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              {outgoing.map((o) => (
-                <tr key={o.id}>
-                  <td>{o.id}</td>
-                  <td>{o.date}</td>
-                  <td>{o.beneficiary}</td>
-                  <td>
-                    {o.currency} {o.amount.toLocaleString()}
-                  </td>
-                  <td>{o.type}</td>
+        {/* Bill Payments */}
+        {activeTab === "bills" && (
+          <div className="table-card">
+            <h2>Bill Payments & Reconciliation</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Biller</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {/* Incoming Transfers */}
-      {activeTab === "incoming" && (
-        <div className="table-card">
-          <h2>Large Incoming Transfers Requiring Review</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Sender</th>
-                <th>Amount</th>
-                <th>Review Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {incoming.map((i) => (
-                <tr key={i.id}>
-                  <td>{i.id}</td>
-                  <td>{i.date}</td>
-                  <td>{i.sender}</td>
-                  <td>
-                    {i.currency} {i.amount.toLocaleString()}
-                  </td>
-                  <td>
-                    <span
-                      className={`status ${
-                        i.review === "On Hold" ? "on-hold" : i.review.toLowerCase()
-                      }`}
-                    >
-                      {i.review}
-                    </span>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleAction(i.id, "Approved", "incoming")}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      onClick={() => handleAction(i.id, "Rejected", "incoming")}
-                    >
-                      Reject
-                    </button>
-                    <button
-                      onClick={() => handleAction(i.id, "On Hold", "incoming")}
-                    >
-                      Hold
-                    </button>
-                    <button
-                      onClick={() => handleAction(i.id, "Pending", "incoming")}
-                    >
-                      Pending
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {/* Beneficiary Management Section */}
-      {activeTab === "beneficiaries" && (
-        <div className="table-card">
-          <h2>Beneficiary Management</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Beneficiary ID</th>
-                <th>Name</th>
-                <th>Account</th>
-                <th>Bank</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {beneficiaries.length > 0 ? (
-                beneficiaries.map((b) => (
+              </thead>
+              <tbody>
+                {bills.map((b) => (
                   <tr key={b.id}>
                     <td>{b.id}</td>
-                    <td>{b.name}</td>
-                    <td>{b.account}</td>
-                    <td>{b.bank}</td>
+                    <td>{b.date}</td>
+                    <td>{b.biller}</td>
+                    <td>
+                      {b.currency} {b.amount.toLocaleString()}
+                    </td>
                     <td>
                       <span
-                        className={`status ${
-                          b.status === "On Hold"
-                            ? "on-hold"
-                            : b.status.toLowerCase()
-                        }`}
+                        className={`status ${b.status === "On Hold" ? "on-hold" : b.status.toLowerCase()
+                          }`}
                       >
                         {b.status}
                       </span>
                     </td>
                     <td>
                       <button
-                        onClick={() => handleAction(b.id, "Approved", "beneficiary")}
+                        onClick={() => handleAction(b.id, "Approved", "bill")}
                       >
                         Approve
                       </button>
                       <button
-                        onClick={() => handleAction(b.id, "Rejected", "beneficiary")}
+                        onClick={() => handleAction(b.id, "Rejected", "bill")}
                       >
-                        Blacklist
+                        Reject
+                      </button>
+                      <button
+                        onClick={() => handleAction(b.id, "On Hold", "bill")}
+                      >
+                        Hold
+                      </button>
+                      <button
+                        onClick={() => handleAction(b.id, "Pending", "bill")}
+                      >
+                        Pending
                       </button>
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="no-data">
-                    No beneficiaries found
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {/* Bill Payments */}
-      {activeTab === "bills" && (
-        <div className="table-card">
-          <h2>Bill Payments & Reconciliation</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Biller</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bills.map((b) => (
-                <tr key={b.id}>
-                  <td>{b.id}</td>
-                  <td>{b.date}</td>
-                  <td>{b.biller}</td>
-                  <td>
-                    {b.currency} {b.amount.toLocaleString()}
-                  </td>
-                  <td>
-                    <span
-                      className={`status ${
-                        b.status === "On Hold" ? "on-hold" : b.status.toLowerCase()
-                      }`}
-                    >
-                      {b.status}
-                    </span>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleAction(b.id, "Approved", "bill")}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      onClick={() => handleAction(b.id, "Rejected", "bill")}
-                    >
-                      Reject
-                    </button>
-                    <button
-                      onClick={() => handleAction(b.id, "On Hold", "bill")}
-                    >
-                      Hold
-                    </button>
-                    <button
-                      onClick={() => handleAction(b.id, "Pending", "bill")}
-                    >
-                      Pending
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </>
   );
 };

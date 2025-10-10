@@ -14,8 +14,9 @@ import DepositManagement from "./pages/DepositManagement/AdminDeposits";
 import Loans from "./pages/Loan/Loans.jsx";
 import MoneyTransferRequest from "./pages/MoneyTransferRequests/MoneyTransferRequests";
 import Reports from "./pages/Reports/Reports.jsx";
-import AdminTransactions from "./pages/Transaction/AdminApp.jsx";
-import Card from "./Components/Card";
+import AdminTransactions from "./pages/Transaction/TransactionsRecords.jsx";
+import Card from "./pages/Cards/Card.jsx"
+import AdminProfile from "./pages/AdminProfile/AdminProfile";
 
 // Temp Pages
 function KYC() { return <h1>KYC Page</h1>; }
@@ -34,7 +35,7 @@ export default function AdminApp() {
   return (
     <>
       {isLoggedIn && <TopNavbar />}
-      <div style={{ paddingTop: isLoggedIn ? "70px" : "0" }}>
+      <div >
         <Routes>
           {/* Login Route */}
           <Route
@@ -51,7 +52,8 @@ export default function AdminApp() {
           {/* Protected Routes */}
           {isLoggedIn ? (
             <>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/adminprofile" element={<AdminProfile />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/users" element={<UserManagement />} />
               <Route path="/kyc/*" element={<KYCComplianceRoutes />} />
               <Route path="/transactions" element={<AdminTransactions />} />
@@ -66,7 +68,7 @@ export default function AdminApp() {
               <Route path="/moneyrequest" element={<MoneyTransferRequest />} />
               <Route path="/reports" element={<Reports />} />
               {/* Default redirect for logged in admin */}
-              <Route path="*" element={<Navigate to="/admin/dashboard" />} />
+              <Route path="*" element={<Navigate to="/admin/" />} />
             </>
           ) : (
             // Redirect all unknown routes to login if not logged in

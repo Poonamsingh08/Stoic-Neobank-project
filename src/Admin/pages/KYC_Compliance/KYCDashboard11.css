@@ -1,83 +1,140 @@
-/* App Layout */
-.db-app {
-  display: flex;
+/* KYC Dashboard CSS - Unique Classes with kdb- prefix */
+
+/* Root Container */
+.kdb-container {
   min-height: 100vh;
   font-family: Arial, sans-serif;
-}
-
-
-/* Main Content */
-.db-main {
-  flex: 1;
-  margin-left: 220px; 
-  padding: 1rem 2rem;
   background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-/* Header */
-.db-header {
-  background: #900603;
-  color: #fff;
-  padding: 1rem 1.5rem;
-  height: 90px;
+/* ---------- Header Fixed ---------- */
+.kdb-header {
+  background-color: #900603;
+  padding: 30px 2rem;
+  color: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  text-align: left;
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-.db-last-updated {
+
+.kdb-header-content {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.kdb-title {
+  font-size: 1.75rem;
+  margin-bottom: 6px;
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.kdb-description {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.kdb-last-updated {
   font-size: 0.9rem;
+  color: #f0f0f0;
+  margin: 0;
   opacity: 0.9;
 }
 
+/* Content Wrapper */
+.kdb-content {
+  flex: 1;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 /* Grid Layouts */
-.db-grid-2 {
+.kdb-grid-2,
+.kdb-grid-3,
+.kdb-grid-4 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-bottom: 1rem;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
-.db-grid-3 {
-  display: grid;
+
+.kdb-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.kdb-grid-3 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
 }
-.db-grid-4 {
-  display: grid;
+
+.kdb-grid-4 {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  margin-top: 1rem;
 }
 
 /* Card */
-.db-card {
+.kdb-card {
   background: #fff;
   border-radius: 10px;
   padding: 1rem;
-  margin-top: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  box-sizing: border-box;
 }
-.db-card-header {
+
+.kdb-card-header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   margin-bottom: 0.5rem;
+  gap: 0.5rem;
 }
-.db-card-body {
+
+.kdb-card-body {
   width: 100%;
 }
 
 /* Card Hover */
-.db-card-hover:hover {
+.kdb-card-hover:hover {
   transform: translateY(-3px);
   transition: 0.3s;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 /* Card Icon */
-.db-card-icon {
+.kdb-card-icon {
   font-size: 2rem;
   background: #900603;
   color: #fffafa;
@@ -91,43 +148,55 @@
 }
 
 /* Transaction + Alert Items */
-.db-txn-item, .db-alert-item {
+.kdb-txn-item, .kdb-alert-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0.5rem 0;
   border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
 }
-.db-txn-actions {
+
+.kdb-txn-actions {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
-.db-badge {
+
+.kdb-badge {
   padding: 0.3rem 0.6rem;
   border-radius: 6px;
   background: #f4f4f4;
   font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 /* Buttons */
-.db-btn {
+.kdb-btn {
   padding: 0.4rem 0.8rem;
   font-size: 0.85rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
-.db-btn-primary { background: #900603; color: #fff; }
-.db-btn-outline { background: transparent; border: 1px solid #900603; color: #900603; }
-.db-btn-dark { background: #333; color: #fff; }
-.db-btn-warning { background: #f7b500; color: #000; }
-.db-btn-secondary { background: #777; color: #fff; }
-.db-btn:hover { opacity: 0.9; }
+
+.kdb-btn-primary { background: #900603; color: #fff; }
+.kdb-btn-outline { background: transparent; border: 1px solid #900603; color: #900603; }
+.kdb-btn-dark { background: #333; color: #fff; }
+.kdb-btn-warning { background: #f7b500; color: #000; }
+.kdb-btn-secondary { background: #777; color: #fff; }
+.kdb-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
 /* Modal */
-.db-modal-overlay {
+.kdb-modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
@@ -137,7 +206,8 @@
   z-index: 3000;
   padding: 1rem;
 }
-.db-modal-box {
+
+.kdb-modal-box {
   background: #fff;
   width: 95%;
   max-width: 600px;
@@ -146,41 +216,222 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
 }
-.db-modal-header {
+
+.kdb-modal-header {
   background: #900603;
   color: #fff;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
-.db-modal-body { padding: 1rem; }
-.db-modal-footer {
+
+.kdb-modal-body { 
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.kdb-modal-footer {
   padding: 0.8rem 1rem;
   border-top: 1px solid #eee;
   text-align: right;
+  flex-shrink: 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
-.db-modal-close {
+
+.kdb-modal-close {
   background: none;
   border: none;
   font-size: 1.3rem;
   color: #fff;
   cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Responsive */
+.kdb-textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* Compliance Card Specific */
+.kdb-compliance-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.kdb-compliance-card .kdb-card-body {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* 🌍 Responsive Breakpoints */
+
+/* Tablets (≤1024px) */
 @media (max-width: 1024px) {
-  .db-main { margin-left: 180px; padding: 1rem; }
-  .db-sidebar { width: 180px; }
+  .kdb-header {
+    padding: 25px 1.5rem;
+  }
+  
+  .kdb-grid-2,
+  .kdb-grid-3,
+  .kdb-grid-4 {
+    padding: 0 1.5rem;
+  }
 }
 
+/* Mobiles (≤768px) */
 @media (max-width: 768px) {
-  .db-app { flex-direction: column; }
-  .db-sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-between; padding: 0.5rem 1rem; }
-  .db-sidebar-menu { flex-direction: row; gap: 1rem; }
-  .db-main { margin-left: 0; }
-  .db-grid-2 { grid-template-columns: 1fr; }
-  .db-grid-3 { grid-template-columns: 1fr; }
-  .db-grid-4 { grid-template-columns: 1fr 1fr; }
+  .kdb-header {
+    padding: 20px 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .kdb-title {
+    font-size: 1.5rem;
+  }
+  
+  .kdb-description {
+    font-size: 0.9rem;
+  }
+  
+  .kdb-grid-2,
+  .kdb-grid-3,
+  .kdb-grid-4 {
+    padding: 0 1rem;
+    grid-template-columns: 1fr;
+  }
+  
+  .kdb-card {
+    padding: 0.8rem;
+  }
+  
+  .kdb-btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  .kdb-modal-footer {
+    justify-content: center;
+  }
+}
+
+/* Small Mobiles (≤480px) */
+@media (max-width: 480px) {
+  .kdb-header {
+    padding: 15px 0.8rem;
+    margin-top: 65px;
+  }
+  
+  .kdb-title {
+    font-size: 1.3rem;
+  }
+  
+  .kdb-description {
+    font-size: 0.85rem;
+  }
+  
+  .kdb-grid-2,
+  .kdb-grid-3,
+  .kdb-grid-4 {
+    padding: 0 0.8rem;
+    gap: 0.8rem;
+  }
+  
+  .kdb-card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .kdb-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .kdb-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .kdb-txn-item,
+  .kdb-alert-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+  
+  .kdb-txn-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .kdb-modal-box {
+    width: 98%;
+    margin: 0.5rem;
+  }
+  
+  .kdb-modal-footer {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .kdb-modal-footer .kdb-btn {
+    width: 100%;
+  }
+}
+
+/* Extra Small Mobiles (≤360px) */
+@media (max-width: 360px) {
+  .kdb-header {
+    padding: 12px 0.5rem;
+  }
+  
+  .kdb-title {
+    font-size: 1.1rem;
+  }
+  
+  .kdb-grid-2,
+  .kdb-grid-3,
+  .kdb-grid-4 {
+    padding: 0 0.5rem;
+  }
+  
+  .kdb-card {
+    padding: 0.6rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .kdb-header {
+    background: #900603 !important;
+    color: white !important;
+  }
+  
+  .kdb-btn {
+    display: none !important;
+  }
 }

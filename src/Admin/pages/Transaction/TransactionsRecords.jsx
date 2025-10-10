@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./AdminApp.css";
+import "./TransactionsRecords.css";
 import { Eye } from "lucide-react";
 
 const AdminTransactions = () => {
@@ -65,7 +65,8 @@ const AdminTransactions = () => {
   return (
     <div className="transactions-page">
       <div className="page-header">
-        <h1>Admin — Transactions</h1>
+        <h2>Admin - Transactions</h2>
+        <p>Monitor, manage, and review all user transactions efficiently.</p>
       </div>
 
       {/* Tabs */}

@@ -1,13 +1,3 @@
-/* ================== */
-/* Full Page Background */
-/* ================== */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #ffffff;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-}
 
 /* ================== */
 /* General container  */
@@ -21,26 +11,35 @@ html, body {
 /* ================== */
 /* Card Title Flush   */
 /* ================== */
-.card-title {
-  position: relative;
-  width: 100vw; /* full viewport width */
-  left: -22vw;      /* flush to left */
-  background-color: #950606; /* deep red */
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;  /* ✅ center the text */
-  line-height: 1.4;
 
-  /* Padding inside the banner */
-  padding: 35px 0; /* top-bottom: 35px, left-right: 0 to keep center alignment */
 
-  /* Margin below header to separate tabs */
-  margin: 0 0 25px 0;
-
-  box-sizing: border-box;
-  z-index: 950;
+ .cards-headers {
+  background-color: #900603;
+  padding: 30px 2rem;
+  color: white;
+  display: flex;
+  align-items: flex-start; /* ensures content aligns top-left */
+  justify-content: flex-start;
+  flex-direction: column; /* places h2 and p vertically */
+  text-align: left;
+  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
+
+.cards-headers h2 {
+  font-size: 1.75rem;
+  margin-bottom: 6px; /* gives spacing before <p> */
+  font-weight: bold;
+}
+
+.cards-headers p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0; /* removes default gap */
+}
+
 
 
 /* ================== */

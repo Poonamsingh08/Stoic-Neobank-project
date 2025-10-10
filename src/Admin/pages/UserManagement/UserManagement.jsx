@@ -172,26 +172,29 @@ export default function UserManagement() {
 
   return (
     <>
-      <header className="dashboard-header">
-        <h4>User Management Dashboard</h4>
-      </header>
+      <div className="um-dashboard-header">
+        <h2 className="um-dashboard-title">User Management Dashboard</h2>
+        <p className="um-dashboard-description">
+          Manage users, roles, and permissions from here.
+        </p>
+      </div>
 
-      <div className="user-management-container">
+      <div className="um-user-management-container">
         {/* Summary Cards */}
-        <section className="summary-cards">
+        <section className="um-summary-cards">
           {[
             { title: "Total Users", value: summaryData.total, icon: "bi-people-fill", color: "#900603" },
             { title: "Active Users", value: summaryData.active, icon: "bi-person-check-fill", color: "#900603" },
             { title: "Frozen Accounts", value: summaryData.frozen, icon: "bi-snow", color: "#900603"  },
             { title: "Pending KYC", value: summaryData.pending, icon: "bi-card-checklist", color: "#900603" },
           ].map((card, idx) => (
-            <div className="summary-card" key={idx} style={{ borderLeftColor: card.color }}>
-              <div className="card-content">
+            <div className="um-summary-card" key={idx} style={{ borderLeftColor: card.color }}>
+              <div className="um-card-content">
                 <div>
                   <h6>{card.title}</h6>
                   <h2>{card.value}</h2>
                 </div>
-                <div className="card-icon" style={{ backgroundColor: card.color }}>
+                <div className="um-card-icon" style={{ backgroundColor: card.color }}>
                   <i className={`bi ${card.icon}`}></i>
                 </div>
               </div>
@@ -200,7 +203,7 @@ export default function UserManagement() {
         </section>
 
         {/* Controls */}
-        <section className="user-controls">
+        <section className="um-user-controls">
           <input
             type="text"
             placeholder="Search by name, email, phone, account..."
@@ -213,16 +216,16 @@ export default function UserManagement() {
             <option>Pending KYC</option>
             <option>Suspended</option>
           </select>
-          <div className="action-buttons">
+          <div className="um-action-buttons">
             <button onClick={bulkFreeze} disabled={!selectedIds.size}><i className="bi bi-snow"></i> Freeze</button>
             <button onClick={bulkExport} disabled={!selectedIds.size}><i className="bi bi-download"></i> Export</button>
           </div>
         </section>
 
         {/* Table / Mobile Cards */}
-        <div className="user-table-wrapper">
+        <div className="um-user-table-wrapper">
           {!isMobile ? (
-            <table className="user-table desktop-table">
+            <table className="um-user-table um-desktop-table">
               <thead>
                 <tr>
                   <th>
@@ -242,32 +245,32 @@ export default function UserManagement() {
               </thead>
               <tbody>
                 {pagedUsers.map((user) => (
-                  <tr key={user.id} className={user.frozen ? "frozen-row" : ""}>
+                  <tr key={user.id} className={user.frozen ? "um-frozen-row" : ""}>
                     <td><input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} /></td>
-                    <td className="user-info">
+                    <td className="um-user-info">
                       <img src={user.photo} alt={user.name} />
                       <span>{user.name}</span>
                     </td>
                     <td>
                       <div>{user.email}</div>
-                      <div className="text-muted">{user.phone}</div>
+                      <div className="um-text-muted">{user.phone}</div>
                     </td>
                     <td>
                       <div>{user.account}</div>
-                      <div className="text-muted">{user.type}</div>
+                      <div className="um-text-muted">{user.type}</div>
                     </td>
                     <td>
-                      <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
-                      {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                      <span className={`um-status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
+                      {user.frozen && <span className="um-status-badge um-frozen">Frozen</span>}
                       
                     </td>
                     <td>{new Date(user.lastLogin).toLocaleDateString("en-GB")}</td>
-                    <td className="action-buttons">
+                    <td className="um-action-buttons">
                       <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
-                      <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
+                      <button className={user.frozen ? "um-unfreeze" : "um-freeze"} onClick={() => toggleFreeze(user.id)}>
                         {user.frozen ? "Unfreeze" : "Freeze"}
                       </button>
-                      <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
+                      <button className={user.status === "Active" ? "um-deactivate" : "um-activate"} onClick={() => toggleStatus(user.id, user.status)}>
                         {user.status === "Active" ? "Deactivate" : "Activate"}
                       </button>
                     </td>
@@ -276,10 +279,10 @@ export default function UserManagement() {
               </tbody>
             </table>
           ) : (
-            <div className="mobile-cards">
+            <div className="um-mobile-cards">
               {pagedUsers.map((user) => (
-                <div key={user.id} className="mobile-card">
-                  <div className="card-header">
+                <div key={user.id} className="um-mobile-card">
+                  <div className="um-card-header">
                     <input type="checkbox" checked={selectedIds.has(user.id)} onChange={() => toggleSelect(user.id)} />
                     <img src={user.photo} alt={user.name} />
                     <span>{user.name}</span>
@@ -289,16 +292,16 @@ export default function UserManagement() {
                   <div><strong>Account:</strong> {user.account}</div>
                   <div><strong>Type:</strong> {user.type}</div>
                   <div>
-                    <span className={`status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
-                    {user.frozen && <span className="status-badge frozen">Frozen</span>}
+                    <span className={`um-status-badge ${user.status.replace(" ", "-").toLowerCase()}`}>{user.status}</span>
+                    {user.frozen && <span className="um-status-badge um-frozen">Frozen</span>}
                   </div>
                   <div><strong>Last Login:</strong> {new Date(user.lastLogin).toLocaleDateString("en-GB")}</div>
-                  <div className="action-buttons">
+                  <div className="um-action-buttons">
                     <button onClick={() => setSelectedUser(user)}><i className="bi bi-eye-fill"></i></button>
-                    <button className={user.frozen ? "unfreeze" : "freeze"} onClick={() => toggleFreeze(user.id)}>
+                    <button className={user.frozen ? "um-unfreeze" : "um-freeze"} onClick={() => toggleFreeze(user.id)}>
                       {user.frozen ? "Unfreeze" : "Freeze"}
                     </button>
-                    <button className={user.status === "Active" ? "deactivate" : "activate"} onClick={() => toggleStatus(user.id, user.status)}>
+                    <button className={user.status === "Active" ? "um-deactivate" : "um-activate"} onClick={() => toggleStatus(user.id, user.status)}>
                       {user.status === "Active" ? "Deactivate" : "Activate"}
                     </button>
                   </div>
@@ -307,60 +310,61 @@ export default function UserManagement() {
             </div>
           )}
         </div>
-{/* Pagination */}
-{totalPages > 1 && (
-  <div className="cl-pagination">
-    <button
-      disabled={currentPage === 1}
-      onClick={() => setCurrentPage(prev => prev - 1)}
-    >
-      Prev
-    </button>
+        
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="um-cl-pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(prev => prev - 1)}
+            >
+              Prev
+            </button>
 
-    {Array.from({ length: totalPages }, (_, i) => i + 1)
-      .filter((page) => {
-        // Always show first, last, current ±2 pages
-        return (
-          page === 1 ||
-          page === totalPages ||
-          (page >= currentPage - 2 && page <= currentPage + 2)
-        );
-      })
-      .map((page, idx, arr) => {
-        const prevPage = arr[idx - 1];
-        if (prevPage && page - prevPage > 1) {
-          // Insert ellipsis if gap > 1
-          return (
-            <React.Fragment key={page}>
-              <span className="ellipsis">...</span>
-              <button
-                className={currentPage === page ? "active" : ""}
-                onClick={() => setCurrentPage(page)}
-              >
-                {page}
-              </button>
-            </React.Fragment>
-          );
-        }
-        return (
-          <button
-            key={page}
-            className={currentPage === page ? "active" : ""}
-            onClick={() => setCurrentPage(page)}
-          >
-            {page}
-          </button>
-        );
-      })}
+            {Array.from({ length: totalPages }, (_, i) => i + 1)
+              .filter((page) => {
+                // Always show first, last, current ±2 pages
+                return (
+                  page === 1 ||
+                  page === totalPages ||
+                  (page >= currentPage - 2 && page <= currentPage + 2)
+                );
+              })
+              .map((page, idx, arr) => {
+                const prevPage = arr[idx - 1];
+                if (prevPage && page - prevPage > 1) {
+                  // Insert ellipsis if gap > 1
+                  return (
+                    <React.Fragment key={page}>
+                      <span className="um-ellipsis">...</span>
+                      <button
+                        className={currentPage === page ? "um-active" : ""}
+                        onClick={() => setCurrentPage(page)}
+                      >
+                        {page}
+                      </button>
+                    </React.Fragment>
+                  );
+                }
+                return (
+                  <button
+                    key={page}
+                    className={currentPage === page ? "um-active" : ""}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
 
-    <button
-      disabled={currentPage === totalPages}
-      onClick={() => setCurrentPage(prev => prev + 1)}
-    >
-      Next
-    </button>
-  </div>
-)}
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(prev => prev + 1)}
+            >
+              Next
+            </button>
+          </div>
+        )}
 
         {/* User Modal */}
         {selectedUser && (

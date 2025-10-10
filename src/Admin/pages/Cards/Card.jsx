@@ -75,12 +75,13 @@ export default function Card() {
   const handleCancelEdit = () => setEditingIndex(null);
 
   return (
+    <>
+     {/* ✅ Updated Card Title */}
+     <div className="cards-headers">
+      <h2 >Card Services</h2>
+      <p>Manage all card-related operations, including issuance, activation, and deactivation.</p>
+      </div>
     <div className="card-container">
-      {/* ✅ Updated Card Title */}
-      <h2 className="card-title">
-        💳 Card Services
-      </h2>
-
       {/* Tabs */}
       <div className="card-tabs">
         <button
@@ -334,5 +335,6 @@ export default function Card() {
         </div>
       )}
     </div>
+    </>
   );
 }

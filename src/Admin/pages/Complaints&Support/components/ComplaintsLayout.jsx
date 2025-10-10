@@ -107,31 +107,34 @@ export default function ComplaintsLayout() {
 
   return (
     <>
-      <header className="clx-header" style={{ backgroundColor: PRIMARY_COLOR }}>
-        <h4>Complaints & Supports</h4>
-        <div className="clx-tabs">
-          <button
-            className={`clx-tab-btn ${activeTab === "queue" ? "active" : ""}`}
-            onClick={() => {
-              setSelectedTicket(null);
-              setActiveTab("queue");
-              setCurrentPage(1);
-            }}
-          >
-            Ticket Queue
-          </button>
-          <button
-            className={`clx-tab-btn ${activeTab === "escalations" ? "active" : ""}`}
-            onClick={() => {
-              setSelectedTicket(null);
-              setActiveTab("escalations");
-              setCurrentPage(1);
-            }}
-          >
-            Escalations
-          </button>
-        </div>
-      </header>
+     <div className="clx-header" style={{ backgroundColor: PRIMARY_COLOR }}>
+  <div className="clx-heading">
+    <h2>Complaints & Supports</h2>
+    <p>View, manage, and resolve all customer complaints and support requests.</p>
+  </div>
+  <div className="clx-tabs">
+    <button
+      className={`clx-tab-btn ${activeTab === "queue" ? "active" : ""}`}
+      onClick={() => {
+        setSelectedTicket(null);
+        setActiveTab("queue");
+        setCurrentPage(1);
+      }}
+    >
+      Ticket Queue
+    </button>
+    <button
+      className={`clx-tab-btn ${activeTab === "escalations" ? "active" : ""}`}
+      onClick={() => {
+        setSelectedTicket(null);
+        setActiveTab("escalations");
+        setCurrentPage(1);
+      }}
+    >
+      Escalations
+    </button>
+  </div>
+</div>
 
       <div className="clx-layout">
         <main className="clx-container">

@@ -137,7 +137,10 @@ export default function Transactions() {
 
   return (
     <div className="transactions-app-container">
-      <nav className="transactions-app-navbar">Neo Bank – All Transactions</nav>
+      <div className="transactions-app-navbar-heading">
+        <h2>Neo Bank - All Transactions</h2>
+        <p>Track and manage all user transactions in one place.</p>
+        </div>
 
       <div className="transactions-app-main">
         <div className="transactions-app-card-header" style={{ marginBottom: "1rem" }}>

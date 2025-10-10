@@ -181,12 +181,15 @@ const AccountsDashboard = () => {
   };
 
   return (
-    <div className="ad-dashboard">
+     <>
       {/* Header */}
       <div className="ad-header">
-        <h1>Accounts & Wallets</h1>
+        <h2>Accounts & Wallets</h2>
         <p>Manage customer accounts, wallets, and financial operations</p>
       </div>
+
+    <div className="ad-dashboard">
+    
 
       {/* Summary Cards */}
       <div className="ad-summary-cards">
@@ -515,6 +518,7 @@ const AccountsDashboard = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -75,9 +75,12 @@ const Loans = () => {
   );
 
   return (
+    <>
+    <div className="loans-header">
+        <h2>Loan Management</h2>
+        <p>Track, manage, and approve all user loan requests efficiently.</p>
+      </div>
     <div className="loans-container">
-      <h1 className="loans-header">Loan Management</h1>
-
       {/* Tabs */}
       <div className="loans-tabs">
         {["applications", "accounts"].map((tab) => (
@@ -266,6 +269,7 @@ const Loans = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

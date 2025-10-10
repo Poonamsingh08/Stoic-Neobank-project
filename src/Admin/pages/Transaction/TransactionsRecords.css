@@ -7,19 +7,29 @@
 
 .page-header {
   background-color: #900603;
-  color: #fff;
-  padding: 20px 0;
-  margin: 0 0 20px 0;
-  margin-top: 70px;
+  padding: 30px 2rem;
+  color: white;
+  display: flex;
+  align-items: flex-start; /* ensures content aligns top-left */
+  justify-content: flex-start;
+  flex-direction: column; /* places h2 and p vertically */
   text-align: left;
-  height: 100px;
-  padding-left: 10px;
+  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
 
-.page-header h1 {
-  font-size: 28px;
-  margin: 0;
-  font-weight: 600;
+.page-header h2 {
+  font-size: 1.75rem;
+  margin-bottom: 6px; /* gives spacing before <p> */
+  font-weight: bold;
+}
+
+.page-header p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0; /* removes default gap */
 }
 
 /* ===== KPI Cards ===== */

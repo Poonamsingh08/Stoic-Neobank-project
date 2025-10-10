@@ -8,17 +8,16 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* ===== Welcome Banner ===== */}
-      <div className="neoDash-welcomeBanner">
-        <h2 className="neoDash-welcomeText">
-          Welcome, <span className="neoDash-username">Khushavant Wagh</span> 👋
-        </h2>
-      </div>
+    
 
       {/* ===== Red Header Bar ===== */}
       <div className="neoDash-header">
-        <h1 className="neoDash-headerText">Let’s make today amazing.</h1>
-      </div>
+  <div className="neoDash-header-content">
+    <h2 className="neoDash-headerText">Welcome to NeoBank Dashboard !!</h2>
+    <p>Manage everything faster smarter simpler</p>
+  </div>
+</div>
+
 
       {/* ===== Main Content ===== */}
       <div className="neoDash-container">
