@@ -169,7 +169,7 @@ function MainApp() {
         <Route path="/fd-calculator" element={<FdCalculator />} />
         <Route path="/fixed-deposit" element={<FixedDepositForm />} />
         <Route path="/recurring-deposit" element={<RDPage />} />
-        <Route path="/tax-saver-fd" element={<TaxSaverFD />} />
+        <Route path="/tax-saver-fd11" element={<TaxSaverFD />} />
 
         {/* Investment */}
         <Route path="/investment" element={<Investment />} />

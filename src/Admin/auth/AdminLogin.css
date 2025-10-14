@@ -82,7 +82,7 @@
   color: #bbbbbb; /* soft grey placeholder */
 }
 .admin-input:focus {
-  background-color: #; /* Slightly lighter on focus */
+  background-color: #900603; /* Slightly lighter on focus */
   color: black; /* Ensure typing color stays black */
 }
 
@@ -94,7 +94,7 @@
   font-weight: bold;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(90deg, #ff5757, #ff0000);
+  background: linear-gradient(90deg, #900603, #900603);
   color: #fff;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.3s ease;
@@ -102,7 +102,7 @@
 
 .admin-btn:hover {
   transform: scale(1.05);
-  background: linear-gradient(90deg, #ff3030, #d90000);
+  background: linear-gradient(90deg, #900603, #d90000);
 }
 
 /* ===== Info ===== */

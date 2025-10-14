@@ -6,6 +6,7 @@ import "./UpdateKYC33.css";
 
 export default function UpdateKYC33({ onComplete }) {
   const { updateUserData, setCurrentStep, userData } = useOnboarding();
+  
 
   const [step, setStep] = useState(1);
   const [choice, setChoice] = useState("customerId");
@@ -288,7 +289,7 @@ export default function UpdateKYC33({ onComplete }) {
             </p>
             <button
               className="record-btn"
-              onClick={onComplete}
+              onClick={() => setCurrentStep('signIn')}
               disabled={isRecording}
               style={{ marginTop: "15px" }}
             >

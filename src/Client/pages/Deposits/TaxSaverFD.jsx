@@ -27,7 +27,7 @@ const TaxSaverFD = () => {
               >
                 Open FD Account
               </button>
-              <button className="btn-outline">Know More</button>
+              <button className="btn-outline" onClick={() => navigate("/Client/deposit")}>Back</button>
             </div>
           </div>
           <div className="fd-hero-right">

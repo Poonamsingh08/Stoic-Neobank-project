@@ -43,7 +43,7 @@ function FdCalculator() {
 
   return (
     <div className="fd-page">
-
+        
       {/* Hero Section */}
       <section className="fd-hero">
         <div className="fd-hero-container">
@@ -68,7 +68,8 @@ function FdCalculator() {
               >
                 OPEN FD
               </button>
-              <button className="btn-outline">SAVE</button>
+              <button className="btn-outline"onClick={() =>
+                  navigate("/Client/deposit")}>Back</button>
             </div>
             <p className="fd-hero-note">⭐ 8,500+ PEOPLE ARE INTERESTED</p>
           </div>

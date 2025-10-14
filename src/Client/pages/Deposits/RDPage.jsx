@@ -57,7 +57,8 @@ function RDPage() {
               >
                 OPEN FD
               </button>
-              <button className="btn-outline">SAVE</button>
+              <button className="btn-outline"onClick={() =>
+                  navigate("/Client/deposit")}>Back</button>
             </div>
             <p className="rd-hero-note">⭐ 8,500+ PEOPLE ARE INTERESTED</p>
           </div>
