@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import "./ProductCatalog.css";
 
 // Pre-defined images
@@ -21,19 +22,47 @@ const initialRequests = [
 
 const riskColors = { "High Risk": "product-badge-danger", "Medium Risk": "product-badge-warning", "Low Risk": "product-badge-success" };
 
+// Options for React Select
+const typeOptions = [
+  { value: "Mutual Fund", label: "Mutual Fund" },
+  { value: "Bank FD", label: "Bank FD" },
+  { value: "Exchange Traded Fund", label: "Exchange Traded Fund" },
+  { value: "Stock", label: "Stock" }
+];
+
+const riskOptions = [
+  { value: "Low Risk", label: "Low Risk" },
+  { value: "Medium Risk", label: "Medium Risk" },
+  { value: "High Risk", label: "High Risk" }
+];
+
 export default function ProductCatalog() {
   const [products, setProducts] = useState(initialProducts);
   const [requests, setRequests] = useState(initialRequests);
   const [showModal, setShowModal] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
-  const [formData, setFormData] = useState({ name: "", type: "Mutual Fund", price: "", returns: "", risk: "Low Risk", enabled: true });
+  const [formData, setFormData] = useState({ 
+    name: "", 
+    type: "Mutual Fund", 
+    price: "", 
+    returns: "", 
+    risk: "Low Risk", 
+    enabled: true 
+  });
 
   const handleShow = (product = null) => {
     if (product) {
       setEditProduct(product);
       setFormData(product);
     } else {
-      setFormData({ name: "", type: "Mutual Fund", price: "", returns: "", risk: "Low Risk", enabled: true });
+      setFormData({ 
+        name: "", 
+        type: "Mutual Fund", 
+        price: "", 
+        returns: "", 
+        risk: "Low Risk", 
+        enabled: true 
+      });
     }
     setShowModal(true);
   };
@@ -56,8 +85,13 @@ export default function ProductCatalog() {
     handleClose();
   };
 
-  const handleDelete = (id) => { if (window.confirm("Delete this product?")) setProducts(products.filter(p => p.id !== id)); };
-  const toggleEnable = (id) => { setProducts(products.map(p => p.id === id ? { ...p, enabled: !p.enabled } : p)); };
+  const handleDelete = (id) => { 
+    if (window.confirm("Delete this product?")) setProducts(products.filter(p => p.id !== id)); 
+  };
+  
+  const toggleEnable = (id) => { 
+    setProducts(products.map(p => p.id === id ? { ...p, enabled: !p.enabled } : p)); 
+  };
 
   const approveRequest = (reqId) => {
     const req = requests.find(r => r.id === reqId);
@@ -66,10 +100,57 @@ export default function ProductCatalog() {
       setRequests(requests.filter(r => r.id !== reqId));
     }
   };
-  const rejectRequest = (reqId) => { setRequests(requests.filter(r => r.id !== reqId)); };
+  
+  const rejectRequest = (reqId) => { 
+    setRequests(requests.filter(r => r.id !== reqId)); 
+  };
 
   // Merge approved and pending for same grid display
   const allProducts = [...requests, ...products];
+
+  // Custom styles for React Select - IMPROVED
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: state.isFocused ? "1px solid #900603" : "1px solid #ddd",
+      borderRadius: "6px",
+      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+      "&:hover": {
+        borderColor: "#900603"
+      },
+      minHeight: "42px",
+      fontSize: "0.95rem",
+      backgroundColor: "#fff"
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "white",
+      color: state.isSelected ? "white" : "black",
+      fontSize: "0.95rem",
+      padding: "10px 12px",
+      cursor: "pointer"
+    }),
+    menu: (provided) => ({
+      ...provided,
+      zIndex: 9999,
+      borderRadius: "6px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
+    }),
+    menuPortal: (base) => ({
+      ...base,
+      zIndex: 9999
+    }),
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      color: "#900603",
+      "&:hover": {
+        color: "#900603"
+      }
+    }),
+    indicatorSeparator: () => ({
+      display: "none"
+    })
+  };
 
   return (
     <div className="product-container">
@@ -129,32 +210,65 @@ export default function ProductCatalog() {
             </div>
             <div className="product-modal-body">
               <label>Product Name</label>
-              <input type="text" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
+              <input 
+                type="text" 
+                value={formData.name} 
+                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Enter product name"
+              />
+              
               <label>Type</label>
-              <select value={formData.type} onChange={e => setFormData({ ...formData, type: e.target.value })}>
-                <option>Mutual Fund</option>
-                <option>Bank FD</option>
-                <option>Exchange Traded Fund</option>
-                <option>Stock</option>
-              </select>
+              <Select
+                options={typeOptions}
+                value={typeOptions.find(option => option.value === formData.type)}
+                onChange={(selectedOption) => setFormData({ ...formData, type: selectedOption.value })}
+                styles={customStyles}
+                menuPortalTarget={document.body}
+                menuPosition="fixed"
+                isSearchable={false}
+              />
+              
               <label>Price / Minimum Investment</label>
-              <input type="text" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} />
+              <input 
+                type="text" 
+                value={formData.price} 
+                onChange={e => setFormData({ ...formData, price: e.target.value })}
+                placeholder="e.g., ₹5,000"
+              />
+              
               <label>Expected Returns</label>
-              <input type="text" value={formData.returns} onChange={e => setFormData({ ...formData, returns: e.target.value })} />
+              <input 
+                type="text" 
+                value={formData.returns} 
+                onChange={e => setFormData({ ...formData, returns: e.target.value })}
+                placeholder="e.g., 12-15% annually"
+              />
+              
               <label>Risk</label>
-              <select value={formData.risk} onChange={e => setFormData({ ...formData, risk: e.target.value })}>
-                <option>Low Risk</option>
-                <option>Medium Risk</option>
-                <option>High Risk</option>
-              </select>
-              <label>
-                <input type="checkbox" checked={formData.enabled} onChange={e => setFormData({ ...formData, enabled: e.target.checked })} />
+              <Select
+                options={riskOptions}
+                value={riskOptions.find(option => option.value === formData.risk)}
+                onChange={(selectedOption) => setFormData({ ...formData, risk: selectedOption.value })}
+                styles={customStyles}
+                menuPortalTarget={document.body}
+                menuPosition="fixed"
+                isSearchable={false}
+              />
+              
+              <label className="product-checkbox-label">
+                <input 
+                  type="checkbox" 
+                  checked={formData.enabled} 
+                  onChange={e => setFormData({ ...formData, enabled: e.target.checked })} 
+                />
                 Enable Product
               </label>
             </div>
             <div className="product-modal-footer">
               <button className="product-btn-secondary" onClick={handleClose}>Cancel</button>
-              <button className="product-btn-primary" onClick={handleSave}>{editProduct ? "Update" : "Add"}</button>
+              <button className="product-btn-primary" onClick={handleSave}>
+                {editProduct ? "Update" : "Add"}
+              </button>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from 'react-select';
 import "./Loans.css";
 
 const Loans = () => {
@@ -9,6 +10,45 @@ const Loans = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDocs, setSelectedDocs] = useState(null);
   const rowsPerPage = 5;
+
+  // React Select Options
+  const statusOptions = [
+    { value: "All", label: "All Status" },
+    { value: "Approved", label: "Approved" },
+    { value: "Rejected", label: "Rejected" },
+    { value: "Sanction", label: "Sanction" },
+    { value: "Disburse", label: "Disburse" },
+    { value: "Reschedule", label: "Reschedule" },
+    { value: "NPA", label: "Mark NPA" }
+  ];
+
+  // Custom styles for React Select
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: '1px solid #ccc',
+      borderRadius: '6px',
+      minHeight: '38px',
+      boxShadow: state.isFocused ? '0 0 0 1px #900603' : 'none',
+      borderColor: state.isFocused ? '#900603' : '#ccc',
+      '&:hover': {
+        borderColor: '#900603'
+      }
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? '#900603' : state.isFocused ? '#fdf2f2' : 'white',
+      color: state.isSelected ? 'white' : '#333',
+      '&:active': {
+        backgroundColor: '#900603'
+      }
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: '#900603',
+      fontWeight: '500'
+    })
+  };
 
   useEffect(() => {
     setLoans([
@@ -106,22 +146,17 @@ const Loans = () => {
           }}
           className="loans-search"
         />
-        <select
-          value={statusFilter}
-          onChange={(e) => {
-            setStatusFilter(e.target.value);
+        <Select
+          options={statusOptions}
+          value={statusOptions.find(option => option.value === statusFilter)}
+          onChange={(selectedOption) => {
+            setStatusFilter(selectedOption.value);
             setCurrentPage(1);
           }}
+          styles={customStyles}
           className="loans-status-filter"
-        >
-          <option value="All">All Status</option>
-          <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Sanction">Sanction</option>
-          <option value="Disburse">Disburse</option>
-          <option value="Reschedule">Reschedule</option>
-          <option value="NPA">Mark NPA</option>
-        </select>
+          classNamePrefix="react-select"
+        />
       </div>
 
       {/* Table */}

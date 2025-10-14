@@ -1,5 +1,6 @@
 // src/Components/Card.jsx
 import React, { useState } from "react";
+import Select from 'react-select';
 import "./Card.css";
 
 export default function Card() {
@@ -21,6 +22,47 @@ export default function Card() {
     user: "",
     reason: "",
   });
+
+  // React Select Options
+  const requestTypeOptions = [
+    { value: "new", label: "New Card Issuance" },
+    { value: "virtual", label: "Virtual Card Creation" }
+  ];
+
+  const actionOptions = [
+    { value: "block", label: "Block / Unblock Card" },
+    { value: "limit", label: "Change Transaction Limit" },
+    { value: "replace", label: "Replace Card" },
+    { value: "setlimit", label: "Set New Card Limit" }
+  ];
+
+  // Custom styles for React Select
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: '1px solid #ccc',
+      borderRadius: '6px',
+      minHeight: '44px',
+      boxShadow: state.isFocused ? '0 0 0 1px #950606' : 'none',
+      borderColor: state.isFocused ? '#950606' : '#ccc',
+      '&:hover': {
+        borderColor: '#950606'
+      }
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? '#950606' : state.isFocused ? '#fdf2f2' : 'white',
+      color: state.isSelected ? 'white' : '#333',
+      '&:active': {
+        backgroundColor: '#950606'
+      }
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: '#333',
+      fontWeight: '500'
+    })
+  };
 
   // Handle new fraud form submit
   const handleFraudSubmit = (e) => {
@@ -128,10 +170,13 @@ export default function Card() {
           </div>
           <div className="form-group">
             <label>Request Type</label>
-            <select required>
-              <option value="new">New Card Issuance</option>
-              <option value="virtual">Virtual Card Creation</option>
-            </select>
+            <Select
+              options={requestTypeOptions}
+              styles={customStyles}
+              className="react-select-container"
+              classNamePrefix="react-select"
+              placeholder="Select request type"
+            />
           </div>
           <button type="submit" className="btn-submit">
             Submit Request
@@ -148,12 +193,13 @@ export default function Card() {
           </div>
           <div className="form-group">
             <label>Action</label>
-            <select required>
-              <option value="block">Block / Unblock Card</option>
-              <option value="limit">Change Transaction Limit</option>
-              <option value="replace">Replace Card</option>
-              <option value="setlimit">Set New Card Limit</option>
-            </select>
+            <Select
+              options={actionOptions}
+              styles={customStyles}
+              className="react-select-container"
+              classNamePrefix="react-select"
+              placeholder="Select action"
+            />
           </div>
           <div className="form-group">
             <label>Remarks</label>

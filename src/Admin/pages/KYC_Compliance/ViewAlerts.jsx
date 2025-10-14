@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { FaBell } from "react-icons/fa";
+import { FaBell, FaArrowLeft } from "react-icons/fa";
 import "./ViewAlerts.css";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 export default function ViewAlerts() {
+  const navigate = useNavigate();
+
   const dummyAlerts = [
     {
       alertId: "A001",
@@ -52,7 +55,7 @@ export default function ViewAlerts() {
   const [viewingAlert, setViewingAlert] = useState(null);
   const [newNote, setNewNote] = useState("");
   const [escalateReason, setEscalateReason] = useState("");
-  const [activeTab, setActiveTab] = useState("info"); // <-- Tab state
+  const [activeTab, setActiveTab] = useState("info");
 
   const itemsPerPage = 5;
 
@@ -88,19 +91,19 @@ export default function ViewAlerts() {
       prev.map((a) =>
         selectedAlerts.includes(a.alertId)
           ? {
-              ...a,
-              status: action,
-              auditLogs: [
-                ...a.auditLogs,
-                {
-                  id: a.auditLogs.length + 1,
-                  action,
-                  user: "Admin",
-                  date: new Date().toLocaleString(),
-                  remark: `${action} via bulk`,
-                },
-              ],
-            }
+            ...a,
+            status: action,
+            auditLogs: [
+              ...a.auditLogs,
+              {
+                id: a.auditLogs.length + 1,
+                action,
+                user: "Admin",
+                date: new Date().toLocaleString(),
+                remark: `${action} via bulk`,
+              },
+            ],
+          }
           : a
       )
     );
@@ -113,19 +116,19 @@ export default function ViewAlerts() {
       prev.map((a) =>
         a.alertId === alertId
           ? {
-              ...a,
-              notes: [...(a.notes || []), newNote],
-              auditLogs: [
-                ...a.auditLogs,
-                {
-                  id: a.auditLogs.length + 1,
-                  action: "Note Added",
-                  user: "Admin",
-                  date: new Date().toLocaleString(),
-                  remark: newNote,
-                },
-              ],
-            }
+            ...a,
+            notes: [...(a.notes || []), newNote],
+            auditLogs: [
+              ...a.auditLogs,
+              {
+                id: a.auditLogs.length + 1,
+                action: "Note Added",
+                user: "Admin",
+                date: new Date().toLocaleString(),
+                remark: newNote,
+              },
+            ],
+          }
           : a
       )
     );
@@ -138,20 +141,20 @@ export default function ViewAlerts() {
       prev.map((a) =>
         a.alertId === alertId
           ? {
-              ...a,
-              status: "Escalated",
-              note: escalateReason,
-              auditLogs: [
-                ...a.auditLogs,
-                {
-                  id: a.auditLogs.length + 1,
-                  action: "Escalated",
-                  user: "Admin",
-                  date: new Date().toLocaleString(),
-                  remark: escalateReason,
-                },
-              ],
-            }
+            ...a,
+            status: "Escalated",
+            note: escalateReason,
+            auditLogs: [
+              ...a.auditLogs,
+              {
+                id: a.auditLogs.length + 1,
+                action: "Escalated",
+                user: "Admin",
+                date: new Date().toLocaleString(),
+                remark: escalateReason,
+              },
+            ],
+          }
           : a
       )
     );
@@ -162,12 +165,12 @@ export default function ViewAlerts() {
     status === "Pending"
       ? "status-pending"
       : status === "Resolved"
-      ? "status-resolved"
-      : "status-escalated";
+        ? "status-resolved"
+        : "status-escalated";
 
   const openModal = (alert) => {
     setViewingAlert(alert);
-    setActiveTab("info"); // reset tab to info when opening modal
+    setActiveTab("info");
     setNewNote("");
     setEscalateReason("");
   };
@@ -175,8 +178,19 @@ export default function ViewAlerts() {
   return (
     <div className="alerts-container">
       <div className="alerts-headings">
-        <h2 className="alerts-brand">Neo Bank AML & Complaints</h2>
-         <p>View and manage all AML reports and customer complaints here.</p>
+        <div className="alerts-header-content">
+          <h2 className="alerts-brand">Neo Bank AML & Complaints</h2>
+          <p>View and manage all AML reports and customer complaints here.</p>
+        </div>
+        <div className="kyc-back-btn-container">
+          <button
+            onClick={() => navigate('/Admin/kyc')}
+            className="kyc-back-btn"
+          >
+            <FaArrowLeft className="kyc-back-btn-icon" />
+            <span className="kyc-back-btn-text">Back to KYC Dashboard</span>
+          </button>
+        </div>
       </div>
 
       <main className="alerts-main">
@@ -196,64 +210,63 @@ export default function ViewAlerts() {
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           />
-                  {/* Filter Select */}
-<Select
-  options={[
-    { value: "All", label: "All Status" },
-    { value: "Pending", label: "Pending" },
-    { value: "Approved", label: "Approved" },
-    { value: "Rejected", label: "Rejected" },
-    { value: "Escalated", label: "Escalated" },
-  ]}
-  value={{ value: filter, label: filter }}
-  onChange={(option) => { setFilter(option.value); setPage(1); }}
-  styles={{
-    container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
-    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-    control: (provided, state) => ({
-      ...provided,
-      borderColor: state.isFocused ? "#900603" : "#ccc",
-      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
-      "&:hover": { borderColor: "#900603" },
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
-      color: state.isSelected ? "#fff" : "#000",
-    }),
-    singleValue: (provided) => ({ ...provided, color: "#900603" }),
-  }}
-  menuPortalTarget={document.body}
-  menuPosition="fixed"
-/>
 
-{/* Sort Select */}
-<Select
-  options={[
-    { value: "latest", label: "Latest First" },
-    { value: "oldest", label: "Oldest First" },
-  ]}
-  value={{ value: sort, label: sort === "latest" ? "Latest First" : "Oldest First" }}
-  onChange={(option) => setSort(option.value)}
-  styles={{
-    container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
-    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-    control: (provided, state) => ({
-      ...provided,
-      borderColor: state.isFocused ? "#900603" : "#ccc",
-      boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
-      "&:hover": { borderColor: "#900603" },
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
-      color: state.isSelected ? "#fff" : "#000",
-    }),
-    singleValue: (provided) => ({ ...provided, color: "#900603" }),
-  }}
-  menuPortalTarget={document.body}
-  menuPosition="fixed"
-/>
+          <Select
+            options={[
+              { value: "All", label: "All Status" },
+              { value: "Pending", label: "Pending" },
+              { value: "Approved", label: "Approved" },
+              { value: "Rejected", label: "Rejected" },
+              { value: "Escalated", label: "Escalated" },
+            ]}
+            value={{ value: filter, label: filter }}
+            onChange={(option) => { setFilter(option.value); setPage(1); }}
+            styles={{
+              container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+              menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+              control: (provided, state) => ({
+                ...provided,
+                borderColor: state.isFocused ? "#900603" : "#ccc",
+                boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+                "&:hover": { borderColor: "#900603" },
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+                color: state.isSelected ? "#fff" : "#000",
+              }),
+              singleValue: (provided) => ({ ...provided, color: "#900603" }),
+            }}
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+          />
+
+          <Select
+            options={[
+              { value: "latest", label: "Latest First" },
+              { value: "oldest", label: "Oldest First" },
+            ]}
+            value={{ value: sort, label: sort === "latest" ? "Latest First" : "Oldest First" }}
+            onChange={(option) => setSort(option.value)}
+            styles={{
+              container: (provided) => ({ ...provided, flex: 1, minWidth: "150px" }),
+              menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+              control: (provided, state) => ({
+                ...provided,
+                borderColor: state.isFocused ? "#900603" : "#ccc",
+                boxShadow: state.isFocused ? "0 0 0 1px #900603" : "none",
+                "&:hover": { borderColor: "#900603" },
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isSelected ? "#900603" : state.isFocused ? "#f8d7da" : "#fff",
+                color: state.isSelected ? "#fff" : "#000",
+              }),
+              singleValue: (provided) => ({ ...provided, color: "#900603" }),
+            }}
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
+          />
 
           <div className="alerts-bulk-buttons">
             <button onClick={() => bulkAction("Resolved")} className="alerts-btn alerts-btn-success">
@@ -297,7 +310,7 @@ export default function ViewAlerts() {
           </table>
         </div>
 
-        {/* Pagination same as before */}
+        {/* Pagination */}
         <div className="alerts-pagination">
           <span>Page {page} of {totalPages}</span>
           <div>
@@ -371,7 +384,6 @@ export default function ViewAlerts() {
             </div>
           </div>
         )}
-
       </main>
     </div>
   );

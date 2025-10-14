@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { FaExchangeAlt } from "react-icons/fa";
+import { FaExchangeAlt, FaArrowLeft } from "react-icons/fa";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 import "./Transactions.css";
 
 export default function Transactions() {
+  const navigate = useNavigate();
+
   const dummyTransactions = [
     {
       id: "T001",
@@ -138,9 +141,20 @@ export default function Transactions() {
   return (
     <div className="transactions-app-container">
       <div className="transactions-app-navbar-heading">
-        <h2>Neo Bank - All Transactions</h2>
-        <p>Track and manage all user transactions in one place.</p>
+        <div className="transactions-header-content">
+          <h2>Neo Bank - All Transactions</h2>
+          <p>Track and manage all user transactions in one place.</p>
         </div>
+        <div className="transactions-back-btn-container">
+          <button
+            onClick={() => navigate('/Admin/kyc')}
+            className="transactions-back-btn"
+          >
+            <FaArrowLeft className="transactions-back-btn-icon" />
+            <span className="transactions-back-btn-text">Back to KYC Dashboard</span>
+          </button>
+        </div>
+      </div>
 
       <div className="transactions-app-main">
         <div className="transactions-app-card-header" style={{ marginBottom: "1rem" }}>

@@ -11,6 +11,68 @@
   overflow: hidden;
 }
 
+/* ===== Header with Same Size ===== */
+.transactions-app-navbar-heading {
+  background-color: #900603;
+  padding: 20px 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 80px;
+}
+
+.transactions-header-content {
+  flex: 1;
+}
+
+.transactions-app-navbar-heading h2 {
+  font-size: 1.75rem;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.transactions-app-navbar-heading p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+/* ===== Unique Transactions Back Button - RIGHT SIDE ===== */
+.transactions-back-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.transactions-back-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.transactions-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.transactions-back-btn-icon {
+  font-size: 12px;
+}
+
+.transactions-back-btn-text {
+  white-space: nowrap;
+}
+
 /* ===== Navbar ===== */
 .transactions-app-navbar {
   background-color: #900603;
@@ -35,33 +97,6 @@
 
 .transactions-app-card-header h3 {
   color: #900603;
-}
-
-.transactions-app-navbar-heading {
-  background-color: #900603;
-  padding: 30px 2rem;
-  color: white;
-  display: flex;
-  align-items: flex-start; /* ensures content aligns top-left */
-  justify-content: flex-start;
-  flex-direction: column; /* places h2 and p vertically */
-  text-align: left;
-  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
-  top: 0;
-  z-index: 1000;
-  flex-wrap: wrap;
-}
-
-.transactions-app-navbar-heading h2 {
-  font-size: 1.75rem;
-  margin-bottom: 6px; /* gives spacing before <p> */
-  font-weight: bold;
-}
-
-.transactions-app-navbar-heading p {
-  font-size: 0.95rem;
-  color: #f0f0f0;
-  margin: 0; /* removes default gap */
 }
 
 /* Controls */
@@ -283,10 +318,35 @@
   .transactions-app-input,
   .transactions-app-select { width: 100%; }
   .transactions-app-table { min-width: 600px; }
+  
+  .transactions-app-navbar-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 1rem;
+  }
+  
+  .transactions-back-btn-container {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+  
+  .transactions-back-btn:hover {
+    transform: translateX(3px);
+  }
 }
 
 @media (max-width: 480px) {
-  .transactions-app-table { width: 100%; min-width: unset; }
+  .transactions-app-table { min-width: 400px; }
   .transactions-app-tab { font-size: 0.75rem; flex: 1; }
   .transactions-app-btn { font-size: 0.75rem; padding: 0.35rem 0.5rem; }
+  
+  .transactions-back-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  
+  .transactions-back-btn-text {
+    white-space: normal;
+  }
 }

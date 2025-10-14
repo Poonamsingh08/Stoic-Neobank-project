@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Select from 'react-select';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import "./AccountsDashboard.css";
 
 const sampleAccounts = [
@@ -59,15 +62,58 @@ const sampleAccounts = [
   },
 ];
 
+// Options for React Select
+const statusOptions = [
+  { value: "All", label: "All Status" },
+  { value: "Active", label: "Active" },
+  { value: "Frozen", label: "Frozen" },
+  { value: "Pending", label: "Pending" },
+  { value: "Closed", label: "Closed" }
+];
+
+const typeOptions = [
+  { value: "All", label: "All Types" },
+  { value: "Savings", label: "Savings" },
+  { value: "Current", label: "Current" },
+  { value: "Business", label: "Business" }
+];
+
+const balanceOptions = [
+  { value: "All", label: "All Ranges" },
+  { value: "0-1000", label: "$0 - $1,000" },
+  { value: "1000-10000", label: "$1,000 - $10,000" },
+  { value: "10000-50000", label: "$10,000 - $50,000" },
+  { value: "50000+", label: "$50,000+" }
+];
+
+const kycOptions = [
+  { value: "Verified", label: "Verified" },
+  { value: "Pending", label: "Pending" },
+  { value: "Rejected", label: "Rejected" }
+];
+
+const accountTypeOptions = [
+  { value: "Savings", label: "Savings" },
+  { value: "Current", label: "Current" },
+  { value: "Business", label: "Business" }
+];
+
+const statusEditOptions = [
+  { value: "Active", label: "Active" },
+  { value: "Pending", label: "Pending" },
+  { value: "Frozen", label: "Frozen" },
+  { value: "Closed", label: "Closed" }
+];
+
 const AccountsDashboard = () => {
   const [accounts, setAccounts] = useState(sampleAccounts);
   const [filteredAccounts, setFilteredAccounts] = useState(sampleAccounts);
   const [searchTerm, setSearchTerm] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
-  const [typeFilter, setTypeFilter] = useState("All");
-  const [balanceRangeFilter, setBalanceRangeFilter] = useState("All");
-  const [dateFromFilter, setDateFromFilter] = useState("");
-  const [dateToFilter, setDateToFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState({ value: "All", label: "All Status" });
+  const [typeFilter, setTypeFilter] = useState({ value: "All", label: "All Types" });
+  const [balanceRangeFilter, setBalanceRangeFilter] = useState({ value: "All", label: "All Ranges" });
+  const [dateFromFilter, setDateFromFilter] = useState(null);
+  const [dateToFilter, setDateToFilter] = useState(null);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [editingAccount, setEditingAccount] = useState(null);
   const [editFormData, setEditFormData] = useState({});
@@ -89,17 +135,17 @@ const AccountsDashboard = () => {
       );
     }
 
-    if (statusFilter !== "All") {
-      filtered = filtered.filter((account) => account.status === statusFilter);
+    if (statusFilter.value !== "All") {
+      filtered = filtered.filter((account) => account.status === statusFilter.value);
     }
 
-    if (typeFilter !== "All") {
-      filtered = filtered.filter((account) => account.accountType === typeFilter);
+    if (typeFilter.value !== "All") {
+      filtered = filtered.filter((account) => account.accountType === typeFilter.value);
     }
 
-    if (balanceRangeFilter !== "All") {
+    if (balanceRangeFilter.value !== "All") {
       filtered = filtered.filter((account) => {
-        switch (balanceRangeFilter) {
+        switch (balanceRangeFilter.value) {
           case "0-1000":
             return account.balance >= 0 && account.balance <= 1000;
           case "1000-10000":
@@ -127,27 +173,27 @@ const AccountsDashboard = () => {
   }, [accounts, searchTerm, statusFilter, typeFilter, balanceRangeFilter, dateFromFilter, dateToFilter]);
 
   const StatusBadge = ({ status }) => {
-    return <span className={`ad-status-badge ad-${status.toLowerCase()}`}>{status}</span>;
+    return <span className={`adx-status-badge adx-status-${status.toLowerCase()}`}>{status}</span>;
   };
 
   const clearFilters = () => {
     setSearchTerm("");
-    setStatusFilter("All");
-    setTypeFilter("All");
-    setBalanceRangeFilter("All");
-    setDateFromFilter("");
-    setDateToFilter("");
+    setStatusFilter({ value: "All", label: "All Status" });
+    setTypeFilter({ value: "All", label: "All Types" });
+    setBalanceRangeFilter({ value: "All", label: "All Ranges" });
+    setDateFromFilter(null);
+    setDateToFilter(null);
   };
 
   const handleEdit = (account) => {
     setEditingAccount(account);
     setEditFormData({
       customerName: account.customerName,
-      accountType: account.accountType,
+      accountType: { value: account.accountType, label: account.accountType },
       balance: account.balance,
       walletBalance: account.walletBalance,
-      status: account.status,
-      kycStatus: account.kycStatus,
+      status: { value: account.status, label: account.status },
+      kycStatus: { value: account.kycStatus, label: account.kycStatus },
     });
   };
 
@@ -164,9 +210,12 @@ const AccountsDashboard = () => {
         acc.id === editingAccount.id
           ? {
               ...acc,
-              ...editFormData,
+              customerName: editFormData.customerName,
+              accountType: editFormData.accountType.value,
               balance: parseFloat(editFormData.balance) || 0,
               walletBalance: parseFloat(editFormData.walletBalance) || 0,
+              status: editFormData.status.value,
+              kycStatus: editFormData.kycStatus.value,
             }
           : acc
       )
@@ -180,344 +229,457 @@ const AccountsDashboard = () => {
     setEditFormData({});
   };
 
+  // Custom styles for React Select
+  const customSelectStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: '2px solid #e9ecef',
+      borderRadius: '8px',
+      boxShadow: 'none',
+      '&:hover': {
+        borderColor: '#900603'
+      },
+      fontSize: '14px',
+      minHeight: '48px',
+      backgroundColor: '#ffffff',
+      transition: 'all 0.3s ease'
+    }),
+    menu: (base) => ({
+      ...base,
+      fontSize: '14px',
+      zIndex: 10050,
+      borderRadius: '8px',
+      boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)',
+      border: '1px solid #e9ecef'
+    }),
+    option: (base, state) => ({
+      ...base,
+      fontSize: '14px',
+      padding: '12px 16px',
+      backgroundColor: state.isSelected ? '#900603' : state.isFocused ? '#f8f9fa' : 'white',
+      color: state.isSelected ? 'white' : '#333',
+      '&:hover': {
+        backgroundColor: state.isSelected ? '#900603' : '#e9ecef'
+      },
+      transition: 'all 0.2s ease'
+    }),
+    indicatorSeparator: () => ({
+      display: 'none'
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: '#6c757d',
+      '&:hover': {
+        color: '#900603'
+      }
+    })
+  };
+
+  // Custom styles for React DatePicker
+  const customDatePickerStyles = {
+    width: '100%',
+    padding: '12px 14px',
+    border: '2px solid #e9ecef',
+    borderRadius: '8px',
+    fontSize: '14px',
+    backgroundColor: '#ffffff',
+    transition: 'all 0.3s ease'
+  };
+
   return (
-     <>
+    <>
       {/* Header */}
-      <div className="ad-header">
-        <h2>Accounts & Wallets</h2>
-        <p>Manage customer accounts, wallets, and financial operations</p>
+      <div className="adx-dashboard-header">
+        <h2 className="adx-header-title">Accounts & Wallets</h2>
+        <p className="adx-header-subtitle">Manage customer accounts, wallets, and financial operations</p>
       </div>
 
-    <div className="ad-dashboard">
-    
-
-      {/* Summary Cards */}
-      <div className="ad-summary-cards">
-        <div className="ad-card">
-          <p>Total Accounts</p>
-          <h4>{totalAccounts}</h4>
-          <small>{activeAccounts} active</small>
-        </div>
-        <div className="ad-card">
-          <p>Total Balance</p>
-          <h4 className="ad-green">${totalBalance.toLocaleString()}</h4>
-          <small>Account balances</small>
-        </div>
-        <div className="ad-card">
-          <p>Wallet Balance</p>
-          <h4 className="ad-blue">${totalWalletBalance.toLocaleString()}</h4>
-          <small>Digital wallet funds</small>
-        </div>
-        <div className="ad-card">
-          <p>Pending Actions</p>
-          <h4 className="ad-yellow">5</h4>
-          <small>Requires attention</small>
-        </div>
-      </div>
-
-      {/* Search + Filters */}
-      <div className="ad-filters-container">
-        <div className="ad-filters-header">
-          <div className="ad-search-box">
-            <input
-              type="text"
-              placeholder="Search accounts, customers..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+      <div className="adx-dashboard-container">
+        {/* Summary Cards */}
+        <div className="adx-summary-grid">
+          <div className="adx-summary-card">
+            <p className="adx-card-label">Total Accounts</p>
+            <h4 className="adx-card-value adx-value-primary">{totalAccounts}</h4>
+            <small className="adx-card-description">{activeAccounts} active</small>
           </div>
-          <div className="ad-actions">
-            <button onClick={() => setShowFilters(!showFilters)}>🔍 Filters</button>
-            <button className="ad-primary">⬇ Export</button>
-            <button className="ad-primary">➕ New Account</button>
+          <div className="adx-summary-card">
+            <p className="adx-card-label">Total Balance</p>
+            <h4 className="adx-card-value adx-value-success">${totalBalance.toLocaleString()}</h4>
+            <small className="adx-card-description">Account balances</small>
+          </div>
+          <div className="adx-summary-card">
+            <p className="adx-card-label">Wallet Balance</p>
+            <h4 className="adx-card-value adx-value-info">${totalWalletBalance.toLocaleString()}</h4>
+            <small className="adx-card-description">Digital wallet funds</small>
+          </div>
+          <div className="adx-summary-card">
+            <p className="adx-card-label">Pending Actions</p>
+            <h4 className="adx-card-value adx-value-warning">5</h4>
+            <small className="adx-card-description">Requires attention</small>
           </div>
         </div>
 
-        {showFilters && (
-          <div className="ad-filters-panel">
-            <div className="ad-grid">
-              <div>
-                <label>Status</label>
-                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-                  <option value="All">All Status</option>
-                  <option value="Active">Active</option>
-                  <option value="Frozen">Frozen</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Closed">Closed</option>
-                </select>
+        {/* Search + Filters */}
+        <div className="adx-filters-wrapper">
+          <div className="adx-filters-main">
+            <div className="adx-search-container">
+              <input
+                type="text"
+                className="adx-search-input"
+                placeholder="Search accounts, customers..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <div className="adx-actions-container">
+              <button 
+                className="adx-btn adx-btn-outline"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                🔍 Filters
+              </button>
+              <button className="adx-btn adx-btn-primary">⬇ Export</button>
+              <button className="adx-btn adx-btn-primary">➕ New Account</button>
+            </div>
+          </div>
+
+          {showFilters && (
+            <div className="adx-filters-panel">
+              <div className="adx-filters-grid">
+                <div className="adx-filter-group">
+                  <label className="adx-filter-label">Status</label>
+                  <div className="adx-react-select-container">
+                    <Select
+                      value={statusFilter}
+                      onChange={setStatusFilter}
+                      options={statusOptions}
+                      styles={customSelectStyles}
+                      isSearchable={false}
+                      classNamePrefix="adx-react-select"
+                    />
+                  </div>
+                </div>
+                <div className="adx-filter-group">
+                  <label className="adx-filter-label">Account Type</label>
+                  <div className="adx-react-select-container">
+                    <Select
+                      value={typeFilter}
+                      onChange={setTypeFilter}
+                      options={typeOptions}
+                      styles={customSelectStyles}
+                      isSearchable={false}
+                      classNamePrefix="adx-react-select"
+                    />
+                  </div>
+                </div>
+                <div className="adx-filter-group">
+                  <label className="adx-filter-label">Balance Range</label>
+                  <div className="adx-react-select-container">
+                    <Select
+                      value={balanceRangeFilter}
+                      onChange={setBalanceRangeFilter}
+                      options={balanceOptions}
+                      styles={customSelectStyles}
+                      isSearchable={false}
+                      classNamePrefix="adx-react-select"
+                    />
+                  </div>
+                </div>
+                <div className="adx-filter-group">
+                  <label className="adx-filter-label">Date From</label>
+                  <DatePicker
+                    selected={dateFromFilter}
+                    onChange={setDateFromFilter}
+                    selectsStart
+                    startDate={dateFromFilter}
+                    endDate={dateToFilter}
+                    placeholderText="Select start date"
+                    dateFormat="yyyy-MM-dd"
+                    className="adx-date-input"
+                    wrapperClassName="adx-datepicker-wrapper"
+                    popperClassName="adx-datepicker-popper"
+                    isClearable
+                    showYearDropdown
+                    scrollableYearDropdown
+                  />
+                </div>
+                <div className="adx-filter-group">
+                  <label className="adx-filter-label">Date To</label>
+                  <DatePicker
+                    selected={dateToFilter}
+                    onChange={setDateToFilter}
+                    selectsEnd
+                    startDate={dateFromFilter}
+                    endDate={dateToFilter}
+                    minDate={dateFromFilter}
+                    placeholderText="Select end date"
+                    dateFormat="yyyy-MM-dd"
+                    className="adx-date-input"
+                    wrapperClassName="adx-datepicker-wrapper"
+                    popperClassName="adx-datepicker-popper"
+                    isClearable
+                    showYearDropdown
+                    scrollableYearDropdown
+                  />
+                </div>
               </div>
-              <div>
-                <label>Account Type</label>
-                <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
-                  <option value="All">All Types</option>
-                  <option value="Savings">Savings</option>
-                  <option value="Current">Current</option>
-                  <option value="Business">Business</option>
-                </select>
+              <button className="adx-btn adx-btn-secondary" onClick={clearFilters}>
+                Clear All Filters
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Accounts Table */}
+        <div className="adx-table-section">
+          <div className="adx-table-header">
+            <h5 className="adx-table-title">All Accounts</h5>
+            <span className="adx-table-count">{filteredAccounts.length} accounts</span>
+          </div>
+          <div className="adx-table-scroll-container">
+            <table className="adx-data-table">
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Type</th>
+                  <th>Account Balance</th>
+                  <th>Wallet Balance</th>
+                  <th>Status</th>
+                  <th>Last Transaction</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredAccounts.map((acc, index) => (
+                  <tr
+                    key={acc.id}
+                    className={index % 2 === 0 ? "adx-table-row-even" : "adx-table-row-odd"}
+                    onClick={() => setSelectedAccount(acc)}
+                  >
+                    <td>
+                      <div>
+                        <strong>{acc.customerName}</strong>
+                        <br />
+                        <small>{acc.accountNumber}</small>
+                      </div>
+                    </td>
+                    <td>
+                      <span className="adx-type-badge">{acc.accountType}</span>
+                    </td>
+                    <td>${acc.balance.toLocaleString()}</td>
+                    <td>${acc.walletBalance.toLocaleString()}</td>
+                    <td>
+                      <StatusBadge status={acc.status} />
+                    </td>
+                    <td>{acc.lastTransaction}</td>
+                    <td>
+                      <div className="adx-table-actions">
+                        <button
+                          className="adx-action-btn adx-action-view"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedAccount(acc);
+                          }}
+                        >
+                          👁 View
+                        </button>
+                        <button
+                          className="adx-action-btn adx-action-edit"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEdit(acc);
+                          }}
+                        >
+                          ✏ Edit
+                        </button>
+                        <button className="adx-action-btn adx-action-more">
+                          ⋯ More
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Account Detail Modal */}
+        {selectedAccount && !editingAccount && (
+          <div className="adx-modal-overlay">
+            <div className="adx-modal-container">
+              <div className="adx-modal-header">
+                <h5 className="adx-modal-title">Account Details</h5>
+                <button className="adx-modal-close" onClick={() => setSelectedAccount(null)}>×</button>
               </div>
-              <div>
-                <label>Balance Range</label>
-                <select value={balanceRangeFilter} onChange={(e) => setBalanceRangeFilter(e.target.value)}>
-                  <option value="All">All Ranges</option>
-                  <option value="0-1000">$0 - $1,000</option>
-                  <option value="1000-10000">$1,000 - $10,000</option>
-                  <option value="10000-50000">$10,000 - $50,000</option>
-                  <option value="50000+">$50,000+</option>
-                </select>
+              <div className="adx-modal-body">
+                <div className="adx-modal-grid">
+                  <div>
+                    <h6 className="adx-section-title">Customer Information</h6>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Name:</span>
+                      <p className="adx-info-value">{selectedAccount.customerName}</p>
+                    </div>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Account Number:</span>
+                      <p className="adx-info-value">{selectedAccount.accountNumber}</p>
+                    </div>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Account Type:</span>
+                      <p className="adx-info-value">{selectedAccount.accountType}</p>
+                    </div>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">KYC Status:</span>
+                      <p className="adx-info-value">{selectedAccount.kycStatus}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <h6 className="adx-section-title">Balance Information</h6>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Account Balance:</span>
+                      <p className="adx-info-value">${selectedAccount.balance.toLocaleString()}</p>
+                    </div>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Wallet Balance:</span>
+                      <p className="adx-info-value">${selectedAccount.walletBalance.toLocaleString()}</p>
+                    </div>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Status:</span>
+                      <p className="adx-info-value"><StatusBadge status={selectedAccount.status} /></p>
+                    </div>
+                    <div className="adx-info-group">
+                      <span className="adx-info-label">Last Transaction:</span>
+                      <p className="adx-info-value">{selectedAccount.lastTransaction}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label>Date From</label>
-                <input type="date" value={dateFromFilter} onChange={(e) => setDateFromFilter(e.target.value)} />
-              </div>
-              <div>
-                <label>Date To</label>
-                <input type="date" value={dateToFilter} onChange={(e) => setDateToFilter(e.target.value)} />
+              <div className="adx-modal-footer">
+                <button className="adx-btn adx-btn-primary">Generate Statement</button>
+                <button className="adx-btn adx-btn-success">Manual Adjustment</button>
+                <button className="adx-btn adx-btn-warning">Update Limits</button>
+                <button className="adx-btn adx-btn-danger">Freeze Account</button>
               </div>
             </div>
-            <button className="ad-secondary" onClick={clearFilters}>
-              Clear All Filters
-            </button>
+          </div>
+        )}
+
+        {/* Edit Account Modal */}
+        {editingAccount && (
+          <div className="adx-modal-overlay">
+            <div className="adx-modal-container">
+              <div className="adx-modal-header adx-edit-header">
+                <h5 className="adx-modal-title">Edit Account</h5>
+                <button className="adx-modal-close" onClick={handleCancelEdit}>×</button>
+              </div>
+              <div className="adx-modal-body">
+                <div className="adx-modal-grid">
+                  <div>
+                    <h6 className="adx-section-title">Customer Information</h6>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Name:</label>
+                      <input
+                        type="text"
+                        className="adx-form-input"
+                        value={editFormData.customerName || ""}
+                        onChange={(e) => handleEditFormChange("customerName", e.target.value)}
+                      />
+                    </div>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Account Number:</label>
+                      <input
+                        type="text"
+                        className="adx-form-input adx-form-input-disabled"
+                        value={editingAccount.accountNumber}
+                        disabled
+                      />
+                    </div>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Account Type:</label>
+                      <div className="adx-react-select-container">
+                        <Select
+                          value={editFormData.accountType}
+                          onChange={(value) => handleEditFormChange("accountType", value)}
+                          options={accountTypeOptions}
+                          styles={customSelectStyles}
+                          isSearchable={false}
+                          classNamePrefix="adx-react-select"
+                        />
+                      </div>
+                    </div>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">KYC Status:</label>
+                      <div className="adx-react-select-container">
+                        <Select
+                          value={editFormData.kycStatus}
+                          onChange={(value) => handleEditFormChange("kycStatus", value)}
+                          options={kycOptions}
+                          styles={customSelectStyles}
+                          isSearchable={false}
+                          classNamePrefix="adx-react-select"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h6 className="adx-section-title">Balance Information</h6>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Account Balance:</label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        className="adx-form-input"
+                        value={editFormData.balance || ""}
+                        onChange={(e) => handleEditFormChange("balance", e.target.value)}
+                      />
+                    </div>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Wallet Balance:</label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        className="adx-form-input"
+                        value={editFormData.walletBalance || ""}
+                        onChange={(e) => handleEditFormChange("walletBalance", e.target.value)}
+                      />
+                    </div>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Status:</label>
+                      <div className="adx-react-select-container">
+                        <Select
+                          value={editFormData.status}
+                          onChange={(value) => handleEditFormChange("status", value)}
+                          options={statusEditOptions}
+                          styles={customSelectStyles}
+                          isSearchable={false}
+                          classNamePrefix="adx-react-select"
+                        />
+                      </div>
+                    </div>
+                    <div className="adx-form-group">
+                      <label className="adx-form-label">Last Transaction:</label>
+                      <input
+                        type="text"
+                        className="adx-form-input adx-form-input-disabled"
+                        value={editingAccount.lastTransaction}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="adx-modal-footer">
+                <button className="adx-btn adx-btn-secondary" onClick={handleCancelEdit}>
+                  Cancel
+                </button>
+                <button className="adx-btn adx-btn-primary" onClick={handleSaveEdit}>
+                  Save Changes
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
-
-      {/* Accounts Table */}
-      <div className="ad-table-container">
-        <div className="ad-table-header">
-          <h5>All Accounts ({filteredAccounts.length})</h5>
-        </div>
-        <div className="ad-table-scroll">
-          <table className="ad-table">
-            <thead>
-              <tr>
-                <th>Customer</th>
-                <th>Type</th>
-                <th>Account Balance</th>
-                <th>Wallet Balance</th>
-                <th>Status</th>
-                <th>Last Transaction</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredAccounts.map((acc, index) => (
-                <tr
-                  key={acc.id}
-                  className={index % 2 === 0 ? "ad-even" : "ad-odd"}
-                  onClick={() => setSelectedAccount(acc)}
-                >
-                  <td>
-                    <div>
-                      <strong>{acc.customerName}</strong>
-                      <br />
-                      <small>{acc.accountNumber}</small>
-                    </div>
-                  </td>
-                  <td>
-                    <span className="ad-badge">{acc.accountType}</span>
-                  </td>
-                  <td>${acc.balance.toLocaleString()}</td>
-                  <td>${acc.walletBalance.toLocaleString()}</td>
-                  <td>
-                    <StatusBadge status={acc.status} />
-                  </td>
-                  <td>{acc.lastTransaction}</td>
-                  <td>
-                    <div className="ad-table-actions">
-                      <button
-                        className="ad-blue"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedAccount(acc);
-                        }}
-                      >
-                        👁
-                      </button>
-                      <button
-                        className="ad-green"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEdit(acc);
-                        }}
-                      >
-                        ✏
-                      </button>
-                      <button className="ad-gray">⋯</button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Account Detail Modal */}
-      {selectedAccount && !editingAccount && (
-        <div className="ad-modal-overlay">
-          <div className="ad-modal">
-            <div className="ad-modal-header">
-              <h5>Account Details</h5>
-              <button onClick={() => setSelectedAccount(null)}>×</button>
-            </div>
-            <div className="ad-modal-body">
-              <div className="ad-grid">
-                <div>
-                  <h6>Customer Information</h6>
-                  <p>
-                    <strong>Name:</strong> {selectedAccount.customerName}
-                  </p>
-                  <p>
-                    <strong>Account Number:</strong> {selectedAccount.accountNumber}
-                  </p>
-                  <p>
-                    <strong>Account Type:</strong> {selectedAccount.accountType}
-                  </p>
-                  <p>
-                    <strong>KYC Status:</strong> {selectedAccount.kycStatus}
-                  </p>
-                </div>
-                <div>
-                  <h6>Balance Information</h6>
-                  <p>
-                    <strong>Account Balance:</strong> ${selectedAccount.balance.toLocaleString()}
-                  </p>
-                  <p>
-                    <strong>Wallet Balance:</strong> ${selectedAccount.walletBalance.toLocaleString()}
-                  </p>
-                  <p>
-                    <strong>Status:</strong> <StatusBadge status={selectedAccount.status} />
-                  </p>
-                  <p>
-                    <strong>Last Transaction:</strong> {selectedAccount.lastTransaction}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="ad-modal-footer">
-              <button className="ad-primary">Generate Statement</button>
-              <button className="ad-green">Manual Adjustment</button>
-              <button className="ad-yellow">Update Limits</button>
-              <button className="ad-red">Freeze Account</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Edit Account Modal */}
-      {editingAccount && (
-        <div className="ad-modal-overlay">
-          <div className="ad-modal">
-            <div className="ad-modal-header ad-edit-header">
-              <h5>Edit Account</h5>
-              <button onClick={handleCancelEdit}>×</button>
-            </div>
-            <div className="ad-modal-body">
-              <div className="ad-grid">
-                <div>
-                  <h6>Customer Information</h6>
-                  <div className="ad-form-group">
-                    <label>Name:</label>
-                    <input
-                      type="text"
-                      className="ad-form-input"
-                      value={editFormData.customerName || ""}
-                      onChange={(e) => handleEditFormChange("customerName", e.target.value)}
-                    />
-                  </div>
-                  <div className="ad-form-group">
-                    <label>Account Number:</label>
-                    <input
-                      type="text"
-                      className="ad-form-input ad-disabled"
-                      value={editingAccount.accountNumber}
-                      disabled
-                    />
-                  </div>
-                  <div className="ad-form-group">
-                    <label>Account Type:</label>
-                    <select
-                      className="ad-form-input"
-                      value={editFormData.accountType || ""}
-                      onChange={(e) => handleEditFormChange("accountType", e.target.value)}
-                    >
-                      <option value="Savings">Savings</option>
-                      <option value="Current">Current</option>
-                      <option value="Business">Business</option>
-                    </select>
-                  </div>
-                  <div className="ad-form-group">
-                    <label>KYC Status:</label>
-                    <select
-                      className="ad-form-input"
-                      value={editFormData.kycStatus || ""}
-                      onChange={(e) => handleEditFormChange("kycStatus", e.target.value)}
-                    >
-                      <option value="Verified">Verified</option>
-                      <option value="Pending">Pending</option>
-                      <option value="Rejected">Rejected</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <h6>Balance Information</h6>
-                  <div className="ad-form-group">
-                    <label>Account Balance:</label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="ad-form-input"
-                      value={editFormData.balance || ""}
-                      onChange={(e) => handleEditFormChange("balance", e.target.value)}
-                    />
-                  </div>
-                  <div className="ad-form-group">
-                    <label>Wallet Balance:</label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      className="ad-form-input"
-                      value={editFormData.walletBalance || ""}
-                      onChange={(e) => handleEditFormChange("walletBalance", e.target.value)}
-                    />
-                  </div>
-                  <div className="ad-form-group">
-                    <label>Status:</label>
-                    <select
-                      className="ad-form-input"
-                      value={editFormData.status || ""}
-                      onChange={(e) => handleEditFormChange("status", e.target.value)}
-                    >
-                      <option value="Active">Active</option>
-                      <option value="Pending">Pending</option>
-                      <option value="Frozen">Frozen</option>
-                      <option value="Closed">Closed</option>
-                    </select>
-                  </div>
-                  <div className="ad-form-group">
-                    <label>Last Transaction:</label>
-                    <input
-                      type="text"
-                      className="ad-form-input ad-disabled"
-                      value={editingAccount.lastTransaction}
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="ad-modal-footer">
-              <button className="ad-secondary" onClick={handleCancelEdit}>
-                Cancel
-              </button>
-              <button className="ad-primary" onClick={handleSaveEdit}>
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
     </>
   );
 };

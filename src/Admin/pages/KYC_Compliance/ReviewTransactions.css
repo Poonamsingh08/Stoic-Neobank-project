@@ -6,6 +6,68 @@
   min-height: 100vh;
 }
 
+/* ===== Header with Same Size ===== */
+.rt-header-heading {
+  background-color: #900603;
+  padding: 20px 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 80px;
+}
+
+.rt-header-content {
+  flex: 1;
+}
+
+.rt-header-heading h2 {
+  font-size: 1.75rem;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.rt-header-heading p {
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+/* ===== Unique ReviewTransactions Back Button - RIGHT SIDE ===== */
+.rt-back-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rt-back-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.rt-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.rt-back-btn-icon {
+  font-size: 12px;
+}
+
+.rt-back-btn-text {
+  white-space: nowrap;
+}
+
 /* ===== Navbar & Header ===== */
 .rt-navbar {
   background-color: #900603;
@@ -22,34 +84,6 @@
   color: #900603;
   margin-bottom: 1rem;
 }
-
-.rt-header-heading {
-  background-color: #900603;
-  padding: 30px 2rem;
-  color: white;
-  display: flex;
-  align-items: flex-start; /* ensures content aligns top-left */
-  justify-content: flex-start;
-  flex-direction: column; /* places h2 and p vertically */
-  text-align: left;
-  /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); */
-  top: 0;
-  z-index: 1000;
-  flex-wrap: wrap;
-}
-
-.rt-header-heading h2 {
-  font-size: 1.75rem;
-  margin-bottom: 6px; /* gives spacing before <p> */
-  font-weight: bold;
-}
-
-.rt-header-heading p {
-  font-size: 0.95rem;
-  color: #f0f0f0;
-  margin: 0; /* removes default gap */
-}
-
 
 /* ===== Controls ===== */
 .rt-controls {
@@ -276,6 +310,22 @@
   .rt-controls input, .rt-controls select { width: 100%; flex: none; min-width: unset; }
   .rt-table { min-width: 600px; }
   .rt-tab-buttons button { font-size: 0.95rem; }
+  
+  .rt-header-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 1rem;
+  }
+  
+  .rt-back-btn-container {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+  
+  .rt-back-btn:hover {
+    transform: translateX(3px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -293,4 +343,13 @@
   .rt-controls select { width: 100%; flex: none; min-width: unset; }
   .rt-bulk-buttons { width: 100%; justify-content: space-between; }
   .rt-doc-card img { max-width: 80px; }
+  
+  .rt-back-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  
+  .rt-back-btn-text {
+    white-space: normal;
+  }
 }

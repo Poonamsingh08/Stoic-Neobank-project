@@ -107,7 +107,7 @@
 }
 
 .um-user-controls input[type="text"],
-.um-user-controls select {
+.um-react-select-container {
   flex: 1 1 200px;
   padding: 8px 10px;
   border-radius: 6px;
@@ -135,6 +135,83 @@
 .um-user-controls button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* React Select Styling */
+.um-react-select-container {
+  padding: 0 !important;
+}
+
+.um-react-select__control {
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  min-height: 38px !important;
+  box-shadow: none !important;
+  background: #fff !important;
+  font-size: 14px !important;
+}
+
+.um-react-select__control:hover {
+  border-color: #900603 !important;
+}
+
+.um-react-select__control--is-focused {
+  border-color: #900603 !important;
+  box-shadow: 0 0 0 1px #900603 !important;
+}
+
+.um-react-select__value-container {
+  padding: 2px 12px !important;
+}
+
+.um-react-select__single-value {
+  color: #333 !important;
+  font-size: 14px !important;
+}
+
+.um-react-select__placeholder {
+  color: #666 !important;
+  font-size: 14px !important;
+}
+
+.um-react-select__menu {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  z-index: 9999 !important;
+}
+
+.um-react-select__menu-list {
+  padding: 4px !important;
+}
+
+.um-react-select__option {
+  padding: 8px 12px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+}
+
+.um-react-select__option--is-focused {
+  background-color: #fdf2f2 !important;
+  color: #900603 !important;
+}
+
+.um-react-select__option--is-selected {
+  background-color: #900603 !important;
+  color: white !important;
+}
+
+.um-react-select__indicator-separator {
+  display: none !important;
+}
+
+.um-react-select__dropdown-indicator {
+  padding: 6px !important;
+  color: #666 !important;
+}
+
+.um-react-select__dropdown-indicator:hover {
+  color: #900603 !important;
 }
 
 /* ---------- User Table ---------- */
@@ -381,7 +458,7 @@
   }
 
   .um-user-controls input[type="text"],
-  .um-user-controls select {
+  .um-react-select-container {
     flex: 1 1 100%;
   }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { faker } from "@faker-js/faker";
+import Select from 'react-select';
 import UserProfileModal from "./UserProfileModal";
 import "./UserManagement.css"; // updated CSS
 
@@ -32,6 +33,42 @@ export default function UserManagement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedIds, setSelectedIds] = useState(new Set());
   const pageSize = 10;
+
+  // React Select Options
+  const statusOptions = [
+    { value: "All", label: "All Status" },
+    { value: "Active", label: "Active" },
+    { value: "Pending KYC", label: "Pending KYC" },
+    { value: "Suspended", label: "Suspended" }
+  ];
+
+  // Custom styles for React Select
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: '1px solid #ccc',
+      borderRadius: '6px',
+      minHeight: '38px',
+      boxShadow: state.isFocused ? '0 0 0 1px #900603' : 'none',
+      borderColor: state.isFocused ? '#900603' : '#ccc',
+      '&:hover': {
+        borderColor: '#900603'
+      }
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? '#900603' : state.isFocused ? '#fdf2f2' : 'white',
+      color: state.isSelected ? 'white' : '#333',
+      '&:active': {
+        backgroundColor: '#900603'
+      }
+    }),
+    singleValue: (base) => ({
+      ...base,
+      color: '#333',
+      fontWeight: '500'
+    })
+  };
 
   // Generate dummy users with full details
   useEffect(() => {
@@ -210,12 +247,17 @@ export default function UserManagement() {
             value={search}
             onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
           />
-          <select value={statusFilter} onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}>
-            <option value="All">All Status</option>
-            <option>Active</option>
-            <option>Pending KYC</option>
-            <option>Suspended</option>
-          </select>
+          <Select
+            options={statusOptions}
+            value={statusOptions.find(option => option.value === statusFilter)}
+            onChange={(selectedOption) => { 
+              setStatusFilter(selectedOption.value); 
+              setCurrentPage(1); 
+            }}
+            styles={customStyles}
+            className="um-react-select-container"
+            classNamePrefix="um-react-select"
+          />
           <div className="um-action-buttons">
             <button onClick={bulkFreeze} disabled={!selectedIds.size}><i className="bi bi-snow"></i> Freeze</button>
             <button onClick={bulkExport} disabled={!selectedIds.size}><i className="bi bi-download"></i> Export</button>
