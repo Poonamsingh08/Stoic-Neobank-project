@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./EmailSupport.css";
 
 const EmailSupport = () => {
+  const navigate = useNavigate(); 
   const [formState, setFormState] = useState({
     fullName: "",
     email: "",
@@ -30,7 +32,14 @@ const EmailSupport = () => {
     <div className="es-root">
       {/* Header */}
       <div className="es-header">
+        <span
+          className="es-back-btn"
+          onClick={() => navigate("/Client/complaintfeedback")} 
+        >
+          ← Back
+        </span>
         <div className="es-header-content">
+
           <h1 className="es-header-title">Neo Bank Email Support</h1>
           <p className="es-header-subtitle">
             We value your feedback and are committed to resolving your concerns promptly.

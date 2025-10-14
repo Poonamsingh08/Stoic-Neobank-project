@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  /* min-height: 100vh; */
   background-color: #fafafa;
   padding: 20px;
   box-sizing: border-box;
@@ -13,7 +12,6 @@
 /* Outer card */
 .sendmoney-card {
   width: 100%;
-  /* max-width: 500px; */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
@@ -23,30 +21,51 @@
   flex-direction: column;
 }
 
-/* Header */
-.sendmoney-card h1 {
-  text-align: center;
+/* Header with back button */
+.sm-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.sm-back-btn {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.3rem; /* 🔹 Bada size */
   color: #950606;
+  transition: color 0.3s ease;
+}
+
+.sm-back-btn:hover {
+  text-decoration: underline;
+}
+
+.sm-title {
+  width: 100%;
+  text-align: center;
   font-size: 1.75rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.5px;
+  color: #950606;
+  margin-bottom: 0;
+ 
 }
 
-.sendmoney-card span,
-.sendmoney-card p {
+/* Send To text */
+.sendmoney-card  {
   text-align: center;
   color: #6c757d;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  
+  font-size: 1.5rem;
+   
 }
-
 /* Recipient type selector */
 .recipient-types {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
-
 }
 
 .recipient-types button {
@@ -88,15 +107,16 @@
 /* Send Button */
 .sendmoney-card button.send-btn {
   width: 100%;
-  padding: 10px 0;
+  padding: 14px 0; /* 🔹 Thoda bada button */
   border-radius: 50px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #fff;
   border: none;
   background-color: #950606;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 12px; /* 🔹 Gap from previous input */
 }
 
 .sendmoney-card button.send-btn:hover {
@@ -109,4 +129,22 @@
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sm-title {
+    font-size: 1.4rem;
+  }
+
+  .sm-back-btn {
+    font-size: 1rem;
+    left: 0px;
+  }
+
+
+  .sendmoney-card button.send-btn {
+    font-size: 1.1rem;
+    padding: 16px 0;
+  }
 }

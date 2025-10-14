@@ -34,8 +34,8 @@ const AddGoal = () => {
         <div className="add-goal-page">
             {/* Header */}
             <div className="add-goal-header">
-                <span className="back-btn" onClick={() => navigate("/Client/investment")}>
-                    ← Back to Investments
+                <span className="ag-back-btn" onClick={() => navigate("/Client/investment")}>
+                    ← Back 
                 </span>
                 <div className="header-title">
                     <h2>

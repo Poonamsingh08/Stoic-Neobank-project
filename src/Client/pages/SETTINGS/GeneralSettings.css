@@ -13,8 +13,8 @@
 /* ====== Header ====== */
 .settings-header {
     width: 100%;
-    text-align: left;
-    margin: 0; /* ❌ No margin */
+    text-align: center;
+    margin-bottom: -21px; /* ❌ No margin */
     background-color: #900603; /* 🔴 dark red background */
     color: white;
     padding: 1.25rem 1rem;
@@ -34,6 +34,16 @@
      color: white;
     font-size: 1rem;
     font-weight: 500;
+}
+
+ .gs-back-btn {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.2rem;      /* 🔹 Size bada kiya */   
 }
 
 /* ====== Grid System ====== */
@@ -247,5 +257,22 @@
     .settings-column {
         flex: 1 1 100%;
         min-width: 100%; /* ✅ full width on mobile */
+    }
+    .gs-back-btn {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        margin-bottom: 0.5rem;
+        display: block;
+        text-align: left;
+        font-size: 1rem; /* thoda chhota mobile me */
+        padding: 0.3rem 0.6rem;
+    }
+
+    .settings-header h2,
+    .settings-header p {
+        text-align: left;
+        padding-left: 1.5rem;
     }
 }

@@ -134,10 +134,12 @@ const Security = () => {
     <div className="sec-container">
       {/* Header */}
       <div className="sec-header">
-        <div>
-          <h2>Security</h2>
-          <p>Manage your account security and privacy</p>
-        </div>
+        <span className="s-back-btn" onClick={() => navigate("/Client/setting")}>
+          ← Back
+        </span>
+        <h2>Security</h2>
+        <p>Manage your account security and privacy</p>
+
       </div>
 
       <motion.div
@@ -161,8 +163,8 @@ const Security = () => {
                   {securityScore >= 90
                     ? "Excellent"
                     : securityScore >= 70
-                    ? "Strong"
-                    : "Weak"}
+                      ? "Strong"
+                      : "Weak"}
                 </p>
               </div>
               <p className="text-small">
@@ -292,9 +294,8 @@ const Security = () => {
               {recentActivity.map((a) => (
                 <div
                   key={a.id}
-                  className={`activity-item ${
-                    a.status === "warning" ? "warning" : "success"
-                  }`}
+                  className={`activity-item ${a.status === "warning" ? "warning" : "success"
+                    }`}
                 >
                   <div>
                     <strong>{a.action}</strong>
