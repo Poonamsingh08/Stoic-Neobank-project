@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./InternationalTransferPage.css";
+import { useNavigate } from "react-router-dom";
 
 const InternationalTransferPage = () => {
   const [step, setStep] = useState(0);
@@ -31,6 +32,7 @@ const InternationalTransferPage = () => {
     });
   };
 
+  const navigate = useNavigate();
   return (
     <div className="intl-page-container">
       {/* Step 0: Landing */}
@@ -55,8 +57,20 @@ const InternationalTransferPage = () => {
               </svg>
             </div>
             <h1 className="intl-title">International Transfer</h1>
-            <p className="intl-subtitle">Send money securely to bank accounts worldwide</p>
-            <button className="intl-btn" onClick={() => setStep(1)}>Start Transfer</button>
+            <p className="intl-subtitle">
+              Send money securely to bank accounts worldwide
+            </p>
+            <div className="intl-btn-container">
+              <button
+                className="intl-btn-cancel"
+                onClick={() => navigate("/client/money-transfer")}
+              >
+                Cancel
+              </button>
+              <button className="intl-btn" onClick={() => setStep(1)}>
+                Start Transfer
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -74,7 +88,9 @@ const InternationalTransferPage = () => {
             >
               <option value="">Select Country</option>
               {countries.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c}>
+                  {c}
+                </option>
               ))}
             </select>
             <div className="intl-currencies">
@@ -82,13 +98,22 @@ const InternationalTransferPage = () => {
               <p>{currencies.join(", ")}</p>
             </div>
             <div className="intl-buttons-right">
-              <button
-                className="intl-btn"
-                onClick={handleNext}
-                disabled={!formData.country}
-              >
-                Next
-              </button>
+              <div className="intl-btn-container">
+                <button
+                  className="intl-btn-outline"
+                  onClick={() => setStep((prev) => prev - 1)}
+                >
+                   Back
+                </button>
+
+                <button
+                  className="intl-btn"
+                  onClick={handleNext}
+                  disabled={!formData.country}
+                >
+                  Next 
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -131,8 +156,12 @@ const InternationalTransferPage = () => {
               />
             </form>
             <div className="intl-buttons-between">
-              <button className="intl-btn" onClick={handlePrev}>Back</button>
-              <button className="intl-btn" onClick={handleNext}>Next</button>
+              <button className="intl-btn" onClick={handlePrev}>
+                Back
+              </button>
+              <button className="intl-btn" onClick={handleNext}>
+                Next
+              </button>
             </div>
           </div>
         </div>
@@ -144,18 +173,36 @@ const InternationalTransferPage = () => {
           <div className="intl-card">
             <h2 className="intl-section-title">Review Transfer Details</h2>
             <div className="intl-review">
-              <p><strong>Country:</strong> {formData.country}</p>
-              <p><strong>Recipient:</strong> {formData.recipientName}</p>
-              <p><strong>Account Number:</strong> {formData.accountNumber}</p>
-              <p><strong>SWIFT / IBAN:</strong> {formData.swiftIban}</p>
+              <p>
+                <strong>Country:</strong> {formData.country}
+              </p>
+              <p>
+                <strong>Recipient:</strong> {formData.recipientName}
+              </p>
+              <p>
+                <strong>Account Number:</strong> {formData.accountNumber}
+              </p>
+              <p>
+                <strong>SWIFT / IBAN:</strong> {formData.swiftIban}
+              </p>
               <hr />
-              <p><strong>Conversion Rate:</strong> 1 USD = 82.50 INR</p>
-              <p><strong>Transfer Fees:</strong> $2.50</p>
-              <p><strong>Estimated Delivery:</strong> 1-2 business days</p>
+              <p>
+                <strong>Conversion Rate:</strong> 1 USD = 82.50 INR
+              </p>
+              <p>
+                <strong>Transfer Fees:</strong> $2.50
+              </p>
+              <p>
+                <strong>Estimated Delivery:</strong> 1-2 business days
+              </p>
             </div>
             <div className="intl-buttons-between">
-              <button className="intl-btn" onClick={handlePrev}>Back</button>
-              <button className="intl-btn" onClick={handleStartTransfer}>Confirm & Send Transfer</button>
+              <button className="intl-btn" onClick={handlePrev}>
+                Back
+              </button>
+              <button className="intl-btn" onClick={handleStartTransfer}>
+                Confirm & Send Transfer
+              </button>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style/loanForm.css";
+import { useNavigate } from "react-router-dom";
 
 function HomeLoanForm() {
   const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ function HomeLoanForm() {
     coApplicantIncome: "",
     declaration: false,
   });
+  const navigate = useNavigate();
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -290,6 +292,9 @@ function HomeLoanForm() {
         <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
           <button type="submit" className="btn-submit">
             Submit Application
+          </button>
+           <button type="button" className="btn-submit" onClick={() => navigate(-1)}>
+            Cancel
           </button>
         </div>
       </form>

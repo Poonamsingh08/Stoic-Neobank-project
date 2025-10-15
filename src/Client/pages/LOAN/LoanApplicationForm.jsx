@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style/LoanApplicationForm.css"; // Custom CSS
+ import { useNavigate } from "react-router-dom";
 
 function LoanApplicationForm() {
   const [formData, setFormData] = useState({
@@ -29,6 +30,8 @@ function LoanApplicationForm() {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+ 
+  const navigate = useNavigate();
 
   const goldPricePerGram = 6000;
   const ltv = 0.75;
@@ -250,6 +253,7 @@ function LoanApplicationForm() {
 
         <div className="form-actions">
           <button type="submit" className="submit-btn">Submit Application</button>
+          <button  onClick={()=>navigate(-1)} className="submit-btn">Cancel</button>
         </div>
       </form>
     </div>

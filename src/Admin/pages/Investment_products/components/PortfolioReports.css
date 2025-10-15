@@ -69,6 +69,7 @@
 .reports-table th {
   background: #900603;
   font-weight: bold;
+  color: #ddd;
 }
 
 .no-data {

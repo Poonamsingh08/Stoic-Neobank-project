@@ -42,7 +42,13 @@ function RDPage() {
       {/* Hero */}
       <section className="rd-hero">
         <div className="rd-hero-container">
+
           <div className="rd-hero-left">
+            {/* 🔙 Back Button */}
+            <button className="rd-back-btn" onClick={() => navigate(-1)}>
+              ← Back
+            </button>
+
             <h1>Recurring Deposit (RD)</h1>
             <h4>Invest smartly and safely</h4>
             <p>Attractive returns | Flexible Tenures | Guaranteed Returns</p>
@@ -51,7 +57,13 @@ function RDPage() {
                 className="btn-primary"
                 onClick={() =>
                   navigate("/Client/fixed-deposit", {
-                    state: { type: "Recurring Deposit", amount, duration, interestRate: activeRate.rate, maturity: maturityAmount },
+                    state: {
+                      type: "Recurring Deposit",
+                      amount,
+                      duration,
+                      interestRate: activeRate.rate,
+                      maturity: maturityAmount,
+                    },
                   })
                 }
               >
@@ -62,11 +74,14 @@ function RDPage() {
             </div>
             <p className="rd-hero-note">⭐ 8,500+ PEOPLE ARE INTERESTED</p>
           </div>
+
           <div className="rd-hero-right">
             <img src={fdBanner} alt="FD Banner" />
           </div>
         </div>
       </section>
+
+
 
       {/* Calculator */}
       <section className="rd-calculator-section">
@@ -83,7 +98,7 @@ function RDPage() {
               {/* Amount Slider */}
               <div className="rd-input-group">
                 <label>Amount to be saved</label>
-                <input type="range" min="1000" max="1000000" step="10000" value={amount} onChange={(e) => setAmount(Number(e.target.value))}/>
+                <input type="range" min="1000" max="1000000" step="10000" value={amount} onChange={(e) => setAmount(Number(e.target.value))} />
                 <div className="rd-range-values">
                   <span>₹1000</span>
                   <span className="rd-range-current">₹{amount.toLocaleString()}</span>
@@ -94,7 +109,7 @@ function RDPage() {
               {/* Duration Slider */}
               <div className="rd-input-group">
                 <label>Duration</label>
-                <input type="range" min="6" max="120" step="6" value={duration} onChange={(e) => setDuration(Number(e.target.value))}/>
+                <input type="range" min="6" max="120" step="6" value={duration} onChange={(e) => setDuration(Number(e.target.value))} />
                 <div className="rd-range-values">
                   <span>6 Months</span>
                   <span className="rd-range-current">{duration} Months</span>
@@ -127,7 +142,7 @@ function RDPage() {
                 <p><strong>Maturity Amount:</strong> ₹{maturityAmount.toLocaleString()}</p>
                 <p><strong>Total Interest:</strong> ₹{totalInterest.toLocaleString()}</p>
                 <p><strong>Duration:</strong> {duration} Months</p>
-                <p><strong>Maturity Date:</strong> {maturityDate.toLocaleDateString("en-IN", { day:"2-digit", month:"short", year:"numeric" })}</p>
+                <p><strong>Maturity Date:</strong> {maturityDate.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</p>
                 <div className="rd-summary-buttons">
                   <button
                     className="btn-primary"

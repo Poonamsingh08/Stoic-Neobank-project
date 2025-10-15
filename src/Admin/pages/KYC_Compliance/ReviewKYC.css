@@ -6,19 +6,20 @@
   /* margin-top: 120px; */
 }
 
-/* KYC Header */
+/* ===== Header with Same Size ===== */
 .kyc-review-header {
   background-color: #900603;
-  padding: 30px 2rem;
+  padding: 20px 2rem;
   color: white;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  text-align: left;
-  top: 0;
-  z-index: 1000;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  min-height: 80px;
+}
+
+.kyc-header-content {
+  flex: 1;
 }
 
 .kyc-review-header h2 {
@@ -31,6 +32,40 @@
   font-size: 0.95rem;
   color: #f0f0f0;
   margin: 0;
+}
+
+/* ===== Unique KYC Back Button - RIGHT SIDE ===== */
+.kyc-back-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.kyc-back-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.kyc-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.kyc-back-btn-icon {
+  font-size: 12px;
+}
+
+.kyc-back-btn-text {
+  white-space: nowrap;
 }
 
 /* Search Bar */
@@ -376,7 +411,7 @@
   border: 2px solid #900603;
 }
 
-/* Responsive Design */
+/* ===== Responsive Design ===== */
 @media (max-width: 768px) {
   .kyc-review-container {
     margin-top: 70px;
@@ -384,8 +419,19 @@
   }
   
   .kyc-review-header {
-    padding: 20px 1rem;
-    margin: -15px -15px 15px -15px;
+    padding: 15px 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .kyc-back-btn-container {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+  
+  .kyc-back-btn:hover {
+    transform: translateX(3px);
   }
   
   .kyc-review-header h2 {
@@ -428,5 +474,14 @@
   
   .kyc-action-buttons button {
     justify-content: center;
+  }
+  
+  .kyc-back-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  
+  .kyc-back-btn-text {
+    white-space: normal;
   }
 }

@@ -11,6 +11,7 @@
   background-color: #900603;
   color: white;
   padding:0px 20px;
+  position: relative;
 }
 
 .rd-hero-container {
@@ -26,6 +27,8 @@
 .rd-hero-left {
   flex: 1;
   min-width: 280px;
+  
+  
 }
 
 .rd-hero-left h1 {
@@ -50,6 +53,28 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+
+/* Back Button */
+.rd-back-btn {
+  background: white;
+  color: #900603;
+  border: none;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.rd-back-btn:hover {
+  background: #f2f2f2;
+}
+
+
 
 .btn-primary {
   background: #fff;
@@ -360,4 +385,15 @@
   .rd-hero-left h4 { font-size: 18px; }
   .rd-summary h2 { font-size: 22px; }
   .rd-benefits-container h3 { font-size: 22px; }
+  .rd-back-btn {
+    top: 0;
+    left: 0;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .rd-hero-left {
+    padding-top: 50px; /* ensure space above title */
+    text-align: center;
+  }
 }

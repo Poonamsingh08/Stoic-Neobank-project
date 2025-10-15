@@ -18,6 +18,8 @@ import {
   Clock,
   ExclamationCircle,
 } from "react-bootstrap-icons";
+import { FaArrowLeft } from "react-icons/fa";
+
 
 const Security = () => {
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const Security = () => {
 
   // ✅ Password validation
   const validatePassword = (password) => {
-    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    const regex = /^(?=.[0-9])(?=.[!@#$%^&*])(?=.{8,})/;
     return regex.test(password);
   };
 
@@ -134,10 +136,13 @@ const Security = () => {
     <div className="sec-container">
       {/* Header */}
       <div className="sec-header">
-        <div>
+        <div className="sec-header-left">
           <h2>Security</h2>
           <p>Manage your account security and privacy</p>
         </div>
+        <button className="sec-back-btn" onClick={() => navigate("/Client/setting")}>
+          <FaArrowLeft /> Back
+        </button>
       </div>
 
       <motion.div
@@ -161,8 +166,8 @@ const Security = () => {
                   {securityScore >= 90
                     ? "Excellent"
                     : securityScore >= 70
-                    ? "Strong"
-                    : "Weak"}
+                      ? "Strong"
+                      : "Weak"}
                 </p>
               </div>
               <p className="text-small">
@@ -238,7 +243,7 @@ const Security = () => {
                 </span>
               </div>
 
-              {/* ⚠️ Show only when invalid */}
+              {/* ⚠ Show only when invalid */}
               {passwordError && (
                 <div className="alert-box">
                   <ExclamationTriangle size={20} /> {passwordError}
@@ -292,9 +297,8 @@ const Security = () => {
               {recentActivity.map((a) => (
                 <div
                   key={a.id}
-                  className={`activity-item ${
-                    a.status === "warning" ? "warning" : "success"
-                  }`}
+                  className={`activity-item ${a.status === "warning" ? "warning" : "success"
+                    }`}
                 >
                   <div>
                     <strong>{a.action}</strong>

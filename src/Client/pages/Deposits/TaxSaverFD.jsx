@@ -18,12 +18,29 @@ const TaxSaverFD = () => {
       <section className="fd-hero">
         <div className="fd-hero-inner">
           <div className="fd-hero-left">
+            {/* 🔙 Back Button */}
+            <button className="ts-back-btn" onClick={() => navigate(-1)}>
+              ← Back
+            </button>
+
             <h1>Tax Saver Fixed Deposit</h1>
-            <p>Save tax under Section 80C & earn guaranteed <strong>7.75% returns</strong></p>
+            <p>
+              Save tax under Section 80C & earn guaranteed <strong>7.75% returns</strong>
+            </p>
             <div className="fd-buttons">
               <button
                 className="btn-primary"
-                onClick={() => navigate("/Client/fixed-deposit", { state: { type: "Tax Saver FD", amount, duration: 0, interestRate: 0, maturity: 0 } })}
+                onClick={() =>
+                  navigate("/Client/fixed-deposit", {
+                    state: {
+                      type: "Tax Saver FD",
+                      amount,
+                      duration: 0,
+                      interestRate: 0,
+                      maturity: 0,
+                    },
+                  })
+                }
               >
                 Open FD Account
               </button>
@@ -31,10 +48,11 @@ const TaxSaverFD = () => {
             </div>
           </div>
           <div className="fd-hero-right">
-           <img src={fdBanner} alt="FD Banner" />
+            <img src={fdBanner} alt="FD Banner" />
           </div>
         </div>
       </section>
+
 
       {/* Calculator Section */}
       <section className="fd-calculator">

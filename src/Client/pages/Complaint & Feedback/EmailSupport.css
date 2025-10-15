@@ -11,12 +11,34 @@
   padding: 1rem;
   text-align: center;
   color: #fff;
+  position: relative; /* ✅ for back button positioning */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2px;
 }
+
+
+.es-back-btn {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+
+
 .es-header-title {
+  font-weight: 700;
   margin: 0;
   font-size: 2rem;
 }
+
 .es-header-subtitle {
+  font-weight: 500;
   margin-top: 0.5rem;
   font-size: 1rem;
   color: #f1f1f1;
@@ -165,21 +187,51 @@
   list-style-type: disc;
 }
 
-/* ===== Responsive ===== */
-/* ===== Responsive for Form ===== */
-@media (max-width: 992px) {
-  .es-col-left {
+/* ✅ Single Responsive Rule (Same as Security.css) */
+@media (max-width: 768px) {
+  .es-container {
+    padding: 15px 10px;
+    overflow-x: hidden;
+  }
+
+  .es-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .es-col-left,
+  .es-col-right {
     flex: 1 1 100%;
     max-width: 100%;
+  }
+
+  .es-header {
+    padding: 15px 10px;
+    text-align: center;
+  }
+
+  .es-header-title {
+    font-size: 1.6rem;
+  }
+
+  .es-header-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .es-back-btn {
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+  }
+
+  .es-card {
+    padding: 15px;
   }
 
   .es-form-row {
     flex-direction: column;
     gap: 1rem;
-  }
-
-  .es-form-col {
-    width: 100%;
   }
 
   .es-form-actions {
@@ -191,5 +243,4 @@
     width: 100%;
     text-align: center;
   }
-
 }

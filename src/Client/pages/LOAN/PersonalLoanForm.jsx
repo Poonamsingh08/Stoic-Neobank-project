@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style/loanForm.css";
+import { useNavigate } from "react-router-dom";
 
 function PersonalLoanForm() {
   const [formData, setFormData] = useState({
@@ -20,6 +21,7 @@ function PersonalLoanForm() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -51,8 +53,9 @@ function PersonalLoanForm() {
 
   return (
     <div className="form-container">
+      <h2 className="form-title">Personal Loan Application Form</h2>
       <form className="loan-form" onSubmit={handleSubmit}>
-        <h2 className="form-title">Personal Loan Application Form</h2>
+        
 
         {/* Applicant Details */}
         <h4 className="section-title">Applicant Details</h4>
@@ -235,6 +238,9 @@ function PersonalLoanForm() {
         <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
           <button type="submit" className="btn-submit">
             Submit Application
+          </button>
+           <button type="button" className="btn-submit" onClick={() => navigate(-1)}>
+            Cancel
           </button>
         </div>
       </form>

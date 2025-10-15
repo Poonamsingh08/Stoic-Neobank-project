@@ -240,6 +240,7 @@
 // export default GoldLoanForm;
 import React, { useState } from "react";
 import "./style/loanForm.css";
+import { useNavigate } from "react-router-dom";
 
 function GoldLoanForm() {
   const [formData, setFormData] = useState({
@@ -258,6 +259,7 @@ function GoldLoanForm() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const goldPricePerGram = 6000;
   const ltv = 0.75;
@@ -476,6 +478,9 @@ function GoldLoanForm() {
         <div className="text-center">
           <button type="submit" className="btn-submit">
             Submit Application
+          </button>
+           <button type="button" className="btn-submit" onClick={() => navigate(-1)}>
+            Cancel
           </button>
         </div>
       </form>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./AccountStatement.css";
-import logoWhite from '../../assets/neobank-white.png';
+import logoWhite from "../../assets/neobank-white.png";
+import { useNavigate } from "react-router-dom";
+
 
 export function AccountStatement() {
   const [step, setStep] = useState(1);
@@ -25,6 +27,8 @@ export function AccountStatement() {
     { id: 3, label: "Request Statement" },
   ];
 
+   const navigate = useNavigate();
+
   return (
     <div className="astmt-container">
       <div className="astmt-box">
@@ -32,7 +36,9 @@ export function AccountStatement() {
         <div className="astmt-left">
           <img src={logoWhite} alt="Neo Bank Logo" className="astmt-logo" />
           <h4 className="astmt-title">Neo Bank Account Statement</h4>
-          <p className="astmt-subtitle">Follow these steps to download your account statement</p>
+          <p className="astmt-subtitle">
+            Follow these steps to download your account statement
+          </p>
         </div>
 
         {/* Right Section */}
@@ -41,14 +47,22 @@ export function AccountStatement() {
           <div className="astmt-stepper">
             {stepTitles.map((s, idx) => (
               <div key={s.id} className="astmt-step">
-                <div className={`astmt-step-circle ${step >= s.id ? "active" : ""}`}>
+                <div
+                  className={`astmt-step-circle ${
+                    step >= s.id ? "active" : ""
+                  }`}
+                >
                   {s.id}
                 </div>
-                <div className={`astmt-step-label ${step >= s.id ? "active" : ""}`}>
+                <div
+                  className={`astmt-step-label ${step >= s.id ? "active" : ""}`}
+                >
                   {s.label}
                 </div>
                 {idx < stepTitles.length - 1 && (
-                  <div className={`astmt-step-line ${step > s.id ? "filled" : ""}`}></div>
+                  <div
+                    className={`astmt-step-line ${step > s.id ? "filled" : ""}`}
+                  ></div>
                 )}
               </div>
             ))}
@@ -57,11 +71,17 @@ export function AccountStatement() {
           {/* Step 1 */}
           {step === 1 && (
             <div className="astmt-card">
-              <div className="astmt-card-header">Step 1: Account Verification</div>
+              <div className="astmt-card-header">
+                Step 1: Account Verification
+              </div>
               <div className="astmt-card-body">
                 <div className="astmt-form-group">
                   <label>Account Number</label>
-                  <input type="text" placeholder="Enter Account Number" className="astmt-input" />
+                  <input
+                    type="text"
+                    placeholder="Enter Account Number"
+                    className="astmt-input"
+                  />
                 </div>
                 <div className="astmt-form-group astmt-captcha-row">
                   <input
@@ -69,15 +89,33 @@ export function AccountStatement() {
                     className="astmt-input"
                     placeholder="Enter Captcha"
                     value={enteredCaptcha}
-                    onChange={(e) => setEnteredCaptcha(e.target.value.toUpperCase())}
+                    onChange={(e) =>
+                      setEnteredCaptcha(e.target.value.toUpperCase())
+                    }
                   />
                   <div className="astmt-captcha-box">{captcha}</div>
-                  <button type="button" className="astmt-btn-outline" onClick={generateCaptcha}>
+                  <button
+                    type="button"
+                    className="astmt-btn-outline"
+                    onClick={generateCaptcha}
+                  >
                     Refresh
                   </button>
                 </div>
                 <div className="astmt-btn-row right">
-                  <button className="astmt-btn" disabled={enteredCaptcha !== captcha} onClick={() => setStep(2)}>
+                  <button
+                    type="button"
+                    className="astmt-btn-back"
+                    onClick={() => navigate("/Client/myaccount")} // or wherever back should go
+                  >
+                    ← Back
+                  </button>
+
+                  <button
+                    className="astmt-btn"
+                    disabled={enteredCaptcha !== captcha}
+                    onClick={() => setStep(2)}
+                  >
                     Next
                   </button>
                 </div>
@@ -90,11 +128,25 @@ export function AccountStatement() {
             <div className="astmt-card">
               <div className="astmt-card-header">Step 2: OTP Verification</div>
               <div className="astmt-card-body">
-                <p>An OTP has been sent to your registered mobile number: <b>+91xxxx389</b></p>
-                <input type="text" className="astmt-input mb-3" placeholder="Enter OTP" />
+                <p>
+                  An OTP has been sent to your registered mobile number:{" "}
+                  <b>+91xxxx389</b>
+                </p>
+                <input
+                  type="text"
+                  className="astmt-input mb-3"
+                  placeholder="Enter OTP"
+                />
                 <div className="astmt-btn-row">
-                  <button className="astmt-btn-outline" onClick={() => setStep(1)}>Back</button>
-                  <button className="astmt-btn" onClick={() => setStep(3)}>Next</button>
+                  <button
+                    className="astmt-btn-outline"
+                    onClick={() => setStep(1)}
+                  >
+                    Back
+                  </button>
+                  <button className="astmt-btn" onClick={() => setStep(3)}>
+                    Next
+                  </button>
                 </div>
               </div>
             </div>
@@ -103,7 +155,9 @@ export function AccountStatement() {
           {/* Step 3 */}
           {step === 3 && (
             <div className="astmt-card">
-              <div className="astmt-card-header">Step 3: Request Account Statement</div>
+              <div className="astmt-card-header">
+                Step 3: Request Account Statement
+              </div>
               <div className="astmt-card-body">
                 <div className="astmt-grid">
                   <div>
@@ -148,7 +202,10 @@ export function AccountStatement() {
 
                 <div className="astmt-form-group">
                   <label>Statement Type</label>
-                  <select value={statementType} onChange={(e) => setStatementType(e.target.value)}>
+                  <select
+                    value={statementType}
+                    onChange={(e) => setStatementType(e.target.value)}
+                  >
                     <option>Request for statement</option>
                     <option>Request for interest certificate</option>
                     <option>Request for TDS certificate</option>
@@ -158,7 +215,10 @@ export function AccountStatement() {
                 {statementType === "Request for statement" && (
                   <div className="astmt-form-group">
                     <label>Select Period</label>
-                    <select value={period} onChange={(e) => setPeriod(e.target.value)}>
+                    <select
+                      value={period}
+                      onChange={(e) => setPeriod(e.target.value)}
+                    >
                       <option value="">-- Select Period --</option>
                       <option value="30">Last 1 Month</option>
                       <option value="90">Last 3 Months</option>
@@ -170,15 +230,25 @@ export function AccountStatement() {
                 )}
 
                 <div className="astmt-btn-row">
-                  <button className="astmt-btn-outline" onClick={() => setStep(2)}>Back</button>
-                  <button className="astmt-btn" onClick={() => {
-                    alert("Request submitted successfully!");
-                    setStep(1);
-                    generateCaptcha();
-                    setStatementType("Request for statement");
-                    setPeriod("");
-                    setEnteredCaptcha("");
-                  }}>Submit</button>
+                  <button
+                    className="astmt-btn-outline"
+                    onClick={() => setStep(2)}
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="astmt-btn"
+                    onClick={() => {
+                      alert("Request submitted successfully!");
+                      setStep(1);
+                      generateCaptcha();
+                      setStatementType("Request for statement");
+                      setPeriod("");
+                      setEnteredCaptcha("");
+                    }}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </div>

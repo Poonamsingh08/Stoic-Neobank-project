@@ -47,6 +47,12 @@ function FdCalculator() {
       {/* Hero Section */}
       <section className="fd-hero">
         <div className="fd-hero-container">
+
+          {/* 🔙 Back Button */}
+          <button className="fd-back-btn" onClick={() => navigate(-1)}>
+            ← Back
+          </button>
+
           <div className="fd-hero-left">
             <h1>Fixed Deposit (FD)</h1>
             <h4>Invest smartly and safely</h4>
@@ -73,11 +79,13 @@ function FdCalculator() {
             </div>
             <p className="fd-hero-note">⭐ 8,500+ PEOPLE ARE INTERESTED</p>
           </div>
+
           <div className="fd-hero-right">
             <img src={fdBanner} alt="FD Banner" />
           </div>
         </div>
       </section>
+
 
       {/* FD Calculator */}
       <section className="fd-calculator-section">

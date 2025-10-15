@@ -12,29 +12,47 @@
 
 /* ====== Header ====== */
 .settings-header {
-    width: 100%;
-    text-align: left;
-    margin: 0; /* ❌ No margin */
-    background-color: #900603; /* 🔴 dark red background */
-    color: white;
-    padding: 1.25rem 1rem;
-    border-radius: 0; /* ❌ Remove rounded corners */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  display: flex;
+  justify-content: space-between; /* Ensures text on left, button on right */
+  align-items: center;
+  background-color: #960603;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
 }
 
 .settings-header h2 {
-    color: white;
-    margin: 10;
-    font-weight: 700;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 4px;
 }
 
 .settings-header p {
-     color: white;
-    font-size: 1rem;
-    font-weight: 500;
+  font-size: 14px;
+  color: #fefefe;
 }
+
+.settings-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #900603;
+  color: white;
+  border: 2px solid white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settings-back-btn:hover {
+  background: #900603;
+  transform: scale(1.03);
+}
+
 
 /* ====== Grid System ====== */
 .settings-container {

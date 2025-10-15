@@ -6,6 +6,7 @@ import {
   ArrowCounterclockwise,
   Check2Circle,
 } from "react-bootstrap-icons";
+import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./GeneralSettings.css";
 
@@ -101,8 +102,16 @@ const GeneralSettings = () => {
     <div className="settings-page">
       {/* Header */}
       <div className="settings-header">
-        <h2>General Settings</h2>
-        <p>Customize your app experience and preferences</p>
+        <div>
+          <h2>General Settings</h2>
+          <p>Customize your app experience and preferences</p>
+        </div>
+        <button
+          className="settings-back-btn"
+          onClick={() => navigate("/Client/setting")} // Go back to previous page
+        >
+          <FaArrowLeft size={16} /> Back
+        </button>
       </div>
 
       <div className="settings-container">
@@ -121,16 +130,15 @@ const GeneralSettings = () => {
             ].map((item) => (
               <div
                 key={item.name}
-                className={`theme-option ${
-                  theme === item.name ? "active-option" : ""
-                }`}
+                className={`theme-option ${theme === item.name ? "active-option" : ""
+                  }`}
                 style={{
                   backgroundColor:
                     theme === "Dark"
                       ? "#2c2c2c"
                       : theme === item.name
-                      ? "#f8d7da"
-                      : cardStyle.backgroundColor,
+                        ? "#f8d7da"
+                        : cardStyle.backgroundColor,
                   color: cardStyle.color,
                 }}
                 onClick={() => setTheme(item.name)}
@@ -142,8 +150,8 @@ const GeneralSettings = () => {
                     {item.name === "Light"
                       ? "Clean and bright interface"
                       : item.name === "Dark"
-                      ? "Easy on the eyes in low light"
-                      : "Follows your device settings"}
+                        ? "Easy on the eyes in low light"
+                        : "Follows your device settings"}
                   </div>
                 </div>
                 {theme === item.name && (

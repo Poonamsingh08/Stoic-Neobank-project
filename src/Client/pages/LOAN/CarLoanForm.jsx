@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import "./style/loanForm.css";
+import { useNavigate } from "react-router-dom";
 
 function CarLoanForm() {
   const [formData, setFormData] = useState({
@@ -27,6 +28,7 @@ function CarLoanForm() {
 
   const [submitted, setSubmitted] = useState(false);
 
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -275,9 +277,14 @@ function CarLoanForm() {
         </div>
 
         {/* Submit */}
-        <button type="submit" className="btn-submit">
-          Submit Application
-        </button>
+         <div className="text-center">
+          <button type="submit" className="btn-submit">
+            Submit Application
+          </button>
+           <button type="button" className="btn-submit" onClick={() => navigate(-1)}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

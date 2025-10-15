@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./EmailSupport.css";
+import  {useNavigate} from 'react-router-dom';
 
 const EmailSupport = () => {
   const [formState, setFormState] = useState({
@@ -25,7 +26,7 @@ const EmailSupport = () => {
     console.log("Form Data:", formState);
     alert("Your email request has been submitted successfully!");
   };
-
+  const navigate = useNavigate();
   return (
     <div className="es-root">
       {/* Header */}
@@ -153,7 +154,7 @@ const EmailSupport = () => {
                   <button
                     type="button"
                     className="es-btn es-btn-light"
-                    onClick={() => (window.location.href = "/complaint")}
+                     onClick={() => navigate("/client/complaintfeedback")}
                   >
                     Cancel
                   </button>

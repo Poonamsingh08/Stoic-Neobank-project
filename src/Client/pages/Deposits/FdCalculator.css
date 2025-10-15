@@ -45,6 +45,7 @@
 .fd-hero-left h1 {
   font-size: 32px;
   font-weight: bold;
+  margin-top: 50px;
 }
 
 .fd-hero-left h4 {
@@ -57,12 +58,36 @@
   margin-top: 10px;
   font-size: 16px;
 }
-
 .fd-hero-buttons {
   margin-top: 15px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+/* Back Button */
+.fd-back-btn {
+  background: white;
+  color: #900603;
+  border: none;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.fd-back-btn:hover {
+  background: #f2f2f2;
+}
+
+/* Make sure hero section is positioned relatively */
+.fd-hero {
+  position: relative;
 }
 
 .btn-primary {
@@ -374,4 +399,10 @@
   .fd-hero-left h4 { font-size: 18px; }
   .fd-summary h2 { font-size: 22px; }
   .fd-benefits-container h3 { font-size: 22px; }
+  .fd-back-btn {
+    top: 10px;
+    left: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
 }

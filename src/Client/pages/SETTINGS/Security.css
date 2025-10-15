@@ -6,24 +6,55 @@
 
 /* Header */
 .sec-header {
-   background-color: #960603;
+  background-color: #960603;
   color: #fff;
-  padding: 15px 1px;
-  border-radius: 0; /* round removed */
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 25px 40px;
+  border-radius: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 25px;
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ✅ keeps text left, button right */
+  flex-wrap: wrap;
 }
-.sec-header h2 {
- font-weight: bold; /* title bold */
-  font-size:35px;
-  margin-bottom: 10px;
+
+.sec-header-left h2 {
+  font-weight: 700;
+  font-size: 32px;
+  margin-bottom: 6px;
+  line-height: 1.2;
 }
-.sec-header p {
-  font-size: 14px;
-  color: #fefefe;
-  font-weight: normal;
+
+.sec-header-left p {
+  font-size: 15px;
+  color: #f8f8f8;
+  margin: 0;
 }
+
+/* ===== Back Button ===== */
+.sec-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #960603;
+  color: white;
+  border: 2px solid white; /* ✅ visible white border */
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sec-back-btn:hover {
+  background: #900603;
+  color:white; /* ✅ inverted on hover */
+  transform: scale(1.05);
+}
+
 
 
 /* Grid */

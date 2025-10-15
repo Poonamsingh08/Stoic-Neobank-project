@@ -10,6 +10,23 @@
 .fd-hero-left p { font-size:1.2rem; margin-bottom:30px; }
 .fd-buttons { display:flex; gap:20px; flex-wrap:wrap; margin-top:10px; }
 .fd-hero-right img { max-width:400px; width:100%; border-radius:20px; }
+/* Back Button */
+.ts-back-btn {
+  background: white;
+  color: #900603;
+  border: none;
+  font-weight: bold;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 20px; /* space between button and title */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.ts-back-btn:hover {
+  background: #f2f2f2;
+}
 
 /* Buttons */
 .btn-primary { background:white; color:#900603; padding:14px 30px; border:none; border-radius:50px; font-weight:700; cursor:pointer; transition:0.3s; }

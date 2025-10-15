@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Notifications.css"; // Responsive CSS
+import { useNavigate } from "react-router-dom";
+import "./Notifications.css";
 
 const DEFAULT_SETTINGS = {
   globalEnabled: true,
@@ -16,6 +17,7 @@ const DEFAULT_SETTINGS = {
 export default function NotificationsPage() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [savedMsg, setSavedMsg] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const saved = localStorage.getItem("nb_notify_settings");
@@ -61,36 +63,35 @@ export default function NotificationsPage() {
 
   const saveSettings = () => {
     localStorage.setItem("nb_notify_settings", JSON.stringify(settings));
-    setSavedMsg("Settings saved successfully ✅");
+    setSavedMsg("✅ Settings saved successfully");
   };
 
   const resetDefaults = () => {
     setSettings(DEFAULT_SETTINGS);
-    setSavedMsg("Restored defaults 🔄");
+    setSavedMsg("🔄 Restored default settings");
   };
 
-  const ChannelBadge = ({ ch }) => {
-    const colors = { email: "#900603", sms: "#900603", push: "#900603" };
-    const emojis = { email: "✉️", sms: "📱", push: "🔔" };
-    return (
-      <span className="badge" style={{ backgroundColor: colors[ch] }}>
-        {emojis[ch]} {ch.toUpperCase()}
-      </span>
-    );
-  };
+  const ChannelBadge = ({ ch }) => (
+    <span className="badge">
+      {ch === "email" ? "✉️" : ch === "sms" ? "📱" : "🔔"} {ch.toUpperCase()}
+    </span>
+  );
 
   return (
-    <div className="notify-container">
+    <div className="notify-page">
       {/* Header */}
-      <div className="header-card">
-        <div>
-          <h1>Notification Preferences</h1>
+      <div className="notify-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ← Back
+        </button>
+        <div className="header-text">
+          <h1>Manage Notifications</h1>
           <p>
-            Control how you receive alerts for transactions, security, offers,
-            and product updates
+            Choose how you receive alerts for transactions, security, offers,
+            and more.
           </p>
         </div>
-        <div className="header-right">
+        <div className="header-toggle">
           <label className="switch">
             <input
               type="checkbox"
@@ -101,7 +102,7 @@ export default function NotificationsPage() {
           </label>
           <small>
             All notifications {settings.globalEnabled ? "ON" : "OFF"} <br />
-            <span className="muted">Turn off global to pause all alerts</span>
+            <span className="muted">Toggle to enable or disable all alerts</span>
           </small>
         </div>
       </div>
@@ -109,30 +110,36 @@ export default function NotificationsPage() {
       {/* Main Grid */}
       <div className="grid">
         {/* Channels */}
+        {/* Channels */}
         <div className="card111">
           <h5>Channels</h5>
           <p className="muted">Enable or disable channels across all notifications</p>
           {["email", "sms", "push"].map((ch) => (
             <div className="channel-row" key={ch}>
-              <div>
-                <strong>{ch.toUpperCase()}</strong>
-                <div className="small">
-                  {ch === "email"
-                    ? "Receive Emails"
-                    : ch === "sms"
-                    ? "Receive SMS"
-                    : "Receive App Push"}
+              <div className="cat-header-inline">
+                <div className="cat-text">
+                  <strong>{ch.toUpperCase()}</strong>
+                  <div className="small muted">
+                    {ch === "email"
+                      ? "Receive Email Notifications"
+                      : ch === "sms"
+                        ? "Receive SMS Alerts"
+                        : "Receive Push Notifications"}
+                  </div>
+                </div>
+                <div className="toggles-inline">
+                  <label className="switch small">
+                    <input
+                      type="checkbox"
+                      checked={settings.channels[ch]}
+                      onChange={() => toggleChannel(ch)}
+                      disabled={!settings.globalEnabled}
+                    />
+                    <span className="slider round"></span>
+                    <span className="label">{ch}</span>
+                  </label>
                 </div>
               </div>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  checked={settings.channels[ch]}
-                  onChange={() => toggleChannel(ch)}
-                  disabled={!settings.globalEnabled}
-                />
-                <span className="slider round"></span>
-              </label>
             </div>
           ))}
         </div>
@@ -150,12 +157,12 @@ export default function NotificationsPage() {
             <div className="category-row" key={cat.key}>
               <div className="cat-icon">{cat.icon}</div>
               <div className="flex-grow">
-                <div className="cat-header">
-                  <div>
+                <div className="cat-header-inline">
+                  <div className="cat-text">
                     <h6>{cat.title}</h6>
                     <div className="muted small">{cat.desc}</div>
                   </div>
-                  <div className="toggles">
+                  <div className="toggles-inline">
                     {["email", "sms", "push"].map((ch) => (
                       <label className="switch small" key={ch}>
                         <input
@@ -165,7 +172,6 @@ export default function NotificationsPage() {
                           disabled={!settings.globalEnabled || !settings.channels[ch]}
                         />
                         <span className="slider round"></span>
-                        <span className="label">{ch}</span>
                       </label>
                     ))}
                   </div>
@@ -178,9 +184,11 @@ export default function NotificationsPage() {
           <div className="frequency">
             <div>
               <h6>Digest Frequency</h6>
-              <small className="muted">How often you receive non-critical messages</small>
+              <small className="muted">
+                How often you receive non-critical messages
+              </small>
             </div>
-            <div>
+            <div className="freq-buttons">
               {["immediate", "daily", "weekly"].map((freq) => (
                 <button
                   key={freq}
@@ -195,10 +203,9 @@ export default function NotificationsPage() {
           </div>
         </div>
 
-        {/* Preview + Actions */}
+        {/* Preview */}
         <div className="card wide">
-          <h6>Preview</h6>
-          <p className="muted small">How your current preferences will be applied</p>
+          <h5>Preview</h5>
           <div className="badges">
             <ChannelBadge ch="email" />
             <ChannelBadge ch="sms" />
@@ -207,14 +214,14 @@ export default function NotificationsPage() {
           <div className="mt">
             <div><strong>Global:</strong> {settings.globalEnabled ? "Enabled" : "Disabled"}</div>
             <div>
-              <strong>Channels active:</strong>{" "}
+              <strong>Active Channels:</strong>{" "}
               {Object.entries(settings.channels).filter(([_, v]) => v).map(([k]) => k.toUpperCase()).join(", ") || "None"}
             </div>
             <div><strong>Frequency:</strong> {settings.frequency}</div>
           </div>
           <div className="actions">
-            <button className="btn dark" onClick={saveSettings}>Save Changes</button>
-            <button className="btn outline" onClick={resetDefaults}>Restore Defaults</button>
+            <button className="btn dark" onClick={saveSettings}>💾 Save Changes</button>
+            <button className="btn outline" onClick={resetDefaults}>♻️ Restore Defaults</button>
             {savedMsg && <div className="alert">{savedMsg}</div>}
           </div>
         </div>

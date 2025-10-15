@@ -73,25 +73,40 @@
   box-shadow: 0 0 4px rgba(144,6,3,0.2);
 }
 
-/* Checkbox */
+/* Checkbox*/
+
 .loan-checkbox {
-  margin: 1.5rem 0;
   display: flex;
-  align-items: center;
-  gap: 0 !important;
-  font-size: 0.9rem;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 40px;   /* ⬆️ Increased from 20px to 40px */
+  margin-bottom: 25px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
 }
 
-.checkbox input[type="checkbox"] {
-  margin: 0 !important;
-  margin-right: 0.3rem !important;
-  padding: 0 !important;
+.loan-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #900603;
+  cursor: pointer;
+  margin-top: 2px;
+  
 }
 
-.checkbox span {
-  margin: 0 !important;
-  padding: 0 !important;
+.loan-checkbox label {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
 }
+
+.loan-checkbox:hover label {
+  color: #900603;
+  transition: color 0.2s ease-in-out;
+}
+
+
 /* Button */
 .btn-submit {
   background-color: #900603;
@@ -102,6 +117,8 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s;
+  margin: 1rem;
+
 }
 .btn-submit:hover {
   background-color: #780606;

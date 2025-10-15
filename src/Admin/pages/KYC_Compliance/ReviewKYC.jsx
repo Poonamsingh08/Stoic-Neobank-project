@@ -6,7 +6,9 @@ import {
   FaRegFileAlt,
   FaStickyNote,
   FaUserShield,
+  FaArrowLeft
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./ReviewKYC.css";
 
 const initialUsers = [
@@ -52,6 +54,7 @@ const initialUsers = [
 ];
 
 export default function PendingKYC() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState(initialUsers);
   const [showModal, setShowModal] = useState(false);
   const [selectedDoc, setSelectedDoc] = useState(null);
@@ -122,8 +125,19 @@ export default function PendingKYC() {
     <>
       {/* Header */}
       <div className="kyc-review-header">
-        <h2>KYC Approve</h2>
-        <p>Efficiently review and manage all KYC submissions</p>
+        <div className="kyc-header-content">
+          <h2>KYC Approve</h2>
+          <p>Efficiently review and manage all KYC submissions</p>
+        </div>
+        <div className="kyc-back-btn-container">
+          <button
+            onClick={() => navigate('/Admin/kyc')}
+            className="kyc-back-btn"
+          >
+            <FaArrowLeft className="kyc-back-btn-icon" />
+            <span className="kyc-back-btn-text">Back to KYC Dashboard</span>
+          </button>
+        </div>
       </div>
 
       <div className="kyc-review-container">

@@ -132,6 +132,20 @@
   cursor: pointer;
   font-weight: bold;
 }
+.astmt-btn-back {
+  background: #fff;
+  color: #900603;
+  border: 2px solid #900603;
+  padding: 4px 19px;
+  margin-right: 18rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.astmt-btn-back:hover {
+  background: #900603;
+  color: #fff;
+}
 .astmt-btn-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 15px; }
 .astmt-btn-row.right { justify-content: flex-end; }
 
