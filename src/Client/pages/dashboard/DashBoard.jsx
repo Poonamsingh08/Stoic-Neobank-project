@@ -98,7 +98,7 @@ const DashBoard = () => {
           ))}
         </div>
       </div>
-
+ 
       {/* Extra Widgets */}
       <div className="three-column">
         <div className="widget-card">
@@ -120,5 +120,6 @@ const DashBoard = () => {
     </div>
   );
 };
+
 
 export default DashBoard;
