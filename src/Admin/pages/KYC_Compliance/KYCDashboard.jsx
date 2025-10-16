@@ -36,14 +36,17 @@ export default function KYCDashboard() {
   ];
 
   return (
-    <div className="kdb-container">
-      {/* Header */}
+
+<>
+     {/* Header */}
       <div className="kdb-header">
         <div className="kdb-header-content">
           <h2 className="kdb-title">KYC & Compliance Dashboard</h2>
           <p className="kdb-description">Monitor and manage compliance operations</p>
         </div>
       </div>
+    <div className="kdb-container">
+     
 
       {/* Summary Cards with Icons */}
       <div className="kdb-grid-3">
@@ -222,5 +225,6 @@ export default function KYCDashboard() {
         ))}
       </div>
     </div>
+    </>
   );
 }
