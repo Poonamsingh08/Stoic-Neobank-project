@@ -44,10 +44,7 @@ function RDPage() {
         <div className="rd-hero-container">
 
           <div className="rd-hero-left">
-            {/* 🔙 Back Button */}
-            <button className="rd-back-btn" onClick={() => navigate(-1)}>
-              ← Back
-            </button>
+        
 
             <h1>Recurring Deposit (RD)</h1>
             <h4>Invest smartly and safely</h4>

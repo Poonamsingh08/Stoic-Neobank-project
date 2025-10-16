@@ -17,11 +17,12 @@ import Reports from "./pages/Reports/Reports.jsx";
 import AdminTransactions from "./pages/Transaction/TransactionsRecords.jsx";
 import Card from "./pages/Cards/Card.jsx"
 import AdminProfile from "./pages/AdminProfile/AdminProfile";
+import  Settings from "./pages/Settings/Settings.jsx"
 
 // Temp Pages
 function KYC() { return <h1>KYC Page</h1>; }
 function Support() { return <h1>Support Page</h1>; }
-function Settings() { return <h1>Settings Page</h1>; }
+
 
 // Admin Login
 import AdminLogin from "./auth/AdminLogin";
@@ -67,6 +68,7 @@ export default function AdminApp() {
               <Route path="/investment_products" element={<InvestmentPanel />} />
               <Route path="/moneyrequest" element={<MoneyTransferRequest />} />
               <Route path="/reports" element={<Reports />} />
+              
               {/* Default redirect for logged in admin */}
               <Route path="*" element={<Navigate to="/admin/" />} />
             </>

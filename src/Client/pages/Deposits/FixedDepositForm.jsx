@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Book } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./FixedDepositForm.css";
 
 const FixedDepositForm = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const data = location.state || {};
 
   const depositType = data.type || "Fixed Deposit";
@@ -60,8 +61,9 @@ const FixedDepositForm = () => {
       {/* Summary */}
       {amount && duration && calculated.maturity > 0 && (
         <div className="fd-summary-alert">
-          <strong>Summary from Calculator:</strong> You selected ₹{amount.toLocaleString()} for {duration} months at{" "}
-          {data.interestRate}% → Expected Maturity: ₹{data.maturity.toLocaleString()}
+          <strong>Summary from Calculator:</strong> You selected ₹
+          {amount.toLocaleString()} for {duration} months at {data.interestRate}% → Expected
+          Maturity: ₹{data.maturity.toLocaleString()}
         </div>
       )}
 
@@ -141,19 +143,9 @@ const FixedDepositForm = () => {
         {/* Action Buttons */}
         <div className="fd-buttons54">
           <button className="btn-primary55">Open FD</button>
-          <button
-            className="btn-outline56"
-            onClick={() => {
-              setAccount("");
-              setState("");
-              setCity("");
-              setBranch("");
-              setAmount("");
-              setDuration("");
-              setCalculated({ interestRate: 0, maturity: 0 });
-            }}
-          >
-            Clear
+          {/* ⬅️ Back button replaces Clear */}
+          <button className="btn-outline56" onClick={() => navigate(-1)}>
+            Back
           </button>
         </div>
       </div>

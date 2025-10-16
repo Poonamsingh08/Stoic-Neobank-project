@@ -8,6 +8,8 @@ import {
   FaUpload,
 } from "react-icons/fa";
 import "./PersonalDetails.css";
+import {FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const PersonalDetails = () => {
   const [showSensitive, setShowSensitive] = useState({
@@ -15,6 +17,7 @@ const PersonalDetails = () => {
     pan: false,
     aadhar: false,
   });
+  const navigate = useNavigate();
   const [copySuccess, setCopySuccess] = useState(false);
   const [activeTab, setActiveTab] = useState("personal");
   const [editMode, setEditMode] = useState({
@@ -95,40 +98,50 @@ const PersonalDetails = () => {
   const toggleEdit = (tab) => {
     setEditMode((prev) => ({ ...prev, [tab]: !prev[tab] }));
   };
-
+  
   return (
     <div className="pd-container">
       {/* Header */}
       <div className="pd-header">
-        <div className="pd-header-left">
-          <div className="pd-profile-pic">
-            <img src={profileImage} alt="profile" />
-            {/* Upload Icon Overlay */}
-            <div
-              className="pd-upload-overlay"
-              onClick={() => fileInputRef.current.click()}
-            >
-               <FaCamera size={20} />
-            </div>
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              accept="image/*"
-              onChange={handleProfileImageChange}
-            />
-          </div>
-          <div className="pd-user-info">
-            <h2>
-              {profileData.firstName} {profileData.middleName}{" "}
-              {profileData.lastName}
-            </h2>
-            <p>{profileData.accountType}</p>
-            <span className="pd-verified">✅ Verified</span>
-            <span className="pd-premium">⭐ Premium Member</span>
-          </div>
-        </div>
+  {/* ===== Left Section (Profile Info) ===== */}
+  <div className="pd-header-left">
+    <div className="pd-profile-pic">
+      <img src={profileImage} alt="profile" />
+      {/* Upload Icon Overlay */}
+      <div
+        className="pd-upload-overlay"
+        onClick={() => fileInputRef.current.click()}
+      >
+        <FaCamera size={18} />
       </div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        accept="image/*"
+        onChange={handleProfileImageChange}
+      />
+    </div>
+
+    <div className="pd-user-info">
+      <h2>
+        {profileData.firstName} {profileData.middleName} {profileData.lastName}
+      </h2>
+      <p>{profileData.accountType}</p>
+      <span className="pd-verified">✅ Verified</span>
+      <span className="pd-premium">⭐ Premium Member</span>
+    </div>
+  </div>
+
+  {/* ===== Right Section (Back Button) ===== */}
+  <div className="pd-header-right">
+    <button className="pd-back-btn" onClick={() => navigate("/Client/setting")}>
+      <FaArrowLeft size={20} />
+      <span>Back</span>
+    </button>
+  </div>
+</div>
+
 
 
       {/* Tabs */}

@@ -48,11 +48,6 @@ function FdCalculator() {
       <section className="fd-hero">
         <div className="fd-hero-container">
 
-          {/* 🔙 Back Button */}
-          <button className="fd-back-btn" onClick={() => navigate(-1)}>
-            ← Back
-          </button>
-
           <div className="fd-hero-left">
             <h1>Fixed Deposit (FD)</h1>
             <h4>Invest smartly and safely</h4>

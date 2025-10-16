@@ -1,7 +1,10 @@
 import React from 'react';
-import './PersonalDetails.css'; // 👈 unique CSS import
+import { useNavigate } from 'react-router-dom';
+import './PersonalDetails.css';
 
 const PersonalDetails = ({ userData, updateUserData, nextStep }) => {
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     updateUserData({ [e.target.name]: e.target.value });
   };
@@ -48,13 +51,24 @@ const PersonalDetails = ({ userData, updateUserData, nextStep }) => {
         />
       </div>
 
+      {/* Footer Buttons */}
       <div className="pd-btn-row">
+        {/* 👈 Back Button (Left Side) */}
+        <button
+          type="button"
+          className="pd-btn-outline"
+          onClick={() => navigate('/Client/myaccount')} // change route if needed
+        >
+          ← Back
+        </button>
+
+        {/* 👉 Next Button (Right Side) */}
         <button
           onClick={nextStep}
           disabled={!isFormValid}
           className={`pd-btn ${isFormValid ? 'pd-btn-active' : 'pd-btn-disabled'}`}
         >
-          Next
+          Next →
         </button>
       </div>
     </div>

@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import SignatureCanvas from "react-signature-canvas";
 import "./UpdateKYC.css";
 import logoWhite from '../../assets/neobank-white.png';
-
+import { useNavigate } from "react-router-dom";
 
 export function UpdateKYC() {
   const [step, setStep] = useState(1);
@@ -24,6 +24,7 @@ export function UpdateKYC() {
   const webcamRef = useRef(null);
   const sigCanvas = useRef(null);
 
+  const navigate = useNavigate();
   const generateCaptcha = () => {
     setCaptchaNum1(Math.floor(Math.random() * 10) + 1);
     setCaptchaNum2(Math.floor(Math.random() * 10) + 1);
@@ -121,12 +122,21 @@ export function UpdateKYC() {
             <>
               {step === 1 && (
                 <form onSubmit={handleStep1Submit}>
+                  <div className="kyc-unique-topbar">
+    <button
+      type="button"
+      className="kyc-unique-btn-outline kyc-back-btn"
+      onClick={() => navigate("/Client/myaccount")}
+    >
+      ← Back
+    </button>
+  </div>
                   <h4 className="kyc-unique-heading">KYC Verification</h4>
 
                   {["customerId", "panNumber", "accountNumber"].map((type) => (
                     <label key={type} className="kyc-unique-radio-label">
                       <input
-                        type="radio"
+        x                type="radio"
                         value={type}
                         checked={choice === type}
                         onChange={() => setChoice(type)}

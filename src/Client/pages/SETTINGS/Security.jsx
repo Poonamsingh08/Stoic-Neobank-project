@@ -56,7 +56,7 @@ const Security = () => {
 
   // ✅ Password validation
   const validatePassword = (password) => {
-    const regex = /^(?=.[0-9])(?=.[!@#$%^&*])(?=.{8,})/;
+    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
     return regex.test(password);
   };
 
@@ -243,7 +243,7 @@ const Security = () => {
                 </span>
               </div>
 
-              {/* ⚠ Show only when invalid */}
+              {/* ⚠️ Show only when invalid */}
               {passwordError && (
                 <div className="alert-box">
                   <ExclamationTriangle size={20} /> {passwordError}

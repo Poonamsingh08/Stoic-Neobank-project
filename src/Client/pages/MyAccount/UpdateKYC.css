@@ -9,6 +9,38 @@
   padding: 40px 15px;
 }
 
+
+/* 🔹 Topbar to position back button in the right corner */
+.kyc-unique-topbar {
+  display: flex;
+  justify-content: flex-end; /* aligns to right */
+  margin-bottom: 50px;
+}
+
+/* 🔹 Outline Back Button Style */
+.kyc-unique-btn-outline.kyc-back-btn {
+  background-color: transparent;
+  color: #900603;
+  border: 2px solid #900603;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.kyc-unique-btn-outline.kyc-back-btn:hover {
+  background-color: #900603;
+  color: #fff;
+}
+
+/* 🔹 Optional: subtle shadow for visibility */
+.kyc-unique-btn-outline.kyc-back-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(144, 6, 3, 0.3);
+}
+
 /* === Main Box === */
 .kyc-unique-box {
   display: flex;

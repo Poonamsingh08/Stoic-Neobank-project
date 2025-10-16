@@ -18,11 +18,6 @@ const TaxSaverFD = () => {
       <section className="fd-hero">
         <div className="fd-hero-inner">
           <div className="fd-hero-left">
-            {/* 🔙 Back Button */}
-            <button className="ts-back-btn" onClick={() => navigate(-1)}>
-              ← Back
-            </button>
-
             <h1>Tax Saver Fixed Deposit</h1>
             <p>
               Save tax under Section 80C & earn guaranteed <strong>7.75% returns</strong>

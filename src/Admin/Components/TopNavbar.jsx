@@ -56,7 +56,7 @@ const TopNavbar = () => {
         { name: "Reports & Analytics", icon: <FileBarChart size={16} />, path: "/Admin/reports" },
         { name: "Loans", icon: <DollarSign size={16} />, path: "/Admin/loans" },
         { name: "Cards", icon: <CreditCard size={16} />, path: "/Admin/cards" },
-        { name: "Setting", icon: <Settings size={16} />, path: "/Admin/setting" },
+        { name: "Setting", icon: <Settings size={16} />, path: "/Admin/settings" },
       ],
     },
   ];

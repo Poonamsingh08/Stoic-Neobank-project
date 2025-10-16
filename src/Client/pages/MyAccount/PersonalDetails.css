@@ -52,14 +52,33 @@
 }
 
 .pd-btn {
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 8px;
   font-weight: bold;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin-left: 330px;
 }
 
+/* ============ BACK BUTTON (Outline) ============ */
+.pd-btn-outline {
+  background-color: transparent;
+  color: #900603; /* same red tone as active */
+  border: 2px solid #900603;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+/* Hover */
+.pd-btn-outline:hover {
+  background-color: #900603;
+  color: #fff;
+}
 .pd-btn-active {
   background-color: #900603;
   color: #fff;
