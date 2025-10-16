@@ -422,14 +422,28 @@
 }
 .um-upm-btn-secondary { background-color: #900603; color: white; }
 .um-upm-btn-warning { background-color: #ff9800; color: white; }
+/* ============================= */
+/* Responsive Design (Updated)   */
+/* ============================= */
 
-/* ---------- Responsive (Fixes Header + Scroll) ---------- */
+/* Tablet (max-width: 1024px) */
 @media (max-width: 1024px) {
+  /* Match dashboard's container padding */
+  .um-user-management-container {
+    padding: 0 16px 50px;
+  }
+
   .um-dashboard-header {
-    padding: 20px 1.2rem;
+   
+  }
+
+  /* Match dashboard's header font size */
+  .um-dashboard-header h2 {
+    font-size: 1.5rem;
   }
 }
 
+/* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
   .um-user-management-container {
     padding: 0 10px 40px;
@@ -437,16 +451,24 @@
   }
 
   .um-dashboard-header {
-    padding: 15px 12px;
-    margin-top: 70px;
+    padding: 18px 1rem; /* Match dashboard padding */
+    
   }
 
+  /* Match dashboard's header font size */
   .um-dashboard-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
-  .um-dashboard-description {
-    font-size: 0.85rem;
+  /* Match dashboard's sub-text font size */
+  .um-dashboard-description,
+  .um-dashboard-subText {
+    font-size: 0.9rem;
+  }
+
+  /* Match dashboard's card padding */
+  .um-summary-card {
+    padding: 14px;
   }
 
   .um-summary-card h2 {
@@ -466,8 +488,9 @@
     overflow-x: hidden;
   }
 
+  /* Hide desktop table and show mobile cards */
   .um-user-table {
-    display: none; /* Hide desktop table */
+    display: none;
   }
 
   .um-mobile-cards {
@@ -534,13 +557,27 @@
   }
 }
 
+
+/* Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
+  /* Match dashboard's container padding */
+  .um-user-management-container {
+    padding: 10px;
+  }
+
   .um-dashboard-header {
     padding: 12px 10px;
   }
 
+  /* Match dashboard's header font size */
   .um-dashboard-header h2 {
     font-size: 1.2rem;
+  }
+
+  /* Match dashboard's header paragraph font size */
+  .um-dashboard-header .um-dashboard-description,
+  .um-dashboard-header .um-dashboard-subText {
+    font-size: 0.85rem;
   }
 
   .um-summary-cards {
@@ -548,7 +585,12 @@
   }
 
   .um-summary-card {
-    flex: 1 1 100%;
+    flex: 1 1 100%; /* Stack cards vertically */
+  }
+
+  /* Match dashboard's stat value font size */
+  .um-summary-card h2 {
+    font-size: 1.4rem;
   }
 
   .um-user-controls {
