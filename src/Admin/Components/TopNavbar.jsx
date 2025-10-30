@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";  // ✅ useNavigate added
 // Font Awesome Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +26,7 @@ import "./TopNavbar.css";
 const TopNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const navigate = useNavigate(); // ✅ Added navigate hook
 
   const menuItems = [
     { name: "Dashboard", icon: <LayoutDashboard size={18} />, path: "/Admin/" },
@@ -85,14 +86,20 @@ const TopNavbar = () => {
 
           {/* Right Side: Notification + Profile */}
           <div className="tnb-navbar-right">
-            <button className="tnb-icon-btn">
+            {/* 🔔 Notification Button with navigation */}
+            <button
+              className="tnb-icon-btn"
+              onClick={() => navigate("/Admin/Notification")}
+            >
               <FontAwesomeIcon icon={faBell} className="tnb-bell-icon" />
               <span className="tnb-badge">3</span>
             </button>
+
             <NavLink to="/Admin/adminprofile" className="tnb-profile-btn">
               <User size={20} className="tnb-profile-icon" />
               <span className="tnb-profile-text">Admin</span>
             </NavLink>
+
             <button
               className="tnb-menu-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -1,38 +1,225 @@
 import React, { useState } from "react";
 import styles from "./AdminDeposits.module.css";
 
+// Approval Modal
+const ApprovalModal = ({ row, onClose, onConfirm }) => {
+  const [rate, setRate] = useState(row?.rate?.replace("%", "") || "");
+  const [tenure, setTenure] = useState(row?.tenure || "");
+
+  const handleConfirm = () => {
+    onConfirm({ rate: rate ? `${rate}%` : undefined, tenure });
+  };
+
+  return (
+    <div className={styles.admDepModalBackdrop}>
+      <div className={styles.admDepModal}>
+        <h3>Approve Request</h3>
+        <p>Customer: {row?.name || "N/A"}</p>
+        <input
+          type="text"
+          placeholder="Interest Rate (%)"
+          value={rate}
+          onChange={(e) => setRate(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Tenure"
+          value={tenure}
+          onChange={(e) => setTenure(e.target.value)}
+        />
+        <div className={styles.admDepModalActions}>
+          <button onClick={onClose}>Cancel</button>
+          <button
+            className={styles.admDepBtnApprove}
+            onClick={handleConfirm}
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Rejection Modal
+const RejectionModal = ({ row, onClose, onConfirm }) => {
+  const [reason, setReason] = useState("");
+
+  return (
+    <div className={styles.admDepModalBackdrop}>
+      <div className={styles.admDepModal}>
+        <h3>Reject Request</h3>
+        <p>Customer: {row?.name || "N/A"}</p>
+        <textarea
+          placeholder="Enter rejection reason..."
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+        />
+        <div className={styles.admDepModalActions}>
+          <button onClick={onClose}>Cancel</button>
+          <button
+            className={styles.admDepBtnReject}
+            onClick={() => onConfirm({ reason })}
+          >
+            Reject
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Format Selection Modal
+const FormatModal = ({ row, onClose, onDownload }) => {
+  return (
+    <div className={styles.admDepModalBackdrop}>
+      <div className={styles.admDepModal}>
+        <h3>Generate Instrument</h3>
+        <p>Customer: {row?.user || "N/A"}</p>
+        <p>Amount: ₹{row?.amount || 0}</p>
+        <p>Select download format:</p>
+        <div className={styles.admDepFormatButtons}>
+          <button
+            className={styles.admDepBtnFormat}
+            onClick={() => onDownload(row, "csv")}
+          >
+            📄 CSV
+          </button>
+          <button
+            className={styles.admDepBtnFormat}
+            onClick={() => onDownload(row, "pdf")}
+          >
+            📕 PDF
+          </button>
+          <button
+            className={styles.admDepBtnFormat}
+            onClick={() => onDownload(row, "excel")}
+          >
+            📗 Excel
+          </button>
+        </div>
+        <div className={styles.admDepModalActions}>
+          <button onClick={onClose}>Close</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Main Component
 const AdminDeposits = () => {
   const [activeTab, setActiveTab] = useState("applications");
   const [notification, setNotification] = useState("");
   const [modalData, setModalData] = useState(null);
+  const [formatModalData, setFormatModalData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All Statuses");
+
+  // Reset search and filter when switching tabs
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSearchQuery("");
+    setStatusFilter("All Statuses");
+  };
 
   const [applications, setApplications] = useState([
-    { id: 1, user: "Alice", type: "FD", amount: 50000, status: "Pending", startDate: "2025-01-01", dueDate: "2025-12-31", interest: "-" },
-    { id: 2, user: "Bob", type: "RD", amount: 10000, status: "Pending", startDate: "2025-02-01", dueDate: "2026-02-01", interest: "-" },
+    {
+      id: 1,
+      user: "Alice",
+      type: "FD",
+      amount: 50000,
+      status: "Pending",
+      startDate: "2025-01-01",
+      dueDate: "2025-12-31",
+      interest: "-",
+    },
+    {
+      id: 2,
+      user: "Bob",
+      type: "RD",
+      amount: 10000,
+      status: "Pending",
+      startDate: "2025-02-01",
+      dueDate: "2026-02-01",
+      interest: "-",
+    },
+    {
+      id: 3,
+      user: "Carol",
+      type: "FD",
+      amount: 75000,
+      status: "Approved",
+      startDate: "2025-01-15",
+      dueDate: "2026-01-15",
+      interest: "4500",
+    },
+    {
+      id: 4,
+      user: "David",
+      type: "RD",
+      amount: 20000,
+      status: "Rejected",
+      startDate: "2025-03-01",
+      dueDate: "2026-03-01",
+      interest: "-",
+    },
   ]);
 
   const [maturities, setMaturities] = useState([
-    { id: 3, user: "Charlie", type: "FD", amount: 70000, status: "Pending", startDate: "2024-01-01", dueDate: "2025-01-01", interest: "-" },
+    {
+      id: 3,
+      user: "Charlie",
+      type: "FD",
+      amount: 70000,
+      status: "Pending",
+      maturityDate: "2025-10-01",
+    },
+    {
+      id: 4,
+      user: "Daisy",
+      type: "RD",
+      amount: 15000,
+      status: "Pending",
+      maturityDate: "2025-10-05",
+    },
+    {
+      id: 5,
+      user: "Edward",
+      type: "FD",
+      amount: 90000,
+      status: "Renewed",
+      maturityDate: "2025-11-01",
+    },
+    {
+      id: 6,
+      user: "Fiona",
+      type: "RD",
+      amount: 25000,
+      status: "Closed",
+      maturityDate: "2025-09-15",
+    },
   ]);
 
-  const [earlyWithdrawals, setEarlyWithdrawals] = useState([
-    { id: 4, user: "Diana", type: "RD", amount: 30000, status: "Pending", startDate: "2025-03-01", dueDate: "2026-03-01", interest: "-" },
+  const [withdrawals, setWithdrawals] = useState([
+    { id: 5, user: "Eve", type: "FD", amount: 20000, penalty: 500, status: "Pending" },
+    { id: 6, user: "Frank", type: "RD", amount: 8000, penalty: 200, status: "Pending" },
+    { id: 7, user: "Grace", type: "FD", amount: 35000, penalty: 1000, status: "Approved" },
+    { id: 8, user: "Henry", type: "RD", amount: 12000, penalty: 300, status: "Rejected" },
   ]);
 
   const showMessage = (msg) => {
     setNotification(msg);
-    setTimeout(() => setNotification(""), 4000);
+    setTimeout(() => setNotification(""), 3000);
   };
 
   const calculateInterest = (amount, startDate, dueDate) => {
     const start = new Date(startDate);
     const end = new Date(dueDate);
-    const durationYears = (end - start) / (1000 * 60 * 60 * 24 * 365);
-    const rate = 6;
-    return ((amount * rate * durationYears) / 100).toFixed(2);
+    const years = (end - start) / (1000 * 60 * 60 * 24 * 365);
+    return ((amount * 6 * years) / 100).toFixed(2);
   };
 
-  const openInterestModal = (row, setRows, action) => {
+  const openModal = (row, setRows, action) => {
     const interest = calculateInterest(row.amount, row.startDate, row.dueDate);
     setModalData({ row, setRows, action, interest });
   };
@@ -44,116 +231,465 @@ const AdminDeposits = () => {
         r.id === row.id ? { ...r, status: action, interest } : r
       )
     );
-    showMessage(`✅ Request ${action} successfully`);
+    showMessage(`✅ Request ${action}`);
     setModalData(null);
   };
 
-  const handleGenerateInstrument = (row) => {
-    showMessage(`📄 Instrument generated for ${row.user}`);
+  const handleMaturityAction = (id, action) => {
+    setMaturities((prev) =>
+      prev.map((r) => (r.id === id ? { ...r, status: action } : r))
+    );
+    showMessage(`✅ Deposit ${action.toLowerCase()}`);
   };
 
-  const renderTable = (rows, setRows, title) => (
-    <section className={styles["adm-tableCard"]}>
-      <h2>{title}</h2>
-      {notification && <div className={styles["adm-notification"]}>{notification}</div>}
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Start Date</th>
-            <th>Due Date</th>
-            <th>Status</th>
-            <th>Interest</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
-              <td>{row.user}</td>
-              <td>{row.type}</td>
-              <td>{row.amount}</td>
-              <td>{row.startDate}</td>
-              <td>{row.dueDate}</td>
-              <td>
-                <span className={`${styles["adm-status"]} ${styles[`adm-${row.status.toLowerCase()}`]}`}>
-                  {row.status}
-                </span>
-              </td>
-              <td>{row.interest}</td>
-              <td className={styles["adm-actionButtons"]}>
-                <button
-                  className={styles["adm-approve"]}
-                  onClick={() => openInterestModal(row, setRows, "Approved")}
-                >
-                  Approve
-                </button>
-                <button
-                  className={styles["adm-reject"]}
-                  onClick={() => openInterestModal(row, setRows, "Rejected")}
-                >
-                  Reject
-                </button>
-                {row.status === "Approved" && (
-                  <button
-                    className={styles["adm-interest"]}
-                    onClick={() => handleGenerateInstrument(row)}
-                  >
-                    Generate Instrument
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  );
+  const handleWithdrawalAction = (id, action) => {
+    setWithdrawals((prev) =>
+      prev.map((r) => (r.id === id ? { ...r, status: action } : r))
+    );
+    showMessage(`✅ Withdrawal ${action.toLowerCase()}`);
+  };
+
+  const handleGenerateInstrument = (row) => {
+    setFormatModalData(row);
+  };
+
+  const downloadInstrument = (row, format) => {
+    const instrumentData = {
+      depositId: row.id,
+      customerName: row.user,
+      depositType: row.type,
+      amount: row.amount,
+      startDate: row.startDate || new Date().toISOString().split("T")[0],
+      dueDate: row.dueDate || row.maturityDate || "N/A",
+      interest: row.interest || "N/A",
+      status: row.status,
+      generatedDate: new Date().toISOString().split("T")[0],
+    };
+
+    if (format === "csv") {
+      downloadCSV(instrumentData);
+    } else if (format === "pdf") {
+      downloadPDF(instrumentData);
+    } else if (format === "excel") {
+      downloadExcel(instrumentData);
+    }
+
+    showMessage(`📥 ${format.toUpperCase()} downloaded for ${row.user}`);
+    setFormatModalData(null);
+  };
+
+  // --- CSV / PDF / Excel downloads unchanged ---
+  const downloadCSV = (data) => {
+    const csvContent = [
+      ["Field", "Value"],
+      ["Deposit ID", data.depositId],
+      ["Customer Name", data.customerName],
+      ["Deposit Type", data.depositType],
+      ["Amount", `₹${data.amount}`],
+      ["Start Date", data.startDate],
+      ["Due Date", data.dueDate],
+      ["Interest", data.interest],
+      ["Status", data.status],
+      ["Generated Date", data.generatedDate],
+    ]
+      .map((row) => row.join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Deposit_Instrument_${data.depositId}_${Date.now()}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadPDF = (data) => {
+    const pdfContent = `
+DEPOSIT INSTRUMENT
+==================
+
+Deposit ID: ${data.depositId}
+Customer Name: ${data.customerName}
+Deposit Type: ${data.depositType}
+Amount: ₹${data.amount}
+Start Date: ${data.startDate}
+Due Date: ${data.dueDate}
+Interest: ${data.interest}
+Status: ${data.status}
+Generated Date: ${data.generatedDate}
+
+==================
+Bank Management System
+    `;
+
+    const blob = new Blob([pdfContent], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Deposit_Instrument_${data.depositId}_${Date.now()}.pdf`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadExcel = (data) => {
+    const excelContent = `
+Deposit ID\t${data.depositId}
+Customer Name\t${data.customerName}
+Deposit Type\t${data.depositType}
+Amount\t₹${data.amount}
+Start Date\t${data.startDate}
+Due Date\t${data.dueDate}
+Interest\t${data.interest}
+Status\t${data.status}
+Generated Date\t${data.generatedDate}
+    `.trim();
+
+    const blob = new Blob([excelContent], {
+      type: "application/vnd.ms-excel",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `Deposit_Instrument_${data.depositId}_${Date.now()}.xls`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // ✅ Updated filtering logic
+  const filterRows = (rows) => {
+    return rows.filter(
+      (row) =>
+        row.user.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (statusFilter === "All Statuses" || row.status === statusFilter)
+    );
+  };
+
+  const renderApplicationsTable = () => {
+    const filteredApplications = filterRows(applications);
+
+    return (
+      <div className={styles.admDepTableCard}>
+        <h2>Deposit Applications</h2>
+        {notification && (
+          <div className={styles.admDepNotification}>{notification}</div>
+        )}
+        <div className={styles.admDepFilters}>
+          <input
+            type="text"
+            placeholder="Search customer..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option>All Statuses</option>
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+        <div className={styles.admDepTableWrapper}>
+          <table className={styles.admDepTable}>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Start Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Interest</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredApplications.length > 0 ? (
+                filteredApplications.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.user}</td>
+                    <td>{row.type}</td>
+                    <td>₹{row.amount}</td>
+                    <td>{row.startDate}</td>
+                    <td>{row.dueDate}</td>
+                    <td>
+                      <span
+                        className={`${styles.admDepStatus} ${styles[`admDepStatus${row.status}`]}`}
+                      >
+                        {row.status}
+                      </span>
+                    </td>
+                    <td>{row.interest}</td>
+                    <td className={styles.admDepActionCell}>
+                      <button
+                        className={styles.admDepBtnApprove}
+                        onClick={() =>
+                          openModal(row, setApplications, "Approved")
+                        }
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className={styles.admDepBtnReject}
+                        onClick={() =>
+                          openModal(row, setApplications, "Rejected")
+                        }
+                      >
+                        Reject
+                      </button>
+                      {row.status === "Approved" && (
+                        <button
+                          className={styles.admDepBtnGenerate}
+                          onClick={() => handleGenerateInstrument(row)}
+                        >
+                          Generate
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="8" style={{ textAlign: "center", padding: "20px" }}>
+                    No results found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
+
+  const renderMaturitiesTable = () => {
+    const filteredMaturities = filterRows(maturities);
+
+    return (
+      <div className={styles.admDepTableCard}>
+        <h2>Maturities</h2>
+        {notification && (
+          <div className={styles.admDepNotification}>{notification}</div>
+        )}
+        <div className={styles.admDepFilters}>
+          <input
+            type="text"
+            placeholder="Search customer..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option>All Statuses</option>
+            <option>Pending</option>
+            <option>Renewed</option>
+            <option>Closed</option>
+          </select>
+        </div>
+        <div className={styles.admDepTableWrapper}>
+          <table className={styles.admDepTable}>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Maturity Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredMaturities.length > 0 ? (
+                filteredMaturities.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.user}</td>
+                    <td>{row.type}</td>
+                    <td>₹{row.amount}</td>
+                    <td>{row.maturityDate}</td>
+                    <td>
+                      <span
+                        className={`${styles.admDepStatus} ${styles[`admDepStatus${row.status}`]}`}
+                      >
+                        {row.status}
+                      </span>
+                    </td>
+                    <td className={styles.admDepActionCell}>
+                      <button
+                        className={styles.admDepBtnRenew}
+                        onClick={() => handleMaturityAction(row.id, "Renewed")}
+                      >
+                        Renew
+                      </button>
+                      <button
+                        className={styles.admDepBtnClose}
+                        onClick={() => handleMaturityAction(row.id, "Closed")}
+                      >
+                        Close
+                      </button>
+                      {(row.status === "Renewed" || row.status === "Closed") && (
+                        <button
+                          className={styles.admDepBtnGenerate}
+                          onClick={() => handleGenerateInstrument(row)}
+                        >
+                          Generate
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>
+                    No results found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
+
+  const renderWithdrawalsTable = () => {
+    const filteredWithdrawals = filterRows(withdrawals);
+
+    return (
+      <div className={styles.admDepTableCard}>
+        <h2>Early Withdrawal Requests</h2>
+        {notification && (
+          <div className={styles.admDepNotification}>{notification}</div>
+        )}
+        <div className={styles.admDepFilters}>
+          <input
+            type="text"
+            placeholder="Search customer..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option>All Statuses</option>
+            <option>Pending</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+        </div>
+        <div className={styles.admDepTableWrapper}>
+          <table className={styles.admDepTable}>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Penalty</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredWithdrawals.length > 0 ? (
+                filteredWithdrawals.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.user}</td>
+                    <td>{row.type}</td>
+                    <td>₹{row.amount}</td>
+                    <td>₹{row.penalty}</td>
+                    <td>
+                      <span
+                        className={`${styles.admDepStatus} ${styles[`admDepStatus${row.status}`]}`}
+                      >
+                        {row.status}
+                      </span>
+                    </td>
+                    <td className={styles.admDepActionCell}>
+                      <button
+                        className={styles.admDepBtnApprove}
+                        onClick={() =>
+                          handleWithdrawalAction(row.id, "Approved")
+                        }
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className={styles.admDepBtnReject}
+                        onClick={() =>
+                          handleWithdrawalAction(row.id, "Rejected")
+                        }
+                      >
+                        Reject
+                      </button>
+                      {row.status === "Approved" && (
+                        <button
+                          className={styles.admDepBtnGenerate}
+                          onClick={() => handleGenerateInstrument(row)}
+                        >
+                          Generate
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>
+                    No results found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
-      <div className={styles["adm-headingBar"]}>
-        <h2>Deposits Management</h2>
-        <p>Manage and track all user deposit transactions efficiently.</p>
-      </div>
-      <div className={styles["adm-adminDeposits"]}>
-        {/* <div className={styles["adm-headingBar"]}>
+      <div className={styles.admDepHeadingBar}>
         <h1>Deposits Management</h1>
-      </div> */}
-
-        <div className={styles["adm-tabs"]}>
+      </div>
+      <div className={styles.admDepContainer}>
+        <div className={styles.admDepTabs}>
           <button
-            className={activeTab === "applications" ? styles["adm-active"] : ""}
-            onClick={() => setActiveTab("applications")}
+            className={
+              activeTab === "applications" ? styles.admDepTabActive : ""
+            }
+            onClick={() => handleTabChange("applications")}
           >
-            Deposit Applications
+            Applications
           </button>
           <button
-            className={activeTab === "maturities" ? styles["adm-active"] : ""}
-            onClick={() => setActiveTab("maturities")}
+            className={
+              activeTab === "maturities" ? styles.admDepTabActive : ""
+            }
+            onClick={() => handleTabChange("maturities")}
           >
             Maturities
           </button>
           <button
-            className={activeTab === "withdrawals" ? styles["adm-active"] : ""}
-            onClick={() => setActiveTab("withdrawals")}
+            className={
+              activeTab === "withdrawals" ? styles.admDepTabActive : ""
+            }
+            onClick={() => handleTabChange("withdrawals")}
           >
-            Early Withdrawal Requests
+            Withdrawals
           </button>
         </div>
 
-        {activeTab === "applications" &&
-          renderTable(applications, setApplications, "Deposit Applications")}
-        {activeTab === "maturities" &&
-          renderTable(maturities, setMaturities, "Maturities")}
-        {activeTab === "withdrawals" &&
-          renderTable(earlyWithdrawals, setEarlyWithdrawals, "Early Withdrawal Requests")}
+        {activeTab === "applications" && renderApplicationsTable()}
+        {activeTab === "maturities" && renderMaturitiesTable()}
+        {activeTab === "withdrawals" && renderWithdrawalsTable()}
 
         {modalData && (
-          <div className={styles["adm-modalBackdrop"]}>
-            <div className={styles["adm-modal"]}>
+          <div className={styles.admDepModalBackdrop}>
+            <div className={styles.admDepModal}>
               <h3>Adjust Interest for {modalData.row.user}</h3>
               <input
                 type="number"
@@ -162,14 +698,25 @@ const AdminDeposits = () => {
                   setModalData({ ...modalData, interest: e.target.value })
                 }
               />
-              <div className={styles["adm-modalActions"]}>
+              <div className={styles.admDepModalActions}>
                 <button onClick={() => setModalData(null)}>Cancel</button>
-                <button onClick={handleModalSave}>
+                <button
+                  className={styles.admDepBtnApprove}
+                  onClick={handleModalSave}
+                >
                   Save & {modalData.action}
                 </button>
               </div>
             </div>
           </div>
+        )}
+
+        {formatModalData && (
+          <FormatModal
+            row={formatModalData}
+            onClose={() => setFormatModalData(null)}
+            onDownload={downloadInstrument}
+          />
         )}
       </div>
     </>

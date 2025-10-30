@@ -18,6 +18,7 @@ import AdminTransactions from "./pages/Transaction/TransactionsRecords.jsx";
 import Card from "./pages/Cards/Card.jsx"
 import AdminProfile from "./pages/AdminProfile/AdminProfile";
 import  Settings from "./pages/Settings/Settings.jsx"
+import Notification from "./pages/Notification/Notification.jsx";
 
 // Temp Pages
 function KYC() { return <h1>KYC Page</h1>; }
@@ -54,6 +55,7 @@ export default function AdminApp() {
           {isLoggedIn ? (
             <>
               <Route path="/adminprofile" element={<AdminProfile />} />
+              <Route path="/Notification" element={<Notification />} />
               <Route path="/" element={<Dashboard />} />
               <Route path="/users" element={<UserManagement />} />
               <Route path="/kyc/*" element={<KYCComplianceRoutes />} />
