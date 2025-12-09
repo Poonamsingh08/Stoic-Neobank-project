@@ -9,8 +9,7 @@
 
 /* ====== Page Title ====== */
 
-.container-money-header
- {
+.container-money-header {
   background-color: #900603;
   padding: 30px 2rem;
   color: white;
@@ -182,14 +181,24 @@ table tbody tr:hover {
   color: #0c5460;
 }
 
-/* ====== Buttons ====== */
+/* ====== Action Buttons ====== */
+.action-btn {
+  padding: 8px 14px;
+  margin: 3px;
+  border: none;
+  border-radius: 4px;
+  background-color: #900603;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 13px;
+}
 
-button:hover,
-.table-card button:hover {
+.action-btn:hover {
   background: linear-gradient(90deg, #900603, #900603);
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(144, 6, 3, 0.3);
-  color: #fff;
 }
 
 /* ====== Small Text ====== */
@@ -237,7 +246,7 @@ button:hover,
     font-size: 13px;
   }
 
-  button {
+  .action-btn {
     padding: 6px 10px;
     font-size: 12px;
     margin: 2px;
@@ -269,7 +278,7 @@ button:hover,
     font-size: 12px;
   }
 
-  button {
+  .action-btn {
     padding: 5px 8px;
     font-size: 11px;
   }

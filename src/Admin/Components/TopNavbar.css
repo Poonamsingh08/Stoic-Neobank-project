@@ -112,6 +112,15 @@
   color: #900603;
 }
 
+.tnb-logout-icon {
+  color: #900603;
+  transition: color 0.3s ease;
+}
+
+.tnb-icon-btn:hover .tnb-logout-icon {
+  color: #900603;
+}
+
 .tnb-badge {
   position: absolute;
   top: -2px;

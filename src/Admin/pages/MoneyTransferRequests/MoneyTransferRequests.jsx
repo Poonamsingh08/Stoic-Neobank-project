@@ -7,6 +7,7 @@ const MoneyTransferRequests = () => {
   const [incoming, setIncoming] = useState([]);
   const [beneficiaries, setBeneficiaries] = useState([]);
   const [bills, setBills] = useState([]);
+  const [international, setInternational] = useState([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [activeTab, setActiveTab] = useState("transfers");
@@ -113,9 +114,37 @@ const MoneyTransferRequests = () => {
         status: "Approved",
       },
     ]);
+
+    // NEW: International transactions
+    setInternational([
+      {
+        id: "INT001",
+        date: "2025-09-14",
+        sender: "Ravi Kumar",
+        senderCountry: "India",
+        receiver: "John Peterson",
+        receiverCountry: "USA",
+        amount: 1500,
+        currency: "USD",
+        method: "SWIFT",
+        status: "Pending",
+      },
+      {
+        id: "INT002",
+        date: "2025-09-12",
+        sender: "Asha Nair",
+        senderCountry: "India",
+        receiver: "Maria Lopez",
+        receiverCountry: "Spain",
+        amount: 980,
+        currency: "EUR",
+        method: "SWIFT",
+        status: "Approved",
+      },
+    ]);
   }, []);
 
-  // Action handler for all entities
+  // Action handler
   const handleAction = (id, action, type) => {
     if (type === "request") {
       setRequests((prev) =>
@@ -133,10 +162,14 @@ const MoneyTransferRequests = () => {
       setBills((prev) =>
         prev.map((bill) => (bill.id === id ? { ...bill, status: action } : bill))
       );
+    } else if (type === "international") {
+      setInternational((prev) =>
+        prev.map((i) => (i.id === id ? { ...i, status: action } : i))
+      );
     }
   };
 
-  // Filtering transfers
+  // Filter (Transfers)
   const filteredRequests = requests.filter((req) => {
     const q = search.toLowerCase();
     const matchesSearch =
@@ -152,18 +185,12 @@ const MoneyTransferRequests = () => {
   return (
     <>
       {/* Header */}
-      <div
-        className="container-money-header">
-        <h2 className=""> Money Transfer Request</h2>
+      <div className="container-money-header">
+        <h2 className="">Money Transfer Request</h2>
         <p>Review and approve pending money transfer requests from users.</p>
       </div>
 
-
-
       <div className="container-money">
-
-
-
         {/* Tabs */}
         <div className="tabs">
           <button
@@ -172,29 +199,41 @@ const MoneyTransferRequests = () => {
           >
             Money Transfers
           </button>
+
           <button
             className={activeTab === "outgoing" ? "active" : ""}
             onClick={() => setActiveTab("outgoing")}
           >
             Outgoing Transfers
           </button>
+
           <button
             className={activeTab === "incoming" ? "active" : ""}
             onClick={() => setActiveTab("incoming")}
           >
             Incoming Transfers
           </button>
+
           <button
             className={activeTab === "beneficiaries" ? "active" : ""}
             onClick={() => setActiveTab("beneficiaries")}
           >
             Beneficiary Management
           </button>
+
           <button
             className={activeTab === "bills" ? "active" : ""}
             onClick={() => setActiveTab("bills")}
           >
             Bill Payments
+          </button>
+
+          {/* NEW TAB */}
+          <button
+            className={activeTab === "international" ? "active" : ""}
+            onClick={() => setActiveTab("international")}
+          >
+            International Transfers
           </button>
         </div>
 
@@ -257,16 +296,18 @@ const MoneyTransferRequests = () => {
                         <td>{req.method}</td>
                         <td>
                           <span
-                            className={`status ${req.status === "On Hold"
+                            className={`status ${
+                              req.status === "On Hold"
                                 ? "on-hold"
                                 : req.status.toLowerCase()
-                              }`}
+                            }`}
                           >
                             {req.status}
                           </span>
                         </td>
                         <td>
                           <button
+                            className="action-btn"
                             onClick={() =>
                               handleAction(req.id, "Approved", "request")
                             }
@@ -274,6 +315,7 @@ const MoneyTransferRequests = () => {
                             Approve
                           </button>
                           <button
+                            className="action-btn"
                             onClick={() =>
                               handleAction(req.id, "Rejected", "request")
                             }
@@ -281,6 +323,7 @@ const MoneyTransferRequests = () => {
                             Reject
                           </button>
                           <button
+                            className="action-btn"
                             onClick={() =>
                               handleAction(req.id, "On Hold", "request")
                             }
@@ -288,6 +331,7 @@ const MoneyTransferRequests = () => {
                             Hold
                           </button>
                           <button
+                            className="action-btn"
                             onClick={() =>
                               handleAction(req.id, "Pending", "request")
                             }
@@ -310,7 +354,7 @@ const MoneyTransferRequests = () => {
           </>
         )}
 
-        {/* Outgoing Transfers */}
+        {/* Outgoing */}
         {activeTab === "outgoing" && (
           <div className="table-card">
             <h2>Queued / Scheduled Outgoing Transfers</h2>
@@ -341,7 +385,7 @@ const MoneyTransferRequests = () => {
           </div>
         )}
 
-        {/* Incoming Transfers */}
+        {/* Incoming */}
         {activeTab === "incoming" && (
           <div className="table-card">
             <h2>Large Incoming Transfers Requiring Review</h2>
@@ -367,29 +411,36 @@ const MoneyTransferRequests = () => {
                     </td>
                     <td>
                       <span
-                        className={`status ${i.review === "On Hold" ? "on-hold" : i.review.toLowerCase()
-                          }`}
+                        className={`status ${
+                          i.review === "On Hold"
+                            ? "on-hold"
+                            : i.review.toLowerCase()
+                        }`}
                       >
                         {i.review}
                       </span>
                     </td>
                     <td>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(i.id, "Approved", "incoming")}
                       >
                         Approve
                       </button>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(i.id, "Rejected", "incoming")}
                       >
                         Reject
                       </button>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(i.id, "On Hold", "incoming")}
                       >
                         Hold
                       </button>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(i.id, "Pending", "incoming")}
                       >
                         Pending
@@ -402,7 +453,7 @@ const MoneyTransferRequests = () => {
           </div>
         )}
 
-        {/* Beneficiary Management Section */}
+        {/* Beneficiary */}
         {activeTab === "beneficiaries" && (
           <div className="table-card">
             <h2>Beneficiary Management</h2>
@@ -427,22 +478,29 @@ const MoneyTransferRequests = () => {
                       <td>{b.bank}</td>
                       <td>
                         <span
-                          className={`status ${b.status === "On Hold"
+                          className={`status ${
+                            b.status === "On Hold"
                               ? "on-hold"
                               : b.status.toLowerCase()
-                            }`}
+                          }`}
                         >
                           {b.status}
                         </span>
                       </td>
                       <td>
                         <button
-                          onClick={() => handleAction(b.id, "Approved", "beneficiary")}
+                          className="action-btn"
+                          onClick={() =>
+                            handleAction(b.id, "Approved", "beneficiary")
+                          }
                         >
                           Approve
                         </button>
                         <button
-                          onClick={() => handleAction(b.id, "Rejected", "beneficiary")}
+                          className="action-btn"
+                          onClick={() =>
+                            handleAction(b.id, "Rejected", "beneficiary")
+                          }
                         >
                           Blacklist
                         </button>
@@ -461,7 +519,7 @@ const MoneyTransferRequests = () => {
           </div>
         )}
 
-        {/* Bill Payments */}
+        {/* Bills */}
         {activeTab === "bills" && (
           <div className="table-card">
             <h2>Bill Payments & Reconciliation</h2>
@@ -487,29 +545,34 @@ const MoneyTransferRequests = () => {
                     </td>
                     <td>
                       <span
-                        className={`status ${b.status === "On Hold" ? "on-hold" : b.status.toLowerCase()
-                          }`}
+                        className={`status ${
+                          b.status === "On Hold" ? "on-hold" : b.status.toLowerCase()
+                        }`}
                       >
                         {b.status}
                       </span>
                     </td>
                     <td>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(b.id, "Approved", "bill")}
                       >
                         Approve
                       </button>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(b.id, "Rejected", "bill")}
                       >
                         Reject
                       </button>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(b.id, "On Hold", "bill")}
                       >
                         Hold
                       </button>
                       <button
+                        className="action-btn"
                         onClick={() => handleAction(b.id, "Pending", "bill")}
                       >
                         Pending
@@ -517,6 +580,113 @@ const MoneyTransferRequests = () => {
                     </td>
                   </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* ----------- NEW INTERNATIONAL SECTION ----------- */}
+        {activeTab === "international" && (
+          <div className="table-card">
+            <h2>International Remittances</h2>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Sender</th>
+                  <th>Receiver</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {international.length > 0 ? (
+                  international.map((i) => (
+                    <tr key={i.id}>
+                      <td>{i.id}</td>
+                      <td>{i.date}</td>
+
+                      <td>
+                        {i.sender}
+                        <br />
+                        <span className="small">{i.senderCountry}</span>
+                      </td>
+
+                      <td>
+                        {i.receiver}
+                        <br />
+                        <span className="small">{i.receiverCountry}</span>
+                      </td>
+
+                      <td>
+                        {i.currency} {i.amount.toLocaleString()}
+                      </td>
+
+                      <td>{i.method}</td>
+
+                      <td>
+                        <span
+                          className={`status ${
+                            i.status === "On Hold"
+                              ? "on-hold"
+                              : i.status.toLowerCase()
+                          }`}
+                        >
+                          {i.status}
+                        </span>
+                      </td>
+
+                      <td>
+                        <button
+                          className="action-btn"
+                          onClick={() =>
+                            handleAction(i.id, "Approved", "international")
+                          }
+                        >
+                          Approve
+                        </button>
+
+                        <button
+                          className="action-btn"
+                          onClick={() =>
+                            handleAction(i.id, "Rejected", "international")
+                          }
+                        >
+                          Reject
+                        </button>
+
+                        <button
+                          className="action-btn"
+                          onClick={() =>
+                            handleAction(i.id, "On Hold", "international")
+                          }
+                        >
+                          Hold
+                        </button>
+
+                        <button
+                          className="action-btn"
+                          onClick={() =>
+                            handleAction(i.id, "Pending", "international")
+                          }
+                        >
+                          Pending
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="8" className="no-data">
+                      No international transfers found
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
